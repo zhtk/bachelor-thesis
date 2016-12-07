@@ -71,6 +71,7 @@
 Tutaj napiszemy jakiś wstęp, nie mam pojęcia o czym. Janusz mówi: ,,Wstęp (a czasem nie tylko wstęp): opis całego projektu, w naturalny sposób daje się tu wykorzystać fragmenty wizji. Dyskusja rozwiązań konkurencyjnych - w zależności od projektu: na świecie, w Polsce, w zamawiającej firmie - ze śladem w bibliografii. To może być część wstępu, może być też osobny rozdział. "
 
 \chapter{Wizja}\label{r:wizja}
+\section{Uwagi Janusza}
 Główna część pracy. Jeden bądź kilka rozdziałów poświęconych osiągnięciom, problemom, sukcesom projektu. To jest to miejsce, gdzie należy się pochwalić tym, co Państwo osiągnęli. Jeśli Państwo się sami nie pochwalicie, nikt nigdy nie będzie wiedział ile pracy, pomysłowości i wysiłku kosztowało zrealizowanie projektu. Chwalić się można i należy różnymi rzeczami.
 
 Osiągnięciami (projekt ma świetny interfejs; projekt jako pierwszy rozwiązuje jakiś problem; użytkownicy projektu są bardzo zadowoleni, a klient zawarł z Państwem umowę na przyszłość; Państwa firma właśnie wchodzi na New Connect; 10\% z pierwszych zarobionych milionów przeznaczyli Państwo na fundację wspierania UW; itp.).
@@ -78,6 +79,9 @@ Ciekawymi rozwiązaniami i dobrym kodem (projekt stworzono od początku do końc
 Włożoną w projekt pracą (dyskusja innych możliwych rozwiązań odrzucanych na kolejnych etapach pracy; opis problemów z biblioteką pobraną z internetu, która wg dokumentacji miała działać, a na skutek jej błędów uruchomienie systemu zajęło miesiąc dodatkowej pracy; problemów z zamawiającym, którego poszczególni przedstawiciele uparli się składać sprzeczne między sobą wymagania; opis organizacji pracy zespołu, w którym wszyscy członkowie mieszkają każdy w innym mieście poza Warszawą, studiują na różnych kierunkach i dotąd się nie znali, jednocześnie pracują i to każdy w innych godzinach, a na koniec dwójka z nich się pobrała, ma trojaczki, właśnie wzięła urlop dziekański i chwilowo podróżuje tratwą po Pacyfiku; itp.).
 
 Zwykle warto dodać jakiś kluczowy przypadek użycia z Państwa dokumentacji. W zależności od projektu mogą być bardzo pożądane zrzuty ekranów kluczowych części projektu. Znów w zależności od projektu mogą być potrzebne fragmenty kodu (do kilkunastu wierszy bezpośrednio w kodzie, do 2 stron jako załączniki do treści dokumentu).
+\section{Konkret}
+
+Tutaj skopiujemy spory fragment \cite{mcobywatel} i \cite{zuspue}.
 
 \chapter{Prototyp}\label{r:prototyp}
 \section{Zarys architektury}
@@ -93,9 +97,38 @@ WebMethods vs WSO2, vs Talend, Mule vs zato.io, a może bez żadnej szyny usług
 \section{Usługi monitorowania stanu mikrousług}
 Apache zookeeper vs Netflix eureka vs ...
 \section{Przegląd baz danych}
+Postgres + pg\_shard i mongo db. Redis jest zbyt prymitywny, a jego obsługa transakcji zbyt ograniczona.
+
 \section{Problemy z współbieżnością mikrousług}
-Możliwe są dwa podejścia: bazodanowe, gdzie każda mikrousługa sama blokuje sobie zasoby, i 
-scentralizowane, gdzie przydzielanie dostępu do zasobów jest osobną usługą.
+
+Nietrudno wyobrazić sobie sytuację, w której dwie współbieżnie działające mikrousługi
+wprowadzają konfliktujące ze sobą zmiany. Pewną formą zabezpieczenia przed takimi sytuacjami
+mogłoby być rozwiązywanie konfliktów przez mikrousługę pośredniczącą w dostępie do bazy danych.
+Taka mikrousługa stanowiłaby wtedy coś w rodzaju sekcji krytycznej, uniemożliwiającej jednoczesne zapisy
+i niespójne odczyty (niezależnie od atomowości operacji na bazie danych). 
+Niestety, takie podejście może nie wystarczać, np. w przypadku dwóch niezależnie działających usług, które najpierw
+odczytują jakąś informację z bazy danych, a następnie na podstawie uzyskanej informacji wybierają rodzaj
+akcji do podjęcia i nadpisują część bazy danych.
+
+Przy rozwiązywaniu tego problemu możliwe są cztery różne podejścia, składające się z dwóch niezależnych komponentów:
+sposobu zakładania blokad na usługi oraz miejsca, w którym będą one przechowywane.
+Blokady mogą być przechowywane w dedykowanej, wydzielonej mikrousłudze lub w mikrousłudze, której dotyczą. W naszej opinii
+pierwsze podejście jest o tyle lepsze, że pozwala na wykrywanie zakleszczeń. Wadą takiego rozwiązania jest
+stosunkowo słabe zrównoleglanie i fakt, że taka mikrousługa stanowiłaby najsłabszy punkt systemu, którego awaria
+skutkowałaby zablokowaniem wszystkich pozostałych usług. Ponadto, blokady mogą być zakładane pojedyńczo, w miarę
+postępu transakcji lub na jej samym początku (w takim przypadku mikrousługa musi dokładnie wiedzieć, z jakich
+zasobów ma zamiar skorzystać).
+
+Wydaje nam się, że najsensowniejszym wariantem jest wykorzystanie rozwiązań stosowanych w relacyjnych bazach
+danych, gdzie blokady są zakładane w miarę postępu transakcji, a w przypadku wykrycia zakleszczenia zmiany są
+wycofywane, sama zaś usługa wywłaszczana. Przy kolejnej próbie takiej mikrousłudze nadany zostaje większy priorytet,
+który zapewnia żywotność. W przypadku implementacji takiego podejścia należy pamiętać o zapewnieniu mechanizmów
+wywłaszczania mikrousług, księgowania zmian, śledzenia transakcji, wykrywania zakleszczeń, nadawania priorytetów
+oraz o możliwości zakładania możliwie małych blokad na pojedyńcze rekordy.
+
+Dokładniejsza analiza tego problemu mogłaby stanowić ekscytujący temat pracy badawczej,
+jednak z uwagi na nasze ograniczone zasoby nie podejmiemy się rozwiązania go. Niemniej jednak,
+projektanci mikrousług korzystających z naszej platformy muszą być świadomi jego następstw.
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
 Opis tego co poszczególne osoby zrobiły w ramach projektu. To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział).
@@ -134,10 +167,3 @@ http://pue.zus.pl/
 \end{thebibliography}
 
 \end{document}
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% coding: latin-2
-%%% End:
