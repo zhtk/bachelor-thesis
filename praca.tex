@@ -15,28 +15,16 @@
 
 \tytulang{Nicht sprechen englisch}
 
-%kierunek: Matematyka, Informatyka, ...
 \kierunek{Informatyka}
 
 % informatyka - nie okreslamy zakresu (opcja zakomentowana)
-% matematyka - zakres moze pozostac nieokreslony,
-% a jesli ma byc okreslony dla pracy mgr,
-% to przyjmuje jedna z wartosci:
-% {metod matematycznych w finansach}
-% {metod matematycznych w ubezpieczeniach}
-% {matematyki stosowanej}
-% {nauczania matematyki}
-% Dla pracy licencjackiej mamy natomiast
-% mozliwosc wpisania takiej wartosci zakresu:
-% {Jednoczesnych Studiow Ekonomiczno--Matematycznych}
-
 % \zakres{Tu wpisac, jesli trzeba, jedna z opcji podanych wyzej}
 
 % Praca wykonana pod kierunkiem:
 % (podać tytuł/stopień imię i nazwisko opiekuna
 % Instytut
 % ew. Wydział ew. Uczelnia (jeżeli nie MIM UW))
-\opiekun{Prezes\\
+\opiekun{mgr Michał Możdżonek\\
   ZUS\\
   }
 
@@ -90,11 +78,29 @@ Ciekawymi rozwiązaniami i dobrym kodem (projekt stworzono od początku do końc
 Włożoną w projekt pracą (dyskusja innych możliwych rozwiązań odrzucanych na kolejnych etapach pracy; opis problemów z biblioteką pobraną z internetu, która wg dokumentacji miała działać, a na skutek jej błędów uruchomienie systemu zajęło miesiąc dodatkowej pracy; problemów z zamawiającym, którego poszczególni przedstawiciele uparli się składać sprzeczne między sobą wymagania; opis organizacji pracy zespołu, w którym wszyscy członkowie mieszkają każdy w innym mieście poza Warszawą, studiują na różnych kierunkach i dotąd się nie znali, jednocześnie pracują i to każdy w innych godzinach, a na koniec dwójka z nich się pobrała, ma trojaczki, właśnie wzięła urlop dziekański i chwilowo podróżuje tratwą po Pacyfiku; itp.).
 
 Zwykle warto dodać jakiś kluczowy przypadek użycia z Państwa dokumentacji. W zależności od projektu mogą być bardzo pożądane zrzuty ekranów kluczowych części projektu. Znów w zależności od projektu mogą być potrzebne fragmenty kodu (do kilkunastu wierszy bezpośrednio w kodzie, do 2 stron jako załączniki do treści dokumentu).
+
 \chapter{Prototyp}\label{r:prototyp}
+\section{Zarys architektury}
+Monolityczna vs mikrousługi, zarysowany podział na tiery.
+3 warstwy mikrousług: biznesowa (realizuje logikę i jest dostępna z zewnątrz),
+techniczna (niedostępna z zewnątrz, pracuje na rzecz warstwy biznesowej i służy np. do komunikacji
+z innymi systemami), bazodanowa.
+\section{API udostępniane przez mikrousługi i frontend}
+\section{Przegląd technologii do tworzenia frontendu}
+Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo vs angular 2 vs react.
+\section{Szyny danych}
+WebMethods vs WSO2, vs Talend, Mule vs zato.io, a może bez żadnej szyny usług (single point of failure, szyny lubią się zapychać)?
+\section{Usługi monitorowania stanu mikrousług}
+Apache zookeeper vs Netflix eureka vs ...
+\section{Przegląd baz danych}
+\section{Problemy z współbieżnością mikrousług}
+Możliwe są dwa podejścia: bazodanowe, gdzie każda mikrousługa sama blokuje sobie zasoby, i 
+scentralizowane, gdzie przydzielanie dostępu do zasobów jest osobną usługą.
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
 Opis tego co poszczególne osoby zrobiły w ramach projektu. To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział).
 
+\appendix
 \chapter{Spis zawartości dołączonej płyty CD}\label{r:spis}
 Dokładny spis zawartości towarzyszącej płytki (p. dalej). To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział). Płytka CD/DVD/Blu-ray/...
 
@@ -108,7 +114,22 @@ Płyta jest częścią pracy - trzeba tyle płyt co drukowanych egzemplarzy prac
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
 
-\bibitem[WWW]{internet} Autor nieznany, \textit{Dokumentacja django}.
+\bibitem[ZDZ]{zusdoz} ZUS, \textit{DOKUMENTOWANIE OKRESÓW ZATRUDNIENIA ORAZ
+	WYNAGRODZENIA}, http://www.zus.pl/files/Dokumentowanie\_okres\%C3\%B3w\_zatrudnienia.pdf
+
+\bibitem[TFA]{tfa} Autor nieznany, \textit{The Twelve-Factor App}, https://12factor.net/
+
+\bibitem[SDM]{govsm} Autor nieznany, \textit{Government Service Design Manual},
+https://www.gov.uk/service-manual/index.html
+
+\bibitem[MSV]{microsvc} Chris Richardson, \textit{Microservice architecture patterns and best practices},
+http://microservices.io/
+
+\bibitem[MCO]{mcobywatel} Ministerstwo Cyfryzacji, \textit{Portal Rzeczypospolitej Polskiej - Opis projektu},
+https://mc.gov.pl/projekty/portal-rzeczypospolitej-polskiej/opis-projektu
+
+\bibitem[PUE]{zuspue} ZUS, \textit{Platforma Usług Elektronicznych},
+http://pue.zus.pl/
 
 \end{thebibliography}
 
