@@ -84,20 +84,12 @@ Zwykle warto dodać jakiś kluczowy przypadek użycia z Państwa dokumentacji. W
 Tutaj skopiujemy spory fragment \cite{mcobywatel} i \cite{zuspue}.
 
 \chapter{Prototyp}\label{r:prototyp}
+
 \section{Zarys architektury}
 Monolityczna vs mikrousługi, zarysowany podział na tiery.
 3 warstwy mikrousług: biznesowa (realizuje logikę i jest dostępna z zewnątrz),
 techniczna (niedostępna z zewnątrz, pracuje na rzecz warstwy biznesowej i służy np. do komunikacji
 z innymi systemami), bazodanowa.
-\section{API udostępniane przez mikrousługi i frontend}
-\section{Przegląd technologii do tworzenia frontendu}
-Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo vs angular 2 vs react.
-\section{Szyny danych}
-WebMethods vs WSO2, vs Talend, Mule vs zato.io, a może bez żadnej szyny usług (single point of failure, szyny lubią się zapychać)?
-\section{Usługi monitorowania stanu mikrousług}
-Apache zookeeper vs Netflix eureka vs ...
-\section{Przegląd baz danych}
-Postgres + pg\_shard i mongo db. Redis jest zbyt prymitywny, a jego obsługa transakcji zbyt ograniczona.
 
 \section{Problemy z współbieżnością mikrousług}
 
@@ -106,29 +98,59 @@ wprowadzają konfliktujące ze sobą zmiany. Pewną formą zabezpieczenia przed 
 mogłoby być rozwiązywanie konfliktów przez mikrousługę pośredniczącą w dostępie do bazy danych.
 Taka mikrousługa stanowiłaby wtedy coś w rodzaju sekcji krytycznej, uniemożliwiającej jednoczesne zapisy
 i niespójne odczyty (niezależnie od atomowości operacji na bazie danych). 
-Niestety, takie podejście może nie wystarczać, np. w przypadku dwóch niezależnie działających usług, które najpierw
+Niestety, takie podejście może nie wystarczać, np. w przypadku dwóch niezależnie działających usług, które wpierw
 odczytują jakąś informację z bazy danych, a następnie na podstawie uzyskanej informacji wybierają rodzaj
 akcji do podjęcia i nadpisują część bazy danych.
 
-Przy rozwiązywaniu tego problemu możliwe są cztery różne podejścia, składające się z dwóch niezależnych komponentów:
-sposobu zakładania blokad na usługi oraz miejsca, w którym będą one przechowywane.
+Jest kilka możliwych rozwiązań tego problemu. Możemy je pogrupować ze względu na następujące cechy:
+\begin{itemize}
+	\item miejsce przechowywania blokad
+	\item sposób zakładania blokad na usługi
+	\item wielkość obiektów, które będą blokowane
+\end{itemize}
 Blokady mogą być przechowywane w dedykowanej, wydzielonej mikrousłudze lub w mikrousłudze, której dotyczą. W naszej opinii
 pierwsze podejście jest o tyle lepsze, że pozwala na wykrywanie zakleszczeń. Wadą takiego rozwiązania jest
 stosunkowo słabe zrównoleglanie i fakt, że taka mikrousługa stanowiłaby najsłabszy punkt systemu, którego awaria
-skutkowałaby zablokowaniem wszystkich pozostałych usług. Ponadto, blokady mogą być zakładane pojedyńczo, w miarę
+skutkowałaby zablokowaniem wszystkich pozostałych usług. Blokady mogą być zakładane pojedyńczo, w miarę
 postępu transakcji lub na jej samym początku (w takim przypadku mikrousługa musi dokładnie wiedzieć, z jakich
-zasobów ma zamiar skorzystać).
+zasobów ma zamiar skorzystać). Wydaje nam się, że najsensowniejszym wariantem jest wykorzystanie rozwiązań
+stosowanych w relacyjnych bazach danych, gdzie blokady są zakładane w miarę postępu transakcji, a w przypadku
+wykrycia zakleszczenia zmiany są wycofywane, sama zaś usługa wywłaszczana. Przy kolejnej próbie takiej mikrousłudze
+nadany zostaje większy priorytet, który zapewnia żywotność. W przypadku implementacji takiego podejścia należy
+pamiętać o zapewnieniu mechanizmów wywłaszczania mikrousług, księgowania zmian, śledzenia transakcji, wykrywania
+zakleszczeń, nadawania priorytetów oraz o możliwości zakładania możliwie małych blokad na pojedyńcze rekordy.
+Niestety, z uwagi na ograniczone zasoby nie byliśmy w stanie zaimplementować mechanizmu synchronizacji w
+przedstawiony wyżej sposób. Postanowiliśmy ograniczyć się do muteksów zakładanych na początku transakcji.
 
-Wydaje nam się, że najsensowniejszym wariantem jest wykorzystanie rozwiązań stosowanych w relacyjnych bazach
-danych, gdzie blokady są zakładane w miarę postępu transakcji, a w przypadku wykrycia zakleszczenia zmiany są
-wycofywane, sama zaś usługa wywłaszczana. Przy kolejnej próbie takiej mikrousłudze nadany zostaje większy priorytet,
-który zapewnia żywotność. W przypadku implementacji takiego podejścia należy pamiętać o zapewnieniu mechanizmów
-wywłaszczania mikrousług, księgowania zmian, śledzenia transakcji, wykrywania zakleszczeń, nadawania priorytetów
-oraz o możliwości zakładania możliwie małych blokad na pojedyńcze rekordy.
+Do ustalenia pozostała tylko wielkość blokowanych przez muteks danych. Ze względów wydajnościowych blokowanie
+całych mikrousług zapewniających dostęp do danych nie było możliwe. Z uwagi na opóźnienia w przesyłaniu informacji
+przez sieć prowadziłoby to z jednej strony do marnowania mocy obliczeniowej serwera bazy danych, a z drugiej strony 
+znacząco ograniczałoby ilość jednoczesnych operacji. Z kolei zakładanie blokad na konkretne wiersze w poszczególnych
+mikrousługach jest nierealizowalne, gdyż w chwili zakładania muteksu usługa może nie wiedzieć, jakie konkretnie
+wiersze zmodyfikuje. Postanowiliśmy znaleźć złoty środek i zakładać blokady na właściciela danych. Wynika to z
+faktu, że w typowej urzędniczej praktyce wykonywane operacje dotyczą co najwyżej kilku osób.
 
-Dokładniejsza analiza tego problemu mogłaby stanowić ekscytujący temat pracy badawczej,
-jednak z uwagi na nasze ograniczone zasoby nie podejmiemy się rozwiązania go. Niemniej jednak,
-projektanci mikrousług korzystających z naszej platformy muszą być świadomi jego następstw.
+Jest jeszcze jeden problem, na który użytkownicy naszej platformy mogą się natknąć. Mianowicie, nasza platforma
+może integrować poprzez różne adaptery już istniejące usługi, które zupełnie nie są świadome istnienia
+zaproponowanego mechanizmu blokad, więc nie są odporne na błędy wynikające z współbieżności.
+Projektanci mikrousług korzystających z naszej platformy muszą być świadomi wszystkiego, co wyżej napisano.
+Aby maksymalnie ułatwić im pracę uwzględniliśmy wyniki powyższych rozważań  przy projektowaniu API, jednak nie
+jesteśmy w stanie rozwiązać wszystkich pojawiających się problemów.
+
+\section{Zapewnienie transakcyjności}
+
+Brak stanów, wszystko trzymane po stronie klienta
+
+\section{Przegląd technologii do tworzenia frontendu}
+Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo vs angular 2 vs react.
+\section{Szyny danych}
+WebMethods vs WSO2, vs Talend, Mule vs zato.io, a może bez żadnej szyny usług (single point of failure, szyny lubią się zapychać)?
+\section{Usługi monitorowania stanu mikrousług}
+Apache zookeeper vs Netflix eureka vs ...
+\section{Przegląd baz danych}
+Postgres + pg\_shard i mongo db. Redis jest zbyt prymitywny, a jego obsługa transakcji zbyt ograniczona, chociaż
+może się przydać przy synchronizacji.
+\section{API udostępniane przez mikrousługi i frontend}
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
 Opis tego co poszczególne osoby zrobiły w ramach projektu. To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział).
