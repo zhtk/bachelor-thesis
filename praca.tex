@@ -9,11 +9,9 @@
 
 \nralbumu{Albumy}
 
-\title{Super tajny projekt dla ZUSu\\
-	(a tak naprawdę dla prezesa)}
+\title{Dużo mikrousług}
 
-
-\tytulang{Nicht sprechen englisch}
+\tytulang{Project}
 
 \kierunek{Informatyka}
 
@@ -47,7 +45,7 @@
   D.127. Ubezpieczenia społeczne}
 
 % Słowa kluczowe:
-\keywords{lenistwo stosowane, spiseg, trudne sprawy}
+\keywords{mikrousługi, SOA, trudne sprawy}
 
 % Tu jest dobre miejsce na Twoje własne makra i~środowiska:
 \newtheorem{defi}{Definicja}[section]
@@ -70,7 +68,6 @@
 \addcontentsline{toc}{chapter}{Wprowadzenie}
 Tutaj napiszemy jakiś wstęp, nie mam pojęcia o czym. Janusz mówi: ,,Wstęp (a czasem nie tylko wstęp): opis całego projektu, w naturalny sposób daje się tu wykorzystać fragmenty wizji. Dyskusja rozwiązań konkurencyjnych - w zależności od projektu: na świecie, w Polsce, w zamawiającej firmie - ze śladem w bibliografii. To może być część wstępu, może być też osobny rozdział. "
 
-\chapter{Wizja}\label{r:wizja}
 \section{Uwagi Janusza}
 Główna część pracy. Jeden bądź kilka rozdziałów poświęconych osiągnięciom, problemom, sukcesom projektu. To jest to miejsce, gdzie należy się pochwalić tym, co Państwo osiągnęli. Jeśli Państwo się sami nie pochwalicie, nikt nigdy nie będzie wiedział ile pracy, pomysłowości i wysiłku kosztowało zrealizowanie projektu. Chwalić się można i należy różnymi rzeczami.
 
@@ -79,9 +76,38 @@ Ciekawymi rozwiązaniami i dobrym kodem (projekt stworzono od początku do końc
 Włożoną w projekt pracą (dyskusja innych możliwych rozwiązań odrzucanych na kolejnych etapach pracy; opis problemów z biblioteką pobraną z internetu, która wg dokumentacji miała działać, a na skutek jej błędów uruchomienie systemu zajęło miesiąc dodatkowej pracy; problemów z zamawiającym, którego poszczególni przedstawiciele uparli się składać sprzeczne między sobą wymagania; opis organizacji pracy zespołu, w którym wszyscy członkowie mieszkają każdy w innym mieście poza Warszawą, studiują na różnych kierunkach i dotąd się nie znali, jednocześnie pracują i to każdy w innych godzinach, a na koniec dwójka z nich się pobrała, ma trojaczki, właśnie wzięła urlop dziekański i chwilowo podróżuje tratwą po Pacyfiku; itp.).
 
 Zwykle warto dodać jakiś kluczowy przypadek użycia z Państwa dokumentacji. W zależności od projektu mogą być bardzo pożądane zrzuty ekranów kluczowych części projektu. Znów w zależności od projektu mogą być potrzebne fragmenty kodu (do kilkunastu wierszy bezpośrednio w kodzie, do 2 stron jako załączniki do treści dokumentu).
-\section{Konkret}
 
-Tutaj skopiujemy spory fragment \cite{mcobywatel} i \cite{zuspue}.
+\chapter{Organizacja pracy}
+
+Pierwszym poważnym wyzwaniem, przed którym staneliśmy, była organizacja pracy zespołu. Każdy członek zespołu
+pochodzi z innego miasta i uczęszcza na inne zajęcia, ponadto część członków pracuje. Znalezienie pory i dnia
+tygodnia, w którym moglibyśmy się spotykać, stanowiło spore wyzwanie. W gospodarowaniu czasem i ustalaniu terminów
+spotkań z klientem bardzo nam pomogło doodle. % Mądrze rozwinąć!
+Komunikacja między członkami zespołu odbywała się głównie przez internet, przy pomocy facebooka %i slacka.
+%Projekt prowadziliśmy w lekko zmodyfikowanej zwinnej metodyce opracowanej specjalnie na potrzeby naszego klienta.
+
+\chapter{Wizja systemu}\label{r:wizja}
+
+Celem naszego projektu było stworzenie prototypu internetowego frameworka do komunikacji obywatela z urzędami
+podobnego do Platformy Usług Elektronicznych ZUS \cite{zuspue}, a następnie na jego bazie zaimplementować jeden
+wybrany przypadek użycia, np. usługę dokumentowania okresów zatrudnienia \cite{zusdoz}. Tym, co wyróżnia nasze
+rozwiązanie od innych systemów stosowanych w administracji, jest całkowicie modularna architektura. To pozwala nam
+stosunkowo małym kosztem podłączać i odłączać kolejne usługi wraz z rozwojem cyfrowej administracji. Pewną
+inspiracją do stworzenia takiego systemu był rządowy portal obywatel.gov.pl \cite{mcobywatel}.
+
+Naszym głównym zadaniem było zaprojektowanie serwisu, który byłby maksymalnie prosty w utrzymaniu i rozwoju, oraz
+który łatwo można było skalować. Do którego rozwoju nie trzeba by było zatrudniać doskonale wykształconych
+programistów z MIM UW, ale także osoby które kończyły szkoły w mniejszych miastach. System powinien być odporny
+na różne błędy programistyczne.
+
+W związku z tym, że projektowaliśmy system dla administracji państwowej z którego będą korzystać miliony obywateli,
+musieliśmy bardzo ostrożnie dobierać technologie, z których korzystaliśmy. Wybranie rozwiązania opartego na
+niekorzystnej licencji mogło się w przyszłości srogo zemścić. Innym wyzwaniem, które należało uwzględnić w fazie
+projektowania, był szeroki zakres użytkowników systemu: od zwykłych obywateli, poprzez urzędników, aż po
+przedsiębiorców.
+
+%Elementy, które powinny się znaleźć w dokumencie opisującym wizję to:
+%Opis rozwiązania, Korzyści biznesowe, Wizja projektu i zakres, Analiza korzyści, Wymagania biznesowe, Wymagania użytkowników, Wymagania operacyjne, Wymagania systemowe, Wymagania bezpieczeństwa, Zakres projektu, Cele biznesowe, Cele techniczne, Kryteria operacyjne, Ograniczenia, Definicja profili użytkowników, Analizy użytkowania, Scenariusze wykorzystania
 
 \chapter{Prototyp}\label{r:prototyp}
 
