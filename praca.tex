@@ -98,7 +98,8 @@ inspiracją do stworzenia takiego systemu był rządowy portal obywatel.gov.pl \
 Naszym głównym zadaniem było zaprojektowanie serwisu, który byłby maksymalnie prosty w utrzymaniu i rozwoju, oraz
 który łatwo można było skalować. Do którego rozwoju nie trzeba by było zatrudniać doskonale wykształconych
 programistów z MIM UW, ale także osoby które kończyły szkoły w mniejszych miastach. System powinien być odporny
-na różne błędy programistyczne.
+na różne błędy programistyczne i spełniać normy 12 Factor App \cite{tfa}, w szczególności być odporny na awarię
+pojedyńczej usługi, bez prowadzenia do rozspójnienia danych.
 
 W związku z tym, że projektowaliśmy system dla administracji państwowej z którego będą korzystać miliony obywateli,
 musieliśmy bardzo ostrożnie dobierać technologie, z których korzystaliśmy. Wybranie rozwiązania opartego na
@@ -156,6 +157,22 @@ mikrousługach jest nierealizowalne, gdyż w chwili zakładania muteksu usługa 
 wiersze zmodyfikuje. Postanowiliśmy znaleźć złoty środek i zakładać blokady na właściciela danych. Wynika to z
 faktu, że w typowej urzędniczej praktyce wykonywane operacje dotyczą co najwyżej kilku osób.
 
+Uzbrojeni w powyższe informacje wytypowaliśmy dwie usługi mogące działać jako zarządca rozproszonego muteksa:
+redisson \cite{redisson} i ZooKeeper \cite{zookeeper}. Redisson jest rozwiązaniem implementującym algorytm Redlock
+\cite{redislock}. Jego najważniejszą cechą jest odporność na awarie usług poprzez automatyczne zwalnianie blokady
+po upływie określonego czasu. W internecie ukazała się bardzo interesująca polemika do przytoczonego algorytmu \cite{redisbad}.
+Głównym zarzutem czynionym wobec algorytmu Redlock jest brak mechanizmu, który zapobiegałby następującej sytuacji:
+mikrousługa A zakłada blokadę na zasób Z. Następnie zaczyna operację nadpisywania danych. W trakcie operacji
+działanie mikrousługi z losowego powodu zostaje zawieszone (np. wystąpiło znaczne opóźnienie w połączeniu sieciowym
+lub włączył się odśmiecacz pamięci). W tym czasie termin ważności blokady mija, zostaje ona zdjęta, a do akcji
+wkracza mikrousługa B, która zakłada swoją blokadę, nadpisuje dane utworzone przez usługę A i kończy swoje
+działanie. Na koniec usługa A zostaje wybudzona i kontynuuje swoje działanie, prowadząc do rozspójnienia danych.
+Według autora polemiki rozwiązaniem tego problemu jest skorzystanie z mechanizmu współdzielonej blokady
+zaimplementowanej w frameworku Apache Curator \cite{curatorlock} i korzystającej pod spodem z Apache ZooKeepera.
+Jest to zdecydowanie bezpieczniejsze rozwiązanie, które w przypadku awarii mikrousługi i utraty połączenia
+automatycznie zdejmuje blokadę. Ponadto, jest to stosunkowo nowoczesny projekt wykorzystywany i rozwijany przez
+m. in. firmę Netflix, co daje pewne gwarancje dotyczące stabilności i przyszłości tego projektu.
+
 Jest jeszcze jeden problem, na który użytkownicy naszej platformy mogą się natknąć. Mianowicie, nasza platforma
 może integrować poprzez różne adaptery już istniejące usługi, które zupełnie nie są świadome istnienia
 zaproponowanego mechanizmu blokad, więc nie są odporne na błędy wynikające z współbieżności.
@@ -165,17 +182,33 @@ jesteśmy w stanie rozwiązać wszystkich pojawiających się problemów.
 
 \section{Zapewnienie transakcyjności}
 
-Brak stanów, wszystko trzymane po stronie klienta
+Jednym z wymagań pozafunkcjonalnych było zapewnienie skalowalności serwisu i mikrousług w sposób zachowujący transakcyjność.
+Dołożenie lub utrata serwera nie powinna wpływać na poprawność transakcji i nie powinna w żadnym przypadku
+prowadzić do utraty lub rozspójnienia danych. Typowym rozwiązaniem stosowanym w takim przypadku jest prowadzenie
+komunikacji między klientem a serwerem w sposób bezstanowy.
+
+Powstaje tutaj pytanie, czy w przypadku naszego serwisu jest to możliwe? Dopuszczalny jest scenariusz, w którym
+mikrousługa pyta użytkownika o jakąś informację (np. stan cywilny), a następnie w zależności od udzielonej odpowiedzi
+prosi o dodatkowe informacje, np. o dane małżonka. Rozwiązaniem tego problemu jest przeniesienie stanowości
+transakcji z serwera do klienta. Wszystkie informacje dotyczące transakcji będą trzymane po stronie klienta, a
+operacje, które mogą zaburzać integralność danych będą wykonywane w jednym momencie i w całości, bez rozbijania
+na wiele części. Dane przechowywane w kliencie przez poszczególne mikrousługi będą odseparowane między sobą, tak aby
+zapobiec konfliktom. W uzasadnionych przypadkach możliwe byłoby przechowywanie części danych (takich jak duże pliki)
+po stronie serwera, oraz trzymanie w kliencie ich identyfikatora.
 
 \section{Przegląd technologii do tworzenia frontendu}
-Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo vs angular 2 vs react.
+Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo vs angular 2 vs react (odpada, słaba licencja).
+
 \section{Szyny danych}
 WebMethods vs WSO2, vs Talend, Mule vs zato.io, a może bez żadnej szyny usług (single point of failure, szyny lubią się zapychać)?
+
 \section{Usługi monitorowania stanu mikrousług}
 Apache zookeeper vs Netflix eureka vs ...
+
 \section{Przegląd baz danych}
-Postgres + pg\_shard i mongo db. Redis jest zbyt prymitywny, a jego obsługa transakcji zbyt ograniczona, chociaż
-może się przydać przy synchronizacji.
+Postgres + pg\_shard i mongo db. Sensowne jest też CouchDB. Redis jest zbyt prymitywny, a jego obsługa transakcji zbyt ograniczona, chociaż
+może się przydać przy synchronizacji \cite{redislock}.
+
 \section{API udostępniane przez mikrousługi i frontend}
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
@@ -195,8 +228,8 @@ Płyta jest częścią pracy - trzeba tyle płyt co drukowanych egzemplarzy prac
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
 
-\bibitem[ZDZ]{zusdoz} ZUS, \textit{DOKUMENTOWANIE OKRESÓW ZATRUDNIENIA ORAZ
-	WYNAGRODZENIA}, http://www.zus.pl/files/Dokumentowanie\_okres\%C3\%B3w\_zatrudnienia.pdf
+\bibitem[DOZ]{zusdoz} ZUS, \textit{Dokumentowanie okresów zatrudnienia oraz
+	wynagrodzenia}, http://www.zus.pl/files/Dokumentowanie\_okres\%C3\%B3w\_zatrudnienia.pdf
 
 \bibitem[TFA]{tfa} Autor nieznany, \textit{The Twelve-Factor App}, https://12factor.net/
 
@@ -211,6 +244,21 @@ https://mc.gov.pl/projekty/portal-rzeczypospolitej-polskiej/opis-projektu
 
 \bibitem[PUE]{zuspue} ZUS, \textit{Platforma Usług Elektronicznych},
 http://pue.zus.pl/
+
+\bibitem[RDL]{redislock} Redis, \textit{Distributed locks with Redis},
+https://redis.io/topics/distlock
+
+\bibitem[RDS]{redisson} \textit{Redisson},
+http://redisson.org/
+
+\bibitem[AZK]{zookeeper} Apache, \textit{Apache ZooKeeper},
+https://zookeeper.apache.org/
+
+\bibitem[HTL]{redisbad} Martin Kleppmann, \textit{How to do distributed locking},
+http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html
+
+\bibitem[CLK]{curatorlock} Apache, \textit{Apache Curator - Shared Lock},
+http://curator.apache.org/curator-recipes/shared-lock.html
 
 \end{thebibliography}
 
