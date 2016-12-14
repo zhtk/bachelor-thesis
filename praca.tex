@@ -89,23 +89,37 @@ Komunikacja między członkami zespołu odbywała się głównie przez internet,
 \chapter{Wizja systemu}\label{r:wizja}
 
 Celem naszego projektu było stworzenie prototypu internetowego frameworka do komunikacji obywatela z urzędami
-podobnego do Platformy Usług Elektronicznych ZUS \cite{zuspue}, a następnie na jego bazie zaimplementować jeden
-wybrany przypadek użycia, np. usługę dokumentowania okresów zatrudnienia \cite{zusdoz}. Tym, co wyróżnia nasze
-rozwiązanie od innych systemów stosowanych w administracji, jest całkowicie modularna architektura. To pozwala nam
-stosunkowo małym kosztem podłączać i odłączać kolejne usługi wraz z rozwojem cyfrowej administracji. Pewną
-inspiracją do stworzenia takiego systemu był rządowy portal obywatel.gov.pl \cite{mcobywatel}.
+podobnego do Platformy Usług Elektronicznych ZUS \cite{zuspue}, a następnie zaimplementowanie na niej jednego
+wybranego przypadku użycia, np. usługi dokumentowania okresów zatrudnienia \cite{zusdoz}. Dzięki temu petent chcący
+coś załatwić w urzędzie nie będzie musiał wychodzić z domu. Pewną inspiracją do stworzenia takiego systemu był
+rządowy portal obywatel.gov.pl \cite{mcobywatel}.
 
-Naszym głównym zadaniem było zaprojektowanie serwisu, który byłby maksymalnie prosty w utrzymaniu i rozwoju, oraz
-który łatwo można było skalować. Do którego rozwoju nie trzeba by było zatrudniać doskonale wykształconych
-programistów z MIM UW, ale także osoby które kończyły szkoły w mniejszych miastach. System powinien być odporny
-na różne błędy programistyczne i spełniać normy 12 Factor App \cite{tfa}, w szczególności być odporny na awarię
-pojedyńczej usługi, bez prowadzenia do rozspójnienia danych.
+Wyzwaniem, które należało uwzględnić w fazie projektowania, był szeroki zakres użytkowników systemu: od zwykłych
+obywateli, poprzez urzędników, aż po przedsiębiorców. Każda z tych grup użytkowników miałaby zupełnie inne uprawnienia:
+byłoby co najmniej niestosowne, gdyby przedsiębiorca wnioskowałby o urlop macierzyński dla prowadzonej przez siebie
+firmy. Podobnie obywatel nie powinien mieć możliwości przyznania sobie emerytury lub renty (o ile nie jest urzędnikiem). Główne przypadki użycia systemu sprowadzałyby się do trzech wariantów: wypełniania wniosków, sprawdzania
+odpowiedzi na wypełniony wniosek i rozpatrywania wniosków. Pobocznymi przypadkami byłyby: rezerwacja terminu wizyty w
+urzędzie w przypadku nadzwyczaj zawiłych spraw, prezentacja różnych danych użytkownikowi (np. stanu ubezpieczenia,
+wysokości przyznanej renty lub wymaganego ustawowo pouczenia) oraz wymiana korenspondencji z urzędnikiem. W obecnie
+istniejącym systemie PUE jest jeszcze jeden przypadek użycia: czat z konsultantem. Nasza platforma powinna umożliwiać
+stosunkowo prostą realizację większości spośród wymienionych wyżej przypadków użycia.
+
+Postawione przed nami wymagania były głównie natury niefunkcjonalnej. Dołączanie kolejnej usługi do systemu
+powinno być maksymalnie proste. To pozwala nam stosunkowo małym kosztem podłączać i odłączać kolejne usługi wraz z
+rozwojem cyfrowej administracji. Usługi powinny tworzyć jeden ekosystem, z którego nie wychodziłby użytkownik. System
+powinien być w dużej mierze odporny na awarie i zachowywać spójność oraz poprawność przechowywanych danych obywateli.
+W szczególności powinny być spełnione normy ,,12 Factor App'' \cite{tfa}, w tym ta mówiąca, że awaria jednego serwera
+lub usługi nie powinna wpływać na działanie pozostałych, niezależnych od niej udostępnianych usług.
+Rozwój platformy powinien być możliwy także dla słabiej wykształconych lub mniej doświadczonych programistów, których
+nie pociągają uroki życia w dużym mieście. W ten sposób nasz projekt realizowałby plan zrównoważonego rozwoju,
+zapobiegając zwijaniu się polski lokalnej, a z drugiej strony prowadziłby do wymiernych oszczędności na wynagrodzeniach.
 
 W związku z tym, że projektowaliśmy system dla administracji państwowej z którego będą korzystać miliony obywateli,
 musieliśmy bardzo ostrożnie dobierać technologie, z których korzystaliśmy. Wybranie rozwiązania opartego na
-niekorzystnej licencji mogło się w przyszłości srogo zemścić. Innym wyzwaniem, które należało uwzględnić w fazie
-projektowania, był szeroki zakres użytkowników systemu: od zwykłych obywateli, poprzez urzędników, aż po
-przedsiębiorców.
+niekorzystnej licencji mogło się w przyszłości srogo zemścić w postaci konieczności zapłacenia ogromnej opłaty
+licencyjnej, wyłączenia usługi i przebudowania jej na nowo, udostępnienia części systemu na licencji open source, a
+nawet konieczności nieodpłatnego przekazania przechowywanych danych obywateli licencjodawcy. Preferowane były
+rozwiązania które albo były darmowe, albo do których nasz klient posiadał licencje (m. in. IBM DB2, komercyjna wersja PostgreSQL oraz cała gama produktów firmy Microsoft).
 
 %Elementy, które powinny się znaleźć w dokumencie opisującym wizję to:
 %Opis rozwiązania, Korzyści biznesowe, Wizja projektu i zakres, Analiza korzyści, Wymagania biznesowe, Wymagania użytkowników, Wymagania operacyjne, Wymagania systemowe, Wymagania bezpieczeństwa, Zakres projektu, Cele biznesowe, Cele techniczne, Kryteria operacyjne, Ograniczenia, Definicja profili użytkowników, Analizy użytkowania, Scenariusze wykorzystania
@@ -116,7 +130,8 @@ przedsiębiorców.
 Monolityczna vs mikrousługi, zarysowany podział na tiery.
 3 warstwy mikrousług: biznesowa (realizuje logikę i jest dostępna z zewnątrz),
 techniczna (niedostępna z zewnątrz, pracuje na rzecz warstwy biznesowej i służy np. do komunikacji
-z innymi systemami), bazodanowa.
+z innymi systemami), bazodanowa. Komunikacja między usługami będzie odbywać się przez kolejki komunikatów beanstalkd lub apache kafka.
+Zadaniem usług bazodanowych jest zapewnienie rollbacku w przypadku jakiejkolwiek awarii (nawet podczas operacji na NoSQL) albo przepchnięcie operacji dalej.
 
 \section{Problemy z współbieżnością mikrousług}
 
@@ -180,6 +195,9 @@ Projektanci mikrousług korzystających z naszej platformy muszą być świadomi
 Aby maksymalnie ułatwić im pracę uwzględniliśmy wyniki powyższych rozważań  przy projektowaniu API, jednak nie
 jesteśmy w stanie rozwiązać wszystkich pojawiających się problemów.
 
+\section{Zapewnianie odporności systemu na awarie}
+Hystrix
+
 \section{Zapewnienie transakcyjności}
 
 Jednym z wymagań pozafunkcjonalnych było zapewnienie skalowalności serwisu i mikrousług w sposób zachowujący transakcyjność.
@@ -197,19 +215,20 @@ zapobiec konfliktom. W uzasadnionych przypadkach możliwe byłoby przechowywanie
 po stronie serwera, oraz trzymanie w kliencie ich identyfikatora.
 
 \section{Przegląd technologii do tworzenia frontendu}
-Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo vs angular 2 vs react (odpada, słaba licencja).
+Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo (najlepszą antyrekomendacją jest obecnie istniejący system PUE) vs angular 2 vs react (odpada, słaba licencja).
 
-\section{Szyny danych}
-WebMethods vs WSO2, vs Talend, Mule vs zato.io, a może bez żadnej szyny usług (single point of failure, szyny lubią się zapychać)?
+\section{Szyny danych a kolejki komunikatów}
+WebMethods vs WSO2, vs Talend, Mule vs zato.io, a może bez żadnej szyny usług (single point of failure, szyny lubią się zapychać)? Szyny danych nie zapewniają niezawodności, należy użyć kolejek komunikatów by zapewnić, że raz uruchomiona operacja zostanie przepchnięta przez system. Kolejka może być ukryta wewnątrz mikrousługi, ale wtedy jest problem z atomowością operacji.
+Ciekawe wynalazki: DistributedLog, apache kafka
 
 \section{Usługi monitorowania stanu mikrousług}
 Apache zookeeper vs Netflix eureka vs ...
 
 \section{Przegląd baz danych}
 Postgres + pg\_shard i mongo db. Sensowne jest też CouchDB. Redis jest zbyt prymitywny, a jego obsługa transakcji zbyt ograniczona, chociaż
-może się przydać przy synchronizacji \cite{redislock}.
+może się przydać przy synchronizacji \cite{redislock}. Niezawodne: cassandra, hbase?
 
-\section{API udostępniane przez mikrousługi i frontend}
+\section{API udostępniane przez mikrousługi biznesowe i frontend}
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
 Opis tego co poszczególne osoby zrobiły w ramach projektu. To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział).
