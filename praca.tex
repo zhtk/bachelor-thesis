@@ -105,14 +105,25 @@ istniejącym systemie PUE jest jeszcze jeden przypadek użycia: czat z konsultan
 stosunkowo prostą realizację większości spośród wymienionych wyżej przypadków użycia.
 
 Postawione przed nami wymagania były głównie natury niefunkcjonalnej. Dołączanie kolejnej usługi do systemu
-powinno być maksymalnie proste. To pozwala nam stosunkowo małym kosztem podłączać i odłączać kolejne usługi wraz z
+powinno być maksymalnie proste. Na tę prostotę składałby się ustandaryzowany interfejs do komunikacji pomiędzy
+poszczególnymi usługami oraz modułowy i łatwo rozszerzalny interfejs użytkownika.
+To pozwoli nam stosunkowo małym kosztem podłączać i odłączać kolejne usługi wraz z
 rozwojem cyfrowej administracji. Usługi powinny tworzyć jeden ekosystem, z którego nie wychodziłby użytkownik. System
 powinien być w dużej mierze odporny na awarie i zachowywać spójność oraz poprawność przechowywanych danych obywateli.
 W szczególności powinny być spełnione normy ,,12 Factor App'' \cite{tfa}, w tym ta mówiąca, że awaria jednego serwera
 lub usługi nie powinna wpływać na działanie pozostałych, niezależnych od niej udostępnianych usług.
-Rozwój platformy powinien być możliwy także dla słabiej wykształconych lub mniej doświadczonych programistów, których
-nie pociągają uroki życia w dużym mieście. W ten sposób nasz projekt realizowałby plan zrównoważonego rozwoju,
-zapobiegając zwijaniu się polski lokalnej, a z drugiej strony prowadziłby do wymiernych oszczędności na wynagrodzeniach.
+Rozwój i utrzymanie platformy powinien być możliwy także dla słabiej wykształconych lub mniej doświadczonych
+programistów, których nie pociągają uroki życia w dużym mieście. W ten sposób nasz projekt realizowałby plan
+zrównoważonego rozwoju, zapobiegając zwijaniu się polski lokalnej, a z drugiej strony prowadziłby do wymiernych
+oszczędności na wynagrodzeniach.
+
+Innym istotnym aspektem naszego projektu było zerwanie z wizerunkiem ZUSu jako instytucji przestarzałej, niewydolnej
+i pochodzącej ze słusznie minionego ustroju. Szata graficzna naszej platformy powinna być przyjemna dla oka, a układ
+graficzny elementów logiczny, prosty do zrozumienia i konsekwentny. W żadnym przypadku praca z naszym systemem nie
+powinna przypominać interakcji ze znudzonym i ślamazarnie wykonującym swoje obowiązki urzędnikiem, a to nakłada na
+nas obowiązek rozwiązania problemu skalowalności aplikacji. W miarę możliwości
+powinniśmy korzystać z nowoczesnych, przyszłościowych i rozwijanych technologii, tak, by odsunąć jak najdalej w
+przyszłość konieczność przebudowy systemu z powodu zmieniających się trendów i narastającego długu technologicznego.
 
 W związku z tym, że projektowaliśmy system dla administracji państwowej z którego będą korzystać miliony obywateli,
 musieliśmy bardzo ostrożnie dobierać technologie, z których korzystaliśmy. Wybranie rozwiązania opartego na
@@ -184,9 +195,10 @@ wkracza mikrousługa B, która zakłada swoją blokadę, nadpisuje dane utworzon
 działanie. Na koniec usługa A zostaje wybudzona i kontynuuje swoje działanie, prowadząc do rozspójnienia danych.
 Według autora polemiki rozwiązaniem tego problemu jest skorzystanie z mechanizmu współdzielonej blokady
 zaimplementowanej w frameworku Apache Curator \cite{curatorlock} i korzystającej pod spodem z Apache ZooKeepera.
-Jest to zdecydowanie bezpieczniejsze rozwiązanie, które w przypadku awarii mikrousługi i utraty połączenia
+Jest to bezpieczniejsze rozwiązanie które nie pozwala na wygaśnięcie blokady z powodu upływającego
+czasu, a w przypadku awarii mikrousługi i utraty połączenia z nią
 automatycznie zdejmuje blokadę. Ponadto, jest to stosunkowo nowoczesny projekt wykorzystywany i rozwijany przez
-m. in. firmę Netflix, co daje pewne gwarancje dotyczące stabilności i przyszłości tego projektu.
+duże firmy takie jak Netflix, co daje pewne nadzieje dotyczące stabilności i dojrzałości tego projektu.
 
 Jest jeszcze jeden problem, na który użytkownicy naszej platformy mogą się natknąć. Mianowicie, nasza platforma
 może integrować poprzez różne adaptery już istniejące usługi, które zupełnie nie są świadome istnienia
@@ -196,7 +208,7 @@ Aby maksymalnie ułatwić im pracę uwzględniliśmy wyniki powyższych rozważa
 jesteśmy w stanie rozwiązać wszystkich pojawiających się problemów.
 
 \section{Zapewnianie odporności systemu na awarie}
-Hystrix
+Hystrix - jeszcze to sprawdzimy
 
 \section{Zapewnienie transakcyjności}
 
@@ -218,8 +230,32 @@ po stronie serwera, oraz trzymanie w kliencie ich identyfikatora.
 Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo (najlepszą antyrekomendacją jest obecnie istniejący system PUE) vs angular 2 vs react (odpada, słaba licencja).
 
 \section{Szyny danych a kolejki komunikatów}
-WebMethods vs WSO2, vs Talend, Mule vs zato.io, a może bez żadnej szyny usług (single point of failure, szyny lubią się zapychać)? Szyny danych nie zapewniają niezawodności, należy użyć kolejek komunikatów by zapewnić, że raz uruchomiona operacja zostanie przepchnięta przez system. Kolejka może być ukryta wewnątrz mikrousługi, ale wtedy jest problem z atomowością operacji.
-Ciekawe wynalazki: DistributedLog, apache kafka
+
+W naszej architekturze mikrousług potrzebowaliśmy jakiejś metody komunikacji pomiędzy poszczególnymi mikrousługami.
+Na początku nasza uwaga została przykuta przez szyny danych jako standardowe rozwiązanie korporacyjne wykorzystywane
+przy integracji usług. Nasz klient jest w posiadaniu licencji na szynę danych WebMethods i to ją jako pierwszą
+rozpatrywaliśmy. Niestety, dostępna publicznie internetowa dokumentacja tego rozwiązania ograniczała się do kilku
+broszurek reklamowych i luźnych sloganów. Z czystej ostrożności zrezygnowaliśmy z tego oprogramowania, gdyż nie
+mieliśmy absolutnie żadnej gwarancji, że wyczytane hasła reklamowe mają jakiekolwiek pokrycie w rzeczywistości.
+Do kolejnej grupy sprawdzonych szyn danych należały rozwiązania takie jak: WSO2, Talend, Mule. Możliwości, które
+oferowały wyglądały na obiecujące, ale zupełnie niepasujące do specyfiki naszego projektu. Jednym z celów naszej
+platformy było opracowanie interfejsu, który pozwalałby na możliwie łatwe, automatyczne wpinanie i wypinanie
+mikrousług. Nijak do tak postawionego celu miała się konieczność konfigurowania szyny danych przez panel wystawiony w sieci
+WWW lub wręcz przy pomocy specjalnego środowiska programistycznego takiego jak Eclipse, z obowiązkową fazą kompilacji
+i wgrywania na serwer. 
+
+Rozwiązaniem wartym wspomnienia jest Zato, dość osobliwa szyna danych rozwijana przez osobę o polsko brzmiącym nazwisku. Jej głównymi cechami są skalowalność, możliwość rekonfiguracji w locie oraz bardzo dobra integracja z językiem python, co miało dla nas niebagatelne znaczenie na etapie wczesnych analiz. W zasadzie cała logika realizowana przez tę szynę danych mogła być zapisana w postaci skryptu pythona, co otwierało nas na zupełnie nowe możliwości integracji mikrousług. Rozważaliśmy scenariusz, w którym szyna danych odpowiadałaby za wykrywanie działających mikrousług, trzymanie ich spisu i metadanych z nimi powiązanych oraz rozgłaszanie tegoż spisu do warstwy prezentacji i innych mikrousług. Zrezygnowaliśmy z tego podejścia jako naruszającego zasadę separacji odpowiedzialności oraz wskutek zmian projektowych - rezygnacji z frameworka django, pyramid i podobnych na rzecz Angulara.
+
+Niepowodzenia przy poszukiwaniu odpowiadającej nam szyny danych skierowały nas w kierunku innych rozwiązań, takich jak
+kolejki komunikatów. Głównym wymaganiem jakie postawiliśmy była bardzo duża odporność na różnego rodzaju błędy i
+awarie. W idealnym modelu każda wiadomość w kolejce powinna mieć trzy stany: do przetworzenia, w trakcie przetwarzania, wykonany. Celem takiego modelu jest, by w przypadku awarii jednego serwera usługi jego zadanie było transparentnie przekazane serwerowi zastępczemu, bez przerywania operacji.
+Udało nam się znaleźć tylko dwie kolejki spełniające to wymaganie: Apache Kafka oraz Beanstalkd. % TODO
+
+Innym ciekawym sposobem osiągnięcia niezawodności może być kolejka ukryta wewnątrz mikrousługi. Niestety wtedy mogą mieć miejsce problemy z atomowością operacji. Przykładowo, w sytuacji gdy zadanie w kolejce zostało oznaczone jako
+wykonane, ale usługa wywołująca nie otrzymała jeszcze odpowiedzi nastąpi awaria wywoływanej mikrousługi, może dojść do
+duplikacji wykonanej operacji lub rozspójnienia danych.
+
+Ciekawe wynalazki: DistributedLog, Netflix Ribbon
 
 \section{Usługi monitorowania stanu mikrousług}
 Apache zookeeper vs Netflix eureka vs ...
