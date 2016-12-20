@@ -9,7 +9,7 @@
 
 \nralbumu{Albumy}
 
-\title{Dużo mikrousług}
+\title{Platforma integracji mikrousług}
 
 \tytulang{Project}
 
@@ -46,11 +46,6 @@
 
 % Słowa kluczowe:
 \keywords{mikrousługi, SOA, trudne sprawy}
-
-% Tu jest dobre miejsce na Twoje własne makra i~środowiska:
-\newtheorem{defi}{Definicja}[section]
-
-% koniec definicji
 
 \begin{document}
 \maketitle
@@ -102,7 +97,17 @@ odpowiedzi na wypełniony wniosek i rozpatrywania wniosków. Pobocznymi przypadk
 urzędzie w przypadku nadzwyczaj zawiłych spraw, prezentacja różnych danych użytkownikowi (np. stanu ubezpieczenia,
 wysokości przyznanej renty lub wymaganego ustawowo pouczenia) oraz wymiana korenspondencji z urzędnikiem. W obecnie
 istniejącym systemie PUE jest jeszcze jeden przypadek użycia: czat z konsultantem. Nasza platforma powinna umożliwiać
-stosunkowo prostą realizację większości spośród wymienionych wyżej przypadków użycia.
+stosunkowo prostą realizację niemal wszystkich spośród wymienionych wyżej przypadków użycia.
+
+Kiedy użytkownik zaloguje się do naszego serwisu powinien zobaczyć pulpit, na którym wyświetlone są ,,kafelki''
+odpowiadające poszczególnym usługom. Kliknięcie na wybrany kafelek powinno wyświetlić bardziej szczegółowy widok
+odpowiadający podjętej akcji. Szczególnym życzeniem naszego klienta było, by architektura naszej aplikacji była
+oparta na mikrousługach. Każda mikrousługa otrzymywałaby na wyłączność fragment pulpitu ograniczony do kafelka,
+z możliwością przełączenia do trybu pełnoekranowego, gdzie przejmowałaby wtedy kontrolę nad większością wyświetlanego
+obszaru. Aby to umożliwić, należało opracować ustandaryzowany i łatwo rozszerzalny interfejs do komunikacji między
+cienkim klientem a mikrousługą. Preferowane było rozwiązanie, w którym komunikacja odbywałaby się bez pośrednictwa
+serwera serwującego stronę internetową. Zamiast tego wykonywane byłyby asynchroniczne zapytania do mikrousługi (być
+może poprzez warstwę integracji).
 
 Postawione przed nami wymagania były głównie natury niefunkcjonalnej. Dołączanie kolejnej usługi do systemu
 powinno być maksymalnie proste. Na tę prostotę składałby się ustandaryzowany interfejs do komunikacji pomiędzy
@@ -119,30 +124,31 @@ oszczędności na wynagrodzeniach.
 
 Innym istotnym aspektem naszego projektu było zerwanie z wizerunkiem ZUSu jako instytucji przestarzałej, niewydolnej
 i pochodzącej ze słusznie minionego ustroju. Szata graficzna naszej platformy powinna być przyjemna dla oka, a układ
-graficzny elementów logiczny, prosty do zrozumienia i konsekwentny. W żadnym przypadku praca z naszym systemem nie
+graficzny elementów logiczny, prosty do zrozumienia i konsekwentny. Użytkownik nie może być bombardowany zagadkowo
+brzmiącymi komunikatami o ,,wchodzeniu na poziom bezpieczeństwa 1'' i ,,zamiarze korzystania z usług biznesowych''.
+W żadnym przypadku praca z naszym systemem nie
 powinna przypominać interakcji ze znudzonym i ślamazarnie wykonującym swoje obowiązki urzędnikiem, a to nakłada na
-nas obowiązek rozwiązania problemu skalowalności aplikacji. W miarę możliwości
-powinniśmy korzystać z nowoczesnych, przyszłościowych i rozwijanych technologii, tak, by odsunąć jak najdalej w
-przyszłość konieczność przebudowy systemu z powodu zmieniających się trendów i narastającego długu technologicznego.
+nas obowiązek rozwiązania problemu skalowalności aplikacji.
 
 W związku z tym, że projektowaliśmy system dla administracji państwowej z którego będą korzystać miliony obywateli,
 musieliśmy bardzo ostrożnie dobierać technologie, z których korzystaliśmy. Wybranie rozwiązania opartego na
 niekorzystnej licencji mogło się w przyszłości srogo zemścić w postaci konieczności zapłacenia ogromnej opłaty
 licencyjnej, wyłączenia usługi i przebudowania jej na nowo, udostępnienia części systemu na licencji open source, a
 nawet konieczności nieodpłatnego przekazania przechowywanych danych obywateli licencjodawcy. Preferowane były
-rozwiązania które albo były darmowe, albo do których nasz klient posiadał licencje (m. in. IBM DB2, komercyjna wersja PostgreSQL oraz cała gama produktów firmy Microsoft).
+rozwiązania które albo były darmowe, albo do których nasz klient posiadał licencje (m. in. IBM DB2, komercyjna wersja PostgreSQL oraz cała gama produktów firmy Microsoft). W miarę możliwości
+powinniśmy korzystać z nowoczesnych, przyszłościowych i rozwijanych technologii, tak, by odsunąć jak najdalej w
+przyszłość konieczność przebudowy systemu z powodu zmieniających się trendów i narastającego długu technologicznego.
 
 %Elementy, które powinny się znaleźć w dokumencie opisującym wizję to:
 %Opis rozwiązania, Korzyści biznesowe, Wizja projektu i zakres, Analiza korzyści, Wymagania biznesowe, Wymagania użytkowników, Wymagania operacyjne, Wymagania systemowe, Wymagania bezpieczeństwa, Zakres projektu, Cele biznesowe, Cele techniczne, Kryteria operacyjne, Ograniczenia, Definicja profili użytkowników, Analizy użytkowania, Scenariusze wykorzystania
 
 \chapter{Prototyp}\label{r:prototyp}
 
-\section{Zarys architektury}
-Monolityczna vs mikrousługi, zarysowany podział na tiery.
-3 warstwy mikrousług: biznesowa (realizuje logikę i jest dostępna z zewnątrz),
-techniczna (niedostępna z zewnątrz, pracuje na rzecz warstwy biznesowej i służy np. do komunikacji
-z innymi systemami), bazodanowa. Komunikacja między usługami będzie odbywać się przez kolejki komunikatów beanstalkd lub apache kafka.
-Zadaniem usług bazodanowych jest zapewnienie rollbacku w przypadku jakiejkolwiek awarii (nawet podczas operacji na NoSQL) albo przepchnięcie operacji dalej.
+Przed przystąpieniem do opracowania projektu architektury wykonaliśmy przegląd obecnie dostępnych rozwiązań, które
+mogłyby nam pomóc w realizacji wyznaczonych celów.
+
+% TODO Komunikacja między usługami będzie odbywać się przez kolejki komunikatów beanstalkd lub apache kafka (powinna być niezawodna)
+%Zadaniem usług bazodanowych jest zapewnienie rollbacku w przypadku jakiejkolwiek awarii (nawet podczas operacji na NoSQL) albo przepchnięcie operacji dalej.
 
 \section{Problemy z współbieżnością mikrousług}
 
@@ -208,7 +214,8 @@ Aby maksymalnie ułatwić im pracę uwzględniliśmy wyniki powyższych rozważa
 jesteśmy w stanie rozwiązać wszystkich pojawiających się problemów.
 
 \section{Zapewnianie odporności systemu na awarie}
-Hystrix - jeszcze to sprawdzimy
+
+Hystrix - jeszcze to sprawdzimy, strażnik na lockach %TODO
 
 \section{Zapewnienie transakcyjności}
 
@@ -244,24 +251,41 @@ mikrousług. Nijak do tak postawionego celu miała się konieczność konfigurow
 WWW lub wręcz przy pomocy specjalnego środowiska programistycznego takiego jak Eclipse, z obowiązkową fazą kompilacji
 i wgrywania na serwer. 
 
-Rozwiązaniem wartym wspomnienia jest Zato, dość osobliwa szyna danych rozwijana przez osobę o polsko brzmiącym nazwisku. Jej głównymi cechami są skalowalność, możliwość rekonfiguracji w locie oraz bardzo dobra integracja z językiem python, co miało dla nas niebagatelne znaczenie na etapie wczesnych analiz. W zasadzie cała logika realizowana przez tę szynę danych mogła być zapisana w postaci skryptu pythona, co otwierało nas na zupełnie nowe możliwości integracji mikrousług. Rozważaliśmy scenariusz, w którym szyna danych odpowiadałaby za wykrywanie działających mikrousług, trzymanie ich spisu i metadanych z nimi powiązanych oraz rozgłaszanie tegoż spisu do warstwy prezentacji i innych mikrousług. Zrezygnowaliśmy z tego podejścia jako naruszającego zasadę separacji odpowiedzialności oraz wskutek zmian projektowych - rezygnacji z frameworka django, pyramid i podobnych na rzecz Angulara.
+Rozwiązaniem wartym wspomnienia jest Zato, dość osobliwa szyna danych rozwijana przez osobę o polsko brzmiącym nazwisku. Jej głównymi cechami są skalowalność, możliwość rekonfiguracji w locie oraz bardzo dobra integracja z językiem python, co miało dla nas niebagatelne znaczenie na etapie wczesnych analiz. W zasadzie cała logika realizowana przez tę szynę danych mogła być zapisana w postaci skryptu pythona, co otwierało nas na zupełnie nowe możliwości integracji mikrousług. Rozważaliśmy scenariusz, w którym szyna danych odpowiadałaby za wykrywanie działających mikrousług, trzymanie ich spisu i metadanych z nimi powiązanych oraz rozgłaszanie tegoż spisu do warstwy prezentacji i innych mikrousług. Zrezygnowaliśmy z tego podejścia jako naruszającego zasadę separacji odpowiedzialności oraz wskutek zmian projektowych - rezygnacji z frameworka django, pyramid i podobnych na rzecz Angulara. Jak się potem okazało, istnieje już rozwiązanie które realizuje wyżej wymienione scenariusze - Apache Zookeeper.
 
 Niepowodzenia przy poszukiwaniu odpowiadającej nam szyny danych skierowały nas w kierunku innych rozwiązań, takich jak
 kolejki komunikatów. Głównym wymaganiem jakie postawiliśmy była bardzo duża odporność na różnego rodzaju błędy i
-awarie. W idealnym modelu każda wiadomość w kolejce powinna mieć trzy stany: do przetworzenia, w trakcie przetwarzania, wykonany. Celem takiego modelu jest, by w przypadku awarii jednego serwera usługi jego zadanie było transparentnie przekazane serwerowi zastępczemu, bez przerywania operacji.
-Udało nam się znaleźć tylko dwie kolejki spełniające to wymaganie: Apache Kafka oraz Beanstalkd. % TODO
+awarie. W idealnym modelu każda wiadomość w kolejce powinna mieć trzy stany: do przetworzenia, w trakcie przetwarzania, wykonany. Celem takiego modelu jest, by w przypadku awarii jednego serwera usługi jego zadanie było transparentnie przekazane serwerowi zastępczemu, bez przerywania operacji. Udało nam się znaleźć tylko jedną kolejkę spełniającą to wymaganie - Beanstalkd.
 
-Innym ciekawym sposobem osiągnięcia niezawodności może być kolejka ukryta wewnątrz mikrousługi. Niestety wtedy mogą mieć miejsce problemy z atomowością operacji. Przykładowo, w sytuacji gdy zadanie w kolejce zostało oznaczone jako
+Innym ciekawym sposobem osiągnięcia niezawodności może być kolejka ukryta wewnątrz mikrousługi, która w razie awarii jednego serwera pozwalałaby na odczytanie zadania przez inny serwer i dokończenie go. Niestety wtedy mogą mieć miejsce problemy z atomowością operacji. Przykładowo, w sytuacji gdy zadanie w kolejce zostało oznaczone jako
 wykonane, ale usługa wywołująca nie otrzymała jeszcze odpowiedzi nastąpi awaria wywoływanej mikrousługi, może dojść do
 duplikacji wykonanej operacji lub rozspójnienia danych.
 
-Ciekawe wynalazki: DistributedLog, Netflix Ribbon
+Jeszcze innym, ciekawym podejściem byłoby zastosowanie usługi udostępniającej niezawodny dostęp do czegoś w rodzaju dziennika. Wtedy moglibyśmy stosunkowo małym kosztem zaimplementować mechanizmy stosujące transakcyjność rodem z relacyjnych baz danych. Przykładami takich usług są DistributedLog i Kafka %TODO
 
 \section{Usługi monitorowania stanu mikrousług}
-Apache zookeeper vs Netflix eureka vs ...
+Apache zookeeper + curator do loadbalancingu vs Netflix eureka (nie)
 
 \section{Przegląd baz danych}
-Postgres + pg\_shard i mongo db. Sensowne jest też CouchDB. Redis jest zbyt prymitywny, a jego obsługa transakcji zbyt ograniczona, chociaż
+
+W naszym projekcie rodzaj użytej bazy danych nie miał większego znaczenia, gdyż dostęp do niej odbywa się poprzez
+wyspecjalizowaną usługę zapewniającą dostęp do danych lub w ramach jednej mikrousługi, gdzie służy jako tymczasowe
+składowisko informacji potrzebnych przy wykonywaniu operacji. W takim modelu rodzaj użytej bazy danych jest
+transparentny dla usługi wywołującej.
+Wymaganiami postawionymi przed użytą bazą danych były:
+\begin{itemize}
+\item Możliwość zapewnienia wysokiej niezawodności i odporności na utratę integralności danych.
+\item Skalowalność
+\item Elastyczny model danych pasujący do specyfiki informacji przetwarzanych przez naszego klienta.
+\end{itemize}
+W naszym projekcie użyliśmy bazy PostgreSQL, która jest rozwiązaniem spełniającym powyższe wymagania i znanym przez naszego klienta. Skalowalność jest zapewniona przez rozszerzenie pg\_shard które pozwala na sharding danych pomiędzy różnymi serwerami. Jest to dość unikalne rozwiązanie w świecie otwartych relacyjnych baz danych.
+
+Spośród baz danych typu NoSQL szczególnie interesujące było Mongo DB. Zastosowany model danych wygląda na spełnienie
+marzeń typowego urzędnika, gdyż wszystkie informacje przechowywane w tej bazie są zorganizowane w dokumenty,
+które mogą być zagnieżdżone w sobie. W obrębie jednego dokumenty gwarantowane są atomowe odczyty i zapisy, które
+działają jak transakcje.
+% TODO
+Sensowne jest też CouchDB. Redis jest zbyt prymitywny, a jego obsługa transakcji zbyt ograniczona, chociaż
 może się przydać przy synchronizacji \cite{redislock}. Niezawodne: cassandra, hbase?
 
 \section{API udostępniane przez mikrousługi biznesowe i frontend}
