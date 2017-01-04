@@ -72,13 +72,13 @@ Włożoną w projekt pracą (dyskusja innych możliwych rozwiązań odrzucanych 
 
 Zwykle warto dodać jakiś kluczowy przypadek użycia z Państwa dokumentacji. W zależności od projektu mogą być bardzo pożądane zrzuty ekranów kluczowych części projektu. Znów w zależności od projektu mogą być potrzebne fragmenty kodu (do kilkunastu wierszy bezpośrednio w kodzie, do 2 stron jako załączniki do treści dokumentu).
 
-\chapter{Organizacja pracy}
+%\chapter{Organizacja pracy}
 
-Pierwszym poważnym wyzwaniem, przed którym staneliśmy, była organizacja pracy zespołu. Każdy członek zespołu
-pochodzi z innego miasta i uczęszcza na inne zajęcia, ponadto część członków pracuje. Znalezienie pory i dnia
-tygodnia, w którym moglibyśmy się spotykać, stanowiło spore wyzwanie. W gospodarowaniu czasem i ustalaniu terminów
-spotkań z klientem bardzo nam pomogło doodle. % Mądrze rozwinąć!
-Komunikacja między członkami zespołu odbywała się głównie przez internet, przy pomocy facebooka %i slacka.
+%Pierwszym poważnym wyzwaniem, przed którym staneliśmy, była organizacja pracy zespołu. Każdy członek zespołu
+%pochodzi z innego miasta i uczęszcza na inne zajęcia, ponadto część członków pracuje. Znalezienie pory i dnia
+%tygodnia, w którym moglibyśmy się spotykać, stanowiło spore wyzwanie. W gospodarowaniu czasem i ustalaniu terminów
+%spotkań z klientem bardzo nam pomogło doodle. % Mądrze rozwinąć!
+%Komunikacja między członkami zespołu odbywała się głównie przez internet, przy pomocy facebooka %i slacka.
 %Projekt prowadziliśmy w lekko zmodyfikowanej zwinnej metodyce opracowanej specjalnie na potrzeby naszego klienta.
 
 \chapter{Wizja systemu}\label{r:wizja}
@@ -142,13 +142,10 @@ przyszłość konieczność przebudowy systemu z powodu zmieniających się tren
 %Elementy, które powinny się znaleźć w dokumencie opisującym wizję to:
 %Opis rozwiązania, Korzyści biznesowe, Wizja projektu i zakres, Analiza korzyści, Wymagania biznesowe, Wymagania użytkowników, Wymagania operacyjne, Wymagania systemowe, Wymagania bezpieczeństwa, Zakres projektu, Cele biznesowe, Cele techniczne, Kryteria operacyjne, Ograniczenia, Definicja profili użytkowników, Analizy użytkowania, Scenariusze wykorzystania
 
-\chapter{Prototyp}\label{r:prototyp}
+\chapter{Przegląd istniejących rozwiązań}\label{r:przeglad}
 
 Przed przystąpieniem do opracowania projektu architektury wykonaliśmy przegląd obecnie dostępnych rozwiązań, które
 mogłyby nam pomóc w realizacji wyznaczonych celów.
-
-% TODO Komunikacja między usługami będzie odbywać się przez kolejki komunikatów beanstalkd lub apache kafka (powinna być niezawodna)
-%Zadaniem usług bazodanowych jest zapewnienie rollbacku w przypadku jakiejkolwiek awarii (nawet podczas operacji na NoSQL) albo przepchnięcie operacji dalej.
 
 \section{Problemy z współbieżnością mikrousług}
 
@@ -233,9 +230,6 @@ na wiele części. Dane przechowywane w kliencie przez poszczególne mikrousług
 zapobiec konfliktom. W uzasadnionych przypadkach możliwe byłoby przechowywanie części danych (takich jak duże pliki)
 po stronie serwera, oraz trzymanie w kliencie ich identyfikatora.
 
-\section{Przegląd technologii do tworzenia frontendu}
-Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo (najlepszą antyrekomendacją jest obecnie istniejący system PUE) vs angular 2 vs react (odpada, słaba licencja).
-
 \section{Szyny danych a kolejki komunikatów}
 
 W naszej architekturze mikrousług potrzebowaliśmy jakiejś metody komunikacji pomiędzy poszczególnymi mikrousługami.
@@ -257,14 +251,18 @@ Niepowodzenia przy poszukiwaniu odpowiadającej nam szyny danych skierowały nas
 kolejki komunikatów. Głównym wymaganiem jakie postawiliśmy była bardzo duża odporność na różnego rodzaju błędy i
 awarie. W idealnym modelu każda wiadomość w kolejce powinna mieć trzy stany: do przetworzenia, w trakcie przetwarzania, wykonany. Celem takiego modelu jest, by w przypadku awarii jednego serwera usługi jego zadanie było transparentnie przekazane serwerowi zastępczemu, bez przerywania operacji. Udało nam się znaleźć tylko jedną kolejkę spełniającą to wymaganie - Beanstalkd.
 
-Innym ciekawym sposobem osiągnięcia niezawodności może być kolejka ukryta wewnątrz mikrousługi, która w razie awarii jednego serwera pozwalałaby na odczytanie zadania przez inny serwer i dokończenie go. Niestety wtedy mogą mieć miejsce problemy z atomowością operacji. Przykładowo, w sytuacji gdy zadanie w kolejce zostało oznaczone jako
-wykonane, ale usługa wywołująca nie otrzymała jeszcze odpowiedzi nastąpi awaria wywoływanej mikrousługi, może dojść do
-duplikacji wykonanej operacji lub rozspójnienia danych.
+Innym sposobem osiągnięcia niezawodności może być kolejka ukryta wewnątrz mikrousługi, która w razie awarii jednego serwera pozwalałaby na odczytanie zadania przez inny serwer i dokończenie go. Niestety wtedy mogą mieć miejsce problemy z atomowością operacji. Przykładowo, w sytuacji gdy zadanie w kolejce zostało oznaczone jako wykonane, ale usługa wywołująca nie otrzymała jeszcze odpowiedzi nastąpi awaria wywoływanej mikrousługi, może dojść do duplikacji wykonanej operacji lub rozspójnienia danych.
 
-Jeszcze innym, ciekawym podejściem byłoby zastosowanie usługi udostępniającej niezawodny dostęp do czegoś w rodzaju dziennika. Wtedy moglibyśmy stosunkowo małym kosztem zaimplementować mechanizmy stosujące transakcyjność rodem z relacyjnych baz danych. Przykładami takich usług są DistributedLog i Kafka %TODO
+Jeszcze innym, ciekawym podejściem byłoby zastosowanie usługi udostępniającej niezawodny dostęp do czegoś w rodzaju dziennika. Wtedy moglibyśmy stosunkowo małym kosztem zaimplementować mechanizmy stosujące transakcyjność rodem z relacyjnych baz danych. Przykładami takich usług są DistributedLog i Kafka. Poszczególne mikrousługi monitorowałyby dziennik i z niego pobierały zmiany, a następnie reagowały na nie poprzez podjęcie jakiejś akcji. Można sobie wyobrazić dwa sposoby wykorzystania takiego dziennika. Pierwszy polegałby na tym, że wszystkie dokonane zmiany są atomowo publikowane w jednej dużej paczce, która musiałaby być potem rozpakowywana, a poszczególne zmiany wyłuskiwane. Drugim sposobem byłoby stworzenie dużej ilości dzienników na każdy rodzaj zdarzenia, a każda operacja byłaby wykonywana w małych krokach, w sposób potokowy.
 
 \section{Usługi monitorowania stanu mikrousług}
-Apache zookeeper + curator do loadbalancingu vs Netflix eureka (nie)
+Apache zookeeper + curator do loadbalancingu vs Netflix eureka (nie) % TODO
+
+\section{Eventuate}
+% TODO
+
+\section{Przegląd technologii do tworzenia frontendu}
+Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo (najlepszą antyrekomendacją jest obecnie istniejący system PUE) vs angular 2 vs react (odpada, słaba licencja).
 
 \section{Przegląd baz danych}
 
@@ -288,7 +286,15 @@ działają jak transakcje.
 Sensowne jest też CouchDB. Redis jest zbyt prymitywny, a jego obsługa transakcji zbyt ograniczona, chociaż
 może się przydać przy synchronizacji \cite{redislock}. Niezawodne: cassandra, hbase?
 
-\section{API udostępniane przez mikrousługi biznesowe i frontend}
+\chapter{Projekt}
+
+Po przedstawieniu naszych wyników klientowi doszliśmy do wniosku, że zakres naszego projektu znacznie pokrywa się z już istniejącymi rozwiązaniami takimi jak Eventuate. Zdecydowaliśmy się przenieść środek ciężkości naszego projektu w stronę warstwy integracji klienta z backendem. Ustalono, że do osiągnięcia sukcesu wystarczy spełnienie następujących warunków: %TODO
+\begin{itemize}
+	\item Zrobicie warstwę FE + BFF w ten sposób, że zostanie zrobione środowisko Web Style Guide z podstawowymi i złożonymi kontrolkami oraz z generacją kodu.
+	\item Następnie użytkownik będzie mógł sam wyklikać kontrolki i ustawić to w dashboardy.
+	\item Na końcu chciałbym mięc zrobiony mockup pue.zus.pl wyklikany w ten sposób.
+	\item Móc zmieniać sam kolory i etc.
+\end{itemize}
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
 Opis tego co poszczególne osoby zrobiły w ramach projektu. To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział).
