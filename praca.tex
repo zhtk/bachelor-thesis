@@ -207,12 +207,14 @@ Jest jeszcze jeden problem, na który użytkownicy naszej platformy mogą się n
 może integrować poprzez różne adaptery już istniejące usługi, które zupełnie nie są świadome istnienia
 zaproponowanego mechanizmu blokad, więc nie są odporne na błędy wynikające z współbieżności.
 Projektanci mikrousług korzystających z naszej platformy muszą być świadomi wszystkiego, co wyżej napisano.
-Aby maksymalnie ułatwić im pracę uwzględniliśmy wyniki powyższych rozważań  przy projektowaniu API, jednak nie
+Aby maksymalnie ułatwić im pracę uwzględniliśmy wyniki powyższych rozważań przy projektowaniu API, jednak nie
 jesteśmy w stanie rozwiązać wszystkich pojawiających się problemów.
 
 \section{Zapewnianie odporności systemu na awarie}
 
-Hystrix - jeszcze to sprawdzimy, strażnik na lockach %TODO
+Nie jest możliwe przewidzenie wszystkich możliwych awarii, a tym bardziej zapobiegnięcie im. W typowej eksploatacji należy jednak liczyć się z tym, że pojedyńcze komponenty systemu mogą ulegać losowym awariom. Jednym z poważniejszych problemów, który pojawia się po wystąpieniu awarii jest niespójność danych w sytuacji, gdy mikrousługa przerwała swoje działanie w trakcie operacji zapisu. Często stosowanym sposobem radzenia sobie z taką sytuacją jest zapewnienie redundantnych komponentów, które w razie potrzeby mogą przejąć zadanie uszkodzonego elementu. Niestety takie rozwiązanie wprowadza dodatkowy stopień skomplikowania do naszego oprogramowania, gdyż trzeba zarządzać nadmiarowymi składowymi. Znaleźliśmy dwa rozwiązania, które automatyzują ten proces.
+
+Hystrix - zapewnia jednokrotny fallback i zapobiega zatykaniu się mikrousług, strażnik na lockach %TODO
 
 \section{Zapewnienie transakcyjności}
 
@@ -261,8 +263,18 @@ Apache zookeeper + curator do loadbalancingu vs Netflix eureka (nie) % TODO
 \section{Eventuate}
 % TODO
 
+\section{Narzędzia oparte o BPM}
+
+W trakcie dyskusji w naszym zespole padła myśl, by udostępnić klientowi proste w użyciu oprogramowanie, które pozwoliłoby na graficzne zamodelowanie udostępnianych usług. Następnie na podstawie tego modelu byłaby generowana gotowa do wdrożenia mikrousługa. Okazuje się, że istnieją rozwiązania zapewniające zbliżoną funkcjonalność. Pozwalają one na modelowanie procesów biznesowych przy pomocy graficznej ,,Notacji i Modelu Procesu Biznesowego'' (ang. \textit{Business Process Modeling Notation}) a następnie wykonanie ich na specjalnie do tego celu skonstruowanym silniku. Poszczególne mikrousługi stanowią w tym modelu ,,klocki'', z których klient może sobie kontruować bardziej złożone procesy. Przykładami technologii które implementują wyżej wymienioną funkcjonalność są:
+\begin{itemize}
+	\item Camunda
+	\item Bonita BPM
+	\item jBPM
+\end{itemize}
+Mimo niewątpliwie fascynujących możliwości wymienionych frameworków porzuciliśmy pomysł zgłębienia i wykorzystania któregoś z nich z powodu nikłego zainteresowania klienta takim rozwiązaniem.
+
 \section{Przegląd technologii do tworzenia frontendu}
-Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo (najlepszą antyrekomendacją jest obecnie istniejący system PUE) vs angular 2 vs react (odpada, słaba licencja).
+Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo (najlepszą antyrekomendacją jest obecnie istniejący system PUE) vs angular 2 vs react (odpada, słaba licencja). % TODO
 
 \section{Przegląd baz danych}
 
@@ -301,9 +313,9 @@ Michał Jaroń, członek podzespołu frontendowego zaproponował koncepcję edyt
 
 Jarosław Socha, członek podzespołu frontendowego zajmował się sprawami organizacyjnymi z klientem i dzielnym rozwiewaniem pesymizmu Krzysztofa.
 
-Krzysztof Stanisławek, członek podzespołu backendowego zajmował się przegłądem technologii i wspierał zespół swoimi krytycznymi uwagami.
+Krzysztof Stanisławek, członek podzespołu backendowego zajmował się przeglądem technologii i wspierał zespół swoimi krytycznymi uwagami.
 
-Piotr Zalas, członek podzespołu backendowego zajmował się przegłądem technologii i spisaniem tego dokumentu.
+Piotr Zalas, członek podzespołu backendowego zajmował się przeglądem technologii i spisaniem niniejszego dokumentu.
 
 \appendix
 \chapter{Spis zawartości dołączonej płyty CD}\label{r:spis}
