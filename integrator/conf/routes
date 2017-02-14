@@ -1,0 +1,7 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET     /view/:ep                   controllers.IncomingRouter.view(ep: String)
+GET     /read/:ep/:stream           controllers.IncomingRouter.read(ep: String, stream: String)
+GET     /write/:ep                  controllers.IncomingRouter.write(ep: String)
