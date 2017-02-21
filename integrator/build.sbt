@@ -11,3 +11,7 @@ libraryDependencies += "org.webjars" % "bootstrap" % "3.3.6"
 
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
 
+libraryDependencies ++= Seq(
+  cache,
+  javaWs
+)
