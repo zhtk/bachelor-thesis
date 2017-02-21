@@ -8,24 +8,37 @@ import play.mvc.Results;
 import managers.*;
 
 public class IncomingRouter extends Controller {
+    private ViewEndpointManager viewManager;
+    private ReadEndpointManager readManager;
+    
     @Inject
-    private EndpointsManager manager;
-
+    IncomingRouter(ViewEndpointManager viewManager,
+                   ReadEndpointManager readManager) {
+        this.viewManager = viewManager;
+        this.readManager = readManager;
+    }
+        
     public Result view(String endpoint) {
-        String type = EndpointsManager.TYPE_VIEW;
-        Endpoint ep = manager.findEndpoint(type, endpoint);
-
+        ViewEndpoint ep = viewManager.getEndpoint(endpoint);
+        
         if (ep != null)
-            return ep.getResult(new String[] {}, new String[] {});
+            return ep.getResult();
         else
             return Results.notFound();
     }
 
-    public Result read(String endpoint, String stream) {
-        return Results.ok("OK"); // TODO
+    public Result read(String endpoint) {
+        ReadEndpoint ep = readManager.getEndpoint(endpoint);
+        
+        // TODO args parsing
+        
+        if (ep != null)
+            return ep.getResult(new String[]{}, new String[]{});
+        else
+            return Results.notFound();
     }
 
     public Result write(String endpoint) {
-        return Results.ok("OK"); // TODO
+        return Results.notFound(); // TODO
     }
 }

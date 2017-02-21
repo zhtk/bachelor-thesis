@@ -6,15 +6,19 @@ import play.api.libs.ws.WSClient;
 import play.mvc.Result;
 import play.mvc.Results;
 
-public class ViewEndpoint implements Endpoint {
+public class ViewEndpoint {
     protected String name;
 
     @Inject
-    public ViewEndpoint(WSClient ws, @Assisted String name) {
+    ViewEndpoint(@Assisted String name) {
         this.name = name;
     }
 
-    public Result getResult(String[] paramsKeys, String[] paramsValues) {
+    public boolean isValid() {
+        return true; // TODO zk check
+    }
+    
+    public Result getResult() {
         // TODO
         // integracja z zookeeperem
         return Results.ok("EP " + name);

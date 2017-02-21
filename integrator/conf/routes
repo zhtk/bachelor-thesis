@@ -2,6 +2,6 @@
 # ~~~~
 
 GET     /view/:ep                   controllers.IncomingRouter.view(ep: String)
-GET     /read/:ep/:stream           controllers.IncomingRouter.read(ep: String, stream: String)
+GET     /read/:ep                   controllers.IncomingRouter.read(ep: String)
 GET     /write/:ep                  controllers.IncomingRouter.write(ep: String)
 GET     /menu                       controllers.MenuController.index()
