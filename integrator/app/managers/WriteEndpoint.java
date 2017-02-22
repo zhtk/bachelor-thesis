@@ -6,17 +6,16 @@ import com.google.inject.assistedinject.Assisted;
 import akka.stream.javadsl.Source;
 import akka.util.ByteString;
 import play.libs.ws.*;
-import play.mvc.Result;
-import play.mvc.Results;
+import play.mvc.*;
 
-public class ReadEndpoint {    
+public class WriteEndpoint {    
     protected final int REQUEST_TIMEOUT = 1000;
     
     protected String zkPath;
     protected WSClient ws;
     
     @Inject
-    ReadEndpoint(WSClient ws, @Assisted String zkPath) {
+    WriteEndpoint(WSClient ws, @Assisted String zkPath) {
         this.zkPath = zkPath;
         this.ws = ws;
     }
@@ -31,14 +30,16 @@ public class ReadEndpoint {
         return true; // TODO zk check
     }
     
-    public Result getResult(String[] paramsKeys, String[] paramsValues) {
+    public Result getResult(String[] paramsKeys, String[] paramsValues,
+                            String requestBody) {
         String url = getUrl();
-        WSRequest request = ws.url(url).setRequestTimeout(REQUEST_TIMEOUT);
+        WSRequest request = ws.url(url).setRequestTimeout(REQUEST_TIMEOUT)
+                              .setBody(requestBody);
         
         for (int i = 0; i < paramsKeys.length; ++i)
             request = request.setQueryParameter(paramsKeys[i], paramsValues[i]);
         
-        CompletionStage<StreamedResponse> stream = request.setMethod("GET").stream();
+        CompletionStage<StreamedResponse> stream = request.setMethod("POST").stream();
         
         CompletionStage<Result> result = stream.thenApply(response -> {
             WSResponseHeaders responseHeaders = response.getHeaders();
@@ -57,3 +58,4 @@ public class ReadEndpoint {
         }
     }
 }
+

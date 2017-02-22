@@ -13,5 +13,9 @@ public class ManagersModule extends AbstractModule {
         install(new FactoryModuleBuilder()
                 .implement(ReadEndpoint.class, ReadEndpoint.class)
                 .build(ReadEndpointFactory.class));
+        
+        install(new FactoryModuleBuilder()
+                .implement(WriteEndpoint.class, WriteEndpoint.class)
+                .build(WriteEndpointFactory.class));
     }
 }
