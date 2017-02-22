@@ -30,10 +30,10 @@ public class IncomingRouter extends Controller {
     public Result read(String endpoint) {
         ReadEndpoint ep = readManager.getEndpoint(endpoint);
         
-        // TODO args parsing
+        ArgumentParser arguments = new ArgumentParser(request());
         
         if (ep != null)
-            return ep.getResult(new String[]{}, new String[]{});
+            return ep.getResult(arguments.getKeys(), arguments.getValues());
         else
             return Results.notFound();
     }
