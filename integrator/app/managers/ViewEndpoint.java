@@ -8,19 +8,28 @@ import play.mvc.Results;
 
 public class ViewEndpoint {
     protected String name;
+    protected CuratorHelper curator;
 
     @Inject
-    ViewEndpoint(@Assisted String name) {
+    ViewEndpoint(CuratorHelper curator, @Assisted String name) {
         this.name = name;
+        this.curator = curator;
     }
-
+    
+    private String getPath() {
+        return "/view/" + name;
+    }
+    
     public boolean isValid() {
-        return true; // TODO zk check
+        return curator.doesExist(getPath());
     }
     
     public Result getResult() {
-        // TODO
-        // integracja z zookeeperem
-        return Results.ok("EP " + name);
+        String result = curator.getNodeContent(getPath());
+        
+        if (result == null)
+            return Results.notFound();
+        else
+            return Results.ok(result);
     }
 }

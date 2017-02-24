@@ -15,3 +15,9 @@ libraryDependencies ++= Seq(
   cache,
   javaWs
 )
+
+libraryDependencies += "org.apache.curator" % "apache-curator" % "3.2.1"
+libraryDependencies += "org.apache.curator" % "curator-recipes" % "3.2.1"
+libraryDependencies += "org.apache.curator" % "curator-framework" % "3.2.1"
+libraryDependencies += "org.apache.curator" % "curator-client" % "3.2.1"
+libraryDependencies += "org.apache.curator" % "curator-x-discovery" % "3.2.1"
