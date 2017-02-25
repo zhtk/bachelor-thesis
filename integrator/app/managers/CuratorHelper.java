@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import org.apache.curator.*;
 import org.apache.curator.framework.*;
 import org.apache.curator.retry.*;
+import org.apache.curator.x.discovery.*;
 
 @Singleton
 public class CuratorHelper {
@@ -23,6 +24,10 @@ public class CuratorHelper {
     private String getConnectionString() {
         // TODO pobieranie z środowiska
         return "127.0.0.1:2181";
+    }
+    
+    public CuratorFramework getClient() {
+        return client;
     }
     
     public boolean doesExist(String path) {

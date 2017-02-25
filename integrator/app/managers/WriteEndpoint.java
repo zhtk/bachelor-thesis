@@ -2,37 +2,74 @@ package managers;
 
 import java.util.concurrent.CompletionStage;
 import javax.inject.Inject;
+
+import org.apache.curator.x.discovery.ServiceDiscovery;
+import org.apache.curator.x.discovery.ServiceDiscoveryBuilder;
+import org.apache.curator.x.discovery.ServiceInstance;
+import org.apache.curator.x.discovery.ServiceProvider;
+
 import com.google.inject.assistedinject.Assisted;
 import akka.stream.javadsl.Source;
 import akka.util.ByteString;
+import play.Logger;
 import play.libs.ws.*;
 import play.mvc.*;
 
 public class WriteEndpoint {    
     protected final int REQUEST_TIMEOUT = 1000;
+    protected final String WRITE_PREFIX = "/write/";
     
     protected String zkPath;
     protected WSClient ws;
+    protected CuratorHelper curator;
+    protected ServiceProvider<EndpointService> instances;
     
     @Inject
-    WriteEndpoint(WSClient ws, @Assisted String zkPath) {
+    WriteEndpoint(WSClient ws, CuratorHelper curator, @Assisted String zkPath)
+            throws Exception {
         this.zkPath = zkPath;
         this.ws = ws;
+        this.curator = curator;
+        
+        ServiceDiscovery<EndpointService> discovery =
+                ServiceDiscoveryBuilder.builder(EndpointService.class)
+                .basePath(WRITE_PREFIX).client(curator.getClient()).build();
+        discovery.start();
+        
+        this.instances = discovery.serviceProviderBuilder().serviceName(zkPath).build();
+        this.instances.start();
     }
    
     private String getUrl() {
-        // TODO
-        // integracja z zookeeperem
-        return "http://example.com";
+        try {
+            Logger.debug("WriteEndpoint.getUrl();");
+            
+            ServiceInstance<EndpointService> service = instances.getInstance();
+            String address = service.getAddress();
+            
+            if (service.getPort() != null)
+                address = address + ":" + service.getPort();
+            
+            Logger.debug("WriteEndpoint.getUrl() = " + address);
+            
+            return address;
+        } catch(Exception e) {
+            Logger.debug("WriteEndpoint.getUrl() = Exception");
+            return null;
+        }
     }
     
     public boolean isValid() {
-        return true; // TODO zk check
+        return curator.doesExist(WRITE_PREFIX + zkPath);
     }
     
     public Result getResult(String[] paramsKeys, String[] paramsValues,
                             String requestBody) {
         String url = getUrl();
+        
+        if (url == null)
+            return Results.notFound();
+        
         WSRequest request = ws.url(url).setRequestTimeout(REQUEST_TIMEOUT)
                               .setBody(requestBody);
         
@@ -58,4 +95,3 @@ public class WriteEndpoint {
         }
     }
 }
-
