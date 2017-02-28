@@ -144,8 +144,17 @@ przyszłość konieczność przebudowy systemu z powodu zmieniających się tren
 
 \chapter{Przegląd istniejących rozwiązań}\label{r:przeglad}
 
-Przed przystąpieniem do opracowania projektu architektury wykonaliśmy przegląd obecnie dostępnych rozwiązań, które
-mogłyby nam pomóc w realizacji wyznaczonych celów.
+Przed przystąpieniem do opracowania projektu architektury wykonaliśmy przegląd
+obecnie dostępnych rozwiązań, które mogłyby nam pomóc w realizacji wyznaczonych
+celów. Nasz klient poprosił nas nie tylko o wykonanie prostego serwisu
+bazującego na skonstruowanym przez nas prototypie, ale także o wstępne
+zarysowanie rozwiązań problemów, które pojawią się przy dalszym rozwoju systemu
+w miarę dokładania kolejnych mikrousług. Przykładami takich problemów były:
+\begin{itemize}
+	\item nieuniknione awarie sprzętu
+	\item konieczność współpracy między mikrousługami
+	\item współbieżne i kolidujące ze sobą operacje mikrousług
+\end{itemize}
 
 \section{Problemy z współbieżnością mikrousług}
 %TODO poprawić wstęp
@@ -257,25 +266,56 @@ Innym sposobem osiągnięcia niezawodności może być kolejka ukryta wewnątrz 
 
 Jeszcze innym, ciekawym podejściem byłoby zastosowanie usługi udostępniającej niezawodny dostęp do czegoś w rodzaju dziennika. Wtedy moglibyśmy stosunkowo małym kosztem zaimplementować mechanizmy stosujące transakcyjność rodem z relacyjnych baz danych. Przykładami takich usług są DistributedLog i Kafka. Poszczególne mikrousługi monitorowałyby dziennik i z niego pobierały zmiany, a następnie reagowały na nie poprzez podjęcie jakiejś akcji. Można sobie wyobrazić dwa sposoby wykorzystania takiego dziennika. Pierwszy polegałby na tym, że wszystkie dokonane zmiany są atomowo publikowane w jednej dużej paczce, która musiałaby być potem rozpakowywana, a poszczególne zmiany wyłuskiwane. Drugim sposobem byłoby stworzenie dużej ilości dzienników na każdy rodzaj zdarzenia, a każda operacja byłaby wykonywana w małych krokach, w sposób potokowy.
 
-\section{Usługi monitorowania stanu mikrousług}
-Apache zookeeper + curator do loadbalancingu vs Netflix eureka (nie) vs Etcd vs Consul % TODO
+\section{Usługi rejestracji i monitorowania mikrousług}
 
-\section{Eventuate}
-axonframework.org % TODO
-
-\section{Narzędzia oparte o BPM}
-
-W trakcie dyskusji w naszym zespole padła myśl, by udostępnić klientowi proste w użyciu oprogramowanie, które pozwoliłoby na graficzne zamodelowanie udostępnianych usług. Następnie na podstawie tego modelu byłaby generowana gotowa do wdrożenia mikrousługa. Okazuje się, że istnieją rozwiązania zapewniające zbliżoną funkcjonalność. Pozwalają one na modelowanie procesów biznesowych przy pomocy graficznej ,,Notacji i Modelu Procesu Biznesowego'' (ang. \textit{Business Process Modeling Notation}) a następnie wykonanie ich na specjalnie do tego celu skonstruowanym silniku. Poszczególne mikrousługi stanowią w tym modelu ,,klocki'', z których klient może sobie kontruować bardziej złożone procesy. Przykładami technologii które implementują wyżej wymienioną funkcjonalność są:
+Jednym z elementów wizji naszego systemu był fakt, że poszczególne usługi
+powinny możliwie prosto ,,wpinać się'' w system. Serwer mikrousługi w trakcie
+uruchamiania dopisywałby do globalnej konfiguracji wpisy związane z prowadzoną
+przez siebie działalnością, takie jak adresy pod którymi przyjmuje zapytania
+albo pozycje w menu widocznym dla użytkownika, które prowadzą do poszczególnych
+usług biznesowych. Doszliśmy do wniosku, że nasze oczekiwania można sprowadzić
+do trzech wymagań:
 \begin{itemize}
-	\item Camunda (oparty na Activiti)
-	\item Bonita BPM
-	\item jBPM
-	\item Intalio BPMS
+	\item przechowywania konfiguracji w drzewiastej strukturze
+	\item automatycznego usuwania dokładnie określonych wpisów w przypadku
+	utraty dowolnego serwera mikrousługi
+	\item automatyczną replikację danych
 \end{itemize}
-Mimo niewątpliwie fascynujących możliwości wymienionych frameworków porzuciliśmy pomysł zgłębienia i wykorzystania któregoś z nich z powodu nikłego zainteresowania klienta takim rozwiązaniem.
+Istnieją rozwiązania, które przynajmniej częściowo spełniają nasze wymagania i
+teraz je przedstawimy.
 
-\section{Przegląd technologii do tworzenia frontendu}
-Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo (najlepszą antyrekomendacją jest obecnie istniejący system PUE) vs angular 2 vs react (odpada, słaba licencja). % TODO
+Najbliższy naszym potrzebom był serwer Apache ZooKeeper \cite{zookeeper} w
+połączeniu z biblioteką Apache Curator \cite{curator}. Dane na serwerze
+ZooKeeper są trzymane w drzewiastej strukturze. Każdy węzeł może zawierać dowolny
+ciąg bajtów ograniczony do rozmiaru ok. 1 Mb. Węzły są wersjonowane, a dostęp
+do nich jest kontrolowany przez mechanizm ACL. Na każdym węźle można ustawić
+obserwatora (ang. \textit{watch}), który w przypadku jakiejkolwiek modyfikacji
+węzła powiadamia klienta o zmianie. Oprócz tego, każdy węzeł może mieć ustawione
+dwie dodatkowe flagi. Pierwsza to \textit{ephemeral}, która oznacza, że węzeł ma
+istnieć tylko do czasu zakończenia sesji klienta, który utworzył dany węzeł.
+Ta własność jest szczególnie interesująca w kontekście automatycznego
+wyrejestrowywania usługi która kończy swe działanie i nie ma możliwości
+powiadomienia serwera o tym fakcie. Druga flaga to \textit{sequence}. Mówi ona,
+że należy do nazwy tworzonego węzła dopisać rosnący numer. Ma to zastosowanie we
+wszelkiego rodzaju kolejkach, algorytmach synchronizujących i przy wyborze
+lidera \cite{curatorlock}. Biblioteka Curator upraszcza wiele aspektów związanych
+z wykorzystaniem ZooKeepera, między innymi rejestrację serwerów mikrousług,
+zapewnia implementację najczęściej wykorzystywanych algorytmów synchronizujących
+oraz łatwe buforowanie drzewa węzłów wraz z automatycznym pobieraniem zmian.
+
+Rozwiązaniem bardzo podobnym do ZooKeepera jest Consul. Zasadniczą różnicą
+między tymi dwoma serwerami było zastosowanie w Consulu słownika typu
+klucz-wartość oraz znacznie bardziej zaawansowane raportowanie stanu
+mikrousługi, które obejmowało nie tylko informację o działaniu serwera usługi,
+ale także okresowe sprawdzanie jego stanu przy pomocy specjalnie
+zaprojektowanego RESTowego interfejsu. Ułatwiał on integrację z platformami na
+których nie był dostępny klient Consula.
+
+Podobną, chociaż nieco okrojoną funkcjonalność w stosunku do Consula zapełniały
+serwery etcd i Netflix Eureka. Ten pierwszy pozwalał na rozproszone składowanie
+danych w słowniku typu klucz-wartość. Eureka z kolei zapewniała automatyczną
+rejestrację, wykrywanie i odpytywanie mikrousług z zadaną częstotliwością oraz
+monitorowanie ich stanu.
 
 \section{Przegląd baz danych}
 
@@ -299,6 +339,21 @@ działają jak transakcje.
 Sensowne jest też CouchDB. Redis jest zbyt prymitywny, a jego obsługa transakcji zbyt ograniczona, chociaż
 może się przydać przy synchronizacji \cite{redislock}. Niezawodne: cassandra, hbase?
 
+\section{Inne ciekawe narzędzia}
+Eventuate
+axonframework.org % TODO
+%\section{Przegląd technologii do tworzenia frontendu}
+Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo (najlepszą antyrekomendacją jest obecnie istniejący system PUE) vs angular 2 vs react (odpada, słaba licencja). % TODO
+
+W trakcie dyskusji w naszym zespole padła myśl, by udostępnić klientowi proste w użyciu oprogramowanie, które pozwoliłoby na graficzne zamodelowanie udostępnianych usług. Następnie na podstawie tego modelu byłaby generowana gotowa do wdrożenia mikrousługa. Okazuje się, że istnieją rozwiązania zapewniające zbliżoną funkcjonalność. Pozwalają one na modelowanie procesów biznesowych przy pomocy graficznej ,,Notacji i Modelu Procesu Biznesowego'' (ang. \textit{Business Process Modeling Notation}) a następnie wykonanie ich na specjalnie do tego celu skonstruowanym silniku. Poszczególne mikrousługi stanowią w tym modelu ,,klocki'', z których klient może sobie kontruować bardziej złożone procesy. Przykładami technologii które implementują wyżej wymienioną funkcjonalność są:
+\begin{itemize}
+	\item Camunda (oparty na Activiti)
+	\item Bonita BPM
+	\item jBPM
+	\item Intalio BPMS
+\end{itemize}
+Mimo niewątpliwie fascynujących możliwości wymienionych frameworków porzuciliśmy pomysł zgłębienia i wykorzystania któregoś z nich z powodu nikłego zainteresowania klienta takim rozwiązaniem.
+
 \chapter{Projekt}
 
 Po przedstawieniu naszych wyników klientowi doszliśmy do wniosku, że zakres naszego projektu znacznie pokrywa się z już istniejącymi rozwiązaniami takimi jak Eventuate. Zdecydowaliśmy się przenieść środek ciężkości naszego projektu w stronę warstwy integracji klienta z backendem. Ustalono, że do osiągnięcia sukcesu wystarczy spełnienie następujących warunków: %TODO
@@ -310,13 +365,21 @@ Po przedstawieniu naszych wyników klientowi doszliśmy do wniosku, że zakres n
 \end{itemize}
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
-Michał Jaroń, członek podzespołu frontendowego zaproponował koncepcję edytorka mikrousług.
+Michał Jaroń, członek podzespołu frontendowego zaproponował koncepcję edytorka
+mikrousług. Wykazał się także niezwykłym talentem w dziedzinie logistyki i
+organizowaniu spotkań członków zespołu.
 
-Jarosław Socha, członek podzespołu frontendowego zajmował się sprawami organizacyjnymi z klientem i dzielnym rozwiewaniem pesymizmu Krzysztofa.
+Jarosław Socha, członek podzespołu frontendowego zajmował się bardzo delikatnymi
+sprawami organizacyjnymi z klientem, takimi jak zarządzanie terminami kolejnych
+iteracji i dostarczaniem rzetelnych informacji o obiektywnych  trudnościach
+występujących przy realizacji projektu. Ponadto miał niebagatelny udział w
+dzielnym rozwiewaniu pesymizmu Krzysztofa.
 
-Krzysztof Stanisławek, członek podzespołu backendowego zajmował się przeglądem technologii i wspierał zespół swoimi krytycznymi uwagami.
+Krzysztof Stanisławek, członek podzespołu backendowego zajmował się przeglądem
+technologii i wspierał zespół swoimi krytycznymi uwagami.
 
-Piotr Zalas, członek podzespołu backendowego zajmował się przeglądem technologii i spisaniem niniejszego dokumentu.
+Piotr Zalas, członek podzespołu backendowego zajmował się przeglądem technologii
+i spisaniem niniejszego dokumentu.
 
 \appendix
 \chapter{Spis zawartości dołączonej płyty CD}\label{r:spis}
@@ -358,11 +421,17 @@ http://redisson.org/
 \bibitem[AZK]{zookeeper} Apache, \textit{Apache ZooKeeper},
 https://zookeeper.apache.org/
 
+\bibitem[ACU]{curator} Apache, \textit{Apache Curator},
+http://curator.apache.org/
+
 \bibitem[HTL]{redisbad} Martin Kleppmann, \textit{How to do distributed locking},
 http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html
 
 \bibitem[CLK]{curatorlock} Apache, \textit{Apache Curator - Shared Lock},
 http://curator.apache.org/curator-recipes/shared-lock.html
+
+\bibitem[Fowler]{fowlermicroservices} Martin Fowler, \textit{Microservices},
+https://martinfowler.com/articles/microservices.html
 
 \end{thebibliography}
 
