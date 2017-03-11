@@ -1,3 +1,5 @@
+import NativePackagerHelper._
+
 name := """zpp-integrator"""
 
 version := "1.0"
@@ -21,3 +23,5 @@ libraryDependencies += "org.apache.curator" % "curator-recipes" % "3.2.1"
 libraryDependencies += "org.apache.curator" % "curator-framework" % "3.2.1"
 libraryDependencies += "org.apache.curator" % "curator-client" % "3.2.1"
 libraryDependencies += "org.apache.curator" % "curator-x-discovery" % "3.2.1"
+
+mappings in Universal ++= directory("ssl")
