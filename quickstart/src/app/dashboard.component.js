@@ -15,6 +15,7 @@ var DashboardComponent = (function () {
     DashboardComponent = __decorate([
         core_1.Component({
             selector: 'dashboard',
+            //template: `<h2>OK!</h2>`
             templateUrl: 'pages/dashboard.html',
         }), 
         __metadata('design:paramtypes', [])
