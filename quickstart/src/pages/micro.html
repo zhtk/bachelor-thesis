@@ -1,4 +1,31 @@
-<services>
+<div style ="padding: 20px;"></div>
+<h4>
+<div class="container" style="cursor: pointer">
+    <span class="label label-primary"  (click) = "filter('renta');" onClick="this.className = 'label label-success';">#renta</span>
+    <span class="label label-primary"  (click) = "filter('urlop');" onClick="this.className = 'label label-success';">#urlop</span>
+    <span class="label label-primary"  (click) = "filter('zwolnienie');" onClick="this.className = 'label label-success';">#zwolnienie</span>
+    <span class="label label-primary"  (click) = "filter('emerytura');" onClick="this.className = 'label label-success';">#emerytura</span>
+    <span class="label label-primary"  (click) = "filter('skladki');" onClick="this.className = 'label label-success';">#składki</span>
+</div>
+</h4>
 
-
-</services>
+<div style ="padding: 20px;"></div>
+<div class="row">
+    <div *ngFor ="let cell of list; let i = index">
+        <div class="col-lg-3 col-md-6"  *ngIf="category=='' || category==cell.tag"
+            onClick="this.className = 'col-lg-3 col-md-6';" data-toggle="collapse" [attr.data-target]="'#' + i" >
+            <div class="panel panel-primary"> 
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{i}}{{cell.title}}</h3> 
+                </div> 
+                <div class="panel-body">
+                    {{cell.description}}
+                    <div id="{{i}}" class="collapse">
+                        Lorem ipsum dolor text....Lorem ipsum dolor text....Lorem ipsum dolor text....Lorem ipsum dolor text....
+                    </div>
+                </div> 
+            
+            </div>
+        </div>
+    </div>
+</div>
