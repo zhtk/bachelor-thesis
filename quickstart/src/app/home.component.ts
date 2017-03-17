@@ -12,7 +12,6 @@ export class User {
 @Component({
   selector: 'home',
   templateUrl: 'pages/home.html',
-  styleUrls: ['app/home.component.css'],
 })
 export class HomeComponent {
   user : User = {

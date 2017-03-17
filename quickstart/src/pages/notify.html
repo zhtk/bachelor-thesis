@@ -8,49 +8,26 @@
             <!-- .panel-heading -->
             <div class="panel-body">
                 <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
-                                     Twój pracownik Michał Lewandowski zaczał zwolnienie lekarskie.
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                            <div class="panel-body">
-                                <ul>
-                                    <li>Czas trwania: 10.02 - 17.02</li>
-                                    <li>Lekarz wystawiający: Dr. Wstrząs</li>
-                                    <li>Przyczyna: Paluszek i główka</li>
-                                </ul>    
-                            </div>
-                        </div>
+                    <div *ngIf="count == 0">
+                        <h1>
+                            Brawo! Uporałeś się ze wszystkimi sprawami!
+                        </h1>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
-                                   Nie odprowadziłeś jeszcze składki za miesiąc luty
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                            <div class="panel-body">
-                               Kwota : 1200 PLN
+                    <div *ngFor="let hero of msgs">
+                        <div class="panel panel-default" *ngIf="hero.hidden == false">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#{{hero.id}}" aria-expanded="false" class="collapsed">
+                                        {{hero.title}} 
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" 
+                                        (click)="hide(hero)">×
+                                        </button>
+                                    </a>
+                                </h4>
                             </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
-                                    Wezwanie na komisje lekarską
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
-                            <div class="panel-body">
-
+                            <div id="{{hero.id}}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                <div class="panel-body" [innerHTML]="hero.message">
+                                </div>
                             </div>
                         </div>
                     </div>

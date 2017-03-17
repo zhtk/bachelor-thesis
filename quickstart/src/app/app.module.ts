@@ -22,7 +22,8 @@ import { NavtoolsModule }       from './navtools.module';
   				  AtelierComponent,
   				  DashboardComponent,
   				  NavbarComponent,
-					Notify ],
+					Notify,
+				],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
