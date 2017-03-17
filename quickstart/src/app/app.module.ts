@@ -1,6 +1,8 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
+import { Services } from './micro-services.component';
 import { Notify } from './notifications.component';
 import { AppComponent }  from './app.component';
 import { NavtoolsComponent }  from './navtools.component';
@@ -23,6 +25,7 @@ import { NavtoolsModule }       from './navtools.module';
   				  DashboardComponent,
   				  NavbarComponent,
 					Notify,
+					Services
 				],
   bootstrap:    [ AppComponent ]
 })
