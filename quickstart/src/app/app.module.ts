@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { Notify } from './notifications.component';
 import { AppComponent }  from './app.component';
 import { NavtoolsComponent }  from './navtools.component';
 import { NavbarComponent }  from './navbar.component';
@@ -20,7 +21,8 @@ import { NavtoolsModule }       from './navtools.module';
   				  HomeComponent,
   				  AtelierComponent,
   				  DashboardComponent,
-  				  NavbarComponent ],
+  				  NavbarComponent,
+					Notify ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
