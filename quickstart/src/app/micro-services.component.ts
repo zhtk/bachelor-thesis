@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 
-
 export class Service{
     id:String;
     title:String;
@@ -9,6 +8,8 @@ export class Service{
     hidden:Boolean;
     tag:String
 }
+
+const FilterTags: string[] = ['renta', 'urlop', 'zwolnienie', 'emerytura', 'skladki'];
 
 const SERIVICES_LIST: Service[] = [
     {tag:"renta", id : '0', title :'Nazwa', description : 'Opis' , hidden : false},
@@ -22,19 +23,41 @@ const SERIVICES_LIST: Service[] = [
     {tag:"renta", id : '8', title :'Nazwa', description : 'Opis' , hidden : false},  
 ];
 
+
+
 @Component({
   selector: 'services',
   templateUrl: 'pages/micro.html',
 })
 export class ServicesComponent {
-    category="";
+    tags = FilterTags;
+    tagStyles : string[];
+    category:string[];
     list = SERIVICES_LIST;
+    showStyle: false;
 
-
-    filter(what: string): void {
-       this.category = what;
+    constructor() {
+        this.category=[];
+        this.tagStyles = Array(SERIVICES_LIST.length).fill("label label-primary");
     }
+
+
+    filter(what: string, index :number): void {
+        if(this.tagStyles[index] == "label label-primary")
+        {
+            this.category.push(what);
+            this.tagStyles[index] = "label label-success";
+        }
+        else
+        {
+            this.category.splice(this.category.indexOf(what),1);
+            this.tagStyles[index] = "label label-primary";
+        }
+    }
+    
 }
+
+
 
 
 
