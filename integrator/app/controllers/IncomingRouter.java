@@ -24,6 +24,8 @@ public class IncomingRouter extends Controller {
     public Result view(String endpoint) {
         ViewEndpoint ep = viewManager.getEndpoint(endpoint);
         
+        response().setHeader("Access-Control-Allow-Origin", "*");
+        
         if (ep != null)
             return ep.getResult();
         else
@@ -32,8 +34,9 @@ public class IncomingRouter extends Controller {
 
     public Result read(String endpoint) {
         ReadEndpoint ep = readManager.getEndpoint(endpoint);
-        
         ArgumentParser arguments = new ArgumentParser(request());
+        
+        response().setHeader("Access-Control-Allow-Origin", "*");
         
         if (ep != null)
             return ep.getResult(arguments.getKeys(), arguments.getValues());
@@ -46,6 +49,8 @@ public class IncomingRouter extends Controller {
         
         ArgumentParser arguments = new ArgumentParser(request());
         String body = request().body().asText();
+        
+        response().setHeader("Access-Control-Allow-Origin", "*");
         
         if (body == null) // TODO: test, czy ten warunek jest kiedyś nieprawdziwy
             body = "";

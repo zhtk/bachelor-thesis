@@ -15,6 +15,7 @@ libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1
 libraryDependencies += guice
 libraryDependencies += cache
 libraryDependencies += javaWs
+libraryDependencies += filters
 
 libraryDependencies += "org.apache.curator" % "apache-curator" % "3.3.0"
 libraryDependencies += "org.apache.curator" % "curator-recipes" % "3.3.0"

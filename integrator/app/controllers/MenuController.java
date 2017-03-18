@@ -85,6 +85,7 @@ public class MenuController extends Controller {
         ArrayNode menu = result.putArray("menu");
         buildMenu(menu, "/menu");
         
+        response().setHeader("Access-Control-Allow-Origin", "*");
         return Results.ok(result);
     }
 }
