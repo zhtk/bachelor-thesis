@@ -1,0 +1,45 @@
+<div style="padding: 20px;"></div>
+<div class="row">
+  <div class="col-lg-3 col-md-6">
+    <label  (click) = "test()">Wojewodztwo:</label>
+    <select class="form-control" [(ngModel)]="wojewodztwo">
+        <option>Wybierz...</option>
+        <option>Lubelskie</option>
+        <option>Mazowieckie</option>
+        <option>Pomorskie</option>
+        <option>Świętokrzyskie</option>
+        <option>Małopolskie</option>
+    </select>
+</div>
+<div class="col-lg-3 col-md-6">
+    <label>Gmina:</label>
+    <select class="form-control" [(ngModel)]="gmina" [disabled]="wojewodztwo ==''">
+        <option></option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+    </select>
+</div>
+<div class="col-lg-3 col-md-6">
+    <label>Powiat/Miasto:</label>
+    <select class="form-control" [(ngModel)]="powiat" [disabled]="gmina ==''">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+    </select>
+</div>
+<div class="col-lg-3 col-md-6">
+    <label>{{geo}}Urząd:</label>
+    <select class="form-control" [(ngModel)]="urzad" [disabled]="powiat ==''">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+    </select>
+</div>
+</div>  
+
