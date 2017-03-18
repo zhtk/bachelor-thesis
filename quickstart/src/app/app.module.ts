@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, JsonpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { ServicesComponent } from './micro-services.component';
 import { Notify } from './notifications.component';
@@ -14,12 +15,13 @@ import { AtelierComponent }  from './atelier.component';
 import { AppRoutingModule }     from './app-routing.module';
 
 import { NavtoolsModule }       from './navtools.module';
+import { MeetingComponent, KolejkaComponent, UmowComponent }       from './meeting-component';
 
 @NgModule({
   imports:      [ BrowserModule,
   				  AppRoutingModule,
 					HttpModule,
-    				JsonpModule
+    				JsonpModule, FormsModule 
   				   ],
   declarations: [ AppComponent,
   				  HomeComponent,
@@ -28,6 +30,9 @@ import { NavtoolsModule }       from './navtools.module';
   				  NavbarComponent,
 					Notify,
 					ServicesComponent,
+					MeetingComponent,
+					KolejkaComponent, 
+					UmowComponent
 				],
   bootstrap:    [ AppComponent ]
 })
