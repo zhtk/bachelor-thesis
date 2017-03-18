@@ -70,7 +70,7 @@ public class ReadEndpoint {
         for (int i = 0; i < paramsKeys.length; ++i)
             request = request.setQueryParameter(paramsKeys[i], paramsValues[i]);
         
-        CompletionStage<StreamedResponse> stream = request.setMethod("GET").stream();
+        CompletionStage<? extends StreamedResponse> stream = request.setMethod("GET").stream();
         
         CompletionStage<Result> result = stream.thenApply(response -> {
             WSResponseHeaders responseHeaders = response.getHeaders();

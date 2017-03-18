@@ -12,16 +12,14 @@ libraryDependencies += "org.webjars" % "flot" % "0.8.3"
 libraryDependencies += "org.webjars" % "bootstrap" % "3.3.6"
 
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
+libraryDependencies += guice
+libraryDependencies += cache
+libraryDependencies += javaWs
 
-libraryDependencies ++= Seq(
-  cache,
-  javaWs
-)
-
-libraryDependencies += "org.apache.curator" % "apache-curator" % "3.2.1"
-libraryDependencies += "org.apache.curator" % "curator-recipes" % "3.2.1"
-libraryDependencies += "org.apache.curator" % "curator-framework" % "3.2.1"
-libraryDependencies += "org.apache.curator" % "curator-client" % "3.2.1"
-libraryDependencies += "org.apache.curator" % "curator-x-discovery" % "3.2.1"
+libraryDependencies += "org.apache.curator" % "apache-curator" % "3.3.0"
+libraryDependencies += "org.apache.curator" % "curator-recipes" % "3.3.0"
+libraryDependencies += "org.apache.curator" % "curator-framework" % "3.3.0"
+libraryDependencies += "org.apache.curator" % "curator-client" % "3.3.0"
+libraryDependencies += "org.apache.curator" % "curator-x-discovery" % "3.3.0"
 
 mappings in Universal ++= directory("ssl")

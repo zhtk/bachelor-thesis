@@ -1,6 +1,6 @@
 package managers;
 
-import com.google.inject.*;
+import javax.inject.*;
 import java.nio.charset.StandardCharsets;
 import org.apache.curator.*;
 import org.apache.curator.framework.*;
@@ -9,14 +9,16 @@ import org.apache.curator.x.discovery.*;
 
 @Singleton
 public class CuratorHelper {
-    protected static int RETRY_TIME = 50;
+    protected final int RETRY_TIME = 500;
     protected CuratorFramework client;
     
     @Inject
     CuratorHelper() {
         RetryPolicy retryPolicy = new RetryOneTime(RETRY_TIME);
         String connectString = getConnectionString();
-        client = CuratorFrameworkFactory.newClient(connectString, retryPolicy);
+        client = CuratorFrameworkFactory.builder()
+                 .connectString(connectString).retryPolicy(retryPolicy)
+                 .build();
         
         client.start();
     }
