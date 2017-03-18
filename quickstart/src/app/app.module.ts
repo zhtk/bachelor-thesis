@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { ServicesComponent } from './micro-services.component';
 import { Notify } from './notifications.component';
@@ -18,6 +18,8 @@ import { NavtoolsModule }       from './navtools.module';
 @NgModule({
   imports:      [ BrowserModule,
   				  AppRoutingModule,
+					HttpModule,
+    				JsonpModule
   				   ],
   declarations: [ AppComponent,
   				  HomeComponent,
@@ -25,7 +27,7 @@ import { NavtoolsModule }       from './navtools.module';
   				  DashboardComponent,
   				  NavbarComponent,
 					Notify,
-					ServicesComponent
+					ServicesComponent,
 				],
   bootstrap:    [ AppComponent ]
 })

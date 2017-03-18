@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
-
+import {MenuService} from './menu-service'
 export class Service{
     id:String;
     title:String;
@@ -28,20 +31,31 @@ const SERIVICES_LIST: Service[] = [
 @Component({
   selector: 'services',
   templateUrl: 'pages/micro.html',
+  providers: [MenuService]
 })
-export class ServicesComponent {
+export class ServicesComponent implements OnInit {
+        
+
+
     tags = FilterTags;
     tagStyles : string[];
     category:string[];
     list = SERIVICES_LIST;
     showStyle: false;
+    profile = {};
+    test :string;
 
-    constructor() {
+    constructor(private menuService: MenuService) {
         this.category=[];
         this.tagStyles = Array(SERIVICES_LIST.length).fill("label label-primary");
     }
 
-
+        ngOnInit(): void {
+        /*this.menuService
+        .getAll()
+        .subscribe(p => this.test = p)*/
+    }
+    
     filter(what: string, index :number): void {
         if(this.tagStyles[index] == "label label-primary")
         {
@@ -54,7 +68,7 @@ export class ServicesComponent {
             this.tagStyles[index] = "label label-primary";
         }
     }
-    
+
 }
 
 
