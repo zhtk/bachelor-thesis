@@ -16,7 +16,7 @@ export class MenuService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let people$ = this.http
-        .get("http://207.154.212.228:9000/menu",{headers: headers, method : 'get'})
+        .get("/api/menu",{headers: headers, method : 'get'})
         .map(proba);
         return people$;
   }
