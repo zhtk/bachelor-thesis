@@ -138,7 +138,7 @@
 <div class="col-lg-3 col-md-6">
     <label>Gmina:</label>
     <select class="form-control" [(ngModel)]="gmina" [disabled]="wojewodztwo ==''">
-        <option>1</option>
+        <option></option>
         <option>2</option>
         <option>3</option>
         <option>4</option>
@@ -201,10 +201,10 @@
 <div class="col-lg-4 col-md-8">
     <label  *ngIf="urzad !=''">Wybierz temat wizyty:</label>
  <select class="form-control" multiple *ngIf="urzad !=''">
-  <option value="volvo" (click) = "sprawa(0,10)">Wniosek o przyznanie renty</option>
-  <option value="saab"(click) = "sprawa(1,15)">Wniosek o wydłużenie zwolnienia</option>
-  <option value="opel"(click) = "sprawa(2,5)">Odbiór decyzji</option>
-  <option value="audi"(click) = "sprawa(3, 30)">Konsultacja</option>
+  <option value="volvo" (click) = "sprawa(10)">Wniosek o przyznanie renty</option>
+  <option value="saab"(click) = "sprawa(15)">Wniosek o wydłużenie zwolnienia</option>
+  <option value="opel"(click) = "sprawa(5)">Odbiór decyzji</option>
+  <option value="audi"(click) = "sprawa(30)">Konsultacja</option>
 </select>
 </div>
 <div class="col-lg-4 col-md-8">
@@ -215,9 +215,10 @@
 </div>
 </div>
 <div class="col-lg-4 col-md-8"*ngIf="urzad !=''">
-    Możliwe godziny:
 <div class="list-group">
-    <li *ngFor ="let slot of slots" class="list-group-item">{{slot}}</li>
+  <a href="#" class="list-group-item active">11:00</a>
+  <a href="#" class="list-group-item">13:10</a>
+  <a href="#" class="list-group-item">14:30</a>
 </div>
 </div>
 </div>
@@ -229,7 +230,7 @@
     <div class="list-group">
         <ul>
             <li class="list-group-item"><span  class="glyphicon glyphicon-ok"></span>
-                Dowód osobisty</li>
+                Dowód osobity</li>
             <li class="list-group-item"><span  class="glyphicon glyphicon-ok"></span>
                 Zaświadczenie od lekarza</li>
             <li class="list-group-item"><span  class="glyphicon glyphicon-ok"></span>
