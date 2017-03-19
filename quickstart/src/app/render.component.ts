@@ -15,6 +15,7 @@ export class RenderComponent implements OnInit {
 			this.first = true;
 			this.menu = init.menu
 		}
+		// sortowanie po nr
 	}
 
 	notEmpty() {
