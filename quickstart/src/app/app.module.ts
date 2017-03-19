@@ -15,7 +15,7 @@ import { MessagesComponent } from './messages.component';
 import { AppRoutingModule }     from './app-routing.module';
 
 import { NavtoolsModule }       from './navtools.module';
-import { MeetingComponent, KolejkaComponent, UmowComponent }       from './meeting-component';
+import { MeetingComponent, KolejkaComponent, UmowComponent , UrzedowanieComponent}       from './meeting-component';
 
 @NgModule({
   imports:      [ BrowserModule,
@@ -33,7 +33,8 @@ import { MeetingComponent, KolejkaComponent, UmowComponent }       from './meeti
 					ServicesComponent,
 					MeetingComponent,
 					KolejkaComponent, 
-					UmowComponent
+					UmowComponent,
+					 UrzedowanieComponent
 				],
   bootstrap:    [ AppComponent ]
 })
