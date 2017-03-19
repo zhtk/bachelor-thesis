@@ -9,20 +9,21 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class MenuService {
 
-    test : string;
-    constructor (private http: Http) {}
-    
-   getAll(): Observable<string>{
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        let people$ = this.http
-        .get("/api/menu",{headers: headers, method : 'get'})
-        .map(proba);
-        return people$;
-  }
-                     
-  }
+	test : string;
+	
+	constructor (private http: Http) {}
 
-  function proba(response:Response): string{
+	getAll(): Observable<string>{
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		let people$ = this.http
+		.get("/api/menu",{headers: headers, method : 'get'})
+		.map(proba);
+		return people$;
+	}
+
+}
+
+function proba(response:Response): string {
    return response.json();
 }

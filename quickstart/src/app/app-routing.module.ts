@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component';
 import { ServicesComponent } from './micro-services.component';
 import { MessagesComponent } from './messages.component';
 import { MeetingComponent, KolejkaComponent, UmowComponent } from './meeting-component';
+import { RenderComponent } from './render.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'meeting',  component: MeetingComponent },
   { path: 'umow',  component: UmowComponent },
   { path: 'kolejka',  component: KolejkaComponent },
+  { path: 'render',  component: RenderComponent },
 ];
 
 @NgModule({

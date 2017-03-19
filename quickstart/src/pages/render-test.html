@@ -1,0 +1,13 @@
+<!-- <div> -->
+
+<div *ngIf="notEmpty()">
+	<div *ngFor="let comp of this.menu" class="panel panel-default" style="margin: 25px;">
+		<div class="panel-body">
+			<h2>{{ comp.name }}</h2>
+
+			<div *ngIf="comp.menu.length > 0">
+				<render-menu [(menu)]="comp.menu"></render-menu>
+			</div>
+		</div>
+	</div>
+</div> 

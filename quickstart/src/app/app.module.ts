@@ -11,6 +11,7 @@ import { DashboardComponent }  from './dashboard.component';
 import { HomeComponent }  from './home.component';
 import { AtelierComponent }  from './atelier.component';
 import { MessagesComponent } from './messages.component';
+import { RenderComponent } from './render.component';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -29,6 +30,7 @@ import { MeetingComponent, KolejkaComponent, UmowComponent , UrzedowanieComponen
   				  DashboardComponent,
   				  NavbarComponent,
   				  MessagesComponent,
+  				  RenderComponent,
 					Notify,
 					ServicesComponent,
 					MeetingComponent,
