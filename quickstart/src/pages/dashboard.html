@@ -12,8 +12,16 @@
                 </div>
                 <!-- /input-group -->
             </li>
-            <li>
-                <a routerLink="/main" routerLinkActive="active">Panel Ogólny</a>
+            <li data-toggle="collapse" data-target="#dash-PanelOgolny">
+                <a routerLink="/main" routerLinkActive="active" >Panel Ogólny</a>
+
+                    <div id="dash-PanelOgolny" class="collapse">
+                        <ul >
+                            <li>
+                                <small class="text-muted">przykładowe podmenu</small>
+                            </li>
+                        </ul>
+                    </div>
             </li>
             <li>
                 <a routerLink="/messages" routerLinkActive="active">Dokumenty i Wiadomości<br><small class="text-muted">Korespondencja z ZUS</small></a>

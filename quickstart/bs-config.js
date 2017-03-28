@@ -12,7 +12,8 @@ module.exports = {
     server: {
         middleware: {
             1: proxyMiddleware('/api', {
-                target: 'http://207.154.212.228:9000',
+                target: 'http://students.mimuw.edu.pl/~js347267',
+		//target: 'http://207.154.212.228:9000',
                 changeOrigin: false,   // for vhosted sites, changes host header to match to target's host
                 ws: true,
                 //onProxyRes

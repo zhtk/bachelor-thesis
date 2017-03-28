@@ -16,17 +16,26 @@ export class EmailComponent {
 
   hidden : boolean;
   resized : boolean;
+  fullscreen : boolean;
   constructor()
   {
     this.hidden = true;
     this.resized = true;
+    this.fullscreen = false;
   }
-    exit():void
+    exit() : void
     {
       this.hidden = false;
     }
-       resize():void
+    
+    resize():void
     {
       this.resized = !this.resized;
+      this.fullscreen = false;
+    }
+
+    maximize():void
+    {
+      this.fullscreen = !this.fullscreen;
     }
 }

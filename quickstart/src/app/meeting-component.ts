@@ -22,7 +22,8 @@ export class KolejkaComponent {
   templateUrl: 'pages/umow.html',
 })
 export class UmowComponent implements OnInit {
- 
+    
+    pathurl: string; 
 
     wojewodztwo:string;
     gmina:string;
@@ -51,6 +52,8 @@ export class UmowComponent implements OnInit {
         this.gmina ='';
         this.powiat = '';
         this.urzad ='';
+      this.pathurl = window.location.pathname;
+      alert("siema")
     }
   fakeArray = Array(30).fill("x");
   constructor()
