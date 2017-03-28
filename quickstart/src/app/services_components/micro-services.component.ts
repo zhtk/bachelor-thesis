@@ -31,7 +31,7 @@ const SERIVICES_LIST: Service[] = [
 
 @Component({
   selector: 'services',
-  templateUrl: 'pages/micro.html',
+  templateUrl: 'pages/services_subpages/micro.html',
   //providers: [MenuService]
 })
 export class ServicesComponent implements OnInit {

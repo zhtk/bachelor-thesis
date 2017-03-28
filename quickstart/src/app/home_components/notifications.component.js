@@ -38,7 +38,6 @@ var Notify = (function () {
         core_1.Component({
             selector: 'notify',
             templateUrl: 'pages/home_subpages/notify.html',
-            styleUrls: ['app/home.component.css'],
         }), 
         __metadata('design:paramtypes', [])
     ], Notify);

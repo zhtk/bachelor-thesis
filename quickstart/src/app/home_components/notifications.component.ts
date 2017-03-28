@@ -22,7 +22,6 @@ const MESSAGES: Msg[] = [
 @Component({
   selector: 'notify',
   templateUrl: 'pages/home_subpages/notify.html',
-  styleUrls: ['app/home.component.css'],
 })
 export class Notify {
     

@@ -57,7 +57,7 @@ var ServicesComponent = (function () {
     ServicesComponent = __decorate([
         core_1.Component({
             selector: 'services',
-            templateUrl: 'pages/micro.html',
+            templateUrl: 'pages/services_subpages/micro.html',
         }), 
         __metadata('design:paramtypes', [])
     ], ServicesComponent);
