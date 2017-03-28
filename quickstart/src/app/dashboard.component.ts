@@ -37,5 +37,6 @@ export class EmailComponent {
     maximize():void
     {
       this.fullscreen = !this.fullscreen;
+       this.resized = !this.resized;
     }
 }
