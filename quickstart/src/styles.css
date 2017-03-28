@@ -113,3 +113,52 @@ body {font-family: Verdana, sans-serif;}
 	background: red;
 }
 
+#test
+{
+    background-color:  red;
+}
+
+
+
+lekarz input[type="text"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  width: 10em;
+  font-size: 1em;
+}
+
+lekarz .input-wrapper, input[type="text"] {
+  font-family: monospace;
+  font-weight: bold;
+  letter-spacing: .3em;
+}
+
+lekarz .input-wrapper {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: .2em;
+  font-size: 200%;
+}
+
+lekarz .input-wrapper:after {
+  content: "———————————";
+  line-height: .3em;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  color: grey;
+}
+
+email
+{
+    right : 100px;
+    bottom : 0;
+    position: fixed;
+    z-index : 10;
+}

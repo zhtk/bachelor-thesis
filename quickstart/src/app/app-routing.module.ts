@@ -6,7 +6,12 @@ import { ServicesComponent } from './micro-services.component';
 import { MessagesComponent } from './messages.component';
 import { MeetingComponent, KolejkaComponent, UmowComponent } from './meeting-component';
 import { RenderComponent } from './render.component';
+import { OpinionComponent } from './opinion-component'
+import { ZwolnienieComponent } from './zwolnienie-component';
 
+import { PracodawcaComponent } from './pracodawca-component';
+import { LekarzComponent } from './lekarz-component';
+import { PacjentComponent } from './pacjent-component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -18,6 +23,11 @@ const routes: Routes = [
   { path: 'umow',  component: UmowComponent },
   { path: 'kolejka',  component: KolejkaComponent },
   { path: 'render',  component: RenderComponent },
+  { path: 'opinion',  component: OpinionComponent },
+  { path: 'zwolnienie',  component: ZwolnienieComponent },
+  { path: 'pracodawca',  component:PracodawcaComponent },
+  { path: 'lekarz',  component: LekarzComponent},
+  { path: 'pacjent',  component: PacjentComponent },
 ];
 
 @NgModule({

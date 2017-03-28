@@ -17,7 +17,8 @@
             onClick="this.className = 'col-lg-3 col-md-6';" data-toggle="collapse" [attr.data-target]="'#' + i" >
             <div class="panel panel-primary"> 
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{i}} {{cell.title}} {{cell.tag}}</h3> 
+                     <a routerLink="/zwolnienie" routerLinkActive="active" class="btn btn-primary">
+                    <h3 class="panel-title">{{i}} {{cell.title}} {{cell.tag}}</h3> </a>
                 </div> 
                 <div class="panel-body">
                     {{cell.description}}

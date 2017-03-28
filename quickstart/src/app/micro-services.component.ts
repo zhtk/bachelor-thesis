@@ -12,13 +12,13 @@ export class Service{
     tag:String
 }
 
-const FilterTags: string[] = ['renta', 'urlop', 'zwolnienie', 'emerytura', 'skladki'];
+const FilterTags: string[] = ['renta', 'urlop', 'Zwolnienie', 'emerytura', 'skladki'];
 
 const SERIVICES_LIST: Service[] = [
     {tag:"renta", id : '0', title :'Nazwa', description : 'Opis' , hidden : false},
     {tag:"emerytura", id : '1', title :'Nazwa', description : 'Opis' , hidden : false},
     {tag:"urlop", id : '2', title :'Nazwa', description : 'Opis' , hidden : false},
-    {tag:"zwolnienie", id : '3', title :'Nazwa', description : 'Opis' , hidden : false},
+    {tag:"Zwolnienie", id : '3', title :'', description : 'Wystawianie, sprawdzanie' , hidden : false},
     {tag:"urlop", id : '4', title :'Nazwa', description : 'Opis' , hidden : false},  
     {tag:"zwolnienie", id : '5', title :'Nazwa', description : 'Opis' , hidden : false},    
     {tag:"zwolnienie", id : '6', title :'Nazwa', description : 'Opis' , hidden : false},  

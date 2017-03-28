@@ -6,3 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: 'pages/dashboard.html',
 })
 export class DashboardComponent {}
+
+
+@Component({
+  selector: 'email',
+  templateUrl: 'pages/email.html',
+})
+export class EmailComponent {}
