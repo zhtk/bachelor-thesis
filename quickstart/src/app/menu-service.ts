@@ -16,9 +16,11 @@ export class MenuService {
 	getAll(): Observable<string>{
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
-		let people$ = this.http
-		.get("/api/menu",{headers: headers, method : 'get'})
-		.map(proba);
+		// Kurwa, to nie działa!
+		//let people$ = this.http
+		//.get("http://207.154.212.228:9000/menu",{headers: headers, method : 'get'})
+		//.map(proba); // -> HttpPromise
+		let people$ = JSON.parse('{"start":"/read/abc","menu":[{"nr":"0","name":"Albo tutaj","icon":"","link":"/view/abc","menu":[]},{"nr":"0","name":"Kliknij tutaj","icon":"","link":"/read/abc","menu":[{"nr":"0","name":"To jest w submenu","icon":"","link":"/read/abc","menu":[]},{"nr":"0","name":"To też","icon":"","link":"/read/abc","menu":[]}]}]}');
 		return people$;
 	}
 

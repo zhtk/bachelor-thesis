@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MenuService } from './menu-service';
 
 @Component({
 	selector: 'render-menu',
@@ -9,8 +10,11 @@ export class RenderComponent implements OnInit {
 	@Input() menu: any = null;
 	first: boolean = false;
 
+	constructor (private menuService: MenuService) {}
+
 	ngOnInit() {
-		var init = JSON.parse('{"start":"/read/abc","menu":[{"nr":"0","name":"Albo tutaj","icon":"","link":"/view/abc","menu":[]},{"nr":"0","name":"Kliknij tutaj","icon":"","link":"/read/abc","menu":[{"nr":"0","name":"To jest w submenu","icon":"","link":"/read/abc","menu":[]},{"nr":"0","name":"To też","icon":"","link":"/read/abc","menu":[]}]}]}');
+		var init = this.menuService.getAll();
+
 		if (!this.menu) {
 			this.first = true;
 			this.menu = init.menu
