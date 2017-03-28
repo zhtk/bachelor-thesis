@@ -1,17 +1,20 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AtelierComponent }   from './atelier.component';
-import { HomeComponent } from './home.component';
-import { ServicesComponent } from './micro-services.component';
-import { MessagesComponent } from './messages.component';
+
 
 import { RenderComponent } from './render.component';
 
 
+import { HomeComponent }  from './home_components/home.component';
+import { ServicesComponent } from './services_components/micro-services.component';
+import { MessagesComponent } from './home_components/messages.component';
 // Meeting components
-import { MeetingComponent, KolejkaComponent, UmowComponent } from './meeting_components/meeting-component';
-import { OpinionComponent } from './meeting_components/opinion-component'
-
+import { KolejkaComponent } from './meeting_components/kolejka-component';
+import { UmowComponent } from './meeting_components/reservation_components/umow-component';
+import { MeetingComponent } from './meeting_components/meeting-component';
+import { UrzedowanieComponent } from './meeting_components/reservation_components/urzedowanie-component';
+import { OpinionComponent } from './meeting_components/opinion_components/opinion-component'
 
 // Medical Leave components
 import { ZwolnienieComponent } from './leave_components/zwolnienie-component';

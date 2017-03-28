@@ -3,7 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import {MenuService} from './menu-service'
+//import {MenuService} from './menu-service'
+
 export class Service{
     id:String;
     title:String;
@@ -31,7 +32,7 @@ const SERIVICES_LIST: Service[] = [
 @Component({
   selector: 'services',
   templateUrl: 'pages/micro.html',
-  providers: [MenuService]
+  //providers: [MenuService]
 })
 export class ServicesComponent implements OnInit {
         
@@ -45,7 +46,7 @@ export class ServicesComponent implements OnInit {
     profile = {};
     test :string;
 
-    constructor(private menuService: MenuService) {
+    constructor() {
         this.category=[];
         this.tagStyles = Array(SERIVICES_LIST.length).fill("label label-primary");
     }
