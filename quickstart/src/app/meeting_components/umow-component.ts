@@ -2,23 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'meeting',
-  templateUrl: 'pages/meetup.html',
-})
-export class MeetingComponent {
-  
-}
-
-@Component({
-  selector: 'meeting',
-  templateUrl: 'pages/kolejka.html',
-})
-export class KolejkaComponent {
-
-}
-
-
-@Component({
-  selector: 'meeting',
   templateUrl: 'pages/umow.html',
 })
 export class UmowComponent implements OnInit {
@@ -65,11 +48,3 @@ export class UmowComponent implements OnInit {
     this.dzien = Wday[now.getUTCDay() + 1];
   }
 }
-@Component({
-  selector: 'urzedowanie',
-  templateUrl: 'pages/urzad_godziny.html',
-})
-export class UrzedowanieComponent {
-
-}
-

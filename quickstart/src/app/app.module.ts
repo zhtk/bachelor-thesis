@@ -35,8 +35,16 @@ import { AppRoutingModule }     from './app-routing.module';
 
 
 // Meeting components
-import { MeetingComponent, KolejkaComponent, UmowComponent } from './meeting_components/meeting-component';
-import { OpinionComponent } from './meeting_components/opinion-component'
+import { KolejkaComponent } from './meeting_components/kolejka-component';
+import { UmowComponent } from './meeting_components/umow-component';
+import { MeetingComponent } from './meeting_components/reservation_components/meeting-component';
+import { UrzedowanieComponent } from './meeting_components/reservation_components/urzedowanie-component';
+
+
+// Visit opinion subpage
+import { RatingComponent } from './meeting_components/opinion_components/rating-component'
+import { OpinionComponent } from './meeting_components/opinion_components/opinion-component'
+
 
 // Medical leave components
 import { ZwolnienieComponent } from './leave_components/zwolnienie-component';
@@ -44,32 +52,34 @@ import { PracodawcaComponent } from './leave_components/pracodawca-component';
 import { LekarzComponent } from './leave_components/lekarz-component';
 import { PacjentComponent } from './leave_components/pacjent-component';
 
+
 @NgModule({
   imports:      [ BrowserModule,
-  				  AppRoutingModule,
+  				  	AppRoutingModule,
 					HttpModule,
-    				JsonpModule, FormsModule 
+    				JsonpModule,
+					FormsModule 
   				   ],
   declarations: [ AppComponent,
-  				  HomeComponent,
-  				  AtelierComponent,
-  				  DashboardComponent,
-  				  NavbarComponent,
-  				  MessagesComponent,
-  				  RenderComponent,
+  				  	HomeComponent,
+  				  	AtelierComponent,
+  				  	DashboardComponent,
+  				  	NavbarComponent,
+  				  	MessagesComponent,
+  				  	RenderComponent,
 					Notify,
 					ServicesComponent,
 					MeetingComponent,
 					KolejkaComponent, 
 					UmowComponent,
-					 UrzedowanieComponent,
-					 OpinionComponent,
-					 RatingComponent,
-					 ZwolnienieComponent,
-					 PracodawcaComponent,
-					 LekarzComponent,
-					 PacjentComponent,
-					 EmailComponent 
+					UrzedowanieComponent,
+					OpinionComponent,
+					RatingComponent,
+					ZwolnienieComponent,
+					PracodawcaComponent,
+					LekarzComponent,
+					PacjentComponent,
+					EmailComponent 
 				],
   bootstrap:    [ AppComponent ]
 })
