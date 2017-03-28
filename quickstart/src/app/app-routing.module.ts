@@ -4,14 +4,20 @@ import { AtelierComponent }   from './atelier.component';
 import { HomeComponent } from './home.component';
 import { ServicesComponent } from './micro-services.component';
 import { MessagesComponent } from './messages.component';
-import { MeetingComponent, KolejkaComponent, UmowComponent } from './meeting-component';
-import { RenderComponent } from './render.component';
-import { OpinionComponent } from './opinion-component'
 
-import { ZwolnienieComponent } from './leave_subpage/zwolnienie-component';
-import { PracodawcaComponent } from './leave_subpage/pracodawca-component';
-import { LekarzComponent } from './leave_subpage/lekarz-component';
-import { PacjentComponent } from './leave_subpage/pacjent-component';
+import { RenderComponent } from './render.component';
+
+
+// Meeting components
+import { MeetingComponent, KolejkaComponent, UmowComponent } from './meeting_components/meeting-component';
+import { OpinionComponent } from './meeting_components/opinion-component'
+
+
+// Medical Leave components
+import { ZwolnienieComponent } from './leave_components/zwolnienie-component';
+import { PracodawcaComponent } from './leave_components/pracodawca-component';
+import { LekarzComponent } from './leave_components/lekarz-component';
+import { PacjentComponent } from './leave_components/pacjent-component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },

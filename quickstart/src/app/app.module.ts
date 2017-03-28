@@ -2,26 +2,44 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { ServicesComponent } from './micro-services.component';
-import { Notify } from './notifications.component';
+
+
 import { AppComponent }  from './app.component';
+
+// Home page components
+import { HomeComponent }  from './home_components/home.component';
+import { Notify } from './home_components/notifications.component';
+import { MessagesComponent } from './home_components/messages.component';
+
+// Micro services components
+import { ServicesComponent } from './services_components/micro-services.component';
+
+// Navbars components
+import { NavbarComponent }  from './navbar_components/navbar.component';
+
+// Navtools components
 import { NavtoolsComponent }  from './navtools.component';
-import { NavbarComponent }  from './navbar.component';
-import { DashboardComponent, EmailComponent }  from './dashboard.component';
-import { HomeComponent }  from './home.component';
+import { NavtoolsModule }       from './navtools.module';
+
+import { DashboardComponent, EmailComponent }  from './dashboard_components/dashboard.component';
+
 import { AtelierComponent }  from './atelier.component';
-import { MessagesComponent } from './messages.component';
+
 import { RenderComponent } from './render.component';
 
 import { AppRoutingModule }     from './app-routing.module';
-import { OpinionComponent, RatingComponent } from './opinion-component'
-import { NavtoolsModule }       from './navtools.module';
-import { MeetingComponent, KolejkaComponent, UmowComponent , UrzedowanieComponent}       from './meeting-component';
 
-import { ZwolnienieComponent } from './leave_subpage/zwolnienie-component';
-import { PracodawcaComponent } from './leave_subpage/pracodawca-component';
-import { LekarzComponent } from './leave_subpage/lekarz-component';
-import { PacjentComponent } from './leave_subpage/pacjent-component';
+
+
+// Meeting components
+import { MeetingComponent, KolejkaComponent, UmowComponent } from './meeting_components/meeting-component';
+import { OpinionComponent } from './meeting_components/opinion-component'
+
+// Medical leave components
+import { ZwolnienieComponent } from './leave_components/zwolnienie-component';
+import { PracodawcaComponent } from './leave_components/pracodawca-component';
+import { LekarzComponent } from './leave_components/lekarz-component';
+import { PacjentComponent } from './leave_components/pacjent-component';
 
 @NgModule({
   imports:      [ BrowserModule,

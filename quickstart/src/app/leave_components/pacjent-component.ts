@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'pacjent',
-  templateUrl: 'pages/pacjent.html',
+  templateUrl: 'pages/leave_subpages/pacjent.html',
 })
 export class PacjentComponent {
 }

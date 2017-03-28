@@ -14,15 +14,15 @@ export class DashboardComponent {}
 })
 export class EmailComponent {
 
-    hidden : boolean;
-    resized : boolean;
-    fullscreen : boolean;
-    constructor()
-    {
-      this.hidden = true;
-      this.resized = true;
-      this.fullscreen = false;
-    }
+  hidden : boolean;
+  resized : boolean;
+  fullscreen : boolean;
+  constructor()
+  {
+    this.hidden = true;
+    this.resized = true;
+    this.fullscreen = false;
+  }
     exit() : void
     {
       this.hidden = false;
@@ -37,6 +37,5 @@ export class EmailComponent {
     maximize():void
     {
       this.fullscreen = !this.fullscreen;
-      this.resized = !this.resized;
     }
 }

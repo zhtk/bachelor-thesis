@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'lekarz',
-  templateUrl: 'pages/lekarz.html',
+  templateUrl: 'pages/leave_subpages/lekarz.html',
 })
 export class LekarzComponent {
 }
