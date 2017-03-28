@@ -21,7 +21,10 @@ import { NavbarComponent }  from './navbar_components/navbar.component';
 import { NavtoolsComponent }  from './navtools.component';
 import { NavtoolsModule }       from './navtools.module';
 
-import { DashboardComponent, EmailComponent }  from './dashboard_components/dashboard.component';
+import { DashboardComponent}  from './dashboard_components/dashboard.component';
+
+// Email windows components
+import { EmailComponent }       from './email_components/email_component';
 
 import { AtelierComponent }  from './atelier.component';
 
