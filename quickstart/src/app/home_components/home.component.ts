@@ -11,7 +11,7 @@ export class User {
 
 @Component({
   selector: 'home',
-  templateUrl: 'pages/home.html',
+  templateUrl: 'pages/home_subpages/home.html',
 })
 export class HomeComponent {
   user : User = {

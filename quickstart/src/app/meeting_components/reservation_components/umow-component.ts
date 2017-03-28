@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'meeting',
-  templateUrl: 'pages/umow.html',
+  templateUrl: 'pages/meeting_subpages/booking_subpages/umow.html',
 })
 export class UmowComponent implements OnInit {
     

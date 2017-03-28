@@ -36,8 +36,8 @@ import { AppRoutingModule }     from './app-routing.module';
 
 // Meeting components
 import { KolejkaComponent } from './meeting_components/kolejka-component';
-import { UmowComponent } from './meeting_components/umow-component';
-import { MeetingComponent } from './meeting_components/reservation_components/meeting-component';
+import { UmowComponent } from './meeting_components/reservation_components/umow-component';
+import { MeetingComponent } from './meeting_components/meeting-component';
 import { UrzedowanieComponent } from './meeting_components/reservation_components/urzedowanie-component';
 
 

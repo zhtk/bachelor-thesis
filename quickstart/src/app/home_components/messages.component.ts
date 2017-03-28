@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'messages',
-  templateUrl: 'pages/messages.html',
+  templateUrl: 'pages/home_subpages/messages.html',
 })
 export class MessagesComponent {}
