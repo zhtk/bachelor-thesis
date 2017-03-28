@@ -12,4 +12,21 @@ export class DashboardComponent {}
   selector: 'email',
   templateUrl: 'pages/email.html',
 })
-export class EmailComponent {}
+export class EmailComponent {
+
+  hidden : boolean;
+  resized : boolean;
+  constructor()
+  {
+    this.hidden = true;
+    this.resized = true;
+  }
+    exit():void
+    {
+      this.hidden = false;
+    }
+       resize():void
+    {
+      this.resized = !this.resized;
+    }
+}

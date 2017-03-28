@@ -1,8 +1,19 @@
-<div class="panel panel-primary" style = "margin: 0;" aria-expanded="false"> 
-    <div class="panel-heading" data-toggle="collapse" href="#rozwin"> 
-        <h3 class="panel-title">Wiadomość</h3> 
+<div *ngIf="hidden" class="panel panel-primary" style = "margin: 0;" aria-expanded="false"> 
+    <div class="panel-heading"> 
+        <h3 class="panel-title" style = "width: 200px; display: inline-block" >Wiadomość</h3> 
+
+        <div style="float:right;">
+            <span *ngIf="!resized"class ="glyphicon glyphicon-resize-full" (click)="resize()"data-toggle="collapse" href="#rozwin" style="cursor:pointer"></span>
+            <span *ngIf="resized"class ="glyphicon glyphicon-resize-small" (click)="resize()"data-toggle="collapse" href="#rozwin" style="cursor:pointer"></span>
+            <span class ="glyphicon glyphicon-remove" (click) = "exit()"style="cursor:pointer; margin-left:10px"></span>
+        </div>
+
     </div> 
-    <div class="panel-body" style = "width: 400px; height: 200px;" id="rozwin">
-<textarea name="Text1" cols="40" rows="5"></textarea>    
+    <div class="panel-body collapse in" style = "width: 400px; height: 400px;" id="rozwin">
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresat">
+        <div style ="padding: 10px"></div>
+<textarea class="form-control" id="exampleTextarea" rows="12"></textarea>  
+     <div style ="padding: 10px"></div>
+<button type="button" style="float:right"class="btn btn-primary">Wyślij</button>
 </div>
 </div>

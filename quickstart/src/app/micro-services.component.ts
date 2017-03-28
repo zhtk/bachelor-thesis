@@ -51,9 +51,9 @@ export class ServicesComponent implements OnInit {
     }
 
         ngOnInit(): void {
-        this.menuService
-        .getAll()
-        .subscribe(p => this.test = p)
+        //this.menuService
+        //.getAll()
+        //.subscribe(p => this.test = p)
     }
     
     filter(what: string, index :number): void {

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class MenuService {
 
-	test : string;
+	/*test : string;
 	
 	constructor (private http: Http) {}
 
@@ -23,7 +23,7 @@ export class MenuService {
 		let people$ = JSON.parse('{"start":"/read/abc","menu":[{"nr":"0","name":"Albo tutaj","icon":"","link":"/view/abc","menu":[]},{"nr":"0","name":"Kliknij tutaj","icon":"","link":"/read/abc","menu":[{"nr":"0","name":"To jest w submenu","icon":"","link":"/read/abc","menu":[]},{"nr":"0","name":"To też","icon":"","link":"/read/abc","menu":[]}]}]}');
 		return people$;
 	}
-
+*/
 }
 
 function proba(response:Response): string {
