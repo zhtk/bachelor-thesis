@@ -7,11 +7,11 @@ import { MessagesComponent } from './messages.component';
 import { MeetingComponent, KolejkaComponent, UmowComponent } from './meeting-component';
 import { RenderComponent } from './render.component';
 import { OpinionComponent } from './opinion-component'
-import { ZwolnienieComponent } from './zwolnienie-component';
 
-import { PracodawcaComponent } from './pracodawca-component';
-import { LekarzComponent } from './lekarz-component';
-import { PacjentComponent } from './pacjent-component';
+import { ZwolnienieComponent } from './leave_subpage/zwolnienie-component';
+import { PracodawcaComponent } from './leave_subpage/pracodawca-component';
+import { LekarzComponent } from './leave_subpage/lekarz-component';
+import { PacjentComponent } from './leave_subpage/pacjent-component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
