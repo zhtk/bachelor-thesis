@@ -12,6 +12,20 @@ var core_1 = require('@angular/core');
 var LekarzComponent = (function () {
     function LekarzComponent() {
     }
+    LekarzComponent.prototype.ngOnInit = function () {
+        this.isPesel = false;
+    };
+    LekarzComponent.prototype.pesel = function () {
+        this.name = "Jan";
+        this.surname = "Kowalski";
+        this.birthday = "1994.01.01";
+        this.city = "Kielce";
+        this.postal_code = "00-007";
+        this.street = "Woronicza";
+        this.house = "7";
+        this.flat = "20";
+        this.isPesel = true;
+    };
     LekarzComponent = __decorate([
         core_1.Component({
             selector: 'lekarz',

@@ -52,7 +52,7 @@ export class ServicesComponent implements OnInit {
     }
 
         ngOnInit(): void {
-
+        
         //this.menuService
         //.getAll2()
         //.subscribe(p => this.test = p, err => console.log(err));

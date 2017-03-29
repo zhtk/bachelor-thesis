@@ -120,7 +120,7 @@ body {font-family: Verdana, sans-serif;}
 
 
 
-lekarz input[type="text"] {
+lekarz #pesel input[type="text"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -131,13 +131,13 @@ lekarz input[type="text"] {
   font-size: 1em;
 }
 
-lekarz .input-wrapper, input[type="text"] {
+lekarz #pesel .input-wrapper,lekarz #pesel input[type="text"] {
   font-family: monospace;
   font-weight: bold;
   letter-spacing: .3em;
 }
 
-lekarz .input-wrapper {
+lekarz #pesel .input-wrapper {
   display: inline-block;
   position: relative;
   overflow: hidden;
@@ -145,7 +145,7 @@ lekarz .input-wrapper {
   font-size: 200%;
 }
 
-lekarz .input-wrapper:after {
+lekarz #pesel .input-wrapper:after {
   content: "———————————";
   line-height: .3em;
   position: absolute;

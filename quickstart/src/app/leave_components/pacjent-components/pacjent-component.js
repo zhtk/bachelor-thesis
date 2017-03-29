@@ -9,22 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var Zwolnienie = (function () {
-    function Zwolnienie() {
-    }
-    return Zwolnienie;
-}());
-exports.Zwolnienie = Zwolnienie;
-var zwolnienia = [
-    { 'id': '0', name: 'Jan Kowalski', from: '04-02-2017', to: '11-02-2017', illness: 'Grypa' },
-    { 'id': '0', name: 'Jan Kowalski', from: '04-02-2017', to: '11-02-2017', illness: 'Grypa' },
-    { 'id': '0', name: 'Jan Kowalski', from: '04-02-2017', to: '11-02-2017', illness: 'Grypa' },
-    { 'id': '0', name: 'Jan Kowalski', from: '04-02-2017', to: '11-02-2017', illness: 'Grypa' },
-    { 'id': '0', name: 'Jan Kowalski', from: '04-02-2017', to: '11-02-2017', illness: 'Grypa' },
-];
 var PacjentComponent = (function () {
     function PacjentComponent() {
-        this.list = zwolnienia;
     }
     PacjentComponent.prototype.clicked = function () {
         alert();
