@@ -17,7 +17,7 @@
 							  </tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let msg of message_array">
+								<tr *ngFor="let msg of message_array" (click)="setFocus(msg.id)" [ngClass]="{'info': current_message.id == msg.id }">
 									<td>
 										<input type="checkbox" value="">
 									</td>

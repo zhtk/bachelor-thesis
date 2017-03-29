@@ -26,4 +26,8 @@ export class MessagesComponent {
 			return content
 		return content.substring(0, this.SIZE_MAX) + "...";
 	}
+
+	setFocus(what: number) {
+		this.current_message = this.message_array.filter(p => p.id == what)[0];
+	}
 }
