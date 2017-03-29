@@ -12,12 +12,12 @@ export class EmailComponent {
   constructor()
   {
     this.hidden = true;
-    this.resized = true;
+    this.resized = false;
     this.fullscreen = false;
   }
     exit() : void
     {
-      this.hidden = false;
+      this.hidden = true;
     }
     
     resize():void
