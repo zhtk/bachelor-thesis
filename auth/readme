@@ -1,0 +1,13 @@
+To jest usługa autoryzacji
+
+Najpierw należy zainstalować paczki GRPC, plik requirements.txt zawiera sporo gruzu ale
+na pewno te paczki wystarczą
+
+Generacja stubu RPC z opisu auth.proto:
+python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. auth.proto
+
+Uruchamiamy serwer:
+python server.py
+
+I sprawdzamy czy wszysko działa na kliencie
+python client.py
