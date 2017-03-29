@@ -1,0 +1,41 @@
+<div style="padding: 20px"></div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+             Zwolnienia:
+            </div>
+            <!-- .panel-heading -->
+            <div class="panel-body">
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                        <th  style="cursor:pointer"(click) ="sort('name')">Imie</th>
+                        <th style="cursor:pointer"(click) ="sort('surname')">Nazwisko</th>
+                        <th style="cursor:pointer"(click) ="sort('from')">Od</th>
+                        <th style="cursor:pointer"(click) ="sort('to')">Do</th>
+                        <th style="cursor:pointer"(click) ="sort('illness')">Przyczyna</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr *ngFor="let dokument of lista">
+                                <td >{{dokument.name}}</td>
+                                <td >{{dokument.surname}}</td>
+                                <td >{{dokument.from}}</td>
+                                <td >{{dokument.to}}</td>
+                                <td >{{dokument.illness}}</td>
+                            </tr>
+                    </tbody>
+                </table>
+
+
+
+            </div>
+                        <!-- .panel-body -->
+        </div>
+                    <!-- /.panel -->
+    </div>
+                <!-- /.col-lg-12 -->
+</div>

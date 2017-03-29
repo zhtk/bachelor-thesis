@@ -50,7 +50,8 @@ import { OpinionComponent } from './meeting_components/opinion_components/opinio
 import { ZwolnienieComponent } from './leave_components/zwolnienie-component';
 import { PracodawcaComponent } from './leave_components/pracodawca-component';
 import { LekarzComponent } from './leave_components/lekarz-component';
-import { PacjentComponent } from './leave_components/pacjent-component';
+import { PacjentComponent } from './leave_components/pacjent-components/pacjent-component';
+import { ListaComponent } from './leave_components/pacjent-components/list-leaves-component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { PacjentComponent } from './leave_components/pacjent-component';
 					PracodawcaComponent,
 					LekarzComponent,
 					PacjentComponent,
-					EmailComponent 
+					EmailComponent,
+					ListaComponent
 				],
   bootstrap:    [ AppComponent ]
 })
