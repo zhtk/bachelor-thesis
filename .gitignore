@@ -1,6 +1,6 @@
 quickstart/node_modules/*
 quickstart/node_modules
-quickstart/src/app/*.js
-quickstart/src/app/*.map
+quickstart/src/app/**/*.js
+quickstart/src/app/**/*.map
 quickstart/src/main.js
 quickstart/src/main.js.map

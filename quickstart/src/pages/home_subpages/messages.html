@@ -2,7 +2,7 @@
 <div class="row" style="padding-top: 20px;">
 	<div class="col-md-12 col-lg-9">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Panel heading title</div>
+			<div class="panel-heading">{{ inboxName }}</div>
 			<div class="panel-body">
 				<div class="panel panel-default">
 					<div class="panel-body">
@@ -47,7 +47,25 @@
 							</tbody>
 						  </table>
 					</div>
+				</div>
 			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row" style="padding-top: 20px;">
+	<div class="col-md-12 col-lg-9">
+		<div class="panel panel-primary">
+			<div class="panel-body">
+				<div style="border-bottom: 5px;">
+					<h5 style="float: right;">{{ message.date }}</h5>
+					<h5 style="float: left;">Od: {{ message.from }}</h5>
+					<br>
+					<span><h3>Temat: {{ message.topic }}</h3></span>
+				</div>
+				<div class="well">
+					{{ message.content }}
+				</div>
 			</div>
 		</div>
 	</div>
