@@ -19,11 +19,12 @@ h1 {
 }
 
 div.page-center {
-	top:50%;
-	left: 50%;
-	transform: translate3d(-50%,-50%, 0);
-	position: absolute;
+	position: fixed;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
 }
+
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
 

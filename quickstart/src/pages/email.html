@@ -1,4 +1,4 @@
-<div *ngIf="hidden" class="panel panel-primary" style = "margin: 0;" aria-expanded="false"> 
+<div *ngIf="hidden" class="panel panel-primary" [ngClass]="{'page-center': fullscreen}" style = "margin: 0;" aria-expanded="false"> 
     <div class="panel-heading"> 
         <h3 class="panel-title" style = "width: 200px; display: inline-block" >Wyślij wiadomość</h3> 
 
@@ -25,6 +25,6 @@
         <div style ="padding: 10px"></div>
         <button type="button" style="float:right"class="btn btn-primary">Wyślij</button>
     </div>
-    <div *ngIf="fullscreen" style="background-color: rgba(0, 0, 0, 0.5); position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;">
-    </div>
+</div>
+<div *ngIf="fullscreen" style="background-color: rgba(0, 0, 0, 0.5); position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;">
 </div>
