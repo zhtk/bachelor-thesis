@@ -17,32 +17,14 @@
 							  </tr>
 							</thead>
 							<tbody>
-								<tr>
+								<tr *ngFor="let msg of message_array">
 									<td>
 										<input type="checkbox" value="">
 									</td>
-									<td>John</td>
-									<td>2015-01-01</td>
-									<td>Zaległości w składkach</td>
-									<td>Szanowny Panie, lorem ipsum ...</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" value="">
-									</td>
-									<td>John</td>
-									<td>2015-01-01</td>
-									<td>Zaległości w składkach</td>
-									<td>Szanowny Panie, lorem ipsum ...</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="checkbox" value="">
-									</td>
-									<td>John</td>
-									<td>2015-01-01</td>
-									<td>Zaległości w składkach</td>
-									<td>Szanowny Panie, lorem ipsum ...</td>
+									<td>{{ msg.from }}</td>
+									<td>{{ msg.date }}</td>
+									<td>{{ msg.topic }}</td>
+									<td>{{ abbreviate(msg.content) }}</td>
 								</tr>
 							</tbody>
 						  </table>
@@ -56,15 +38,15 @@
 <div class="row" style="padding-top: 20px;">
 	<div class="col-md-12 col-lg-9">
 		<div class="panel panel-primary">
-			<div class="panel-body">
+			<div *ngIf="current_message" class="panel-body">
 				<div style="border-bottom: 5px;">
-					<h5 style="float: right;">{{ message.date }}</h5>
-					<h5 style="float: left;">Od: {{ message.from }}</h5>
+					<h5 style="float: right;">{{ current_message.date }}</h5>
+					<h5 style="float: left;">Od: {{ current_message.from }}</h5>
 					<br>
-					<span><h3>Temat: {{ message.topic }}</h3></span>
+					<span><h3>Temat: {{ current_message.topic }}</h3></span>
 				</div>
 				<div class="well">
-					{{ message.content }}
+					{{ current_message.content }}
 				</div>
 			</div>
 		</div>
