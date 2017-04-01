@@ -24,7 +24,7 @@ import { NavtoolsModule }       from './navtools.module';
 import { DashboardComponent}  from './dashboard_components/dashboard.component';
 
 // Email windows components
-import { EmailComponent }       from './email_components/email_component';
+import { EmailComponent }       from './email_components/email.component';
 
 import { AtelierComponent }  from './atelier.component';
 

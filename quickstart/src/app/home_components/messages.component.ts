@@ -10,7 +10,7 @@ export class MessagesComponent {
 	inboxName : string;
 	message_array: Message[];
 	current_message: Message;
-	SIZE_MAX = 30;
+	SIZE_MAX = 150;
 
 	constructor(private messagesService: MessagesService) {
 		this.inboxName = "Nazwa skrzynki"
@@ -29,5 +29,9 @@ export class MessagesComponent {
 
 	setFocus(what: number) {
 		this.current_message = this.message_array.filter(p => p.id == what)[0];
+	}
+
+	respond(id: number) {
+		// TODO komunikacja z modułem
 	}
 }

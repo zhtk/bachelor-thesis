@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { EmailService } from '../service/email.service';
 
 @Component({
 	selector: 'email',
@@ -9,9 +10,14 @@ export class EmailComponent {
 	hidden : boolean;
 	resized : boolean;
 	fullscreen : boolean;
-	constructor()
+
+	@Input() addresser: string;
+	@Input() topic: string;
+	@Input() content: string;
+
+	constructor(private emailService: EmailService)
 	{
-		this.hidden = true;
+		this.hidden = false;
 		this.resized = false;
 		this.fullscreen = false;
 	}

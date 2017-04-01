@@ -3,36 +3,19 @@
 	<div class="col-md-12 col-lg-12">	
 		<div class="panel-body"  style="padding: 0">
 			<div class ="col-md-12 col-lg-4"  style="padding: 0">
-				<div class="list-group" style="margin: 0">
-					<a href="#" style="border-radius: 4px 0 0 4px" class="list-group-item list-group-item-action flex-column align-items-start active">
+				<div class="list-group" style="margin: 0; overflow-y: scroll; height: 500px; border-radius: 0 4px 4px 0;">
+					<a *ngFor="let msg of message_array" style="border-radius: 4px 0 0 4px;" class="list-group-item list-group-item-action flex-column align-items-start" [ngClass]="{'active': current_message.id == msg.id}" (click)="setFocus(msg.id)">
 						<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">List group item heading</h5>
-						<small>3 days ago</small>
+						<small>{{ msg.date }}</small>
 						</div>
-						<p class="mb-1">Donec id elit non mi porta gravida at eget metus.</p>
-						<small>Donec id elit non mi porta.</small>
-					</a>
-					<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-						<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">List group item heading</h5>
-						<small class="text-muted">3 days ago</small>
-						</div>
-						<p class="mb-1">Donec id elit non mi porta gravida at eget metus.</p>
-						<small class="text-muted">Donec id elit non mi porta.</small>
-					</a>
-					<a href="#" style="border-radius: 0px 0 0 4px"  class="list-group-item list-group-item-action flex-column align-items-start">
-						<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">List group item heading</h5>
-						<small class="text-muted">3 days ago</small>
-						</div>
-						<p class="mb-1">Donec id elit non mi porta gravida at eget metus.</p>
-						<small class="text-muted">Donec id elit non mi porta.</small>
+						<p class="mb-1">{{ msg.topic }}</p>
+						<small>{{ abbreviate(msg.content) }}</small>
 					</a>
 				</div>
 			</div>
 			<div class="col-md-12 col-lg-8" style="padding: 0">
 				<div class="panel panel-primary"  style="border-radius: 0 4px 4px 0">
-					<div *ngIf="current_message" class="panel-body" style="margin: 0; height: 437px">
+					<div *ngIf="current_message" class="panel-body" style="margin: 0; height: 500px">
 						<div style="border-bottom: 5px;">
 							<h5 style="float: right;">{{ current_message.date }}</h5>
 							<h5 style="float: left;">Od: {{ current_message.from }}</h5>
@@ -42,6 +25,8 @@
 						<div class="well">
 							{{ current_message.content }}
 						</div>
+						<button type="button" class="btn btn-primary" (click)="respond(msg.id)">Odpowiedz</button>
+						<!-- <button type="button" class="btn btn-primary">Skasuj</button> -->
 					</div>
 				</div>
 			</div>
