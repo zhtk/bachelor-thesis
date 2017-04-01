@@ -1,25 +1,36 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EmailService } from '../service/email.service';
 
 @Component({
 	selector: 'email',
 	templateUrl: 'pages/email.html',
 })
-export class EmailComponent {
+export class EmailComponent implements OnInit{
 
 	hidden : boolean;
 	resized : boolean;
 	fullscreen : boolean;
 
-	@Input() addresser: string;
-	@Input() topic: string;
-	@Input() content: string;
+	addresser: string;
+	topic: string;
+	msgContent: string;
 
 	constructor(private emailService: EmailService)
-	{
-		this.hidden = false;
+	{}
+
+	ngOnInit() {
+		this.hidden = true;
 		this.resized = false;
 		this.fullscreen = false;
+	
+		this.emailService.current$.subscribe(
+			data => {
+				this.addresser = data.from;
+				this.msgContent = data.content;
+				this.topic = "Re: " + data.topic;
+				
+				this.hidden = false;
+			});
 	}
 	exit() : void
 	{

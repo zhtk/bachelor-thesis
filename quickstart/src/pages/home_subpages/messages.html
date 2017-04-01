@@ -15,7 +15,7 @@
 			</div>
 			<div class="col-md-12 col-lg-8" style="padding: 0">
 				<div class="panel panel-primary"  style="border-radius: 0 4px 4px 0">
-					<div *ngIf="current_message" class="panel-body" style="margin: 0; height: 500px">
+					<div *ngIf="current_message" class="panel-body" style="margin: 0; height: 500px; overflow-y: scroll;">
 						<div style="border-bottom: 5px;">
 							<h5 style="float: right;">{{ current_message.date }}</h5>
 							<h5 style="float: left;">Od: {{ current_message.from }}</h5>
@@ -25,7 +25,7 @@
 						<div class="well">
 							{{ current_message.content }}
 						</div>
-						<button type="button" class="btn btn-primary" (click)="respond(msg.id)">Odpowiedz</button>
+						<button type="button" class="btn btn-primary" (click)="respond(current_message.id)">Odpowiedz</button>
 						<!-- <button type="button" class="btn btn-primary">Skasuj</button> -->
 					</div>
 				</div>
