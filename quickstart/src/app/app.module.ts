@@ -21,6 +21,8 @@ import { NavbarComponent }  from './navbar_components/navbar.component';
 import { NavtoolsComponent }  from './navtools.component';
 import { NavtoolsModule }       from './navtools.module';
 
+import { PageNotFoundComponent } from './page-not-found.component';
+
 import { DashboardComponent}  from './dashboard_components/dashboard.component';
 
 // Email windows components
@@ -53,7 +55,7 @@ import { LekarzComponent } from './leave_components/lekarz-component';
 import { PacjentComponent } from './leave_components/pacjent-components/pacjent-component';
 import { ListaComponent } from './leave_components/pacjent-components/list-leaves-component';
 import { BreadCrumbComponent } from './dashboard_components/breadcrumb.component';
-
+import { InboxComponent } from './home_components/inbox.component';
 
 @NgModule({
   imports:      [ BrowserModule,
@@ -64,6 +66,7 @@ import { BreadCrumbComponent } from './dashboard_components/breadcrumb.component
   				   ],
   declarations: [ AppComponent,
   				  	HomeComponent,
+  				  	PageNotFoundComponent,
   				  	AtelierComponent,
   				  	DashboardComponent,
   				  	NavbarComponent,
@@ -84,6 +87,7 @@ import { BreadCrumbComponent } from './dashboard_components/breadcrumb.component
 					EmailComponent,
 					ListaComponent,
 					BreadCrumbComponent,
+					InboxComponent,
 				],
   bootstrap:    [ AppComponent ],
 })

@@ -17,7 +17,7 @@
             <div style ="padding: 7px"></div>
             <input type="text" class="form-control" placeholder="Temat" [(ngModel)]="topic">
             <div style ="padding: 7px"></div>
-            <textarea class="form-control" id="exampleTextarea" rows="12">{{ msgContent }}</textarea>  
+            <textarea class="form-control" id="exampleTextarea" rows="12" [(ngModel)]="msgContent">{{ msgContent }}</textarea>  
             <div style ="padding: 7px"></div>
             <button type="button" style="float:right"class="btn btn-primary">Wyślij</button>
         </div>

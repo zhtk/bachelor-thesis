@@ -21,27 +21,34 @@ import { ZwolnienieComponent } from './leave_components/zwolnienie-component';
 import { PracodawcaComponent } from './leave_components/pracodawca-component';
 import { LekarzComponent } from './leave_components/lekarz-component';
 import { PacjentComponent } from './leave_components/pacjent-components/pacjent-component';
+import { PageNotFoundComponent } from './page-not-found.component';
+import { InboxComponent } from './home_components/inbox.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/main', pathMatch: 'full' },
-  { path: 'main',  component: HomeComponent },
-  { path: 'test',  component: AtelierComponent },
-  { path: 'services',  component: ServicesComponent },
-  { path: 'messages',  component: MessagesComponent },
-  { path: 'meeting',  component: MeetingComponent },
-  { path: 'umow',  component: UmowComponent },
-  { path: 'kolejka',  component: KolejkaComponent },
-  { path: 'render',  component: RenderComponent },
-  { path: 'opinion',  component: OpinionComponent },
-  { path: 'zwolnienie',  component: ZwolnienieComponent },
-  { path: 'pracodawca',  component:PracodawcaComponent },
-  { path: 'lekarz',  component: LekarzComponent},
-  { path: 'pacjent',  component: PacjentComponent },
+	{ path: '', redirectTo: '/main', pathMatch: 'full' },
+	{ path: 'main',  component: HomeComponent },
+	{ path: 'test',  component: AtelierComponent },
+	{ path: 'services',  component: ServicesComponent },
+	{ path: 'messages',  component: MessagesComponent, children: [
+		{ path: 'inbox', component: InboxComponent },
+	] },
+	{ path: 'meeting',  component: MeetingComponent },
+	{ path: 'umow',  component: UmowComponent },
+	{ path: 'kolejka',  component: KolejkaComponent },
+	{ path: 'render',  component: RenderComponent },
+	{ path: 'opinion',  component: OpinionComponent },
+	{ path: 'zwolnienie',  component: ZwolnienieComponent },
+	{ path: 'pracodawca',  component:PracodawcaComponent },
+	{ path: 'lekarz',  component: LekarzComponent},
+	{ path: 'pacjent',  component: PacjentComponent },
+	{ path: '404', component: PageNotFoundComponent},
+
+	{ path: '**', redirectTo: '/404'} // ostatni komponent - dodajemy nowe sciezki przed nim!
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+	imports: [ RouterModule.forRoot(routes) ],
+	exports: [ RouterModule ]
 })
 
 export class AppRoutingModule {}

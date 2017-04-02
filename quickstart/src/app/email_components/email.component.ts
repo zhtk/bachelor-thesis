@@ -27,7 +27,7 @@ export class EmailComponent implements OnInit{
 			data => {
 				this.addresser = data.from;
 				this.msgContent = data.content;
-				this.topic = "Re: " + data.topic;
+				this.topic = data.topic;
 				
 				this.hidden = false;
 			});
