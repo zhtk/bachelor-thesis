@@ -1,52 +1,33 @@
 
 <div class="row" style="padding-top: 20px;">
-	<div class="col-md-12 col-lg-9">
-		<div class="panel panel-primary">
-			<div class="panel-heading">{{ inboxName }}</div>
-			<div class="panel-body">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<table class="table table-striped">
-							<thead>
-							  <tr>
-							  	<th>Zaznacz</th>
-								<th>Nadawca</th>
-								<th>Data</th>
-								<th>Temat</th>
-								<th>Treść</th>
-							  </tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let msg of message_array" (click)="setFocus(msg.id)" [ngClass]="{'info': current_message.id == msg.id }">
-									<td>
-										<input type="checkbox" value="">
-									</td>
-									<td>{{ msg.from }}</td>
-									<td>{{ msg.date }}</td>
-									<td>{{ msg.topic }}</td>
-									<td>{{ abbreviate(msg.content) }}</td>
-								</tr>
-							</tbody>
-						  </table>
-					</div>
+	<div class="col-md-12 col-lg-12">	
+		<div class="panel-body"  style="padding: 0">
+			<div class ="col-md-12 col-lg-4"  style="padding: 0">
+				<div class="list-group" style="margin: 0; overflow-y: scroll; height: 500px; border-radius: 0 4px 4px 0;">
+					<a *ngFor="let msg of message_array" style="border-radius: 4px 0 0 4px;" class="list-group-item list-group-item-action flex-column align-items-start" [ngClass]="{'active': current_message.id == msg.id}" (click)="setFocus(msg.id)">
+						<div class="d-flex w-100 justify-content-between">
+						<small>{{ msg.date }}</small>
+						</div>
+						<p class="mb-1">{{ msg.topic }}</p>
+						<small>{{ abbreviate(msg.content) }}</small>
+					</a>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row" style="padding-top: 20px;">
-	<div class="col-md-12 col-lg-9">
-		<div class="panel panel-primary">
-			<div *ngIf="current_message" class="panel-body">
-				<div style="border-bottom: 5px;">
-					<h5 style="float: right;">{{ current_message.date }}</h5>
-					<h5 style="float: left;">Od: {{ current_message.from }}</h5>
-					<br>
-					<span><h3>Temat: {{ current_message.topic }}</h3></span>
-				</div>
-				<div class="well">
-					{{ current_message.content }}
+			<div class="col-md-12 col-lg-8" style="padding: 0">
+				<div class="panel panel-primary"  style="border-radius: 0 4px 4px 0">
+					<div *ngIf="current_message" class="panel-body" style="margin: 0; height: 500px; overflow-y: scroll;">
+						<div style="border-bottom: 5px;">
+							<h5 style="float: right;">{{ current_message.date }}</h5>
+							<h5 style="float: left;">Od: {{ current_message.from }}</h5>
+							<br>
+							<span><h3>Temat: {{ current_message.topic }}</h3></span>
+						</div>
+						<div class="well">
+							{{ current_message.content }}
+						</div>
+						<button type="button" class="btn btn-primary" (click)="respond(current_message.id)">Odpowiedz</button>
+						<!-- <button type="button" class="btn btn-primary">Skasuj</button> -->
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MessagesService } from '../service/messages.service';
+import { EmailService } from '../service/email.service';
 import { Message } from '../message';
 
 @Component({
@@ -10,9 +11,9 @@ export class MessagesComponent {
 	inboxName : string;
 	message_array: Message[];
 	current_message: Message;
-	SIZE_MAX = 30;
+	SIZE_MAX = 150;
 
-	constructor(private messagesService: MessagesService) {
+	constructor(private messagesService: MessagesService, private emailService: EmailService) {
 		this.inboxName = "Nazwa skrzynki"
 		this.message_array = messagesService.getMessagesInbox();
 		this.current_message = null;
@@ -27,7 +28,15 @@ export class MessagesComponent {
 		return content.substring(0, this.SIZE_MAX) + "...";
 	}
 
+	private getMsgById(id: number) {
+		return this.message_array.filter(p => p.id == id)[0];
+	}
+
 	setFocus(what: number) {
-		this.current_message = this.message_array.filter(p => p.id == what)[0];
+		this.current_message = this.getMsgById(what);
+	}
+
+	respond(id: number) {
+		this.emailService.setMessageWindowContent(this.getMsgById(id));
 	}
 }

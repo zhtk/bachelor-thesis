@@ -12,17 +12,21 @@
             </div>
 
         </div> 
-        <div *ngIf="!fullscreen" class="panel-body collapse in" style = "width: 400px; height: 400px;" id="rozwin">
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresat">
-            <div style ="padding: 10px"></div>
-            <textarea class="form-control" id="exampleTextarea" rows="12"></textarea>  
-            <div style ="padding: 10px"></div>
+        <div *ngIf="!fullscreen" class="panel-body collapse in" style = "width: 400px; height: 440px;" id="rozwin">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresat" [(ngModel)]="addresser">
+            <div style ="padding: 7px"></div>
+            <input type="text" class="form-control" placeholder="Temat" [(ngModel)]="topic">
+            <div style ="padding: 7px"></div>
+            <textarea class="form-control" id="exampleTextarea" rows="12">{{ msgContent }}</textarea>  
+            <div style ="padding: 7px"></div>
             <button type="button" style="float:right"class="btn btn-primary">Wyślij</button>
         </div>
-        <div *ngIf="fullscreen" class="panel-body collapse in" style = "width: 1050px; height: 600px; border: 10px;" id="rozwin">
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresat">
+        <div *ngIf="fullscreen" class="panel-body collapse in" style = "width: 1050px; height: 650px; border: 10px;" id="rozwin">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresat" [(ngModel)]="addresser">
             <div style ="padding: 10px"></div>
-            <textarea class="form-control" id="exampleTextarea" rows="22"></textarea>  
+            <input type="text" class="form-control" placeholder="Temat" [(ngModel)]="topic">
+            <div style ="padding: 10px"></div>
+            <textarea class="form-control" id="exampleTextarea" rows="22">{{ msgContent }}</textarea>  
             <div style ="padding: 10px"></div>
             <button type="button" style="float:right"class="btn btn-primary">Wyślij</button>
         </div>
