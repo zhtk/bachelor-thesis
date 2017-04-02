@@ -30,8 +30,10 @@ const routes: Routes = [
 	{ path: 'test',  component: AtelierComponent },
 	{ path: 'services',  component: ServicesComponent },
 	{ path: 'messages',  component: MessagesComponent, children: [
+		{ path: '', redirectTo: 'inbox', pathMatch: 'full' },
 		{ path: 'inbox', component: InboxComponent },
-	] },
+		
+	]},
 	{ path: 'meeting',  component: MeetingComponent },
 	{ path: 'umow',  component: UmowComponent },
 	{ path: 'kolejka',  component: KolejkaComponent },
