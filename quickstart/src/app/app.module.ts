@@ -52,6 +52,7 @@ import { PracodawcaComponent } from './leave_components/pracodawca-component';
 import { LekarzComponent } from './leave_components/lekarz-component';
 import { PacjentComponent } from './leave_components/pacjent-components/pacjent-component';
 import { ListaComponent } from './leave_components/pacjent-components/list-leaves-component';
+import { BreadCrumbComponent } from './dashboard_components/breadcrumb.component';
 
 
 @NgModule({
@@ -59,7 +60,7 @@ import { ListaComponent } from './leave_components/pacjent-components/list-leave
   				  	AppRoutingModule,
 					HttpModule,
     				JsonpModule,
-					FormsModule 
+					FormsModule,
   				   ],
   declarations: [ AppComponent,
   				  	HomeComponent,
@@ -81,8 +82,9 @@ import { ListaComponent } from './leave_components/pacjent-components/list-leave
 					LekarzComponent,
 					PacjentComponent,
 					EmailComponent,
-					ListaComponent
+					ListaComponent,
+					BreadCrumbComponent,
 				],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
 })
 export class AppModule { }
