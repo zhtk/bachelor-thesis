@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent }  from './app.component';
 
+import {TextBox} from './FormComponents/TextBox'
+import {Testowe} from './FormComponents/test'
 // Home page components
 import { HomeComponent }  from './home_components/home.component';
 import { Notify } from './home_components/notifications.component';
@@ -75,7 +77,7 @@ import { InboxComponent } from './home_components/inbox.component';
 					Notify,
 					ServicesComponent,
 					MeetingComponent,
-					KolejkaComponent, 
+					KolejkaComponent,
 					UmowComponent,
 					UrzedowanieComponent,
 					OpinionComponent,
@@ -88,6 +90,8 @@ import { InboxComponent } from './home_components/inbox.component';
 					ListaComponent,
 					BreadCrumbComponent,
 					InboxComponent,
+          TextBox,
+    Testowe
 				],
   bootstrap:    [ AppComponent ],
 })
