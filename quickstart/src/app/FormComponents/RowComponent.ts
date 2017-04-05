@@ -22,18 +22,21 @@ export class RowComponent implements FEComponent, OnInit{
     {
       "components":
       [
-        
-         {"id" : "test",
+         {
+          "type": "TextBox",
+          "id" : "test",
           "required" : true,
           "regex" : "([0-9]{10})",
           "defaultText" : "standardowy tekst",
           "width" : 3
           },
-          {"id" : "test",
-          "required" : true,
-          "regex" : "([0-9]{10})",
-          "defaultText" : "standardowy tekst",
-          "width" : 3
+          {
+            "type": "TextBox",
+            "id" : "test",
+            "required" : true,
+            "regex" : "([0-9]{10})",
+            "defaultText" : "standardowy tekst",
+            "width" : 3
           }
       ]
     }
@@ -51,7 +54,7 @@ export class RowComponent implements FEComponent, OnInit{
     for (var i = 0, len = this.parsed.length; i < len; ++i)
     {
       var obj = this.parsed[i];
-      this.add_element(obj);
+      this.add_element(obj.type, obj);
     }
 
   }
@@ -60,9 +63,9 @@ export class RowComponent implements FEComponent, OnInit{
 
   }
 
-  add_element ( specification: any)
+  add_element (type:any, specification: any)
   {
-    const factory = this.componentFactoryResolver.resolveComponentFactory(TextBox);
+    const factory = this.componentFactoryResolver.resolveComponentFactory(this.componentRegistry[type]);
     const ref = this.viewContainerRef.createComponent(factory);
     ref.changeDetectorRef.detectChanges();
     var added = <FEComponent> ref.instance;
