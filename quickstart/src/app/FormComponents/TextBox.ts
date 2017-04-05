@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core'
+import {Component, Input, } from '@angular/core'
 import { FormComponent } from './FormComponent'
+import { FormsModule }   from '@angular/forms';
 
 @Component
 ({
@@ -19,10 +20,18 @@ export class TextBox extends FormComponent
     super();
     this.maxLength = 0;
     this.minLength = 0;
-    this.defaultText = "";
+    this.defaultText = "DefaultText";
     this.text = "";
-    this.regex = new RegExp("");
+    this.regex = new RegExp("([0-9]{10})");
   }
   //Tutaj przyda się klasa autouzupelnienie
   //autoComplete:AutoComplete
+  textInput (a:string)
+  {
+
+    if(this.regex.test(this.text))
+      this.backgroundColor = "rgba(0, 255, 0, 0.3)";
+    else
+      this.backgroundColor = "rgba(255, 0, 0, 0.3)";
+  }
 }
