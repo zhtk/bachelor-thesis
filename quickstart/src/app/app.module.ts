@@ -58,6 +58,8 @@ import { PacjentComponent } from './leave_components/pacjent-components/pacjent-
 import { ListaComponent } from './leave_components/pacjent-components/list-leaves-component';
 import { BreadCrumbComponent } from './dashboard_components/breadcrumb.component';
 import { InboxComponent } from './home_components/inbox.component';
+import {RowComponent} from "./FormComponents/RowComponent";
+
 
 @NgModule({
   imports:      [ BrowserModule,
@@ -91,8 +93,10 @@ import { InboxComponent } from './home_components/inbox.component';
 					BreadCrumbComponent,
 					InboxComponent,
           TextBox,
-    Testowe
+          Testowe,
+        RowComponent
 				],
   bootstrap:    [ AppComponent ],
+  entryComponents: [TextBox, RowComponent]
 })
 export class AppModule { }
