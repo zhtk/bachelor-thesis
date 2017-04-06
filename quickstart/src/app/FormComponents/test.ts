@@ -20,13 +20,13 @@ export class Testowe implements OnInit
          {"id" : "test",
           "required" : true,
           "regex" : "([0-9]{10})",
-          "defaultText" : "standardowy tekst",
+          "defaultText" : "standardowy tekst1",
           "width" : 3
           },
           {"id" : "test",
           "required" : true,
           "regex" : "([0-9]{10})",
-          "defaultText" : "standardowy tekst",
+          "defaultText" : "standardowy tekst2",
           "width" : 3
           }
       ]

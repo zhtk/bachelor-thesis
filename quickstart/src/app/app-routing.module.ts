@@ -41,10 +41,10 @@ const routes: Routes = [
 	{ path: 'opinion',  component: OpinionComponent },
 	{ path: 'zwolnienie',  component: ZwolnienieComponent },
 	{ path: 'pracodawca',  component:PracodawcaComponent },
-	{ path: 'lekarz',  component: LekarzComponent},
+	{ path: 'lekarz',  component: LekarzComponent },
 	{ path: 'pacjent',  component: PacjentComponent },
-	{ path: '404', component: PageNotFoundComponent},
-  { path: 'komponenty', component: Testowe},
+	{ path: '404', component: PageNotFoundComponent },
+	{ path: 'komponenty', component: Testowe },
 	{ path: '**', redirectTo: '/404'} // ostatni komponent - dodajemy nowe sciezki przed nim!
 ];
 
