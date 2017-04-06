@@ -1,75 +1,47 @@
-import { Component, Input, OnInit, ViewChildren, ViewContainerRef, ViewChild, ReflectiveInjector, ComponentFactoryResolver,
-  QueryList} from '@angular/core'
+import {
+  Component, Input, OnInit, ViewChildren, ViewContainerRef, ViewChild, ReflectiveInjector, ComponentFactoryResolver,
+  QueryList, ElementRef, TemplateRef
+} from '@angular/core'
 import { FormComponent } from './FormComponent'
 import { FormsModule }   from '@angular/forms';
 import {TextBox} from "./TextBox";
 import {Type} from "typescript";
+import {ViewContainer} from "@angular/core/src/linker/view_container";
+import {ComponentCreator} from "./ComponentCreator";
 
 @Component
 ({
   selector: 'row',
-  template: '<button (click) = "dziala()">test</button> '
+  template: '<div class="row"><template #target></template></div>'
  ,
 })
 export class RowComponent implements FEComponent, OnInit{
 
+  id:number;
   parsed:any;
-  componentRegistry = {
-  'TextBox': TextBox,
-  }
 
-  pageJSON = `
-    {
-      "components":
-      [
-         {
-          "type": "TextBox",
-          "id" : "test",
-          "required" : true,
-          "regex" : "([0-9]{10})",
-          "defaultText" : "standardowy tekst",
-          "width" : 3
-          },
-          {
-            "type": "TextBox",
-            "id" : "test",
-            "required" : true,
-            "regex" : "([0-9]{10})",
-            "defaultText" : "standardowy tekst",
-            "width" : 3
-          }
-      ]
-    }
-  `;
   visible:boolean;
-  //@ViewChildren(TextBox) components: QueryList<TextBox>;
+  @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver,
-              private viewContainerRef: ViewContainerRef) {
-    this.parsed = JSON.parse(this.pageJSON)["components"];
+  constructor(private cfr: ComponentFactoryResolver) {
   }
+
 
   ngOnInit(): void {
-    console.log(this.parsed);
-    for (var i = 0, len = this.parsed.length; i < len; ++i)
-    {
-      var obj = this.parsed[i];
-      this.add_element(obj.type, obj);
-    }
-
   }
 
   renderJSON(specification: any): void {
+    this.target.clear();
+    if("id" in specification)
+      this.id = specification["id"];
 
+    if("children" in specification)
+    {// Stworz wszystkie komponenty i dodaj je w sobie
+      for(var child = 0; child < specification["children"].length; child++)
+      {
+        var added = ComponentCreator.insertComponent(this.cfr, this.target, specification["children"][child]["type"]);
+        added.renderJSON(specification["children"][child]);
+      }
+    }
   }
-
-  add_element (type:any, specification: any)
-  {
-    const factory = this.componentFactoryResolver.resolveComponentFactory(this.componentRegistry[type]);
-    const ref = this.viewContainerRef.createComponent(factory);
-    ref.changeDetectorRef.detectChanges();
-    var added = <FEComponent> ref.instance;
-    added.renderJSON(specification);
-  }
-
 }

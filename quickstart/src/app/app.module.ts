@@ -7,7 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent }  from './app.component';
 
 import {TextBox} from './FormComponents/TextBox'
-import {Testowe} from './FormComponents/test'
+import {TestComponent} from './FormComponents/TestComponent'
+
 // Home page components
 import { HomeComponent }  from './home_components/home.component';
 import { Notify } from './home_components/notifications.component';
@@ -58,16 +59,17 @@ import { PacjentComponent } from './leave_components/pacjent-components/pacjent-
 import { ListaComponent } from './leave_components/pacjent-components/list-leaves-component';
 import { BreadCrumbComponent } from './dashboard_components/breadcrumb.component';
 import { InboxComponent } from './home_components/inbox.component';
-import {RowComponent} from "./FormComponents/RowComponent";
+import { RowComponent } from "./FormComponents/RowComponent";
+import {ComponentCreator} from "./FormComponents/ComponentCreator";
 
 
 @NgModule({
   imports:      [ BrowserModule,
-  				  	AppRoutingModule,
-					HttpModule,
-    				JsonpModule,
-					FormsModule,
-  				   ],
+  				  	    AppRoutingModule,
+					        HttpModule,
+    				      JsonpModule,
+					        FormsModule,
+  				      ],
   declarations: [ AppComponent,
   				  	HomeComponent,
   				  	PageNotFoundComponent,
@@ -93,10 +95,10 @@ import {RowComponent} from "./FormComponents/RowComponent";
 					BreadCrumbComponent,
 					InboxComponent,
           TextBox,
-          Testowe,
-        RowComponent
+          TestComponent,
+          RowComponent
 				],
   bootstrap:    [ AppComponent ],
-  entryComponents: [TextBox, RowComponent]
+  entryComponents: [TestComponent, TextBox, RowComponent]
 })
 export class AppModule { }
