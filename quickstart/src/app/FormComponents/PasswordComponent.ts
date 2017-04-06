@@ -3,7 +3,7 @@ import { FormsModule }   from '@angular/forms';
 import { TextBox } from './TextBox';
 
 @Component({
-  selector: 'textBox',
+  selector: 'password',
   templateUrl: 'pages/TextBoxComponent/password.html'
 })
 export class PasswordComponent
@@ -12,6 +12,6 @@ export class PasswordComponent
 {
 	constructor() {
 		super();
-		this.text = "95040100120";	
+		this.text = "95040100120";
 	}
 }

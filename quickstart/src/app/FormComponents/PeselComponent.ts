@@ -4,7 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import { TextBox } from './TextBox';
 
 @Component({
-  selector: 'textBox',
+  selector: 'pesel',
   templateUrl: 'pages/TextBoxComponent/TextBox.html'
 })
 export class PeselComponent
