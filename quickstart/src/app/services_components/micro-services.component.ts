@@ -13,18 +13,18 @@ export class Service{
     tag:String
 }
 
-const FilterTags: string[] = ['renta', 'urlop', 'Zwolnienie', 'emerytura', 'skladki'];
+const FilterTags: string[] = ['renta', 'urlop', 'zwolnienie', 'emerytura', 'skladki'];
 
 const SERIVICES_LIST: Service[] = [
-    {tag:"renta", id : '0', title :'Nazwa', description : 'Opis' , hidden : false},
-    {tag:"emerytura", id : '1', title :'Nazwa', description : 'Opis' , hidden : false},
-    {tag:"urlop", id : '2', title :'Nazwa', description : 'Opis' , hidden : false},
+    {tag:"renta", id : '0', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},
+    {tag:"emerytura", id : '1', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},
+    {tag:"urlop", id : '2', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},
     {tag:"Zwolnienie", id : '3', title :'', description : 'Wystawianie, sprawdzanie' , hidden : false},
-    {tag:"urlop", id : '4', title :'Nazwa', description : 'Opis' , hidden : false},  
-    {tag:"zwolnienie", id : '5', title :'Nazwa', description : 'Opis' , hidden : false},    
-    {tag:"zwolnienie", id : '6', title :'Nazwa', description : 'Opis' , hidden : false},  
-    {tag:"renta",  id : '7', title :'Nazwa', description : 'Opis' , hidden : false},  
-    {tag:"renta", id : '8', title :'Nazwa', description : 'Opis' , hidden : false},  
+    {tag:"urlop", id : '4', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},  
+    {tag:"zwolnienie", id : '5', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},    
+    {tag:"zwolnienie", id : '6', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},  
+    {tag:"renta",  id : '7', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},  
+    {tag:"renta", id : '8', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},  
 ];
 
 

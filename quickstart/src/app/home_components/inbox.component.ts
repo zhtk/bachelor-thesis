@@ -8,7 +8,7 @@ import { Message } from '../message';
   templateUrl: 'pages/home_subpages/inbox.html',
 })
 export class InboxComponent {
-	inboxName : string;
+	inboxName: string;
 	message_array: Message[];
 	current_message: Message;
 	SIZE_MAX = 150;

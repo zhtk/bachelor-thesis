@@ -1,9 +1,8 @@
-import {Component, Input, } from '@angular/core'
+import { Component, Input, } from '@angular/core'
 import { FormComponent } from './FormComponent'
 import { FormsModule }   from '@angular/forms';
 
-@Component
-({
+@Component({
   selector: 'textBox',
   templateUrl: 'pages/TextBoxComponent/TextBox.html'
 })
@@ -32,7 +31,7 @@ export class TextBox extends FormComponent implements FEComponent
   // Wołana po wpisnaiu znaku do pola
   textInput (a:string)
   {
-    if(this.regex.test(this.text))
+    if(this.regex.test(this.text) && this.text.length > 0)
       this.backgroundColor = "rgba(0, 255, 0, 0.3)";
     else
       this.backgroundColor = "rgba(255, 0, 0, 0.3)";

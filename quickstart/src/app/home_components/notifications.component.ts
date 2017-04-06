@@ -15,7 +15,6 @@ const MESSAGES: Msg[] = [
     , message: 'Kwota : 1200 PLN' },
   { hidden: false, id:'2', title: 'Wezwanie na komisje lekarską'
     , message: '' },
-        
 ];
 
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { EmailService } from '../service/email.service';
 
 @Component({
@@ -11,18 +11,25 @@ export class EmailComponent implements OnInit{
 	resized : boolean;
 	fullscreen : boolean;
 
-	addresser: string;
-	topic: string;
-	msgContent: string;
+	@Input() addresser: string;
+	@Input() topic: string;
+	@Input() msgContent: string;
 
-	constructor(private emailService: EmailService)
-	{}
+	constructor(private emailService: EmailService) {}
 
 	ngOnInit() {
 		this.hidden = true;
 		this.resized = false;
 		this.fullscreen = false;
-	
+		
+		if (this.checkForCache()) {
+			this.hidden = false;
+
+			this.addresser = localStorage.getItem("email-cache-addresser");
+			this.topic = localStorage.getItem("email-cache-topic");
+			this.msgContent = localStorage.getItem("email-cache-content");
+		}
+
 		this.emailService.current$.subscribe(
 			data => {
 				this.addresser = data.from;
@@ -32,7 +39,36 @@ export class EmailComponent implements OnInit{
 				this.hidden = false;
 			});
 	}
-	exit() : void
+
+	checkForCache(): Boolean {
+		return (
+			(localStorage.getItem("email-cache-addresser") != null) ||
+			(localStorage.getItem("email-cache-topic") != null) ||
+			(localStorage.getItem("email-cache-content") != null)
+			);
+	}
+
+	myOnChanges() {
+		//console.log("mamy zmiane");
+		localStorage.setItem("email-cache-addresser", this.addresser);
+		localStorage.setItem("email-cache-topic", this.topic);
+		localStorage.setItem("email-cache-content", this.msgContent);
+	}
+	
+	clearCache() {
+		localStorage.removeItem("email-cache-addresser");
+		localStorage.removeItem("email-cache-topic");
+		localStorage.removeItem("email-cache-content");
+	}
+
+	sendMessage() {
+		// tu pojawi sie protokol przesyłania wiadomości
+		
+		this.clearCache();
+		this.exit();
+	}
+
+	exit(): void
 	{
 		this.hidden = true;
 	}
