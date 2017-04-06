@@ -9,12 +9,13 @@ import { FormsModule }   from '@angular/forms';
 export class TextBox extends FormComponent implements FEComponent
 {
 
-  maxLength:number;
-  minLength:number;
-  defaultText:string;
-  text:string;
-  regex:RegExp;
-  visible:boolean;
+  maxLength: number;
+  minLength: number;
+  defaultText: string;
+  text: string;
+  regex: RegExp;
+  visible: boolean;
+  backgroundColor: string;
 
   constructor ()
   {
@@ -35,6 +36,8 @@ export class TextBox extends FormComponent implements FEComponent
       this.backgroundColor = "rgba(0, 255, 0, 0.3)";
     else
       this.backgroundColor = "rgba(255, 0, 0, 0.3)";
+
+    return (this.regex.test(this.text) && this.text.length > 0);
   }
 
   renderJSON(parsed: any): void {

@@ -62,6 +62,8 @@ import { InboxComponent } from './home_components/inbox.component';
 import { RowComponent } from "./FormComponents/RowComponent";
 import {ComponentCreator} from "./FormComponents/ComponentCreator";
 import {PanelGroupComponent} from "./FormComponents/PanelGroupComponent";
+import { PeselComponent } from './FormComponents/PeselComponent'
+import { PasswordComponent } from './FormComponents/PasswordComponent'
 
 
 @NgModule({
@@ -95,12 +97,14 @@ import {PanelGroupComponent} from "./FormComponents/PanelGroupComponent";
 					ListaComponent,
 					BreadCrumbComponent,
 					InboxComponent,
-          TextBox,
-          TestComponent,
-          RowComponent,
-        PanelGroupComponent
+					TextBox,
+					TestComponent,
+					RowComponent,
+					PanelGroupComponent,
+					PeselComponent,
+					PasswordComponent,
 				],
   bootstrap:    [ AppComponent ],
-  entryComponents: [TestComponent, TextBox, RowComponent, PanelGroupComponent]
+  entryComponents: [TestComponent, TextBox, RowComponent, PanelGroupComponent, PeselComponent, PasswordComponent,]
 })
 export class AppModule { }

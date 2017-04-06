@@ -1,0 +1,17 @@
+import { Component, Input, } from '@angular/core'
+import { FormsModule }   from '@angular/forms';
+import { TextBox } from './TextBox';
+
+@Component({
+  selector: 'textBox',
+  templateUrl: 'pages/TextBoxComponent/password.html'
+})
+export class PasswordComponent
+	extends TextBox
+	//implements FEComponent
+{
+	constructor() {
+		super();
+		this.text = "95040100120";	
+	}
+}

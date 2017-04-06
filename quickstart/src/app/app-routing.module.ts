@@ -44,7 +44,7 @@ const routes: Routes = [
 	{ path: 'lekarz',  component: LekarzComponent },
 	{ path: 'pacjent',  component: PacjentComponent },
 	{ path: '404', component: PageNotFoundComponent },
-  { path: 'komponenty', component: TestComponent},
+	{ path: 'komponenty', component: TestComponent},
 	{ path: '**', redirectTo: '/404'} // ostatni komponent - dodajemy nowe sciezki przed nim!
 ];
 

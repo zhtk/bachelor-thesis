@@ -33,18 +33,18 @@ export class TestComponent implements OnInit, MicroService
           "children" :
                   [
                     {
-                    "type": "TextBox",
+                    "type": "PeselComponent",
                     "id" : "test1",
                     "required" : true,
-                    "regex" : "([0-9]{10})",
+                    
                     "defaultText" : "standardowy tekst1",
                     "width" : 3
                     },
                     {
-                      "type": "TextBox",
+                      "type": "PasswordComponent",
                       "id" : "test2",
                       "required" : true,
-                      "regex" : "([0-9]{10})",
+                      
                       "defaultText" : "standardowy tekst2",
                       "width" : 3
                     }

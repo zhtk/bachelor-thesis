@@ -1,4 +1,6 @@
 import {RowComponent} from "./RowComponent";
+import {PeselComponent} from "./PeselComponent";
+import {PasswordComponent} from "./PasswordComponent";
 import {TextBox} from "./TextBox";
 import {PanelGroupComponent} from "./PanelGroupComponent";
 import {Component, ComponentFactoryResolver, ViewContainerRef} from "@angular/core";
@@ -25,6 +27,16 @@ export class ComponentCreator {
       const ref = target.createComponent(compFactory);
       return <FEComponent> ref.instance;
     }
+    else if (type == "PeselComponent") {
+      compFactory = factory.resolveComponentFactory(PeselComponent);
+      const ref = target.createComponent(compFactory);
+      return <FEComponent> ref.instance;
+    }
+    else if (type == "PasswordComponent") {
+      compFactory = factory.resolveComponentFactory(PasswordComponent);
+      const ref = target.createComponent(compFactory);
+      return <FEComponent> ref.instance;
+    }
     else
     {
       compFactory = factory.resolveComponentFactory(PanelGroupComponent);
@@ -32,5 +44,6 @@ export class ComponentCreator {
       return <FEComponent> ref.instance;
     }
   }
+  // TODO refactor!!!
 
 }
