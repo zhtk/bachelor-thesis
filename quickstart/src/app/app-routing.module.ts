@@ -4,7 +4,7 @@ import { AtelierComponent }   from './atelier.component';
 
 
 import { RenderComponent } from './render.component';
-import { Testowe } from './FormComponents/test'
+import { TestComponent } from './FormComponents/TestComponent'
 
 import { HomeComponent }  from './home_components/home.component';
 import { ServicesComponent } from './services_components/micro-services.component';
@@ -44,7 +44,7 @@ const routes: Routes = [
 	{ path: 'lekarz',  component: LekarzComponent },
 	{ path: 'pacjent',  component: PacjentComponent },
 	{ path: '404', component: PageNotFoundComponent },
-	{ path: 'komponenty', component: Testowe },
+  { path: 'komponenty', component: TestComponent},
 	{ path: '**', redirectTo: '/404'} // ostatni komponent - dodajemy nowe sciezki przed nim!
 ];
 

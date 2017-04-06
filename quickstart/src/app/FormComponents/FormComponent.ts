@@ -9,7 +9,6 @@ export class FormComponent implements FEComponent{
     throw new Error('Method not implemented.');
   }
 
-
   public id:number;
   public width:number;
   public required:boolean;
