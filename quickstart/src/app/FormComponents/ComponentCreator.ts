@@ -13,7 +13,7 @@ export class ComponentCreator {
 
   static insertComponent(factory:ComponentFactoryResolver, target:ViewContainerRef, type: string):FEComponent {
     // Rozwiazanie tymczasowe, z mapą z góry nie chce działać
-    var compFactory;
+    var compFactory: any;
     console.log("typ" + type);
     if (type == "TextBox") {
       compFactory = factory.resolveComponentFactory(TextBox);

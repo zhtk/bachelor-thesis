@@ -6,3 +6,4 @@ quickstart/src/main.js
 quickstart/src/main.js.map
 npm-debug.log
 quickstart/gulpfile.js
+**/*.orig
