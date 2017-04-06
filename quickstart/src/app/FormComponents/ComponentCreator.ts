@@ -8,22 +8,26 @@ export class ComponentCreator {
 
   static componentMapping = {
     'TextBox': TextBox,
-    'PanelGroupComponent' : PanelGroupComponent
+    'PanelGroup' : PanelGroupComponent
   };
 
   static insertComponent(factory:ComponentFactoryResolver, target:ViewContainerRef, type: string):FEComponent {
-
     // Rozwiazanie tymczasowe, z mapą z góry nie chce działać
     var compFactory;
+    console.log("typ" + type);
     if (type == "TextBox") {
-
       compFactory = factory.resolveComponentFactory(TextBox);
       const ref = target.createComponent(compFactory);
       return <FEComponent> ref.instance;
     }
-    else {
-
+    else if(type == "RowComponent") {
       compFactory = factory.resolveComponentFactory(RowComponent);
+      const ref = target.createComponent(compFactory);
+      return <FEComponent> ref.instance;
+    }
+    else
+    {
+      compFactory = factory.resolveComponentFactory(PanelGroupComponent);
       const ref = target.createComponent(compFactory);
       return <FEComponent> ref.instance;
     }

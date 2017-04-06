@@ -39,7 +39,7 @@ export class TextBox extends FormComponent implements FEComponent
   }
 
   renderJSON(parsed: any): void {
-    console.log("ppppp" + parsed);
+
     if("id" in parsed)
       this.id = parsed["id"];
     else

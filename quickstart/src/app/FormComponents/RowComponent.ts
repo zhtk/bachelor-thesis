@@ -8,6 +8,7 @@ import {TextBox} from "./TextBox";
 import {Type} from "typescript";
 import {ViewContainer} from "@angular/core/src/linker/view_container";
 import {ComponentCreator} from "./ComponentCreator";
+import {Container} from "./Container";
 
 @Component
 ({
@@ -15,7 +16,7 @@ import {ComponentCreator} from "./ComponentCreator";
   template: '<div class="row"><template #target></template></div>'
  ,
 })
-export class RowComponent implements FEComponent, OnInit{
+export class RowComponent implements FEComponent, OnInit, Container{
 
   id:number;
   parsed:any;
@@ -31,17 +32,20 @@ export class RowComponent implements FEComponent, OnInit{
   }
 
   renderJSON(specification: any): void {
-    this.target.clear();
+    //this.target.clear();
     if("id" in specification)
       this.id = specification["id"];
 
     if("children" in specification)
     {// Stworz wszystkie komponenty i dodaj je w sobie
-      for(var child = 0; child < specification["children"].length; child++)
-      {
-        var added = ComponentCreator.insertComponent(this.cfr, this.target, specification["children"][child]["type"]);
-        added.renderJSON(specification["children"][child]);
-      }
+      this.renderChildren(specification["children"]);
+    }
+  }
+  renderChildren(children: any): void {
+    for(var child = 0; child < children.length; child++)
+    {
+      var added = ComponentCreator.insertComponent(this.cfr, this.target, children[child]["type"]);
+      added.renderJSON(children[child]);
     }
   }
 }

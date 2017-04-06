@@ -61,6 +61,7 @@ import { BreadCrumbComponent } from './dashboard_components/breadcrumb.component
 import { InboxComponent } from './home_components/inbox.component';
 import { RowComponent } from "./FormComponents/RowComponent";
 import {ComponentCreator} from "./FormComponents/ComponentCreator";
+import {PanelGroupComponent} from "./FormComponents/PanelGroupComponent";
 
 
 @NgModule({
@@ -96,9 +97,10 @@ import {ComponentCreator} from "./FormComponents/ComponentCreator";
 					InboxComponent,
           TextBox,
           TestComponent,
-          RowComponent
+          RowComponent,
+        PanelGroupComponent
 				],
   bootstrap:    [ AppComponent ],
-  entryComponents: [TestComponent, TextBox, RowComponent]
+  entryComponents: [TestComponent, TextBox, RowComponent, PanelGroupComponent]
 })
 export class AppModule { }

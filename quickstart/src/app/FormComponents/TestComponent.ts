@@ -55,15 +55,48 @@ export class TestComponent implements OnInit, MicroService
           "id" : "row2",
           "children" :
               [
-              {
-                 "type": "TextBox",
+               {
+                "type": "TextBox",
                  "id" : "test3",
                  "required" : true,
                  "regex" : "([0-9]{10})",
                  "defaultText" : "standardowy tekst3",
                  "width" : 3
                  }
+              ]
+         },
+         {
+          "type" : "RowComponent",
+          "id" : "row2",
+          "children" :
+              [
+               {
+                "type": "PanelGroup",
+                 "title" : "Tytul",
+                 "panel_class" : "success",
+                 "width" : 6,
+                 "children":
+                 [
+                      {
+                  "type": "TextBox",
+                   "id" : "test3",
+                   "required" : true,
+                   "regex" : "([0-9]{10})",
+                   "defaultText" : "standardowy tekst3",
+                   "width" : 3
+                   },
+                      {
+                  "type": "TextBox",
+                   "id" : "test3",
+                   "required" : true,
+                   "regex" : "([0-9]{10})",
+                   "defaultText" : "standardowy tekst3",
+                   "width" : 3
+                   }
+                   
                  ]
+                 }
+              ]
          }
       ]
     }
