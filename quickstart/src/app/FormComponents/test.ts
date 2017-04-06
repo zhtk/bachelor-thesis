@@ -1,5 +1,7 @@
 import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core'
 import {TextBox} from "./TextBox";
+import { PeselComponent } from './PeselComponent'
+
 
 
 @Component
@@ -19,13 +21,13 @@ export class Testowe implements OnInit
         
          {"id" : "test",
           "required" : true,
-          "regex" : "([0-9]{10})",
-          "defaultText" : "standardowy tekst1",
+          
+          "defaultText" : "standardowy tekst3",
           "width" : 3
           },
           {"id" : "test",
           "required" : true,
-          "regex" : "([0-9]{10})",
+          
           "defaultText" : "standardowy tekst2",
           "width" : 3
           }
@@ -34,7 +36,7 @@ export class Testowe implements OnInit
   `;
   ngOnInit(): void {
     this.components = new Array<FEComponent>();
-    this.components.push(new TextBox());
+    this.components.push(new PeselComponent());
     this.components[0].renderJSON(JSON.parse(this.pageJSON)["components"][0]);
   }
 

@@ -26,7 +26,6 @@ export class RowComponent implements FEComponent, OnInit{
           "type": "TextBox",
           "id" : "test",
           "required" : true,
-          "regex" : "([0-9]{10})",
           "defaultText" : "standardowy tekst1",
           "width" : 3
           },
