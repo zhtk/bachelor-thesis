@@ -28,32 +28,41 @@ public final class AuthServiceGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<Auth.LoginData,
-      Auth.LoginResponse> METHOD_GET_TOKEN =
+  public static final io.grpc.MethodDescriptor<auth.Auth.LoginData,
+      auth.Auth.LoginResponse> METHOD_GET_TOKEN =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
               "AuthService", "GetToken"),
-          io.grpc.protobuf.ProtoUtils.marshaller(Auth.LoginData.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(Auth.LoginResponse.getDefaultInstance()));
+          io.grpc.protobuf.ProtoUtils.marshaller(auth.Auth.LoginData.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(auth.Auth.LoginResponse.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<Auth.Token,
-      Auth.Empty> METHOD_INVALIDATE_TOKEN =
+  public static final io.grpc.MethodDescriptor<auth.Auth.Token,
+      auth.Auth.Empty> METHOD_INVALIDATE_TOKEN =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
               "AuthService", "InvalidateToken"),
-          io.grpc.protobuf.ProtoUtils.marshaller(Auth.Token.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(Auth.Empty.getDefaultInstance()));
+          io.grpc.protobuf.ProtoUtils.marshaller(auth.Auth.Token.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(auth.Auth.Empty.getDefaultInstance()));
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<Auth.Token,
-      Auth.Permissions> METHOD_GET_PERMISSIONS =
+  public static final io.grpc.MethodDescriptor<auth.Auth.Token,
+      auth.Auth.Permissions> METHOD_GET_PERMISSIONS =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
               "AuthService", "GetPermissions"),
-          io.grpc.protobuf.ProtoUtils.marshaller(Auth.Token.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(Auth.Permissions.getDefaultInstance()));
+          io.grpc.protobuf.ProtoUtils.marshaller(auth.Auth.Token.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(auth.Auth.Permissions.getDefaultInstance()));
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<auth.Auth.Token,
+      auth.Auth.UserId> METHOD_GET_USER_ID =
+      io.grpc.MethodDescriptor.create(
+          io.grpc.MethodDescriptor.MethodType.UNARY,
+          generateFullMethodName(
+              "AuthService", "GetUserId"),
+          io.grpc.protobuf.ProtoUtils.marshaller(auth.Auth.Token.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(auth.Auth.UserId.getDefaultInstance()));
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -84,23 +93,30 @@ public final class AuthServiceGrpc {
 
     /**
      */
-    public void getToken(Auth.LoginData request,
-        io.grpc.stub.StreamObserver<Auth.LoginResponse> responseObserver) {
+    public void getToken(auth.Auth.LoginData request,
+        io.grpc.stub.StreamObserver<auth.Auth.LoginResponse> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_GET_TOKEN, responseObserver);
     }
 
     /**
      */
-    public void invalidateToken(Auth.Token request,
-        io.grpc.stub.StreamObserver<Auth.Empty> responseObserver) {
+    public void invalidateToken(auth.Auth.Token request,
+        io.grpc.stub.StreamObserver<auth.Auth.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_INVALIDATE_TOKEN, responseObserver);
     }
 
     /**
      */
-    public void getPermissions(Auth.Token request,
-        io.grpc.stub.StreamObserver<Auth.Permissions> responseObserver) {
+    public void getPermissions(auth.Auth.Token request,
+        io.grpc.stub.StreamObserver<auth.Auth.Permissions> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_GET_PERMISSIONS, responseObserver);
+    }
+
+    /**
+     */
+    public void getUserId(auth.Auth.Token request,
+        io.grpc.stub.StreamObserver<auth.Auth.UserId> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_GET_USER_ID, responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -109,23 +125,30 @@ public final class AuthServiceGrpc {
             METHOD_GET_TOKEN,
             asyncUnaryCall(
               new MethodHandlers<
-                Auth.LoginData,
-                Auth.LoginResponse>(
+                auth.Auth.LoginData,
+                auth.Auth.LoginResponse>(
                   this, METHODID_GET_TOKEN)))
           .addMethod(
             METHOD_INVALIDATE_TOKEN,
             asyncUnaryCall(
               new MethodHandlers<
-                Auth.Token,
-                Auth.Empty>(
+                auth.Auth.Token,
+                auth.Auth.Empty>(
                   this, METHODID_INVALIDATE_TOKEN)))
           .addMethod(
             METHOD_GET_PERMISSIONS,
             asyncUnaryCall(
               new MethodHandlers<
-                Auth.Token,
-                Auth.Permissions>(
+                auth.Auth.Token,
+                auth.Auth.Permissions>(
                   this, METHODID_GET_PERMISSIONS)))
+          .addMethod(
+            METHOD_GET_USER_ID,
+            asyncUnaryCall(
+              new MethodHandlers<
+                auth.Auth.Token,
+                auth.Auth.UserId>(
+                  this, METHODID_GET_USER_ID)))
           .build();
     }
   }
@@ -150,26 +173,34 @@ public final class AuthServiceGrpc {
 
     /**
      */
-    public void getToken(Auth.LoginData request,
-        io.grpc.stub.StreamObserver<Auth.LoginResponse> responseObserver) {
+    public void getToken(auth.Auth.LoginData request,
+        io.grpc.stub.StreamObserver<auth.Auth.LoginResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_GET_TOKEN, getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void invalidateToken(Auth.Token request,
-        io.grpc.stub.StreamObserver<Auth.Empty> responseObserver) {
+    public void invalidateToken(auth.Auth.Token request,
+        io.grpc.stub.StreamObserver<auth.Auth.Empty> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_INVALIDATE_TOKEN, getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void getPermissions(Auth.Token request,
-        io.grpc.stub.StreamObserver<Auth.Permissions> responseObserver) {
+    public void getPermissions(auth.Auth.Token request,
+        io.grpc.stub.StreamObserver<auth.Auth.Permissions> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_GET_PERMISSIONS, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getUserId(auth.Auth.Token request,
+        io.grpc.stub.StreamObserver<auth.Auth.UserId> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_GET_USER_ID, getCallOptions()), request, responseObserver);
     }
   }
 
@@ -193,23 +224,30 @@ public final class AuthServiceGrpc {
 
     /**
      */
-    public Auth.LoginResponse getToken(Auth.LoginData request) {
+    public auth.Auth.LoginResponse getToken(auth.Auth.LoginData request) {
       return blockingUnaryCall(
           getChannel(), METHOD_GET_TOKEN, getCallOptions(), request);
     }
 
     /**
      */
-    public Auth.Empty invalidateToken(Auth.Token request) {
+    public auth.Auth.Empty invalidateToken(auth.Auth.Token request) {
       return blockingUnaryCall(
           getChannel(), METHOD_INVALIDATE_TOKEN, getCallOptions(), request);
     }
 
     /**
      */
-    public Auth.Permissions getPermissions(Auth.Token request) {
+    public auth.Auth.Permissions getPermissions(auth.Auth.Token request) {
       return blockingUnaryCall(
           getChannel(), METHOD_GET_PERMISSIONS, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public auth.Auth.UserId getUserId(auth.Auth.Token request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_GET_USER_ID, getCallOptions(), request);
     }
   }
 
@@ -233,32 +271,41 @@ public final class AuthServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Auth.LoginResponse> getToken(
-        Auth.LoginData request) {
+    public com.google.common.util.concurrent.ListenableFuture<auth.Auth.LoginResponse> getToken(
+        auth.Auth.LoginData request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_GET_TOKEN, getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Auth.Empty> invalidateToken(
-        Auth.Token request) {
+    public com.google.common.util.concurrent.ListenableFuture<auth.Auth.Empty> invalidateToken(
+        auth.Auth.Token request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_INVALIDATE_TOKEN, getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Auth.Permissions> getPermissions(
-        Auth.Token request) {
+    public com.google.common.util.concurrent.ListenableFuture<auth.Auth.Permissions> getPermissions(
+        auth.Auth.Token request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_GET_PERMISSIONS, getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<auth.Auth.UserId> getUserId(
+        auth.Auth.Token request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_GET_USER_ID, getCallOptions()), request);
     }
   }
 
   private static final int METHODID_GET_TOKEN = 0;
   private static final int METHODID_INVALIDATE_TOKEN = 1;
   private static final int METHODID_GET_PERMISSIONS = 2;
+  private static final int METHODID_GET_USER_ID = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -278,16 +325,20 @@ public final class AuthServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_TOKEN:
-          serviceImpl.getToken((Auth.LoginData) request,
-              (io.grpc.stub.StreamObserver<Auth.LoginResponse>) responseObserver);
+          serviceImpl.getToken((auth.Auth.LoginData) request,
+              (io.grpc.stub.StreamObserver<auth.Auth.LoginResponse>) responseObserver);
           break;
         case METHODID_INVALIDATE_TOKEN:
-          serviceImpl.invalidateToken((Auth.Token) request,
-              (io.grpc.stub.StreamObserver<Auth.Empty>) responseObserver);
+          serviceImpl.invalidateToken((auth.Auth.Token) request,
+              (io.grpc.stub.StreamObserver<auth.Auth.Empty>) responseObserver);
           break;
         case METHODID_GET_PERMISSIONS:
-          serviceImpl.getPermissions((Auth.Token) request,
-              (io.grpc.stub.StreamObserver<Auth.Permissions>) responseObserver);
+          serviceImpl.getPermissions((auth.Auth.Token) request,
+              (io.grpc.stub.StreamObserver<auth.Auth.Permissions>) responseObserver);
+          break;
+        case METHODID_GET_USER_ID:
+          serviceImpl.getUserId((auth.Auth.Token) request,
+              (io.grpc.stub.StreamObserver<auth.Auth.UserId>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -308,7 +359,7 @@ public final class AuthServiceGrpc {
   private static final class AuthServiceDescriptorSupplier implements io.grpc.protobuf.ProtoFileDescriptorSupplier {
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return Auth.getDescriptor();
+      return auth.Auth.getDescriptor();
     }
   }
 
@@ -325,6 +376,7 @@ public final class AuthServiceGrpc {
               .addMethod(METHOD_GET_TOKEN)
               .addMethod(METHOD_INVALIDATE_TOKEN)
               .addMethod(METHOD_GET_PERMISSIONS)
+              .addMethod(METHOD_GET_USER_ID)
               .build();
         }
       }

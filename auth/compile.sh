@@ -5,6 +5,6 @@ chmod +x compiler.exe
 
 python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. auth.proto
 protoc --plugin=protoc-gen-grpc-java="./compiler.exe" \
-       --java_out="../integrator/app/auth" \
-       --grpc-java_out="../integrator/app/auth" \
+       --java_out="../integrator/app" \
+       --grpc-java_out="../integrator/app" \
        auth.proto
