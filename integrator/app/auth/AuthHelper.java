@@ -12,14 +12,16 @@ public class AuthHelper {
     private static String AUTH_HOST = "localhost";
     
     private AuthServiceBlockingStub stub;
+    private MaskChecker checker;
 
     @Inject
-    AuthHelper() {
+    AuthHelper(MaskChecker checker) {
         ManagedChannelBuilder<?> builder =
             ManagedChannelBuilder.forAddress(getAuthHostAdress(), getAuthHostPort())
             .usePlaintext(true);
         ManagedChannel channel = builder.build();
         stub = AuthServiceGrpc.newBlockingStub(channel);
+        this.checker = checker;
     }
     
     private String getAuthHostAdress() {
@@ -79,5 +81,9 @@ public class AuthHelper {
         } catch(Exception e) {
             return null;
         }
+    }
+    
+    public boolean checkMasks(String obtained, String required) {
+        return checker.checkMasks(obtained, required);
     }
 }

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.*;
 import play.libs.Json;
 import play.mvc.*;
+import auth.AuthHelper;
 import managers.CuratorHelper;
 
 public class MenuController extends Controller {
@@ -15,12 +16,15 @@ public class MenuController extends Controller {
     
     private CuratorHelper helper;
     private TreeCache tree;
+    private AuthHelper auth;
     
     @Inject
-    public MenuController(CuratorHelper helper) throws Exception {
+    public MenuController(CuratorHelper helper, AuthHelper auth)
+            throws Exception {
         this.helper = helper;
         this.tree = new TreeCache(helper.getClient(), MENU_PATH);
         this.tree.start();
+        this.auth = auth;
     }
     
     private void appendValue(JsonNode from, ObjectNode to, String field) {
@@ -33,7 +37,20 @@ public class MenuController extends Controller {
     }
     
     private boolean checkPermissions(String mask) {
-        return true; // TODO
+        String[] tokens = request().queryString().get("token");
+        String token;
+        
+        if (tokens != null && tokens.length > 0)
+            token = tokens[0];
+        else
+            token = "";
+        
+        String svc = auth.getPermissions(token);
+        
+        if (mask == null)
+            mask = "";
+        
+        return auth.checkMasks(svc, mask);
     }
     
     private void buildMenu(ArrayNode node, String path) {

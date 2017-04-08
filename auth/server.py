@@ -36,13 +36,17 @@ class Server(auth_pb2_grpc.AuthServiceServicer):
 	def GetPermissions(self, request, context):
 		try:
 			user = self.USERS[request.token] # Login jest taki sam jak token
+			print("GetPermissions token = %s mask = %s" % (request.token, user[1]))
 			return auth_pb2.Permissions(mask=user[1])
 		except KeyError as e:
+			print("GetPermission: No user; token = %s" % request.token)
 			return auth_pb2.Permissions(mask=self.EMPTY_MASK)
 	
 	def GetUserId(self, request, context):
 		try:
+			print("GetUserId token = %s" % request.token)
 			user = self.USERS[request.token]
+			print("  UserId = %s" % user[2])
 			return auth_pb2.UserId(status=auth_pb2.UserId.OK,
 			                       uid=user[2])
 		except KeyError as e:
