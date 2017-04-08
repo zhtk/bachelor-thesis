@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='auth.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\nauth.proto\",\n\tLoginData\x12\r\n\x05login\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"q\n\rLoginResponse\x12\r\n\x05token\x18\x01 \x02(\t\x12%\n\x06status\x18\x02 \x02(\x0e\x32\x15.LoginResponse.Status\"*\n\x06Status\x12\x06\n\x02OK\x10\x00\x12\x18\n\x14INVALID_CREDIENTIALS\x10\x01\"\x16\n\x05Token\x12\r\n\x05token\x18\x01 \x02(\t\"\x1b\n\x0bPermissions\x12\x0c\n\x04mask\x18\x01 \x02(\t\"\x07\n\x05\x45mpty2\x80\x01\n\x0b\x41uthService\x12&\n\x08GetToken\x12\n.LoginData\x1a\x0e.LoginResponse\x12!\n\x0fInvalidateToken\x12\x06.Token\x1a\x06.Empty\x12&\n\x0eGetPermissions\x12\x06.Token\x1a\x0c.Permissions')
+  serialized_pb=_b('\n\nauth.proto\",\n\tLoginData\x12\r\n\x05login\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"q\n\rLoginResponse\x12\r\n\x05token\x18\x01 \x02(\t\x12%\n\x06status\x18\x02 \x02(\x0e\x32\x15.LoginResponse.Status\"*\n\x06Status\x12\x06\n\x02OK\x10\x00\x12\x18\n\x14INVALID_CREDIENTIALS\x10\x01\"T\n\x06UserId\x12\x1e\n\x06status\x18\x01 \x02(\x0e\x32\x0e.UserId.Status\x12\x0b\n\x03uid\x18\x02 \x02(\t\"\x1d\n\x06Status\x12\x06\n\x02OK\x10\x00\x12\x0b\n\x07NO_USER\x10\x01\"\x16\n\x05Token\x12\r\n\x05token\x18\x01 \x02(\t\"\x1b\n\x0bPermissions\x12\x0c\n\x04mask\x18\x01 \x02(\t\"\x07\n\x05\x45mpty2\x9e\x01\n\x0b\x41uthService\x12&\n\x08GetToken\x12\n.LoginData\x1a\x0e.LoginResponse\x12!\n\x0fInvalidateToken\x12\x06.Token\x1a\x06.Empty\x12&\n\x0eGetPermissions\x12\x06.Token\x1a\x0c.Permissions\x12\x1c\n\tGetUserId\x12\x06.Token\x1a\x07.UserIdB\x06\n\x04\x61uth')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -46,6 +46,28 @@ _LOGINRESPONSE_STATUS = _descriptor.EnumDescriptor(
   serialized_end=173,
 )
 _sym_db.RegisterEnumDescriptor(_LOGINRESPONSE_STATUS)
+
+_USERID_STATUS = _descriptor.EnumDescriptor(
+  name='Status',
+  full_name='UserId.Status',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='OK', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='NO_USER', index=1, number=1,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=230,
+  serialized_end=259,
+)
+_sym_db.RegisterEnumDescriptor(_USERID_STATUS)
 
 
 _LOGINDATA = _descriptor.Descriptor(
@@ -125,6 +147,45 @@ _LOGINRESPONSE = _descriptor.Descriptor(
 )
 
 
+_USERID = _descriptor.Descriptor(
+  name='UserId',
+  full_name='UserId',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='status', full_name='UserId.status', index=0,
+      number=1, type=14, cpp_type=8, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='uid', full_name='UserId.uid', index=1,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _USERID_STATUS,
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=175,
+  serialized_end=259,
+)
+
+
 _TOKEN = _descriptor.Descriptor(
   name='Token',
   full_name='Token',
@@ -151,8 +212,8 @@ _TOKEN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=175,
-  serialized_end=197,
+  serialized_start=261,
+  serialized_end=283,
 )
 
 
@@ -182,8 +243,8 @@ _PERMISSIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=199,
-  serialized_end=226,
+  serialized_start=285,
+  serialized_end=312,
 )
 
 
@@ -206,14 +267,17 @@ _EMPTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=228,
-  serialized_end=235,
+  serialized_start=314,
+  serialized_end=321,
 )
 
 _LOGINRESPONSE.fields_by_name['status'].enum_type = _LOGINRESPONSE_STATUS
 _LOGINRESPONSE_STATUS.containing_type = _LOGINRESPONSE
+_USERID.fields_by_name['status'].enum_type = _USERID_STATUS
+_USERID_STATUS.containing_type = _USERID
 DESCRIPTOR.message_types_by_name['LoginData'] = _LOGINDATA
 DESCRIPTOR.message_types_by_name['LoginResponse'] = _LOGINRESPONSE
+DESCRIPTOR.message_types_by_name['UserId'] = _USERID
 DESCRIPTOR.message_types_by_name['Token'] = _TOKEN
 DESCRIPTOR.message_types_by_name['Permissions'] = _PERMISSIONS
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
@@ -231,6 +295,13 @@ LoginResponse = _reflection.GeneratedProtocolMessageType('LoginResponse', (_mess
   # @@protoc_insertion_point(class_scope:LoginResponse)
   ))
 _sym_db.RegisterMessage(LoginResponse)
+
+UserId = _reflection.GeneratedProtocolMessageType('UserId', (_message.Message,), dict(
+  DESCRIPTOR = _USERID,
+  __module__ = 'auth_pb2'
+  # @@protoc_insertion_point(class_scope:UserId)
+  ))
+_sym_db.RegisterMessage(UserId)
 
 Token = _reflection.GeneratedProtocolMessageType('Token', (_message.Message,), dict(
   DESCRIPTOR = _TOKEN,
@@ -254,6 +325,8 @@ Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), d
 _sym_db.RegisterMessage(Empty)
 
 
+DESCRIPTOR.has_options = True
+DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n\004auth'))
 try:
   # THESE ELEMENTS WILL BE DEPRECATED.
   # Please use the generated *_pb2_grpc.py files instead.
@@ -287,6 +360,11 @@ try:
           request_serializer=Token.SerializeToString,
           response_deserializer=Permissions.FromString,
           )
+      self.GetUserId = channel.unary_unary(
+          '/AuthService/GetUserId',
+          request_serializer=Token.SerializeToString,
+          response_deserializer=UserId.FromString,
+          )
 
 
   class AuthServiceServicer(object):
@@ -302,6 +380,11 @@ try:
       raise NotImplementedError('Method not implemented!')
 
     def GetPermissions(self, request, context):
+      context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+      context.set_details('Method not implemented!')
+      raise NotImplementedError('Method not implemented!')
+
+    def GetUserId(self, request, context):
       context.set_code(grpc.StatusCode.UNIMPLEMENTED)
       context.set_details('Method not implemented!')
       raise NotImplementedError('Method not implemented!')
@@ -324,6 +407,11 @@ try:
             request_deserializer=Token.FromString,
             response_serializer=Permissions.SerializeToString,
         ),
+        'GetUserId': grpc.unary_unary_rpc_method_handler(
+            servicer.GetUserId,
+            request_deserializer=Token.FromString,
+            response_serializer=UserId.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
         'AuthService', rpc_method_handlers)
@@ -342,6 +430,8 @@ try:
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
     def GetPermissions(self, request, context):
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
+    def GetUserId(self, request, context):
+      context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
 
 
   class BetaAuthServiceStub(object):
@@ -359,6 +449,9 @@ try:
     def GetPermissions(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
       raise NotImplementedError()
     GetPermissions.future = None
+    def GetUserId(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+      raise NotImplementedError()
+    GetUserId.future = None
 
 
   def beta_create_AuthService_server(servicer, pool=None, pool_size=None, default_timeout=None, maximum_timeout=None):
@@ -370,16 +463,19 @@ try:
     request_deserializers = {
       ('AuthService', 'GetPermissions'): Token.FromString,
       ('AuthService', 'GetToken'): LoginData.FromString,
+      ('AuthService', 'GetUserId'): Token.FromString,
       ('AuthService', 'InvalidateToken'): Token.FromString,
     }
     response_serializers = {
       ('AuthService', 'GetPermissions'): Permissions.SerializeToString,
       ('AuthService', 'GetToken'): LoginResponse.SerializeToString,
+      ('AuthService', 'GetUserId'): UserId.SerializeToString,
       ('AuthService', 'InvalidateToken'): Empty.SerializeToString,
     }
     method_implementations = {
       ('AuthService', 'GetPermissions'): face_utilities.unary_unary_inline(servicer.GetPermissions),
       ('AuthService', 'GetToken'): face_utilities.unary_unary_inline(servicer.GetToken),
+      ('AuthService', 'GetUserId'): face_utilities.unary_unary_inline(servicer.GetUserId),
       ('AuthService', 'InvalidateToken'): face_utilities.unary_unary_inline(servicer.InvalidateToken),
     }
     server_options = beta_implementations.server_options(request_deserializers=request_deserializers, response_serializers=response_serializers, thread_pool=pool, thread_pool_size=pool_size, default_timeout=default_timeout, maximum_timeout=maximum_timeout)
@@ -395,16 +491,19 @@ try:
     request_serializers = {
       ('AuthService', 'GetPermissions'): Token.SerializeToString,
       ('AuthService', 'GetToken'): LoginData.SerializeToString,
+      ('AuthService', 'GetUserId'): Token.SerializeToString,
       ('AuthService', 'InvalidateToken'): Token.SerializeToString,
     }
     response_deserializers = {
       ('AuthService', 'GetPermissions'): Permissions.FromString,
       ('AuthService', 'GetToken'): LoginResponse.FromString,
+      ('AuthService', 'GetUserId'): UserId.FromString,
       ('AuthService', 'InvalidateToken'): Empty.FromString,
     }
     cardinalities = {
       'GetPermissions': cardinality.Cardinality.UNARY_UNARY,
       'GetToken': cardinality.Cardinality.UNARY_UNARY,
+      'GetUserId': cardinality.Cardinality.UNARY_UNARY,
       'InvalidateToken': cardinality.Cardinality.UNARY_UNARY,
     }
     stub_options = beta_implementations.stub_options(host=host, metadata_transformer=metadata_transformer, request_serializers=request_serializers, response_deserializers=response_deserializers, thread_pool=pool, thread_pool_size=pool_size)

@@ -1,4 +1,5 @@
 syntax = "proto2";
+option java_package = "auth";
 
 message LoginData {
   required string login = 1;
@@ -13,6 +14,16 @@ message LoginResponse {
 	
 	required string token = 1;
 	required Status status = 2;
+}
+
+message UserId {
+	enum Status {
+		OK = 0;
+		NO_USER = 1;
+	}
+	
+	required Status status = 1;
+	required string uid = 2;
 }
 
 message Token {
@@ -30,4 +41,5 @@ service AuthService {
    rpc GetToken(LoginData) returns (LoginResponse);
    rpc InvalidateToken(Token) returns (Empty);
    rpc GetPermissions(Token) returns (Permissions);
+   rpc GetUserId(Token) returns (UserId);
 }

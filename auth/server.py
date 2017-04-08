@@ -9,11 +9,11 @@ class Server(auth_pb2_grpc.AuthServiceServicer):
 	EMPTY_MASK = '000'
 	
 	USERS = {
-		# Login: (hasło, uprawnienia)
-		'admin': ('admin', '111'),
-		'user': ('user', '100'),
-		'rzecznik': ('zalewajka', '010'),
-		'lekarz': ('zus', '001'),
+		# Login: (hasło, uprawnienia, pesel)
+		'admin': ('admin', '111', '9901020300001'),
+		'user': ('user', '100', '9901020300002'),
+		'rzecznik': ('zalewajka', '010', '9901020300003'),
+		'lekarz': ('zus', '001', '9901020300003'),
 	}
 	
 	def GetToken(self, request, context):
@@ -39,6 +39,14 @@ class Server(auth_pb2_grpc.AuthServiceServicer):
 			return auth_pb2.Permissions(mask=user[1])
 		except KeyError as e:
 			return auth_pb2.Permissions(mask=self.EMPTY_MASK)
+	
+	def GetUserId(self, request, context):
+		try:
+			user = self.USERS[request.token]
+			return auth_pb2.UserId(status=auth_pb2.UserId.OK,
+			                       uid=user[2])
+		except KeyError as e:
+			return auth_pb2.UserId(status=auth_pb2.UserId.NO_USER, uid='')
 
 def serve():
 	server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

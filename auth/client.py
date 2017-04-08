@@ -38,3 +38,10 @@ if __name__ == '__main__':
 	
 	response = stub.GetPermissions(auth_pb2.Token(token='fakeuser'))
 	print("Client received mask: " + response.mask)
+	
+	# Get UserId
+	response = stub.GetUserId(auth_pb2.Token(token='admin'))
+	print("Client received: response = %d id = %s" % (response.status, response.uid))
+	
+	response = stub.GetUserId(auth_pb2.Token(token='fakeuser'))
+	print("Client received: response = %d id = %s" % (response.status, response.uid))

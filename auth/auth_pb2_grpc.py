@@ -29,6 +29,11 @@ class AuthServiceStub(object):
         request_serializer=auth__pb2.Token.SerializeToString,
         response_deserializer=auth__pb2.Permissions.FromString,
         )
+    self.GetUserId = channel.unary_unary(
+        '/AuthService/GetUserId',
+        request_serializer=auth__pb2.Token.SerializeToString,
+        response_deserializer=auth__pb2.UserId.FromString,
+        )
 
 
 class AuthServiceServicer(object):
@@ -44,6 +49,11 @@ class AuthServiceServicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def GetPermissions(self, request, context):
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetUserId(self, request, context):
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -65,6 +75,11 @@ def add_AuthServiceServicer_to_server(servicer, server):
           servicer.GetPermissions,
           request_deserializer=auth__pb2.Token.FromString,
           response_serializer=auth__pb2.Permissions.SerializeToString,
+      ),
+      'GetUserId': grpc.unary_unary_rpc_method_handler(
+          servicer.GetUserId,
+          request_deserializer=auth__pb2.Token.FromString,
+          response_serializer=auth__pb2.UserId.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
