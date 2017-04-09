@@ -1,21 +1,20 @@
 package auth;
 
 import com.google.inject.Inject;
-
 import auth.Auth.*;
 import auth.AuthServiceGrpc.*;
 import io.grpc.*;
+import play.Configuration;
 
-public class AuthHelper {
-    // TODO pobieranie z środowiska
-    private static int AUTH_PORT = 50051;
-    private static String AUTH_HOST = "localhost";
-    
+@SuppressWarnings("deprecation")
+public class AuthHelper {    
     private AuthServiceBlockingStub stub;
     private MaskChecker checker;
+    private Configuration conf;
 
     @Inject
-    AuthHelper(MaskChecker checker) {
+    AuthHelper(Configuration conf, MaskChecker checker) {
+        this.conf = conf;
         ManagedChannelBuilder<?> builder =
             ManagedChannelBuilder.forAddress(getAuthHostAdress(), getAuthHostPort())
             .usePlaintext(true);
@@ -25,11 +24,11 @@ public class AuthHelper {
     }
     
     private String getAuthHostAdress() {
-        return AUTH_HOST;
+        return conf.getString("auth.host");
     } 
     
     private int getAuthHostPort() {
-        return AUTH_PORT;
+        return conf.getInt("auth.port");
     }
     
     public String getToken(String login, String password) {

@@ -6,14 +6,19 @@ import org.apache.curator.*;
 import org.apache.curator.framework.*;
 import org.apache.curator.retry.*;
 import org.apache.curator.x.discovery.*;
+import play.Configuration;
 
+@SuppressWarnings("deprecation")
 @Singleton
 public class CuratorHelper {
     protected final int RETRY_TIME = 500;
     protected CuratorFramework client;
+    protected Configuration conf;
+    
     
     @Inject
-    CuratorHelper() {
+    CuratorHelper(Configuration conf) {
+        this.conf = conf;
         RetryPolicy retryPolicy = new RetryOneTime(RETRY_TIME);
         String connectString = getConnectionString();
         client = CuratorFrameworkFactory.builder()
@@ -24,8 +29,7 @@ public class CuratorHelper {
     }
     
     private String getConnectionString() {
-        // TODO pobieranie z środowiska
-        return "127.0.0.1:2181";
+        return conf.getString("zkserver.host");
     }
     
     public CuratorFramework getClient() {
