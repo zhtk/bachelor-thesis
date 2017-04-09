@@ -15,50 +15,50 @@ var onProxyRes = function (proxyRes, req, res) {
 };
 
 function authMiddleware (req, res, next) {
-	// TODO rodzaj operacji
-	var isLogin = false;
-	var isLogout = false;
-	
-	// TODO wyciągnięcie loginu i hasła (lub tokenu jeśli logout) z requesta
-	// ...
-	
-	if (isLogin) {
-		// TODO podmienić to na sensowne wartości		
-		var loginData = {login: "admin", password: "admin"};
-		authChannel.getToken(loginData, function(err, data) {
-			if (err) {
-				// Error
-				// TODO
-			} else {
-				var status = data.status;
-				var token = data.token;
-				
-				// Wypisz wynik do response
-				if (status == authDescriptor.LoginResponse.Status.OK) {
-					// Oddaj klientowi token
-					// TODO
-				} else {
-					// Invalid login
-					// TODO
-				}
-			}
-		});
-	} else if (isLogout) {
-		var data = {token: "admin"};
-		authChannel.invalidateToken(data, function(err, data) {
-			if (err) {
-				// Error, nie można się wylogować
-				// TODO
-			} else {
-				// Wypisujemy klientowi, że się wylogował
-				// TODO
-			}
-		});
-	} else {
-		// Request nie dotyczy logowania
-		// Ładujemy normalną stronę
-		next();
-	}
+    // TODO rodzaj operacji
+    var isLogin = false;
+    var isLogout = false;
+    
+    // TODO wyciągnięcie loginu i hasła (lub tokenu jeśli logout) z requesta
+    // ...
+    
+    if (isLogin) {
+        // TODO podmienić to na sensowne wartości        
+        var loginData = {login: "admin", password: "admin"};
+        authChannel.getToken(loginData, function(err, data) {
+            if (err) {
+                // Error
+                // TODO
+            } else {
+                var status = data.status;
+                var token = data.token;
+                
+                // Wypisz wynik do response
+                if (status == authDescriptor.LoginResponse.Status.OK) {
+                    // Oddaj klientowi token
+                    // TODO
+                } else {
+                    // Invalid login
+                    // TODO
+                }
+            }
+        });
+    } else if (isLogout) {
+        var data = {token: "admin"};
+        authChannel.invalidateToken(data, function(err, data) {
+            if (err) {
+                // Error, nie można się wylogować
+                // TODO
+            } else {
+                // Wypisujemy klientowi, że się wylogował
+                // TODO
+            }
+        });
+    } else {
+        // Request nie dotyczy logowania
+        // Ładujemy normalną stronę
+        next();
+    }
 }
 
 module.exports = {
