@@ -19,11 +19,12 @@ export class PeselComponent
 	}
 
 	textInputValidate(a: string) {
-		if (super.textInput(a)) {
+		if (super.textInputValidate(a)) {
 			if (!this.validate()) {
 				this.backgroundColor = "rgba(255, 0, 0, 0.3)";
 			}
 		}
+		return true;
 	}
 
 	validate(): Boolean {

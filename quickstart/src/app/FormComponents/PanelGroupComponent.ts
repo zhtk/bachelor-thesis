@@ -32,6 +32,8 @@ export class PanelGroupComponent implements FEComponent, Container {
       this.title = specification["title"];
     if ("panel_class" in specification)
       this.panel_class += specification["panel_class"];
+    else
+      this.panel_class += "default";
     if ("width" in specification)
     {
       this.width = specification["width"];

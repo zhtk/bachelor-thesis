@@ -24,12 +24,9 @@ export class RowComponent implements FEComponent, OnInit, Container{
   visible:boolean;
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
-  constructor(private cfr: ComponentFactoryResolver) {
-  }
+  constructor(private cfr: ComponentFactoryResolver) {}
 
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   renderJSON(specification: any): void {
     //this.target.clear();

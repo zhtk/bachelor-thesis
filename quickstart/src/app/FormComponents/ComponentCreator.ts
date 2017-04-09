@@ -1,9 +1,11 @@
 import {RowComponent} from "./RowComponent";
 import {PeselComponent} from "./PeselComponent";
 import {PasswordComponent} from "./PasswordComponent";
+import {LabelComponent} from "./LabelComponent";
 import {TextBox} from "./TextBox";
 import {PanelGroupComponent} from "./PanelGroupComponent";
-import {Component, ComponentFactoryResolver, ViewContainerRef} from "@angular/core";
+import {Component, ComponentFactoryResolver, 
+	ViewContainerRef} from "@angular/core";
 import {MicroService} from "./MicroService";
 
 export class ComponentCreator {
@@ -13,30 +15,35 @@ export class ComponentCreator {
 		'PanelGroup' : PanelGroupComponent
 	};
 
-	static insertComponent(factory:ComponentFactoryResolver, target:ViewContainerRef, type: string):FEComponent {
+	static insertComponent(factory:ComponentFactoryResolver, 
+		target:ViewContainerRef, type: string):FEComponent {
 		// Rozwiazanie tymczasowe, z mapą z góry nie chce działać
 		var compFactory: any;
 		console.log("typ" + type);
 		switch (type) {
 			case ("TextBox"):
-			compFactory = factory.resolveComponentFactory(TextBox);
-			break;
+				compFactory = factory.resolveComponentFactory(TextBox);
+				break;
 		
 			case ("RowComponent"):
-			compFactory = factory.resolveComponentFactory(RowComponent);
-			break;
+				compFactory = factory.resolveComponentFactory(RowComponent);
+				break;
 		
 			case ("PeselComponent"):
-			compFactory = factory.resolveComponentFactory(PeselComponent);
-			break;
+				compFactory = factory.resolveComponentFactory(PeselComponent);
+				break;
 		
 			case ("PasswordComponent"):
-			compFactory = factory.resolveComponentFactory(PasswordComponent);
-			break;
-		
+				compFactory = factory.resolveComponentFactory(PasswordComponent);
+				break;
+			
+			case ("LabelComponent"):
+				compFactory = factory.resolveComponentFactory(LabelComponent);
+				break;
+
 			default: // powinno byc explicite
-			compFactory = factory.resolveComponentFactory(PanelGroupComponent);
-			break;
+				compFactory = factory.resolveComponentFactory(PanelGroupComponent);
+				break;
 		}
 			
 		const ref = target.createComponent(compFactory);
