@@ -5,6 +5,7 @@ import {TextBox} from "./TextBox";
 import {PanelGroupComponent} from "./PanelGroupComponent";
 import {Component, ComponentFactoryResolver, ViewContainerRef} from "@angular/core";
 import {MicroService} from "./MicroService";
+import {SubmitComponent} from "./SubmitComponent";
 
 export class ComponentCreator {
 
@@ -21,24 +22,28 @@ export class ComponentCreator {
 			case ("TextBox"):
 			compFactory = factory.resolveComponentFactory(TextBox);
 			break;
-		
+
 			case ("RowComponent"):
 			compFactory = factory.resolveComponentFactory(RowComponent);
 			break;
-		
+
 			case ("PeselComponent"):
 			compFactory = factory.resolveComponentFactory(PeselComponent);
 			break;
-		
+
 			case ("PasswordComponent"):
 			compFactory = factory.resolveComponentFactory(PasswordComponent);
 			break;
-		
+
+      case ("Submit"):
+        compFactory = factory.resolveComponentFactory(SubmitComponent);
+        break;
+
 			default: // powinno byc explicite
 			compFactory = factory.resolveComponentFactory(PanelGroupComponent);
 			break;
 		}
-			
+
 		const ref = target.createComponent(compFactory);
 		return <FEComponent> ref.instance;
 	}

@@ -97,6 +97,10 @@ export class TestComponent implements OnInit, MicroService
                  ]
                  }
               ]
+         },
+         {
+          "type" : "Submit",
+          "title" : "Wyślij"
          }
       ]
     }
