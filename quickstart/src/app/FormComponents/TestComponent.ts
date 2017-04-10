@@ -28,80 +28,88 @@ export class TestComponent implements OnInit, MicroService
       "components":
       [
         {
-          "type" : "RowComponent",
-          "id" : "row1",
+          "type" : "Form",
+          "action" : "/test",
+          "method" : "get",
           "children" :
-                  [
-                    {
-                    "type": "PeselComponent",
-                    "id" : "test1",
-                    "required" : true,
-                    
-                    "defaultText" : "standardowy tekst1",
-                    "width" : 3
-                    },
-                    {
-                      "type": "PasswordComponent",
-                      "id" : "test2",
-                      "required" : true,
-                      
-                      "defaultText" : "standardowy tekst2",
-                      "width" : 3
-                    }
-                  ]
-        },
-        {
-          "type" : "RowComponent",
-          "id" : "row2",
-          "children" :
-              [
-               {
-                "type": "TextBox",
-                 "id" : "test3",
-                 "required" : true,
-                 "regex" : "([0-9]{10})",
-                 "defaultText" : "standardowy tekst3",
-                 "width" : 3
+          [
+                {
+                  "type" : "RowComponent",
+                  "id" : "row1",
+                  "children" :
+                          [
+                            {
+                            "type": "PeselComponent",
+                            "id" : "test1",
+                            "required" : true,
+                            
+                            "defaultText" : "standardowy tekst1",
+                            "width" : 3
+                            },
+                            {
+                              "type": "PasswordComponent",
+                              "id" : "test2",
+                              "required" : true,
+                              
+                              "defaultText" : "standardowy tekst2",
+                              "width" : 3
+                            }
+                          ]
+                },
+                {
+                  "type" : "RowComponent",
+                  "id" : "row2",
+                  "children" :
+                      [
+                       {
+                        "type": "TextBox",
+                         "id" : "test3",
+                         "required" : true,
+                         "regex" : "([0-9]{10})",
+                         "defaultText" : "standardowy tekst3",
+                         "width" : 3
+                         }
+                      ]
+                 },
+                 {
+                  "type" : "RowComponent",
+                  "id" : "row2",
+                  "children" :
+                      [
+                       {
+                        "type": "PanelGroup",
+                         "title" : "Tytul",
+                         "panel_class" : "success",
+                         "width" : 6,
+                         "children":
+                         [
+                              {
+                          "type": "TextBox",
+                           "id" : "test3",
+                           "required" : true,
+                           "regex" : "([0-9]{10})",
+                           "defaultText" : "standardowy tekst3",
+                           "width" : 3
+                           },
+                              {
+                          "type": "TextBox",
+                           "id" : "test3",
+                           "required" : true,
+                           "regex" : "([0-9]{10})",
+                           "defaultText" : "standardowy tekst3",
+                           "width" : 3
+                           }
+                           
+                         ]
+                         }
+                      ]
+                 },
+                 {
+                  "type" : "Submit",
+                  "title" : "Wyślij"
                  }
-              ]
-         },
-         {
-          "type" : "RowComponent",
-          "id" : "row2",
-          "children" :
-              [
-               {
-                "type": "PanelGroup",
-                 "title" : "Tytul",
-                 "panel_class" : "success",
-                 "width" : 6,
-                 "children":
-                 [
-                      {
-                  "type": "TextBox",
-                   "id" : "test3",
-                   "required" : true,
-                   "regex" : "([0-9]{10})",
-                   "defaultText" : "standardowy tekst3",
-                   "width" : 3
-                   },
-                      {
-                  "type": "TextBox",
-                   "id" : "test3",
-                   "required" : true,
-                   "regex" : "([0-9]{10})",
-                   "defaultText" : "standardowy tekst3",
-                   "width" : 3
-                   }
-                   
-                 ]
-                 }
-              ]
-         },
-         {
-          "type" : "Submit",
-          "title" : "Wyślij"
-         }
+          ]
+        }
       ]
     }
   `;

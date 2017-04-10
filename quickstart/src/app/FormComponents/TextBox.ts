@@ -16,6 +16,7 @@ export class TextBox extends FormComponent implements FEComponent
   regex: RegExp;
   visible: boolean;
   backgroundColor: string;
+  name:string;
 
   constructor ()
   {
@@ -25,6 +26,7 @@ export class TextBox extends FormComponent implements FEComponent
     this.defaultText = "DefaultText";
     this.text = "";
     this.regex = new RegExp("");
+    this.name = "val";
   }
   //Tutaj przyda się klasa autouzupelnienie
   //autoComplete:AutoComplete
@@ -42,8 +44,11 @@ export class TextBox extends FormComponent implements FEComponent
 
   renderJSON(parsed: any): void {
 
-    if("id" in parsed)
+    if ("id" in parsed) {
+
       this.id = parsed["id"];
+      this.name = this.name + this.id;
+     }
     else
       throw new Error('Error with JSON form.');
 

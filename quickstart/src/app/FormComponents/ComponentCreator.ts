@@ -6,6 +6,7 @@ import {PanelGroupComponent} from "./PanelGroupComponent";
 import {Component, ComponentFactoryResolver, ViewContainerRef} from "@angular/core";
 import {MicroService} from "./MicroService";
 import {SubmitComponent} from "./SubmitComponent";
+import {FormularComponent} from "./FormularComponent";
 
 export class ComponentCreator {
 
@@ -37,6 +38,9 @@ export class ComponentCreator {
 
       case ("Submit"):
         compFactory = factory.resolveComponentFactory(SubmitComponent);
+        break;
+      case ("Form"):
+        compFactory = factory.resolveComponentFactory(FormularComponent);
         break;
 
 			default: // powinno byc explicite
