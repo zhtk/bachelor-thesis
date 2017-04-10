@@ -1,7 +1,7 @@
 # Routes
 # ~~~~
 
-GET     /view/:ep                   controllers.IncomingRouter.view(ep: String)
-GET     /read/:ep                   controllers.IncomingRouter.read(ep: String)
-POST    /write/:ep                  controllers.IncomingRouter.write(ep: String)
-GET     /menu                       controllers.MenuController.index()
+GET     /api/view/:ep                   controllers.IncomingRouter.view(ep: String)
+GET     /api/read/:ep                   controllers.IncomingRouter.read(ep: String)
+POST    /api/write/:ep                  controllers.IncomingRouter.write(ep: String)
+GET     /api/menu                       controllers.MenuController.index()

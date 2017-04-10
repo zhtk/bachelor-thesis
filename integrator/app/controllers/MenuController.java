@@ -78,8 +78,8 @@ public class MenuController extends Controller {
             // Sprawdzenie uprawnień
             String mask;
             
-            if (!json.findValuesAsText("mask").isEmpty())
-                mask = json.findValuesAsText("mask").get(0);
+            if (!json.findValuesAsText("perm").isEmpty())
+                mask = json.findValuesAsText("perm").get(0);
             else
                 mask = null;
             

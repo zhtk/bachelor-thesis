@@ -5,13 +5,17 @@ public class MaskChecker {
         int i = 0;
         
         while (i < obtained.length() && i < required.length()) {
-            if (checkPermission(obtained.charAt(i), required.charAt(i)))
+            if (!checkPermission(obtained.charAt(i), required.charAt(i)))
                 return false;
+            
+            i++;
         }
         
         while (i < required.length()) {
-            if (checkPermission('0', required.charAt(i)))
+            if (!checkPermission('0', required.charAt(i)))
                 return false;
+            
+            i++;
         }
         
         return true;

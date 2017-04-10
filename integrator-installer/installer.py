@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from kazoo.client import KazooClient
+from kazoo.exceptions import NodeExistsError
 
 # Klient zookeepera
 # Należy tutaj uzupełnić adresy serwera
@@ -11,7 +12,10 @@ def try_delete(path):
 	zk.delete(path, recursive=True)
 
 def add_node(path, content):
-	zk.create(path, content.encode('utf-8'))
+	try:
+		zk.create(path, content.encode('utf-8'))
+	except NodeExistsError as e:
+		pass
 
 def add_service_server(basePath, serviceName, serverId, address, port,
                        sslPort="null", payload="null", registrationTimeUTC=0,
@@ -83,6 +87,9 @@ def create_menu():
 	# Podpięcie czegoś pod elem1
 	add_menu_element("To jest w submenu", "/read/abc", "/elem1/a")
 	add_menu_element("To też", "/read/abc", "/elem1/b")
+	
+	# Element dla admina
+	add_menu_element("Panel admina", "/read/abc", "/elem3", perm="111")
 
 if __name__ == "__main__":
 	zk.start()
