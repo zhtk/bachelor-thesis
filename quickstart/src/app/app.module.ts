@@ -106,7 +106,7 @@ import {FormularComponent} from "./FormComponents/FormularComponent";
 					PanelGroupComponent,
 					PeselComponent,
 			        SubmitComponent,
-			        FormularComponent
+			        FormularComponent,
 					PasswordComponent,
 					LabelComponent,
 				],
