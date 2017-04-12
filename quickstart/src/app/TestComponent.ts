@@ -3,8 +3,8 @@ import {
   ReflectiveInjector, ComponentFactoryResolver,
   QueryList, ElementRef, TemplateRef
 } from '@angular/core'
-import {TextBox} from "./FormComponents/TextBox/TextBox";
-import {ComponentCreator} from "./ComponentsCore/ComponentCreator";
+import {TextBox} from "./Components/FormComponents/TextBox/TextBox";
+import {ComponentCreator} from "./Components/ComponentsCore/ComponentCreator";
 import { LAYOUT } from './500plus/mock-form'
 
 @Component

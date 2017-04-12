@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent }  from './app.component';
 
-import {TextBox} from './FormComponents/TextBox/TextBox'
+import {TextBox} from './Components/FormComponents/TextBox/TextBox'
 import {TestComponent} from './TestComponent'
 
 // Home page components
@@ -59,14 +59,14 @@ import { PacjentComponent } from './leave_components/pacjent-components/pacjent-
 import { ListaComponent } from './leave_components/pacjent-components/list-leaves-component';
 import { BreadCrumbComponent } from './dashboard_components/breadcrumb.component';
 import { InboxComponent } from './home_components/inbox.component';
-import { RowComponent } from "./FrontComponents/RowComponent";
-import {ComponentCreator} from "./ComponentsCore/ComponentCreator";
-import {PanelComponent} from "./FrontComponents/PanelComponent";
-import { PeselComponent } from './FormComponents/TextBox/PeselComponent'
-import { PasswordComponent } from './FormComponents/TextBox/PasswordComponent'
-import { LabelComponent } from './FrontComponents/LabelComponent'
-import {SubmitComponent} from "./FormComponents/SubmitComponent";
-import {FormComponent} from "./FormComponents/FormComponent";
+import { RowComponent } from "./Components/FrontComponents/RowComponent";
+import {ComponentCreator} from "./Components/ComponentsCore/ComponentCreator";
+import {PanelComponent} from "./Components/FrontComponents/PanelComponent";
+import { PeselComponent } from './Components/FormComponents/TextBox/PeselComponent'
+import { PasswordComponent } from './Components/FormComponents/TextBox/PasswordComponent'
+import { LabelComponent } from './Components/FrontComponents/LabelComponent'
+import {SubmitComponent} from "./Components/FormComponents/SubmitComponent";
+import {FormComponent} from "./Components/FormComponents/FormComponent";
 
 
 @NgModule({
