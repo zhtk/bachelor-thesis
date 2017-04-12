@@ -1,15 +1,17 @@
 import {GridProperty} from "./GridProperty";
+import {FrontEndClass} from "./FrontEndClass";
 export class SizeProperties {
 
-
+  parent:FrontEndClass;
   private xsmall:GridProperty;
   private small:GridProperty;
   private medium:GridProperty;
   private large:GridProperty;
   private xlarge:GridProperty;
 
-  constructor ()
+  constructor (parent:FrontEndClass)
   {
+    this.parent = parent;
     this.xsmall = new GridProperty("xsmall");
     this.small = new GridProperty("small");
     this.medium = new GridProperty("medium");
@@ -19,27 +21,38 @@ export class SizeProperties {
 
   setXsmall(value:number)
   {
-    this.xsmall.width = value;
+    this.xsmall.setWidth(value);
+    this.changeSize();
   }
 
   setSmall(value:number)
   {
-    this.small.width = value;
+    this.small.setWidth(value);
+    this.changeSize();
   }
 
   setMedium(value:number)
   {
-    this.medium.width = value;
+    this.medium.setWidth(value);
+    this.changeSize();
   }
 
   setLarge(value:number)
   {
-    this.large.width = value;
+    this.large.setWidth(value);
+    this.changeSize();
   }
 
   setXlarge(value:number)
   {
-    this.xlarge.width = value;
+    this.xlarge.setWidth(value);
+    this.changeSize();
+  }
+
+  changeSize()
+  {
+    this.parent.grid_class = this.xsmall.class + " " + this.small.class + " " +
+      this.medium.class + " " + this.large.class + " " + this.xlarge.class;
   }
 
 }

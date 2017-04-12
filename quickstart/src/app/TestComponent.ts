@@ -10,7 +10,7 @@ import { LAYOUT } from './500plus/mock-form'
 @Component
 ({
   selector: 'testowe',
-  templateUrl: '../pages/Components/TextBoxComponents/test.html',
+  templateUrl: '../pages/test.html',
 })
 export class TestComponent implements OnInit
 {

@@ -9,13 +9,15 @@ export class FrontEndClass{
   public size:SizeProperties;
   public backgroundColor:string;
   public textColor:string;
+  public grid_class:string;
 
   constructor()
   {
-    this.size = new SizeProperties();
+    this.size = new SizeProperties(this);
     this.visible = true;
     this.backgroundColor = "white";
     this.textColor = "black";
+    this.grid_class="";
   }
 
 }

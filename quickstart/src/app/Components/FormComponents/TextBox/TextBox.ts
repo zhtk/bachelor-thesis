@@ -57,13 +57,23 @@ export class TextBox extends FormClass implements RenderFromJSON
     if ("maxLength" in parsed)
       this.maxLength = parsed["maxLength"];
     if ("minLength" in parsed)
-      this.minLength = parsed["minLength"]
+      this.minLength = parsed["minLength"];
     if ("defaultText" in parsed)
       this.defaultText = parsed["defaultText"];
-    if ("width" in parsed)
+    if ("size" in parsed)
     {
-      this.width = parsed["width"];
-      this.grid_class += this.width.toString()
+      var size = parsed["size"];
+
+      if(size.xsmall)
+        this.size.setXsmall(size.xsmall);
+      if(size.small)
+        this.size.setSmall(size.small);
+      if(size.medium)
+        this.size.setMedium(size.medium);
+      if(size.large)
+        this.size.setLarge(size.large);
+      if(size.xlarge)
+        this.size.setXlarge(size.xlarge);
     }
     if("required" in parsed)
       this.required = parsed["required"];
