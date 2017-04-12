@@ -4,7 +4,7 @@ import { TextBox } from './TextBox';
 
 @Component({
   selector: 'password',
-  templateUrl: 'pages/TextBoxComponent/password.html'
+  templateUrl: '../../../pages/Components/TextBoxComponents/password.html'
 })
 export class PasswordComponent extends TextBox
 {

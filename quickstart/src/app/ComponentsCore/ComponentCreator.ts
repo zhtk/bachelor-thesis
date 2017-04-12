@@ -1,24 +1,23 @@
-import {RowComponent} from "./RowComponent";
-import {PeselComponent} from "./PeselComponent";
-import {PasswordComponent} from "./PasswordComponent";
-import {LabelComponent} from "./LabelComponent";
-import {TextBox} from "./TextBox";
-import {PanelGroupComponent} from "./PanelGroupComponent";
-import {Component, ComponentFactoryResolver, 
+import {RowComponent} from "../FrontComponents/RowComponent";
+import {PeselComponent} from "../FormComponents/TextBox/PeselComponent";
+import {PasswordComponent} from "../FormComponents/TextBox/PasswordComponent";
+import {LabelComponent} from "../FrontComponents/LabelComponent";
+import {TextBox} from "../FormComponents/TextBox/TextBox";
+import {PanelComponent} from "../FrontComponents/PanelComponent";
+import {Component, ComponentFactoryResolver,
 	ViewContainerRef} from "@angular/core";
-import {MicroService} from "./MicroService";
-import {SubmitComponent} from "./SubmitComponent";
-import {FormularComponent} from "./FormularComponent";
+import {SubmitComponent} from "../FormComponents/SubmitComponent";
+import {FormComponent} from "../FormComponents/FormComponent";
 
 export class ComponentCreator {
 
 	static componentMapping = {
 		'TextBox': TextBox,
-		'PanelGroup' : PanelGroupComponent
+		'PanelGroup' : PanelComponent
 	};
 
-	static insertComponent(factory:ComponentFactoryResolver, 
-		target:ViewContainerRef, type: string):FEComponent {
+	static insertComponent(factory:ComponentFactoryResolver,
+		target:ViewContainerRef, type: string):RenderFromJSON {
 		// Rozwiazanie tymczasowe, z mapą z góry nie chce działać
 		var compFactory: any;
 		console.log("typ" + type);
@@ -26,19 +25,19 @@ export class ComponentCreator {
 			case ("TextBox"):
 				compFactory = factory.resolveComponentFactory(TextBox);
 				break;
-		
+
 			case ("RowComponent"):
 				compFactory = factory.resolveComponentFactory(RowComponent);
 				break;
-		
+
 			case ("PeselComponent"):
 				compFactory = factory.resolveComponentFactory(PeselComponent);
 				break;
-		
+
 			case ("PasswordComponent"):
 				compFactory = factory.resolveComponentFactory(PasswordComponent);
 				break;
-			
+
 			case ("LabelComponent"):
 				compFactory = factory.resolveComponentFactory(LabelComponent);
 				break;
@@ -48,16 +47,16 @@ export class ComponentCreator {
 				break;
 
 			case ("Form"):
-				compFactory = factory.resolveComponentFactory(FormularComponent);
+				compFactory = factory.resolveComponentFactory(FormComponent);
 				break;
 
 			default: // powinno byc explicite
-				compFactory = factory.resolveComponentFactory(PanelGroupComponent);
+				compFactory = factory.resolveComponentFactory(PanelComponent);
 				break;
 		}
 
 		const ref = target.createComponent(compFactory);
-		return <FEComponent> ref.instance;
+		return <RenderFromJSON> ref.instance;
 	}
 	// TODO refactor!!!
 }

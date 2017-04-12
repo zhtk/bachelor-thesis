@@ -1,12 +1,12 @@
 import { Component, Input, } from '@angular/core'
-import { FormComponent } from './FormComponent'
+import { FormClass } from '../FormComponents/FormClass'
 import { FormsModule }   from '@angular/forms';
 
 @Component({
   selector: 'labelcomp',
   template: `<h5 style="margin: 15px;">{{ text }}</h5>`
 })
-export class LabelComponent extends FormComponent
+export class LabelComponent extends FormClass
 {
 
   text: string;
@@ -17,7 +17,7 @@ export class LabelComponent extends FormComponent
     super();
     this.text = "";
   }
- 
+
   renderJSON(parsed: any): void {
 
     if("id" in parsed)

@@ -4,7 +4,7 @@ import { AtelierComponent }   from './atelier.component';
 
 
 import { RenderComponent } from './render.component';
-import { TestComponent } from './FormComponents/TestComponent'
+import { TestComponent } from './TestComponent'
 
 import { HomeComponent }  from './home_components/home.component';
 import { ServicesComponent } from './services_components/micro-services.component';

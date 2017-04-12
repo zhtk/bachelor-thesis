@@ -1,12 +1,12 @@
 import { Component, Input, } from '@angular/core'
-import { FormComponent } from './FormComponent'
+import { FormClass } from '../FormClass'
 import { FormsModule }   from '@angular/forms';
 
 @Component({
   selector: 'textBox',
-  templateUrl: 'pages/TextBoxComponent/TextBox.html'
+  templateUrl: '../../../pages/Components/TextBoxComponents/TextBox.html'
 })
-export class TextBox extends FormComponent implements FEComponent
+export class TextBox extends FormClass implements RenderFromJSON
 {
 
   maxLength: number;

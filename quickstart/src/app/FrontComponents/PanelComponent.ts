@@ -1,15 +1,15 @@
 import {Component, ComponentFactoryResolver, Input, ViewChild, ViewContainerRef,} from '@angular/core'
-import { FormComponent } from './FormComponent'
+import { FormClass } from '../FormComponents/FormClass'
 import { FormsModule }   from '@angular/forms';
-import {Container} from "./Container";
-import {ComponentCreator} from "./ComponentCreator";
+import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
+import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 
 @Component
 ({
   selector: 'panelgroup',
-  templateUrl: 'pages/PanelGroup/panelGroup.html'
+  templateUrl: '../../pages/Components/Panel/panel.html'
 })
-export class PanelGroupComponent implements FEComponent, Container {
+export class PanelComponent implements RenderFromJSON, Container {
 
   visible: boolean;
   title:string;

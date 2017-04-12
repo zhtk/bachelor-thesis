@@ -6,8 +6,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent }  from './app.component';
 
-import {TextBox} from './FormComponents/TextBox'
-import {TestComponent} from './FormComponents/TestComponent'
+import {TextBox} from './FormComponents/TextBox/TextBox'
+import {TestComponent} from './TestComponent'
 
 // Home page components
 import { HomeComponent }  from './home_components/home.component';
@@ -59,14 +59,14 @@ import { PacjentComponent } from './leave_components/pacjent-components/pacjent-
 import { ListaComponent } from './leave_components/pacjent-components/list-leaves-component';
 import { BreadCrumbComponent } from './dashboard_components/breadcrumb.component';
 import { InboxComponent } from './home_components/inbox.component';
-import { RowComponent } from "./FormComponents/RowComponent";
-import {ComponentCreator} from "./FormComponents/ComponentCreator";
-import {PanelGroupComponent} from "./FormComponents/PanelGroupComponent";
-import { PeselComponent } from './FormComponents/PeselComponent'
-import { PasswordComponent } from './FormComponents/PasswordComponent'
-import { LabelComponent } from './FormComponents/LabelComponent'
+import { RowComponent } from "./FrontComponents/RowComponent";
+import {ComponentCreator} from "./ComponentsCore/ComponentCreator";
+import {PanelComponent} from "./FrontComponents/PanelComponent";
+import { PeselComponent } from './FormComponents/TextBox/PeselComponent'
+import { PasswordComponent } from './FormComponents/TextBox/PasswordComponent'
+import { LabelComponent } from './FrontComponents/LabelComponent'
 import {SubmitComponent} from "./FormComponents/SubmitComponent";
-import {FormularComponent} from "./FormComponents/FormularComponent";
+import {FormComponent} from "./FormComponents/FormComponent";
 
 
 @NgModule({
@@ -103,16 +103,16 @@ import {FormularComponent} from "./FormComponents/FormularComponent";
 					TextBox,
 					TestComponent,
 					RowComponent,
-					PanelGroupComponent,
+					PanelComponent,
 					PeselComponent,
 			        SubmitComponent,
-			        FormularComponent,
+			        FormComponent,
 					PasswordComponent,
 					LabelComponent,
 				],
   bootstrap:    [ AppComponent ],
-  entryComponents: [TestComponent, TextBox, RowComponent, PanelGroupComponent, PeselComponent, PasswordComponent,
-  					 LabelComponent, SubmitComponent, FormularComponent]
+  entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
+  					 LabelComponent, SubmitComponent, FormComponent]
 
 })
 export class AppModule { }

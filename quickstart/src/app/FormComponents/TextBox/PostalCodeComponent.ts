@@ -1,15 +1,15 @@
 import { Component, Input, } from '@angular/core'
-import { FormComponent } from './FormComponent'
+import { FormClass } from '../FormClass'
 import { FormsModule }   from '@angular/forms';
 import { TextBox } from './TextBox';
 
 @Component({
   selector: 'zipcode',
-  templateUrl: 'pages/TextBoxComponent/TextBox.html'
+  templateUrl: '../../../pages/Components/TextBoxComponents/TextBox.html'
 })
 export class ZipcodeComponent
 	extends TextBox
-	//implements FEComponent
+	//implements RenderFromJSON
 {
 	constructor() {
 		super();

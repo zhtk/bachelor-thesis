@@ -1,13 +1,13 @@
 import { Component, Input, } from '@angular/core'
 import { FormsModule }   from '@angular/forms';
-import { TextBox } from './TextBox';
-import {FormComponent} from "./FormComponent";
+import { TextBox } from './TextBox/TextBox';
+import {FormClass} from "./FormClass";
 
 @Component({
   selector: 'submit',
   templateUrl: 'pages/submit.html'
 })
-export class SubmitComponent extends FormComponent
+export class SubmitComponent extends FormClass
 {
   title:string;
   constructor() {

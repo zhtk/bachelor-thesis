@@ -2,13 +2,13 @@ import {
   Component, Input, OnInit, ViewChildren, ViewContainerRef, ViewChild, ReflectiveInjector, ComponentFactoryResolver,
   QueryList, ElementRef, TemplateRef
 } from '@angular/core'
-import { FormComponent } from './FormComponent'
+import { FormClass } from '../FormComponents/FormClass'
 import { FormsModule }   from '@angular/forms';
-import {TextBox} from "./TextBox";
+import {TextBox} from "../FormComponents/TextBox/TextBox";
 import {Type} from "typescript";
 import {ViewContainer} from "@angular/core/src/linker/view_container";
-import {ComponentCreator} from "./ComponentCreator";
-import {Container} from "./Container";
+import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
+import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
 
 @Component
 ({
@@ -16,7 +16,7 @@ import {Container} from "./Container";
   template: '<div class="row"><template #target></template></div>'
  ,
 })
-export class RowComponent implements FEComponent, OnInit, Container{
+export class RowComponent implements RenderFromJSON, OnInit, Container{
 
   id:number;
   parsed:any;
