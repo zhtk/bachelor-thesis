@@ -4,7 +4,7 @@ import { FormsModule }   from '@angular/forms';
 
 @Component({
   selector: 'labelcomp',
-  template: `<h3 style="margin: 15px;">{{ text }}</h3>`
+  template: `<h5 style="margin: 15px;">{{ text }}</h5>`
 })
 export class LabelComponent extends FormComponent
 {
