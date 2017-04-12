@@ -6,9 +6,7 @@ import { TextBox } from './TextBox';
   selector: 'password',
   templateUrl: 'pages/TextBoxComponent/password.html'
 })
-export class PasswordComponent
-	extends TextBox
-	//implements FEComponent
+export class PasswordComponent extends TextBox
 {
 	constructor() {
 		super();

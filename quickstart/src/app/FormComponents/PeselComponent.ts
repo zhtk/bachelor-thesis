@@ -7,9 +7,7 @@ import { TextBox } from './TextBox';
   selector: 'pesel',
   templateUrl: 'pages/TextBoxComponent/TextBox.html'
 })
-export class PeselComponent
-	extends TextBox
-	//implements FEComponent
+export class PeselComponent extends TextBox
 {
 	constructor() {
 		super();
@@ -32,7 +30,7 @@ export class PeselComponent
 		for (var i = 0; i < this.text.length; ++i) {
 			parsedPesel[i] = parseInt(this.text[i]);
 		}
-		var controlSum = 
+		var controlSum =
 			9 * parsedPesel[0] +
 			7 * parsedPesel[1] +
 			3 * parsedPesel[2] +
@@ -43,7 +41,7 @@ export class PeselComponent
 			1 * parsedPesel[7] +
 			9 * parsedPesel[8] +
 			7 * parsedPesel[9]
-		
+
 		return (controlSum % 10 == parsedPesel[10]);
 	}
 }
