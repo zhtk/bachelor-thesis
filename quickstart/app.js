@@ -5,7 +5,7 @@ var grpc = require('grpc');
 var morgan = require('morgan');
 
 var authDescriptor = grpc.load(__dirname + '/auth/auth.proto');
-var authChannel = new authDescriptor.AuthService('localhost:50051', grpc.credentials.createInsecure());
+var authChannel = new authDescriptor.AuthService('207.154.212.228:50051', grpc.credentials.createInsecure());
 
 var proxy = proxyMiddleware({
   target: 'http://207.154.212.228:9000',
