@@ -8,6 +8,7 @@ import {Component, ComponentFactoryResolver,
 	ViewContainerRef} from "@angular/core";
 import {SubmitComponent} from "../FormComponents/SubmitComponent";
 import {FormComponent} from "../FormComponents/FormComponent";
+import {HeadingComponent} from "../FrontComponents/HeadingComponent";
 
 export class ComponentCreator {
 
@@ -49,6 +50,9 @@ export class ComponentCreator {
 			case ("Form"):
 				compFactory = factory.resolveComponentFactory(FormComponent);
 				break;
+      case ("Heading"):
+        compFactory = factory.resolveComponentFactory(HeadingComponent);
+        break;
 
 			default: // powinno byc explicite
 				compFactory = factory.resolveComponentFactory(PanelComponent);

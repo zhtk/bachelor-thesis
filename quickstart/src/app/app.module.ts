@@ -67,6 +67,7 @@ import { PasswordComponent } from './Components/FormComponents/TextBox/PasswordC
 import { LabelComponent } from './Components/FrontComponents/LabelComponent'
 import {SubmitComponent} from "./Components/FormComponents/SubmitComponent";
 import {FormComponent} from "./Components/FormComponents/FormComponent";
+import {HeadingComponent} from "./Components/FrontComponents/HeadingComponent";
 
 
 @NgModule({
@@ -105,14 +106,15 @@ import {FormComponent} from "./Components/FormComponents/FormComponent";
 					RowComponent,
 					PanelComponent,
 					PeselComponent,
-			        SubmitComponent,
-			        FormComponent,
+          SubmitComponent,
+          FormComponent,
 					PasswordComponent,
 					LabelComponent,
+          HeadingComponent
 				],
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
-  					 LabelComponent, SubmitComponent, FormComponent]
+  					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent]
 
 })
 export class AppModule { }

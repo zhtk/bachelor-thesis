@@ -33,9 +33,9 @@ export class FormComponent extends FormClass implements Container
     if("method" in parsed)
       this.method = parsed["method"];
     if("children" in parsed)
-    {// Stworz wszystkie komponenty i dodaj je w sobie
+    // Stworz wszystkie komponenty i dodaj je w sobie
       this.renderChildren(parsed["children"]);
-    }
+
   }
 
   renderChildren(children: any): void {

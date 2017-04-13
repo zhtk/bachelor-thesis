@@ -1,9 +1,9 @@
 <div [ngClass] = "grid_class">
   <div [ngClass] = "panel_class" id= "{{id}}">
-    <div *ngIf="title" class="panel-heading">
+    <div *ngIf="title" class="panel-heading" [attr.data-toggle]=" collapsible ? 'collapse' : null " data-target="#body">
       <h3 class="panel-title">{{ title }}</h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body collapse" id="body">
       <template #target></template>
     </div>
   </div>

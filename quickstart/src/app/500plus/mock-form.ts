@@ -2,10 +2,22 @@ const layout_dict =
 	{
 		"components":
 		[
+      {
+        "type" : "RowComponent",
+        "id"  : "row0",
+        "children":
+        [
+          {
+            "type": "Heading",
+            "text": "Witaj ponownie Jan!"
+          }
+        ]
+      },
 			{
 				"type": "PanelComponent",
+				"collapse" : true,
 				"size": {
-          "large": 10,
+          "large": 12,
         },
 				"title": "Wniosek o ustalenie prawa do świadczenia wychowawczego",
 				"children":

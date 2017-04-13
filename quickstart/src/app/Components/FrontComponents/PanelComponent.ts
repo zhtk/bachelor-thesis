@@ -3,24 +3,23 @@ import { FormClass } from '../FormComponents/FormClass'
 import { FormsModule }   from '@angular/forms';
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
 import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
+import {FrontEndClass} from "../ComponentsCore/MainClasses/FrontEndClass";
 
 @Component
 ({
   selector: 'panelgroup',
   templateUrl: '../../pages/Components/Panel/panel.html'
 })
-export class PanelComponent implements RenderFromJSON, Container {
+export class PanelComponent extends FrontEndClass implements RenderFromJSON, Container {
 
-  visible: boolean;
   title:string;
   panel_class:string;
-  width:number;
-  grid_class:string;
+  collapsible:boolean;
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
   constructor(private cfr: ComponentFactoryResolver) {
-
+    super();
   }
 
   renderJSON(specification: any): void {
@@ -34,15 +33,15 @@ export class PanelComponent implements RenderFromJSON, Container {
       this.panel_class += specification["panel_class"];
     else
       this.panel_class += "default";
-    if ("width" in specification)
-    {
-      this.width = specification["width"];
-      this.grid_class += this.width.toString()
-    }
+    if ("size" in specification)
+      this.setGridClass(specification);
     if("children" in specification)
-    {// Stworz wszystkie komponenty i dodaj je w sobie
+    // Stworz wszystkie komponenty i dodaj je w sobie
       this.renderChildren(specification["children"]);
-    }
+    if("collapse" in specification)
+      this.collapsible = specification["collapse"]
+    else
+      this.collapsible = false;
   }
 
   renderChildren(children: any): void {

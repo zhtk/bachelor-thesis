@@ -18,10 +18,7 @@ export class SubmitComponent extends FormClass
     if("title" in parsed)
       this.title = parsed["title"];
     if ("width" in parsed)
-    {
-      this.width = parsed["width"];
-      this.grid_class += this.width.toString()
-    }
+     this.setGridClass(parsed);
   }
 
 }

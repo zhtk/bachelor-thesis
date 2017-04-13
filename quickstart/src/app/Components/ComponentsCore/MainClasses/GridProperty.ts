@@ -32,7 +32,7 @@ export class GridProperty {
   {
     this.width = value;
     var index = this.class.lastIndexOf("-");
-    this.class = this.class.slice(0, index+1);
+    this.class = this.class.slice(0, index + 1);
     this.class += value.toString();
   }
 }
