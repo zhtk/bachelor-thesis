@@ -7,31 +7,14 @@ var morgan = require('morgan');
 var authDescriptor = grpc.load(__dirname + '/auth/auth.proto');
 var authChannel = new authDescriptor.AuthService('localhost:50051', grpc.credentials.createInsecure());
 
-function authMiddleware (req, res, next) {
-	if (isLogout) {
-        var data = {token: "admin"};
-        authChannel.invalidateToken(data, function(err, data) {
-            if (err) {
-                // Error, nie można się wylogować
-                // TODO
-            } else {
-                // Wypisujemy klientowi, że się wylogował
-                // TODO
-            }
-        });
-    }
-}
-
-var proxyOptions = {
+var proxy = proxyMiddleware({
   target: 'http://207.154.212.228:9000',
   changeOrigin: true,
   ws: true,
   pathRewrite: {
     '^/api/' : '/'
   }
-};
-
-var proxy = proxyMiddleware(proxyOptions);
+});
 
 var app = express();
 app.use(morgan('combined'));
