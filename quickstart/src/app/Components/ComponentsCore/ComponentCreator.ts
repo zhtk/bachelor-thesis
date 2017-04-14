@@ -9,6 +9,7 @@ import {Component, ComponentFactoryResolver,
 import {SubmitComponent} from "../FormComponents/SubmitComponent";
 import {FormComponent} from "../FormComponents/FormComponent";
 import {HeadingComponent} from "../FrontComponents/HeadingComponent";
+import {PanelGroupComponent} from "../FrontComponents/PanelGroupComponent";
 
 export class ComponentCreator {
 
@@ -52,6 +53,9 @@ export class ComponentCreator {
 				break;
       case ("Heading"):
         compFactory = factory.resolveComponentFactory(HeadingComponent);
+        break;
+      case ("PanelGroup"):
+        compFactory = factory.resolveComponentFactory(PanelGroupComponent);
         break;
 
 			default: // powinno byc explicite
