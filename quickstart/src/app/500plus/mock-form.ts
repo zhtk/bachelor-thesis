@@ -2,24 +2,24 @@ const layout_dict =
 	{
 		"components":
 		[
-      {
-        "type" : "RowComponent",
-        "id"  : "row0",
-        "children":
-        [
-          {
-            "type": "Heading",
-            "text": "Witaj ponownie Jan!"
-          }
-        ]
-      },
+			{
+				"type" : "RowComponent",
+				"id"  : "row0",
+				"children":
+				[
+					{
+						"type": "Heading",
+						"text": "Witaj ponownie Jan!"
+					}
+				]
+			},
 			{
 				"type": "PanelComponent",
 				"collapse" : true,
 				"hidable" : true,
 				"size": {
-          "large": 12,
-        },
+					"large": 12,
+				},
 				"title": "Wniosek o ustalenie prawa do świadczenia wychowawczego",
 				"children":
 				[
@@ -31,9 +31,9 @@ const layout_dict =
 								"type": "LabelComponent",
 								"id": "test1",
 								"text": "WNIOSEK O USTALENIE PRAWA DO ŚWIADCZENIA WYCHOWAWCZEGO",
-                "size": {
-                  "large": 5,
-                }
+								"size": {
+									"large": 5,
+								}
 							}
 						]
 
@@ -46,17 +46,17 @@ const layout_dict =
 								"type": "TextBox",
 								"id": "test1",
 								"defaultText": "Imię",
-                "size": {
-                  "large": 5,
-                }
+								"size": {
+									"large": 5,
+								}
 							},
 							{
 								"type": "TextBox",
 								"id": "test2",
 								"defaultText": "Nazwisko",
-                "size": {
-                  "large": 6,
-                },
+								"size": {
+									"large": 6,
+								},
 							}
 						]
 					},
@@ -68,25 +68,25 @@ const layout_dict =
 								"type": "PeselComponent",
 								"id": "test1",
 								"defaultText": "PESEL",
-                "size": {
-                  "large": 5,
-                },
+								"size": {
+									"large": 5,
+								},
 							},
 							{
 								"type": "TextBox",
 								"id": "test2",
 								"defaultText": "Stan cywilny",
-                "size": {
-                  "large": 3,
-                },
+								"size": {
+									"large": 3,
+								},
 							},
 							{
 								"type": "TextBox",
 								"id": "test2",
 								"defaultText": "Obywatelstwo",
-                "size": {
-                  "large": 4,
-                },
+								"size": {
+									"large": 4,
+								},
 							}
 						]
 					},
@@ -98,17 +98,17 @@ const layout_dict =
 								"type": "TextBox",
 								"id": "test1",
 								"defaultText": "Miejscowość",
-                "size": {
-                  "large": 8,
-                },
+								"size": {
+									"large": 8,
+								},
 							},
 							{
 								"type": "TextBox",
 								"id": "test2",
 								"defaultText": "Kod Pocztowy",
-                "size": {
-                  "large": 3,
-                },
+								"size": {
+									"large": 3,
+								},
 							}
 						]
 					},
@@ -120,34 +120,46 @@ const layout_dict =
 								"type": "TextBox",
 								"id": "test1",
 								"defaultText": "Ulica",
-                "size": {
-                  "large": 5,
-                },
+								"size": {
+									"large": 5,
+								},
 							},
 							{
 								"type": "TextBox",
 								"id": "test2",
 								"defaultText": "Numer Domu",
-                "size": {
-                  "large": 3,
-                },
+								"size": {
+									"large": 3,
+								},
 							},
 							{
 								"type": "TextBox",
 								"id": "test2",
 								"defaultText": "Numer mieszkania",
-                "size": {
-                  "large": 3,
-                },
-							}
+								"size": {
+									"large": 3,
+								},
+							},
+							
 						]
 					},
 					{
+						"type": "RowComponent",
+						"id": "row1",
+						"children": [
+							{
+								"type": "ProgBar",
+								"width": 3,
+								"id": "cokolsiek"
+							}
+						]
+					}
+					{
 						"type": "PanelComponent",
 						"id": "panel1",
-            "size": {
-              "large": 10,
-            },
+						"size": {
+							"large": 10,
+						},
 						"title": "2. Ustalenie prawa do świadczenia wychowawczego na pierwsze dziecko.",
 						"children": [
 							{
@@ -161,9 +173,9 @@ osobę ubiegającą się.
 Niepełnosprawne dziecko oznacza dziecko legitymujące się orzeczeniem o niepełnosprawności
 określonym w przepisach o rehabilitacji zawodowej i społecznej oraz zatrudnianiu osób
 niepełnosprawnych albo orzeczeniem o umiarkowanym lub znacznym stopniu niepełnosprawności.`,
-                "size": {
-                  "large": 10,
-                }
+								"size": {
+									"large": 10,
+								}
 							}
 						]
 					}
