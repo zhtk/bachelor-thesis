@@ -7,6 +7,7 @@ import {PanelComponent} from "../FrontComponents/PanelComponent";
 import {Component, ComponentFactoryResolver,
 	ViewContainerRef} from "@angular/core";
 import {SubmitComponent} from "../FormComponents/SubmitComponent";
+import { ProgressBarComponent } from '../FormComponents/ProgressBarComponent';
 import {FormComponent} from "../FormComponents/FormComponent";
 import {HeadingComponent} from "../FrontComponents/HeadingComponent";
 
@@ -50,6 +51,11 @@ export class ComponentCreator {
 			case ("Form"):
 				compFactory = factory.resolveComponentFactory(FormComponent);
 				break;
+
+			case ("ProgBar"):
+				compFactory = factory.resolveComponentFactory(ProgressBarComponent);
+				break;
+				
       case ("Heading"):
         compFactory = factory.resolveComponentFactory(HeadingComponent);
         break;

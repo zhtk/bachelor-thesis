@@ -67,6 +67,7 @@ import { PasswordComponent } from './Components/FormComponents/TextBox/PasswordC
 import { LabelComponent } from './Components/FrontComponents/LabelComponent'
 import {SubmitComponent} from "./Components/FormComponents/SubmitComponent";
 import {FormComponent} from "./Components/FormComponents/FormComponent";
+import { ProgressBarComponent } from "./Components/FormComponents/ProgressBarComponent";
 import {HeadingComponent} from "./Components/FrontComponents/HeadingComponent";
 
 
@@ -106,6 +107,7 @@ import {HeadingComponent} from "./Components/FrontComponents/HeadingComponent";
 					RowComponent,
 					PanelComponent,
 					PeselComponent,
+					ProgressBarComponent,
           SubmitComponent,
           FormComponent,
 					PasswordComponent,
@@ -114,7 +116,7 @@ import {HeadingComponent} from "./Components/FrontComponents/HeadingComponent";
 				],
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
-  					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent]
+  					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, ProgressBarComponent ]
 
 })
 export class AppModule { }
