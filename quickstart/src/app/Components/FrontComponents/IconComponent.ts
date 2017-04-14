@@ -12,32 +12,39 @@ import {TimerObservable} from "rxjs/observable/TimerObservable";
 @Injectable()
 @Component
 ({
-  selector: 'content',
-  template: '<div style=" display:inline"#target>{{text}}</div>'
+  selector: 'icon',
+  template: '<span [style.font-size] = "font_size" [ngClass]="class"></span>'
 })
-export class ContentComponent extends FrontEndClass implements RenderFromJSON{
+export class IconComponent extends FrontEndClass implements RenderFromJSON{
 
-  text:string;
-  people: string = "";
-
-  @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
-
+  class:string;
+  font_size:string;
   constructor(private cfr: ComponentFactoryResolver, private peopleServicee : MenuService, private http: Http) {
     super();
-    this.text = "Xx";
-    let timer = TimerObservable.create(0, 5000);
-    timer.subscribe(t => this.start());
-    //this.start();
+    this.class = "glyphicon glyphicon-"
+
   }
 
   renderJSON(specification: any): void {
-
+    if("class" in specification)
+      this.class+= specification["class"];
+    if("size" in specification)
+    {
+      switch(specification["size"])
+      {
+        case "small":
+          this.font_size = "1em";
+          break;
+        case "medium":
+          this.font_size = "2em";
+          break;
+        case "big":
+          this.font_size = "3em";
+          break;
+      }
+    }
   }
 
-  start(){
-   this.http.get("/api/view/abc").map(res => res.text())
-              .subscribe(p => this.text = p)
-  }
 
 
 }

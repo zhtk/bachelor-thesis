@@ -3,6 +3,63 @@ const layout_dict =
     "components":
       [
         {
+          "type": "PanelComponent",
+          "title": "Pozytywnie rozpatrzonych spraw",
+          "panel_class" : "green",
+          "size": {
+            "large": 4,
+          },
+          "children":
+          [
+            {
+              "type": "Content",
+            },
+            {
+              "type" : "Icon",
+              "class" : "ok",
+              "size" : "big"
+            }
+          ]
+        },
+        {
+          "type": "PanelComponent",
+          "title": "Spraw oczekuje na rozpatrzenie...",
+          "panel_class" : "yellow",
+          "size": {
+            "large": 4,
+          },
+          "children":
+            [
+              {
+                "type": "Content",
+              },
+              {
+                "type" : "Icon",
+                "class" : "zoom-in",
+                "size" : "big"
+              }
+            ]
+        },
+        {
+          "type": "PanelComponent",
+          "title": "Odrzuconych spraw",
+          "panel_class" : "red",
+          "size": {
+            "large": 4,
+          },
+          "children":
+            [
+              {
+                "type": "Content",
+              },
+              {
+                "type" : "Icon",
+                "class" : "remove",
+                "size" : "big"
+              }
+            ]
+        },
+        {
           "type" : "RowComponent",
           "id"  : "row0",
           "children":
@@ -38,6 +95,12 @@ const layout_dict =
                         "size": {
                           "large": 12,
                         },
+                        "children":
+                        [
+                          {
+                            "type": "Content",
+                          },
+                        ]
                       },
                       {
                         "type": "PanelComponent",
@@ -47,15 +110,26 @@ const layout_dict =
                         "size": {
                           "large": 12,
                         },
+                        "children":
+                        [
+                          {
+                            "type": "Content",
+                          },
+                        ]
                       },
                       {
                         "type": "PanelComponent",
                         "title": "Pracownik",
                         "collapse": true,
-                        "hidable" : true,
                         "size": {
                           "large": 12,
                         },
+                        "children":
+                          [
+                            {
+                              "type": "Content",
+                            },
+                          ]
                       }
                     ]
                 }
