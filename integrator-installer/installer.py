@@ -39,6 +39,10 @@ def add_service_server(basePath, serviceName, serverId, address, port,
 def add_view_endpoint(name, content):
 	add_node("/view/" + name, content)
 
+def add_view_endpoint_from_file(name, filename):
+	with open(filename) as f: content = f.read()
+	add_view_endpoint(name, content)
+
 def add_read_endpoint(name, serverId, address, port):
 	add_service_server("/read/", name, serverId, address, port)
 
@@ -91,9 +95,9 @@ def create_menu():
 	# Element dla admina
 	add_menu_element("Panel admina", "/read/abc", "/elem3", perm="111")
 
+zk.start()
+
 if __name__ == "__main__":
-	zk.start()
-	
 	# Przygotowanie czystej bazy danych
 	clean_database()
 	prepare_database_layout()
