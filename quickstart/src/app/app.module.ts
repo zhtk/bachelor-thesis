@@ -122,13 +122,7 @@ import {IconComponent} from "./Components/FrontComponents/IconComponent";
 				],
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
-<<<<<<< HEAD
   					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, PanelGroupComponent, ContentComponent,
-    IconComponent]
-=======
-  					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, PanelGroupComponent, 
-  					 ContentComponent, ProgressBarComponent]
->>>>>>> origin/master
-
+    IconComponent, ProgressBarComponent]
 })
 export class AppModule { }
