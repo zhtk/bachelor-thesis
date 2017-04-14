@@ -16,6 +16,7 @@ const layout_dict =
 			{
 				"type": "PanelComponent",
 				"collapse" : true,
+				"hidable" : true,
 				"size": {
           "large": 12,
         },

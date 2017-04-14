@@ -10,6 +10,7 @@ export class FrontEndClass{
   public backgroundColor:string;
   public textColor:string;
   public grid_class:string;
+  cursor:string; // Tutaj przyda sie enum
 
   constructor()
   {

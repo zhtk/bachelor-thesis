@@ -68,6 +68,7 @@ import { LabelComponent } from './Components/FrontComponents/LabelComponent'
 import {SubmitComponent} from "./Components/FormComponents/SubmitComponent";
 import {FormComponent} from "./Components/FormComponents/FormComponent";
 import {HeadingComponent} from "./Components/FrontComponents/HeadingComponent";
+import {PanelGroupComponent} from "./Components/FrontComponents/PanelGroupComponent";
 
 
 @NgModule({
@@ -110,11 +111,12 @@ import {HeadingComponent} from "./Components/FrontComponents/HeadingComponent";
           FormComponent,
 					PasswordComponent,
 					LabelComponent,
-          HeadingComponent
+          HeadingComponent,
+          PanelGroupComponent
 				],
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
-  					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent]
+  					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, PanelGroupComponent]
 
 })
 export class AppModule { }
