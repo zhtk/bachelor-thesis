@@ -6,7 +6,7 @@ import {
 import {TextBox} from "./Components/FormComponents/TextBox/TextBox";
 import {ComponentCreator} from "./Components/ComponentsCore/ComponentCreator";
 import { LAYOUT } from './500plus/mock-form'
-
+import { HOME } from './home_components/home-json'
 @Component
 ({
   selector: 'testowe',
@@ -22,7 +22,7 @@ export class TestComponent implements OnInit
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
-  pageJSON = LAYOUT;
+  pageJSON = HOME;
   ngOnInit(): void {
     var parsed = JSON.parse(this.pageJSON)["components"];
     for(var elem = 0; elem < parsed.length; elem++)

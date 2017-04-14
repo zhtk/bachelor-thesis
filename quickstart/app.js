@@ -66,6 +66,9 @@ app.use('/api', proxy);
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use(express.static(__dirname + '/src' ));
 
+app.get('*', function(req, res) {
+  res.sendfile('./src/index.html');
+});
 
 app.listen(3000, function () {
   console.log('Server started on port 3000!')

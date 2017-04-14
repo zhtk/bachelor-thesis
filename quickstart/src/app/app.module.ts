@@ -69,6 +69,8 @@ import {SubmitComponent} from "./Components/FormComponents/SubmitComponent";
 import {FormComponent} from "./Components/FormComponents/FormComponent";
 import { ProgressBarComponent } from "./Components/FormComponents/ProgressBarComponent";
 import {HeadingComponent} from "./Components/FrontComponents/HeadingComponent";
+import {PanelGroupComponent} from "./Components/FrontComponents/PanelGroupComponent";
+import {ContentComponent} from "./Components/FrontComponents/ContentComponent";
 
 
 @NgModule({
@@ -112,11 +114,14 @@ import {HeadingComponent} from "./Components/FrontComponents/HeadingComponent";
           FormComponent,
 					PasswordComponent,
 					LabelComponent,
-          HeadingComponent
+          HeadingComponent,
+          PanelGroupComponent,
+          ContentComponent
 				],
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
-  					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, ProgressBarComponent ]
+  					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, PanelGroupComponent, 
+  					 ContentComponent, ProgressBarComponent]
 
 })
 export class AppModule { }
