@@ -13,6 +13,8 @@ const layout_dict =
           [
             {
               "type": "Content",
+              "data_provider": "static",
+              "endpoint": "/api/view/taskpositive"
             },
             {
               "type" : "Icon",
@@ -32,6 +34,8 @@ const layout_dict =
             [
               {
                 "type": "Content",
+                "data_provider": "static",
+                "endpoint": "/api/view/taskpending"
               },
               {
                 "type" : "Icon",
@@ -51,6 +55,8 @@ const layout_dict =
             [
               {
                 "type": "Content",
+                "data_provider": "static",
+                "endpoint": "/api/view/tasknegative"
               },
               {
                 "type" : "Icon",

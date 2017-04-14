@@ -17,6 +17,7 @@ import {TimerObservable} from "rxjs/observable/TimerObservable";
 })
 export class ContentComponent extends FrontEndClass implements RenderFromJSON{
 
+  url:string;
   text:string;
   people: string = "";
 
@@ -24,18 +25,18 @@ export class ContentComponent extends FrontEndClass implements RenderFromJSON{
 
   constructor(private cfr: ComponentFactoryResolver, private peopleServicee : MenuService, private http: Http) {
     super();
-    this.text = "Xx";
-    let timer = TimerObservable.create(0, 5000);
-    timer.subscribe(t => this.start());
-    //this.start();
+    //let timer = TimerObservable.create(0, 5000);
+    //timer.subscribe(t => this.start());
   }
 
   renderJSON(specification: any): void {
-
+    if("endpoint" in specification)
+      this.url = specification["endpoint"];
+    this.start();
   }
 
   start(){
-   this.http.get("/api/view/abc").map(res => res.text())
+   this.http.get(this.url).map(res => res.text())
               .subscribe(p => this.text = p)
   }
 
