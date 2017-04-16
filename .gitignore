@@ -1,0 +1,17 @@
+logs
+target
+*.workdir
+auth_pb2
+auth_pb2_grpc
+compiler.exe
+grpc
+.vscode
+venv
+__pycache__
+.idea
+.idea_modules
+.classpath
+.project
+.settings
+RUNNING_PID
+
