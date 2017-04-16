@@ -1,4 +1,7 @@
+#!/usr/bin/env python3
+
 # Przykładowy klient
+
 
 import grpc
 import auth_pb2
