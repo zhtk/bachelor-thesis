@@ -23,10 +23,12 @@ import { LekarzComponent } from './leave_components/lekarz-component';
 import { PacjentComponent } from './leave_components/pacjent-components/pacjent-component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { InboxComponent } from './home_components/inbox.component';
+import {StyleGuideComponent} from "./Components/StyleGuideComponent";
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/main', pathMatch: 'full' },
 	{ path: 'main',  component: HomeComponent },
+  { path: 'style_guide/:category',  component: StyleGuideComponent },
 	{ path: 'test',  component: AtelierComponent },
 	{ path: 'services',  component: ServicesComponent },
 	{ path: 'messages',  component: MessagesComponent, children: [

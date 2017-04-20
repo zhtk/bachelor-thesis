@@ -1,22 +1,36 @@
-import { Component, Input, } from '@angular/core'
+import {Component, Input, Provider,} from '@angular/core'
 import { FormClass } from '../FormComponents/FormClass'
 import { FormsModule }   from '@angular/forms';
 import {FrontEndClass} from "../ComponentsCore/MainClasses/FrontEndClass";
+import {ProviderTypeEnum} from "../ComponentsCore/ProviderTypeEnum";
+import {ComponentsRegister, Register} from "../ComponentsRegister";
+import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
+
 
 @Component({
   selector: 'heading',
-  template: `<h1 class="page-header">{{ text }}</h1>`
+  template: `<h1 class="page-header">{{ text }}{{name}}</h1>`,
+  providers:[ComponentsRegister]
 })
+@Register(
+  {
+    name: "Nagłówek",
+    description : "Wyróżniony tekst"
+  }
+)
 export class HeadingComponent extends FrontEndClass implements RenderFromJSON
 {
-  textType:TextTypeEnum;
+
+
+  textType:ProviderTypeEnum;
   text: string;
   backgroundColor: string;
 
-  constructor ()
+  constructor (reg : ComponentsRegister )
   {
     super();
     this.text = "";
+    reg.register(this);
   }
 
   renderJSON(parsed: any): void {
