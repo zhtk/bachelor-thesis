@@ -4,7 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
 import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 import {FrontEndClass} from "../ComponentsCore/MainClasses/FrontEndClass";
-import {ComponentsInfo, Register} from "../ComponentsRegister";
+import {Attr, ComponentsInfo, Register} from "../ComponentsRegister";
 import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 
 @Component
@@ -19,14 +19,21 @@ import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
      tag : "kontener"
    }
 )
-export class PanelComponent extends FrontEndClass implements RenderFromJSON, Container{
+export class PanelComponent extends FrontEndClass implements RenderFromJSON, Container {
 
-
-  title:string;
+  @Attr({info:"Tekst na górnej belce", default : "", name:""})
+  public title:string;
+  @Attr({info:"Kolor panelu", default : "", name:""})
   panel_class:string;
+
   panel_body_class:string;
+
+  @Attr({info:"Czy ciało panelu rozwijane", default : "false", name:""})
   collapsible:boolean;
+
+  @Attr({info:"Id panelu", default : "", name:""})
   main_id:string;
+  @Attr({info:"Czy panel usuwalny", default : "false", name:""})
   hidable:boolean;
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;

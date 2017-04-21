@@ -23,7 +23,7 @@ import { Attr, Register} from "../ComponentsRegister";
     tag : "ogolne"
   }
 )
-export class IconComponent extends FrontEndClass implements RenderFromJSON{
+export class IconComponent extends FrontEndClass implements RenderFromJSON {
 
   @Attr({info:"Która ikona", default : "glyphicon glyphicon-", name:""})
   class:string;
