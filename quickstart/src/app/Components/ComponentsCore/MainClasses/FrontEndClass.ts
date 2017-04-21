@@ -1,4 +1,5 @@
 import {SizeProperties} from "./SizeProperties";
+import {MemberInfo} from "../../ComponentsRegister";
 
 /*
  Klasa "abstrakcyjna" korzeń drzewa wszystkich komponentow
@@ -11,9 +12,11 @@ export class FrontEndClass{
   public textColor:string;
   public grid_class:string;
   cursor:string; // Tutaj przyda sie enum
+  public params:MemberInfo[];
 
   constructor()
   {
+
     this.size = new SizeProperties(this);
     this.visible = true;
     this.backgroundColor = "white";

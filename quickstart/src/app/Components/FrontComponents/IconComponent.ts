@@ -8,6 +8,7 @@ import {Http} from "@angular/http";
 import {Observable} from "rxjs";
 import {MenuService} from "../../menu-service";
 import {TimerObservable} from "rxjs/observable/TimerObservable";
+import { Attr, Register} from "../ComponentsRegister";
 
 @Injectable()
 @Component
@@ -15,14 +16,24 @@ import {TimerObservable} from "rxjs/observable/TimerObservable";
   selector: 'icon',
   template: '<span [style.font-size] = "font_size" [ngClass]="class"></span>'
 })
+@Register
+(
+  {name : "Icon",
+    description : "Ikona ze zbioru glyphicon",
+    tag : "ogolne"
+  }
+)
 export class IconComponent extends FrontEndClass implements RenderFromJSON{
 
+  @Attr({info:"Która ikona", default : "glyphicon glyphicon-", name:""})
   class:string;
+
+  @Attr({info:"Wielkość ikony", default : "small", name:""})
   font_size:string;
   constructor(private cfr: ComponentFactoryResolver, private peopleServicee : MenuService, private http: Http) {
     super();
     this.class = "glyphicon glyphicon-"
-
+    this.font_size = "1em";
   }
 
   renderJSON(specification: any): void {

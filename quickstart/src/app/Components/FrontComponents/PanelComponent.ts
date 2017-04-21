@@ -4,13 +4,23 @@ import { FormsModule }   from '@angular/forms';
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
 import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 import {FrontEndClass} from "../ComponentsCore/MainClasses/FrontEndClass";
+import {ComponentsInfo, Register} from "../ComponentsRegister";
+import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 
 @Component
 ({
   selector: 'panelgroup',
   templateUrl: '../../pages/Components/Panel/panel.html'
 })
-export class PanelComponent extends FrontEndClass implements RenderFromJSON, Container {
+@Register
+(
+   {name : "Panel",
+     description : "Okno z górną belką i miejscem na zawartość",
+     tag : "kontener"
+   }
+)
+export class PanelComponent extends FrontEndClass implements RenderFromJSON, Container{
+
 
   title:string;
   panel_class:string;
@@ -27,7 +37,7 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
   }
 
   renderJSON(specification: any): void {
-    //this.target.clear();
+
     this.panel_class = "panel panel-";
     this.panel_body_class ="panel-body";
     this.grid_class = "col-lg-";
@@ -55,6 +65,7 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
 
     if("hidable" in specification)
       this.hidable = true;
+
   }
 
   renderChildren(children: any): void {

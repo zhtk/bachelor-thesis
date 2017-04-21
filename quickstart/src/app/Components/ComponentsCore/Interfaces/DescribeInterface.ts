@@ -1,4 +1,6 @@
-import {ComponentsRegister} from "../../ComponentsRegister";
+import {ComponentsInfo} from "../../ComponentsRegister";
 export  interface Docs {
-  reg:ComponentsRegister;
+  name: string;
+  description: string;
+  tag: string;
 }

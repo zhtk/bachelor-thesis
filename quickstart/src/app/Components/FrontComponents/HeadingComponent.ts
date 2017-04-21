@@ -12,12 +12,6 @@ import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
   template: `<h1 class="page-header">{{ text }}{{name}}</h1>`,
   providers:[ComponentsRegister]
 })
-@Register(
-  {
-    name: "Nagłówek",
-    description : "Wyróżniony tekst"
-  }
-)
 export class HeadingComponent extends FrontEndClass implements RenderFromJSON
 {
 
@@ -34,6 +28,7 @@ export class HeadingComponent extends FrontEndClass implements RenderFromJSON
   }
 
   renderJSON(parsed: any): void {
+    console.log( );
     if ("text" in parsed)
       this.text = parsed["text"];
     if("backgroundColor" in parsed)

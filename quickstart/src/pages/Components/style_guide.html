@@ -1,0 +1,63 @@
+<div style ="padding:20px"></div>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Informacja ogólne</div>
+      <div class="panel-body">
+        <h3>Nazwa</h3>
+        {{obj.name}}
+        <h3>Opis</h3>
+        {{obj.description}}
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Json</div>
+      <div class="panel-body">
+       {{json}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style ="padding:20px"></div>
+<div class="row">
+  <div class="col-lg-8">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Atrybuty</div>
+      <div class="panel-body">
+
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Nazwa</th>
+            <th>Opis</th>
+            <th>Wartość domyślna</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor = "let param of obj.params">
+            <td>{{param.name}}</td>
+            <td>{{param.info}}</td>
+            <td>{{param.default}}</td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style ="padding:20px"></div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Komponent</div>
+      <div class="panel-body">
+        <template #target></template>
+      </div>
+    </div>
+  </div>
+</div>
+

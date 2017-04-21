@@ -127,8 +127,9 @@ import {StyleGuideComponent} from "./Components/StyleGuideComponent";
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
   					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, PanelGroupComponent, ContentComponent,
-    IconComponent, ProgressBarComponent, SpanComponent]
+    IconComponent, ProgressBarComponent, SpanComponent, StyleGuideComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
 
 
