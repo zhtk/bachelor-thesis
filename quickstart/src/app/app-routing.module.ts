@@ -1,7 +1,8 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AtelierComponent }   from './atelier.component';
-
+import { LoginComponent } from './login.component';
+import { PreprocComponent } from './preproc.component';
 
 import { RenderComponent } from './render.component';
 import { TestComponent } from './TestComponent'
@@ -25,26 +26,30 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { InboxComponent } from './home_components/inbox.component';
 
 const routes: Routes = [
-	{ path: '', redirectTo: '/main', pathMatch: 'full' },
-	{ path: 'main',  component: HomeComponent },
-	{ path: 'test',  component: AtelierComponent },
-	{ path: 'services',  component: ServicesComponent },
-	{ path: 'messages',  component: MessagesComponent, children: [
-		{ path: '', redirectTo: 'inbox', pathMatch: 'full' },
-		{ path: 'inbox', component: InboxComponent },
-
-	]},
-	{ path: 'meeting',  component: MeetingComponent },
-	{ path: 'umow',  component: UmowComponent },
-	{ path: 'kolejka',  component: KolejkaComponent },
-	{ path: 'render',  component: RenderComponent },
-	{ path: 'opinion',  component: OpinionComponent },
-	{ path: 'zwolnienie',  component: ZwolnienieComponent },
-	{ path: 'pracodawca',  component:PracodawcaComponent },
-	{ path: 'lekarz',  component: LekarzComponent },
-	{ path: 'pacjent',  component: PacjentComponent },
+	//{ path: '', redirectTo: '/app', pathMatch: 'full' },
+	{ path: 'auth',  component: LoginComponent },
 	{ path: '404', component: PageNotFoundComponent },
-	{ path: 'komponenty', component: TestComponent},
+	{ path: '',  component: PreprocComponent, children: [
+		{ path: '', redirectTo: '/main', pathMatch: 'full' },
+		{ path: 'main',  component: HomeComponent },
+		//{ path: 'test',  component: AtelierComponent },
+		{ path: 'services',  component: ServicesComponent },
+		{ path: 'messages',  component: MessagesComponent, children: [
+			{ path: '', redirectTo: 'inbox', pathMatch: 'full' },
+			{ path: 'inbox', component: InboxComponent },
+
+		]},
+		{ path: 'meeting',  component: MeetingComponent },
+		{ path: 'umow',  component: UmowComponent },
+		{ path: 'kolejka',  component: KolejkaComponent },
+		{ path: 'render',  component: RenderComponent },
+		{ path: 'opinion',  component: OpinionComponent },
+		{ path: 'zwolnienie',  component: ZwolnienieComponent },
+		{ path: 'pracodawca',  component:PracodawcaComponent },
+		{ path: 'lekarz',  component: LekarzComponent },
+		{ path: 'pacjent',  component: PacjentComponent },
+		{ path: 'komponenty', component: TestComponent},
+	]},
 	{ path: '**', redirectTo: '/404'} // ostatni komponent - dodajemy nowe sciezki przed nim!
 ];
 
