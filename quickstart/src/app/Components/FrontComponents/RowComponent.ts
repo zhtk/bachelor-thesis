@@ -9,6 +9,7 @@ import {Type} from "typescript";
 import {ViewContainer} from "@angular/core/src/linker/view_container";
 import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
+import {Register} from "../ComponentsRegister";
 
 @Component
 ({
@@ -16,6 +17,13 @@ import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
   template: '<div class="row"><template #target></template></div>'
  ,
 })
+@Register
+(
+  {name : "Row",
+    description : "Grupuje zawartość w rząd",
+    tag : "kontener"
+  }
+)
 export class RowComponent implements RenderFromJSON, OnInit, Container{
 
   id:number;

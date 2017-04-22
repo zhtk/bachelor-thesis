@@ -13,6 +13,7 @@ import {HeadingComponent} from "../FrontComponents/HeadingComponent";
 import {PanelGroupComponent} from "../FrontComponents/PanelGroupComponent";
 import {ContentComponent} from "../FrontComponents/ContentComponent";
 import {IconComponent} from "../FrontComponents/IconComponent";
+import {SpanComponent} from "../FrontComponents/SpanComponent";
 
 export class ComponentCreator {
 
@@ -58,7 +59,7 @@ export class ComponentCreator {
 			case ("ProgBar"):
 				compFactory = factory.resolveComponentFactory(ProgressBarComponent);
 				break;
-				
+
       case ("Heading"):
         compFactory = factory.resolveComponentFactory(HeadingComponent);
         break;
@@ -70,6 +71,9 @@ export class ComponentCreator {
         break;
       case ("Icon"):
         compFactory = factory.resolveComponentFactory(IconComponent);
+        break;
+      case ("Span"):
+        compFactory = factory.resolveComponentFactory(SpanComponent);
         break;
 
 			default: // powinno byc explicite

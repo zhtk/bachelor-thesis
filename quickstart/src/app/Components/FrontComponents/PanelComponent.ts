@@ -4,19 +4,36 @@ import { FormsModule }   from '@angular/forms';
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
 import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 import {FrontEndClass} from "../ComponentsCore/MainClasses/FrontEndClass";
+import {Attr, ComponentsInfo, Register} from "../ComponentsRegister";
+import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 
 @Component
 ({
   selector: 'panelgroup',
   templateUrl: '../../pages/Components/Panel/panel.html'
 })
+@Register
+(
+   {name : "Panel",
+     description : "Okno z górną belką i miejscem na zawartość",
+     tag : "kontener"
+   }
+)
 export class PanelComponent extends FrontEndClass implements RenderFromJSON, Container {
 
-  title:string;
+  @Attr({info:"Tekst na górnej belce", default : "", name:""})
+  public title:string;
+  @Attr({info:"Kolor panelu", default : "", name:""})
   panel_class:string;
+
   panel_body_class:string;
+
+  @Attr({info:"Czy ciało panelu rozwijane", default : "false", name:""})
   collapsible:boolean;
+
+  @Attr({info:"Id panelu", default : "", name:""})
   main_id:string;
+  @Attr({info:"Czy panel usuwalny", default : "false", name:""})
   hidable:boolean;
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
@@ -27,7 +44,7 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
   }
 
   renderJSON(specification: any): void {
-    //this.target.clear();
+
     this.panel_class = "panel panel-";
     this.panel_body_class ="panel-body";
     this.grid_class = "col-lg-";
@@ -55,6 +72,7 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
 
     if("hidable" in specification)
       this.hidable = true;
+
   }
 
   renderChildren(children: any): void {

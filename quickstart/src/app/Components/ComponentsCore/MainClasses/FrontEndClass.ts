@@ -1,19 +1,27 @@
 import {SizeProperties} from "./SizeProperties";
+import {MemberInfo, Attr} from "../../ComponentsRegister";
 
 /*
  Klasa "abstrakcyjna" korzeń drzewa wszystkich komponentow
  */
 export class FrontEndClass{
-
+  @Attr({info:"Czy element widzialny", default : "true", name:""})
   public visible: boolean;
+  @Attr({info:"Rozmiar elementu", default : "12", name:""})
   public size:SizeProperties;
+  @Attr({info:"Kolor tla", default : "transparent", name:""})
   public backgroundColor:string;
+  @Attr({info:"Kolor tekstu", default : "black", name:""})
   public textColor:string;
+
   public grid_class:string;
+  @Attr({info:"Rodzaj kursora", default : "pointer", name:""})
   cursor:string; // Tutaj przyda sie enum
+  public params:MemberInfo[];
 
   constructor()
   {
+
     this.size = new SizeProperties(this);
     this.visible = true;
     this.backgroundColor = "white";

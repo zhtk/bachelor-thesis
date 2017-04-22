@@ -73,6 +73,8 @@ import {HeadingComponent} from "./Components/FrontComponents/HeadingComponent";
 import {PanelGroupComponent} from "./Components/FrontComponents/PanelGroupComponent";
 import {ContentComponent} from "./Components/FrontComponents/ContentComponent";
 import {IconComponent} from "./Components/FrontComponents/IconComponent";
+import {SpanComponent} from "./Components/FrontComponents/SpanComponent";
+import {StyleGuideComponent} from "./Components/StyleGuideComponent";
 
 
 @NgModule({
@@ -121,11 +123,16 @@ import {IconComponent} from "./Components/FrontComponents/IconComponent";
           HeadingComponent,
           PanelGroupComponent,
           ContentComponent,
-    IconComponent
+    IconComponent,
+    SpanComponent,
+    StyleGuideComponent,
 				],
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
   					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, PanelGroupComponent, ContentComponent,
-    IconComponent, ProgressBarComponent]
+    IconComponent, ProgressBarComponent, SpanComponent, StyleGuideComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
+
+

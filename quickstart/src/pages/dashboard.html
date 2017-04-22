@@ -12,22 +12,24 @@
                 </div>
                 <!-- /input-group -->
             </li>
-            <li data-toggle="collapse" data-target="#dash-PanelOgolny">
+            <li>
                 <a routerLink="/main" routerLinkActive="active" >Panel Ogólny</a>
-
-                    <div id="dash-PanelOgolny" class="collapse">
-                        <ul >
-                            <li>
-                                <small class="text-muted">przykładowe podmenu</small>
-                            </li>
-                        </ul>
-                    </div>
             </li>
+          <li data-toggle="collapse" data-target="#dash">
+            <a routerLink="/main" >Komponenty<span class="fa arrow"></span><br><small class="text-muted">Style Guide</small></a>
+            <ul id ="dash" class="nav nav-second-level collapse">
+              <li *ngFor = "let i of display">
+                <a routerLink="/style_guide/{{i.name}}" routerLinkActive="active">{{i.name}}</a>
+              </li>
+            </ul>
+          </li>
+
+
+
+
+
             <li>
                 <a routerLink="/messages" routerLinkActive="active">Dokumenty i Wiadomości<br><small class="text-muted">Korespondencja z ZUS</small></a>
-            </li>
-            <li>
-                <a routerLink="/test" routerLinkActive="active">Zlecenia<br><small class="text-muted">Autoryzacja operacji</small></a>
             </li>
             <li>
                 <a routerLink="/services" routerLinkActive="active">Usługi<br><small class="text-muted">Katalog usług elektronicznych</small></a>
@@ -43,9 +45,6 @@
             </li>
             <li>
                 <a>Ustawienia<br><small class="text-muted">Konfiguracja profilu</small></a>
-            </li>
-            <li>
-                <a routerLink="/render" routerLinkActive="active">Przykład Renderowania<br><small class="text-muted">Renderowanie komponentów z JSONa</small></a>
             </li>
         </ul>
     </div>
