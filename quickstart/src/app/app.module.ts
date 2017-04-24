@@ -74,6 +74,7 @@ import {ContentComponent} from "./Components/FrontComponents/ContentComponent";
 import {IconComponent} from "./Components/FrontComponents/IconComponent";
 import {SpanComponent} from "./Components/FrontComponents/SpanComponent";
 import {StyleGuideComponent} from "./Components/StyleGuideComponent";
+import {PiecsetComponent} from "./piecsetComponent";
 
 
 @NgModule({
@@ -123,11 +124,12 @@ import {StyleGuideComponent} from "./Components/StyleGuideComponent";
     IconComponent,
     SpanComponent,
     StyleGuideComponent,
-				],
+    PiecsetComponent,
+  ],
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
   					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, PanelGroupComponent, ContentComponent,
-    IconComponent, ProgressBarComponent, SpanComponent, StyleGuideComponent]
+    IconComponent, ProgressBarComponent, SpanComponent, StyleGuideComponent, PiecsetComponent]
 })
 export class AppModule {
 }

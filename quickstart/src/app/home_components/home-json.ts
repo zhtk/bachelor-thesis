@@ -35,13 +35,8 @@ const layout_dict =
               {
                 "type": "Content",
                 "data_provider": "dynamic",
-                "text" : "x: %tasks",
-                "endpoints":
-                  [
-                    { "name" : "tasks",
-                      "url" : "/api/view/taskpending"
-                    },
-                  ]
+                "endpoint": "/api/view/taskpending"
+
               },
               {
                 "type" : "Icon",
@@ -111,6 +106,8 @@ const layout_dict =
                         [
                           {
                             "type": "Content",
+                            "data_provider": "dynamic",
+                            "endpoint": "/api/view/taskpending"
                           },
                         ]
                       },
@@ -126,6 +123,8 @@ const layout_dict =
                         [
                           {
                             "type": "Content",
+                            "data_provider": "dynamic",
+                            "endpoint": "/api/view/taskpending"
                           },
                         ]
                       },
@@ -140,6 +139,8 @@ const layout_dict =
                           [
                             {
                               "type": "Content",
+                              "data_provider": "dynamic",
+                              "endpoint": "/api/view/taskpending"
                             },
                           ]
                       }

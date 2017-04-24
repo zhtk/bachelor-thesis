@@ -3,17 +3,6 @@ const layout_dict =
 		"components":
 		[
 			{
-				"type" : "RowComponent",
-				"id"  : "row0",
-				"children":
-				[
-					{
-						"type": "Heading",
-						"text": "Witaj ponownie Jan!"
-					}
-				]
-			},
-			{
 				"type": "PanelComponent",
 				"collapse" : true,
 				"hidable" : true,
@@ -140,7 +129,7 @@ const layout_dict =
 									"large": 3,
 								},
 							},
-							
+
 						]
 					},
 					{

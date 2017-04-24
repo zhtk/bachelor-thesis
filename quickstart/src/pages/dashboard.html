@@ -34,9 +34,19 @@
             <li>
                 <a routerLink="/services" routerLinkActive="active">Usługi<br><small class="text-muted">Katalog usług elektronicznych</small></a>
             </li>
-            <li>
-              <a routerLink="/komponenty" routerLinkActive="active">Test<br><small class="text-muted">Test</small></a>
-            </li>
+
+          <li data-toggle="collapse" data-target="#testy">
+            <a routerLink="/main" >Test<span class="fa arrow"></span><br><small class="text-muted">Strony testowe</small></a>
+            <ul id ="testy" class="nav nav-second-level collapse">
+              <li>
+                <a routerLink="/test/main" routerLinkActive="active">Strona domowa<br><small class="text-muted">Strona domowa z JSONa</small></a>
+              </li>
+              <li>
+                <a routerLink="/test/piecset" routerLinkActive="active">500+<br><small class="text-muted">500+ z JSONa</small></a>
+              </li>
+            </ul>
+          </li>
+
             <li>
                 <a routerLink="/meeting" routerLinkActive="active">Wizyty<br><small class="text-muted">Rezerwacja wizyty w ZUS</small></a>
             </li>

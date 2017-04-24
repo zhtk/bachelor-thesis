@@ -6,30 +6,23 @@ import {
 import {TextBox} from "./Components/FormComponents/TextBox/TextBox";
 import {ComponentCreator} from "./Components/ComponentsCore/ComponentCreator";
 import { LAYOUT } from './500plus/mock-form'
-import { HOME } from './home_components/home-json'
-import {ActivatedRoute} from "@angular/router";
+
 @Component
 ({
-  selector: 'testowe',
+  selector: 'piecset',
   templateUrl: '../pages/test.html',
 })
-export class TestComponent implements OnInit
+export class PiecsetComponent implements OnInit
 {
   factory: ComponentFactoryResolver;
-  pageJSON = HOME;
-  pages = {
-    'piecset' : LAYOUT,
-    'main' : HOME
-  };
-  constructor(private route: ActivatedRoute, public cfr: ComponentFactoryResolver) {
+
+  constructor(public cfr: ComponentFactoryResolver) {
     this.factory = cfr;
-    console.log(this.route.snapshot.params['name']);
-    this.pageJSON = this.pages[this.route.snapshot.params['name']];
   }
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
-
+  pageJSON = LAYOUT;
   ngOnInit(): void {
     var parsed = JSON.parse(this.pageJSON)["components"];
     for(var elem = 0; elem < parsed.length; elem++)

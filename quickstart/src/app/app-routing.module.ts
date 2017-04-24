@@ -24,6 +24,7 @@ import { PacjentComponent } from './leave_components/pacjent-components/pacjent-
 import { PageNotFoundComponent } from './page-not-found.component';
 import { InboxComponent } from './home_components/inbox.component';
 import {StyleGuideComponent} from "./Components/StyleGuideComponent";
+import {PiecsetComponent} from "./piecsetComponent";
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -42,11 +43,11 @@ const routes: Routes = [
 	{ path: 'render',  component: RenderComponent },
 	{ path: 'opinion',  component: OpinionComponent },
 	{ path: 'zwolnienie',  component: ZwolnienieComponent },
-	{ path: 'pracodawca',  component:PracodawcaComponent },
+	{ path: 'pracodawca',  component: PracodawcaComponent },
 	{ path: 'lekarz',  component: LekarzComponent },
 	{ path: 'pacjent',  component: PacjentComponent },
 	{ path: '404', component: PageNotFoundComponent },
-	{ path: 'komponenty', component: TestComponent},
+  { path: 'test/:name', component: TestComponent },
 	{ path: '**', redirectTo: '/404'} // ostatni komponent - dodajemy nowe sciezki przed nim!
 ];
 
