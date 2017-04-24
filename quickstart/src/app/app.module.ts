@@ -3,8 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
-
 import { AppComponent }  from './app.component';
+import { LoginComponent } from './login.component';
+import { PreprocComponent } from './preproc.component';
 
 import {TextBox} from './Components/FormComponents/TextBox/TextBox'
 import {TestComponent} from './TestComponent'
@@ -86,6 +87,7 @@ import {PiecsetComponent} from "./piecsetComponent";
   				      ],
   declarations: [ AppComponent,
   				  	HomeComponent,
+  				  	PreprocComponent,
   				  	PageNotFoundComponent,
   				  	AtelierComponent,
   				  	DashboardComponent,
@@ -118,6 +120,7 @@ import {PiecsetComponent} from "./piecsetComponent";
           FormComponent,
 					PasswordComponent,
 					LabelComponent,
+					LoginComponent,
           HeadingComponent,
           PanelGroupComponent,
           ContentComponent,

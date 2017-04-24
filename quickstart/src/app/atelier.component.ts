@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'atelier',
-  template: `<h2>OK!</h2>`
-  // templateUrl: 'pages/dashboard.html',
+  templateUrl: 'pages/mockup.html',
 })
 export class AtelierComponent {}
