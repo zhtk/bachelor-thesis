@@ -14,7 +14,7 @@ import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 })
 @Register
 (
-   {name : "Panel",
+   { name : "Panel",
      description : "Okno z górną belką i miejscem na zawartość",
      tag : "kontener"
    }
@@ -38,9 +38,12 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
+
   constructor(private cfr: ComponentFactoryResolver) {
+
     super();
     this.main_id = Math.floor((Math.random() * 10000) + 1).toString();
+    this.arrayOfKeys += Object.keys(this);
   }
 
   renderJSON(specification: any): void {

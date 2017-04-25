@@ -8,26 +8,25 @@ import {IconComponent} from "../Components/FrontComponents/IconComponent";
   templateUrl: 'pages/dashboard.html',
 })
 export class DashboardComponent {
-  components = {
-    'Panel' : PanelComponent,
-    'Row' : RowComponent,
-    'Icon' : IconComponent
-  };
+
+  components = [
+    'Panel' ,
+    'Row' ,
+    'Icon' ,
+  ];
 
   display: string[];
-  tekst:string;
-  constructor ()
-  {
-    this.display = [];
-    for(var i in this.components)
-    {
-      let obj = Object.create(this.components[i]);
 
-      obj.constructor = this.components[i]
-      this.display.push(obj.prototype);
-      console.log(obj);
-      console.log(obj.prototype.name);
+  constructor () {
+    this.display = [];
+
+    for (let i in this.components) {
+      //let obj = Object.create(this.components[i]);
+
+      //obj.constructor = this.components[i];
+      //this.display.push(obj.prototype);
+      this.display.push(this.components[i]);
     }
-    console.log(this.display);
+
   }
 }

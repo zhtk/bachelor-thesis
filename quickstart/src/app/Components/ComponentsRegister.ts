@@ -5,12 +5,13 @@ import {FrontEndClass} from "./ComponentsCore/MainClasses/FrontEndClass";
 
 
 export function Attr(label: MemberInfo) {
-  return function (target: FrontEndClass, key: string) {
+  return function (target: any, key: any) {
 
     if (!target.params) {
       target.params = [];
     }
     label.name = key;
+    Object.defineProperty(label, 'class_name', {value: target.constructor.name});
     target.params.push(label);
 
   };
@@ -42,16 +43,7 @@ export class ComponentsInfo {
 @Injectable()
 export class ComponentsRegister {
   components_list: string[]; // ComponentsInfo[];
-
-
   constructor() {
     this.components_list = [];
   }
-
-  register(obj: any) {
-    console.log(obj.name);
-    this.components_list.push(obj.name);
-    console.log( this.components_list);
-  }
-
 }

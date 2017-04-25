@@ -24,7 +24,6 @@ export class HeadingComponent extends FrontEndClass implements RenderFromJSON
   {
     super();
     this.text = "";
-    reg.register(this);
   }
 
   renderJSON(parsed: any): void {

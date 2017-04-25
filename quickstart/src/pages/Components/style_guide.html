@@ -15,7 +15,8 @@
     <div class="panel panel-primary">
       <div class="panel-heading">Json</div>
       <div class="panel-body">
-       {{json}}
+        <div [innerHTML]="json">
+        </div>
       </div>
     </div>
   </div>
@@ -35,6 +36,7 @@
             <th>Nazwa</th>
             <th>Opis</th>
             <th>Wartość domyślna</th>
+            <th>Zmień wartość</th>
           </tr>
           </thead>
           <tbody>
@@ -42,6 +44,8 @@
             <td>{{param.name}}</td>
             <td>{{param.info}}</td>
             <td>{{param.default}}</td>
+            <td>{{param.class_name}}</td>
+            <td> <input [(ngModel)]="test[param.name]" (focusout) = "attr_change()"></td>
           </tbody>
         </table>
       </div>
