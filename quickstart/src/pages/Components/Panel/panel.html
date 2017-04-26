@@ -1,6 +1,6 @@
 <div [ngClass] = "grid_class"  [hidden]="!visible">
     <div [ngClass] = "panel_class" id= "{{id}}">
-      <div [style.cursor] = "cursor" class="panel-heading"
+      <div [style.cursor] = "cursor" class="panel-heading" *ngIf="title || hidable"
            [attr.data-toggle]=" collapsible ? 'collapse' : null " [attr.data-target]="'#' + main_id">
         <h3 class="panel-title">{{ title }}
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true"
