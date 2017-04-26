@@ -4,7 +4,7 @@ const layout_dict =
 		[
 			{
 				"type": "PanelComponent",
-				"collapse" : true,
+				//"collapse" : true,
 				"hidable" : true,
 				"size": {
 					"large": 12,
@@ -92,7 +92,7 @@ const layout_dict =
 								},
 							},
 							{
-								"type": "TextBox",
+								"type": "Zipcode",
 								"id": "test2",
 								"defaultText": "Kod Pocztowy",
 								"size": {
@@ -133,17 +133,6 @@ const layout_dict =
 						]
 					},
 					{
-						"type": "RowComponent",
-						"id": "row1",
-						"children": [
-							{
-								"type": "ProgBar",
-								"width": 3,
-								"id": "cokolsiek"
-							}
-						]
-					},
-					{
 						"type": "PanelComponent",
 						"id": "panel1",
 						"size": {
@@ -165,6 +154,99 @@ niepełnosprawnych albo orzeczeniem o umiarkowanym lub znacznym stopniu niepełn
 								"size": {
 									"large": 10,
 								}
+							}
+						]
+					},
+					{
+						"type": "PanelComponent",
+						"id": "panel2",
+						"size": {
+							"large": 10,
+						},
+						"title": `3. Ustalenie prawa do świadczenia wychowawczego na kolejne dziecko/dzieci w wieku poniżej
+18. roku życia, inne niż pierwsze dziecko.`,
+						"children": [
+							{
+								"type": "LabelComponent",
+								"id": "test3",
+								"text":
+`Wnoszę o ustalenie prawa do świadczenia wychowawczego na następujące dzieci/dziecko
+zamieszkujące ze mną oraz pozostające na moim utrzymaniu (świadczenie wychowawcze na drugie
+i kolejne dziecko przysługuje do dnia ukończenia przez dziecko 18. roku życia i przysługuje niezależnie
+od osiągniętego dochodu):`,
+								"size": {
+									"large": 12,
+									"medium": 12
+								}
+							},
+							{
+								"type": "RowComponent",
+								"id": "row1",
+								"children": [
+									{
+										"type": "TextBox",
+										"id": "test1",
+										"defaultText": "Imię",
+										"size": {
+											"large": 4,
+										},
+									},
+									{
+										"type": "TextBox",
+										"id": "test2",
+										"defaultText": "Nazwisko",
+										"size": {
+											"large": 4,
+										},
+									},
+									{
+										"type": "TextBox",
+										"id": "test2",
+										"defaultText": "Płeć",
+										"size": {
+											"large": 3,
+										},
+									}
+								]
+							},
+							{
+								"type": "RowComponent",
+								"id": "row1",
+								"children": [
+									{
+										"type": "PeselComponent",
+										"id": "test1",
+										"infoText": "PESEL",
+										"defaultText": "PESEL", //TODO samo się ustawia
+										"size": {
+											"large": 2,
+										},
+									},
+									{
+										"type": "TextBox",
+										"id": "test2",
+										"defaultText": "Stan cywilny",
+										"size": {
+											"large": 3,
+										},
+									},
+									{
+										"type": "TextBox",
+										"id": "test2",
+										"defaultText": "Obywatelstwo",
+										"size": {
+											"large": 3,
+										},
+									},
+									{
+										"type": "TextBox",
+										"id": "test2",
+										"defaultText": "Data urodzenia",
+										"size": {
+											"large": 3,
+										},
+									}
+								]
 							}
 						]
 					}

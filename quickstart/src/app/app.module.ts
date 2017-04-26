@@ -63,7 +63,8 @@ import { InboxComponent } from './home_components/inbox.component';
 import { RowComponent } from "./Components/FrontComponents/RowComponent";
 import {ComponentCreator} from "./Components/ComponentsCore/ComponentCreator";
 import {PanelComponent} from "./Components/FrontComponents/PanelComponent";
-import { PeselComponent } from './Components/FormComponents/TextBox/PeselComponent'
+import { PeselComponent } from './Components/FormComponents/TextBox/PeselComponent';
+import { ZipcodeComponent } from './Components/FormComponents/TextBox/PostalCodeComponent'
 import { PasswordComponent } from './Components/FormComponents/TextBox/PasswordComponent'
 import { LabelComponent } from './Components/FrontComponents/LabelComponent'
 import {SubmitComponent} from "./Components/FormComponents/SubmitComponent";
@@ -116,6 +117,7 @@ import {PiecsetComponent} from "./piecsetComponent";
 					PanelComponent,
 					PeselComponent,
 					ProgressBarComponent,
+					ZipcodeComponent,
           SubmitComponent,
           FormComponent,
 					PasswordComponent,
@@ -132,7 +134,7 @@ import {PiecsetComponent} from "./piecsetComponent";
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
   					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, PanelGroupComponent, ContentComponent,
-    IconComponent, ProgressBarComponent, SpanComponent, StyleGuideComponent, PiecsetComponent]
+    IconComponent, ProgressBarComponent, SpanComponent, StyleGuideComponent, PiecsetComponent, ZipcodeComponent]
 })
 export class AppModule {
 }
