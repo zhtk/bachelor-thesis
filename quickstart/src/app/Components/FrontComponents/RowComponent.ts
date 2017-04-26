@@ -19,7 +19,8 @@ import {Register} from "../ComponentsRegister";
 })
 @Register
 (
-  {name : "Row",
+  {
+    name : "Row",
     description : "Grupuje zawartość w rząd",
     tag : "kontener"
   }

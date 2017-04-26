@@ -17,6 +17,7 @@ export class TextBox extends FormClass implements RenderFromJSON
   visible: boolean;
   backgroundColor: string;
   name:string;
+  infoText: string;
 
   constructor ()
   {
@@ -27,6 +28,7 @@ export class TextBox extends FormClass implements RenderFromJSON
     this.text = "";
     this.regex = new RegExp("");
     this.name = "val";
+    this.infoText = "";
   }
   //Tutaj przyda się klasa autouzupelnienie
   //autoComplete:AutoComplete
@@ -66,6 +68,8 @@ export class TextBox extends FormClass implements RenderFromJSON
       this.required = parsed["required"];
     if("disabled" in parsed)
       this.disabled = parsed["disabled"];
+    if("infoText" in parsed)
+      this.infoText = parsed["infoText"];
     if("backgroundColor" in parsed)
       this.backgroundColor = parsed["backgroundColor"];
   }
