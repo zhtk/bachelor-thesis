@@ -23,6 +23,7 @@ libraryDependencies += "org.apache.curator" % "curator-framework" % "3.3.0"
 libraryDependencies += "org.apache.curator" % "curator-client" % "3.3.0"
 libraryDependencies += "org.apache.curator" % "curator-x-discovery" % "3.3.0"
 
+libraryDependencies += "com.google.guava" % "guava" % "21.0"
 libraryDependencies += "io.grpc" % "grpc-all" % "1.2.0"
 libraryDependencies += "com.google.protobuf" % "protobuf-java" % "3.0.0"
 

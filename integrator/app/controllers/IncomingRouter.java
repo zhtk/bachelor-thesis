@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.concurrent.*;
 import javax.inject.Inject;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -32,16 +33,14 @@ public class IncomingRouter extends Controller {
             return Results.notFound();
     }
 
-    public Result read(String endpoint) {
+    public CompletionStage<Result> read(String endpoint) {
         ReadEndpoint ep = readManager.getEndpoint(endpoint);
         ArgumentParser arguments = new ArgumentParser(request());
-        
-        response().setHeader("Access-Control-Allow-Origin", "*");
         
         if (ep != null)
             return ep.getResult(arguments.getKeys(), arguments.getValues());
         else
-            return Results.notFound();
+            return CompletableFuture.supplyAsync(() -> {return Results.notFound();});
     }
 
     public Result write(String endpoint) {

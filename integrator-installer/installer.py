@@ -19,7 +19,7 @@ def add_node(path, content, temp=False):
 
 def add_service_server(basePath, serviceName, serverId, address, port,
                        sslPort="null", payload="null", registrationTimeUTC=0,
-                       serviceType="PERMANENT", uriSpec="null"):
+                       serviceType="PERMANENT", uriSpec="null", temp=True):
 	add_node(basePath + serviceName, "")
 	
 	info = "{"
@@ -32,9 +32,9 @@ def add_service_server(basePath, serviceName, serverId, address, port,
 	info += "\"registrationTimeUTC\":" + str(registrationTimeUTC) + ","
 	info += "\"serviceType\":\"" + serviceType + "\","
 	info += "\"uriSpec\":" + uriSpec + ""
-	info += "}"	
+	info += "}"
 	
-	add_node(basePath + serviceName + "/" + serverId, info, temp=True)
+	add_node(basePath + serviceName + "/" + serverId, info, temp=temp)
 
 def add_view_endpoint(name, content):
 	add_node("/view/" + name, content)
@@ -43,8 +43,8 @@ def add_view_endpoint_from_file(name, filename):
 	with open(filename) as f: content = f.read()
 	add_view_endpoint(name, content)
 
-def add_read_endpoint(name, serverId, address, port):
-	add_service_server("/read/", name, serverId, address, port)
+def add_read_endpoint(name, serverId, address, port, temp=True):
+	add_service_server("/read/", name, serverId, address, port, temp=temp)
 
 def add_write_endpoint(name, serverId, address, port):
 	add_service_server("/write/", name, serverId, address, port)
@@ -78,7 +78,8 @@ def prepare_database_layout():
 
 def create_endpoints():
 	add_view_endpoint("abc", "jakiś przykładowy tekst")
-	add_read_endpoint("abc", "server1", "http://example.com", 80)
+	add_read_endpoint("abc", "server1", "http://example.com", 80, temp=False)
+	add_read_endpoint("google", "google", "https://google.com", 80, temp=False)
 
 def set_starting_endpoint(path):
 	zk.set("/start", path.encode('utf-8'))

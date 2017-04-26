@@ -1,6 +1,8 @@
 package managers;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.time.Duration;
 import javax.inject.Inject;
 import org.apache.curator.x.discovery.*;
 import com.google.inject.assistedinject.Assisted;
@@ -11,7 +13,7 @@ import play.mvc.Result;
 import play.mvc.Results;
 import play.Logger;
 
-public class ReadEndpoint {    
+public class ReadEndpoint implements play.libs.concurrent.Timeout {
     protected final int REQUEST_TIMEOUT = 1000;
     protected final String READ_PREFIX = "/read/";
     
@@ -59,11 +61,11 @@ public class ReadEndpoint {
         return curator.doesExist(READ_PREFIX + zkPath);
     }
     
-    public Result getResult(String[] paramsKeys, String[] paramsValues) {
+    public CompletionStage<Result> getResult(String[] paramsKeys, String[] paramsValues) {
         String url = getUrl();
         
         if (url == null)
-            return Results.notFound();
+            return CompletableFuture.supplyAsync(() -> {return Results.notFound();});
         
         WSRequest request = ws.url(url).setRequestTimeout(REQUEST_TIMEOUT);
         
@@ -71,8 +73,7 @@ public class ReadEndpoint {
             request = request.setQueryParameter(paramsKeys[i], paramsValues[i]);
         
         CompletionStage<? extends StreamedResponse> stream = request.setMethod("GET").stream();
-        
-        CompletionStage<Result> result = stream.thenApply(response -> {
+        CompletionStage<Result> result = timeout(stream.thenApply(response -> {
             WSResponseHeaders responseHeaders = response.getHeaders();
             Source<ByteString, ?> body = response.getBody();
 
@@ -80,12 +81,8 @@ public class ReadEndpoint {
                 return Results.ok().chunked(body);
             else
                 return Results.notFound();
-        });
+        }), Duration.ofSeconds(3));
         
-        try {
-            return result.toCompletableFuture().get();
-        } catch (Exception e) {
-            return Results.notFound();
-        }
+        return result;
     }
 }
