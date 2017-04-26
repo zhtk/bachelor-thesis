@@ -364,6 +364,15 @@ Po przedstawieniu naszych wyników klientowi doszliśmy do wniosku, że zakres n
 	\item Móc zmieniać sam kolory i etc.
 \end{itemize}
 
+Integrator - autodiscovery usług, możliwość spinania różnych interfejsów gRPC, WSDL. 
+Z uwagi na to, że danem przechodzą przez niego w postaci nieszyfrowanej można
+go podłączyć do IDSa wykrywającego anomalie w przesyłanych danych i w ten sposób
+zapobiegać masowemu wyciekowi wrażliwych danych lub atakom hakerskim. Stanowi też
+dodatkową linię obrony, którą musi sforsować potencjalny haker. Dzięki temu system jest
+odporniejszy na błędy popełnione w serwerach mikrousług, a w przypadku wykrycia
+jakiejś luki można ad-hoc wprowadzić łatkę bezpieczeństwa w serwerze pośredniczącym
+zamiast łatać wszystkie podatne serwery mikrousług.
+
 \chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
 Michał Jaroń, członek podzespołu frontendowego zaproponował koncepcję edytorka
 mikrousług. Wykazał się także niezwykłym talentem w dziedzinie logistyki i
