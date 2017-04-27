@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404
 import json
 import grpc
-from itertools import zip_longest
 from zk import auth_pb2
 from zk import auth_pb2_grpc
 from zk import integrator
@@ -11,22 +10,6 @@ from zk import integrator
 channel = grpc.insecure_channel('localhost:50051')
 stub = auth_pb2_grpc.AuthServiceStub(channel)
 integrator.zk.start()
-
-
-def check_permissions(required, obtained):
-	check = list(zip_longest(required, obtained))
-	
-	for (r, o) in check:
-		if r is None:
-			r = '0'
-		
-		if o is None:
-			o = '0'
-		
-		if r == '1' and o == '0':
-			return False
-	
-	return True
 
 
 def clean_node(n):
@@ -42,7 +25,7 @@ def parse_menu(path, perm):
 		return []
 	
 	childs = list(map(lambda x: parse_menu(path + "/" + x, perm), childs))
-	childs = list(filter(lambda x: check_permissions(x['perm'], perm), childs))
+	childs = list(filter(lambda x: integrator.check_permissions(x['perm'], perm), childs))
 	childs = sorted(childs, key=lambda x: x['nr'])
 	childs = list(filter(clean_node, childs))
 	

@@ -2,11 +2,18 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from .apps import EndpointsConfig
-from zk import integrator as i
+import grpc
 import requests
 import json
+from zk import integrator as i
+from zk import auth_pb2
+from zk import auth_pb2_grpc
+
 
 i.zk.start()
+channel = grpc.insecure_channel('localhost:50051')
+stub = auth_pb2_grpc.AuthServiceStub(channel)
+
 
 @csrf_exempt
 def view_endpoint(request, name):
@@ -18,11 +25,27 @@ def view_endpoint(request, name):
 
 @csrf_exempt
 def read_endpoint(request, name):
+	# Uprawnienia użytkownika
+	try:
+		token = request.GET.dict()['token']
+		response = stub.GetPermissions(auth_pb2.Token(token=token))
+		perm = response.mask
+	except:
+		perm = ''
+	
+	# Sprawdzenie uprawnień
+	try:
+		expected = i.get_read_endpoint_permissions(name)
+		
+		if not i.check_permissions(expected, perm):
+			raise Http404("")
+	except:
+		raise Http404("")
+	
+	# Pobranie endpointa i wykonanie zapytania
 	try:
 		ep = i.get_read_endpoint(name)
 		server = json.loads(ep)
-		
-		# TODO autoryzacja
 		
 		url = server['address']
 		
@@ -39,5 +62,5 @@ def read_endpoint(request, name):
 
 @csrf_exempt
 def write_endpoint(request, name):
-	return HttpResponse("TODO")
+	return HttpResponse("TODO") # TODO
 

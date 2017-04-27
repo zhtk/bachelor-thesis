@@ -1,5 +1,6 @@
 from kazoo.client import KazooClient
 from kazoo.exceptions import NodeExistsError
+from itertools import zip_longest
 import random
 
 zk = KazooClient(hosts='127.0.0.1:2181')
@@ -82,6 +83,10 @@ def get_read_endpoint(name):
 	return zk.get("/read/" + name + "/" + node)[0].decode("utf-8")
 
 
+def get_read_endpoint_permissions(name):
+	return zk.get("/read/" + name)[0].decode("utf-8")
+
+
 def get_write_endpoint(name):
 	servers = zk.get_children("/write/" + name)
 	node = random.choice(servers)
@@ -92,3 +97,19 @@ def get_menu_node(path):
 	childs = zk.get_children("/menu" + path)
 	item = zk.get("/menu" + path)[0].decode("utf-8")
 	return (item, childs)
+
+
+def check_permissions(required, obtained):
+	check = list(zip_longest(required, obtained))
+	
+	for (r, o) in check:
+		if r is None:
+			r = '0'
+		
+		if o is None:
+			o = '0'
+		
+		if r == '1' and o == '0':
+			return False
+	
+	return True
