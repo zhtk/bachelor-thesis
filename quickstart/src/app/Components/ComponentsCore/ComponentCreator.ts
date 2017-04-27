@@ -1,6 +1,7 @@
 import {RowComponent} from "../FrontComponents/RowComponent";
 import {PeselComponent} from "../FormComponents/TextBox/PeselComponent";
 import {PasswordComponent} from "../FormComponents/TextBox/PasswordComponent";
+import {ZipcodeComponent} from "../FormComponents/TextBox/PostalCodeComponent";
 import {LabelComponent} from "../FrontComponents/LabelComponent";
 import {TextBox} from "../FormComponents/TextBox/TextBox";
 import {PanelComponent} from "../FrontComponents/PanelComponent";
@@ -58,6 +59,10 @@ export class ComponentCreator {
 
 			case ("ProgBar"):
 				compFactory = factory.resolveComponentFactory(ProgressBarComponent);
+				break;
+
+			case ("Zipcode"):
+				compFactory = factory.resolveComponentFactory(ZipcodeComponent);
 				break;
 
       case ("Heading"):

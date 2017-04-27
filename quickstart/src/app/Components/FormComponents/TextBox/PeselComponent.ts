@@ -11,7 +11,9 @@ export class PeselComponent extends TextBox
 {
 	constructor() {
 		super();
-		this.text = "95040100120";
+		//this.text = "95040100120";
+		this.defaultText = "PESEL";
+		this.infoText = "PESEL";
 		this.regex = new RegExp("^[0-9]{11}$");
 		this.textInputValidate(this.text);
 	}

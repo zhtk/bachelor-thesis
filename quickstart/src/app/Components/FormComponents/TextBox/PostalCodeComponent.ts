@@ -14,5 +14,6 @@ export class ZipcodeComponent
 	constructor() {
 		super();
 		this.regex = new RegExp("^[0-9]{2}-[0-9]{3}$");
+		this.infoText = "Kod pocztowy";
 	}
 }

@@ -24,6 +24,7 @@ app.get('/login', function (req, res) {
     res.status(403).end();
     return;
   }
+  console.log("przyszlo zapytanie");
   
   var loginData = {login: req.query.login, password: req.query.password};
 
