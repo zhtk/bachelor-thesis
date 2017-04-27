@@ -26,7 +26,8 @@ export class FrontEndClass{
   public params:MemberInfo[];
   constructor()
   {
-    this.params = this.params.concat(ComponentsRegister.attributes['FrontEndClass']);
+    if(this.params)
+      this.params = this.params.concat(ComponentsRegister.attributes['FrontEndClass']);
     this.size = new SizeProperties(this);
     this.visible = true;
     this.backgroundColor = "white";

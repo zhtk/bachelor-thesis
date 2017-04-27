@@ -15,14 +15,12 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StyleGuideComponent.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StyleGuideComponent.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/Components/StyleGuideComponent.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="52" column="21" lean-forward="false" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#109#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="105">
+              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -30,8 +28,8 @@
       <file leaf-file-name="PanelComponent.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/Components/FrontComponents/PanelComponent.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="43" column="86" lean-forward="false" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="86" />
+            <state relative-caret-position="204">
+              <caret line="43" column="38" lean-forward="false" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="38" />
               <folding>
                 <element signature="e#0#102#0" expanded="true" />
               </folding>
@@ -65,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FrontEndClass.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FrontEndClass.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/Components/ComponentsCore/MainClasses/FrontEndClass.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="27" column="3" lean-forward="false" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+            <state relative-caret-position="219">
+              <caret line="29" column="6" lean-forward="false" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -91,6 +89,8 @@
       <find>collap</find>
       <find>level</find>
       <find>obj</find>
+      <find>conca</find>
+      <find>concat</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -115,8 +115,8 @@
         <option value="$PROJECT_DIR$/src/pages/Components/style_guide.html" />
         <option value="$PROJECT_DIR$/src/app/Components/FrontComponents/PanelComponent.ts" />
         <option value="$PROJECT_DIR$/src/app/Components/ComponentsRegister.ts" />
-        <option value="$PROJECT_DIR$/src/app/Components/ComponentsCore/MainClasses/FrontEndClass.ts" />
         <option value="$PROJECT_DIR$/src/app/Components/StyleGuideComponent.ts" />
+        <option value="$PROJECT_DIR$/src/app/Components/ComponentsCore/MainClasses/FrontEndClass.ts" />
       </list>
     </option>
   </component>
@@ -591,12 +591,12 @@
       <workItem from="1493015269868" duration="2801000" />
       <workItem from="1493045215875" duration="3423000" />
       <workItem from="1493134344028" duration="5923000" />
-      <workItem from="1493149934196" duration="21153000" />
+      <workItem from="1493149934196" duration="21879000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48011000" />
+    <option name="totallyTimeSpent" value="48737000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
@@ -1068,16 +1068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/Components/FrontComponents/PanelComponent.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="43" column="86" lean-forward="false" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="86" />
-          <folding>
-            <element signature="e#0#102#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/Components/ComponentsRegister.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -1088,21 +1078,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/Components/ComponentsCore/MainClasses/FrontEndClass.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/Components/StyleGuideComponent.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="27" column="3" lean-forward="false" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+        <state relative-caret-position="105">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/Components/StyleGuideComponent.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/Components/FrontComponents/PanelComponent.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="52" column="21" lean-forward="false" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
+        <state relative-caret-position="204">
+          <caret line="43" column="38" lean-forward="false" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="38" />
           <folding>
-            <element signature="e#0#109#0" expanded="true" />
+            <element signature="e#0#102#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/Components/ComponentsCore/MainClasses/FrontEndClass.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="29" column="6" lean-forward="false" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
