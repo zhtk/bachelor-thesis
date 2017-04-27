@@ -17,43 +17,41 @@ import {ComponentCreator} from "./ComponentsCore/ComponentCreator";
 })
 export class StyleGuideComponent implements OnInit {
 
-  components = {
+  static components = {
     'Panel' : PanelComponent,
     'Row' : RowComponent,
     'Icon' : IconComponent
   };
+
   json: string;
-  test: any;
-  obj: any;
-  params:any;
+  obj:any;
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
   constructor(private route: ActivatedRoute, private cfr: ComponentFactoryResolver) {
-    console.log("xx");
-    this.params = [];
-    let obj = Object.create(this.components[this.route.snapshot.params['category']]);
-    //obj.constructor = this.components[this.route.snapshot.params['category']];
-    this.obj = obj.prototype;
   }
 
   ngOnInit(): void {
-    console.log("zz");
-    let compFactory = this.cfr.resolveComponentFactory(this.components[this.route.snapshot.params['category']]);
-    const main = this.target.createComponent(compFactory).instance;
 
+    let compFactory =
+      this.cfr.resolveComponentFactory(StyleGuideComponent.components[this.route.snapshot.params['category']]);
+    const main = this.target.createComponent(compFactory).instance;
     const that = <RenderFromJSON> main;
     that.renderJSON({'title' : 'ok'});
 
     const front = <FrontEndClass> main;
+    this.obj = front;
+
+
+
     // const reg = new RegExp('"info":"(\w|\s)*",');
 
     this.json = ' { <br>';
-    for (let i = 0; i < front.params.length; i++) {
-      this.json += '"' +  front.params[i].name + '" : "' + 'val' + '"' + '<br>';
+    /*for (let i = 0; i < FrontEndClass.params.length; i++) {
+      this.json += '"' +  FrontEndClass.params[i].name + '" : "' + 'val' + '"' + '<br>';
     }
     this.json += '}';
-    this.test = front;
+    this.test = front;*/
   }
 
 

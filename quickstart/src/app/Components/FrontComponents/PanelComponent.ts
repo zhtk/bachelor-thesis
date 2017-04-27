@@ -4,7 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
 import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 import {FrontEndClass} from "../ComponentsCore/MainClasses/FrontEndClass";
-import {Attr, ComponentsInfo, Register} from "../ComponentsRegister";
+import {Attr, ComponentsInfo, ComponentsRegister, Register} from "../ComponentsRegister";
 import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 
 @Component
@@ -38,10 +38,10 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
-
   constructor(private cfr: ComponentFactoryResolver) {
 
     super();
+    //this.params = this.params.concat(ComponentsRegister.attributes['PanelComponent']);
     this.main_id = Math.floor((Math.random() * 10000) + 1).toString();
     this.arrayOfKeys += Object.keys(this);
   }

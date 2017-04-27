@@ -1,16 +1,18 @@
 import {SizeProperties} from "./SizeProperties";
-import {MemberInfo, Attr} from "../../ComponentsRegister";
+import {MemberInfo, Attr, ComponentsRegister} from "../../ComponentsRegister";
+import {BaseClass} from "./BaseClass";
 
 /*
  Klasa "abstrakcyjna" korzeń drzewa wszystkich komponentow
  */
-export class FrontEndClass {
+export class FrontEndClass{
 
   public arrayOfKeys:any;
 
+
   @Attr({info:"Czy element widzialny", default : "true", name:""})
   public visible: boolean;
-  //@Attr({info:"Rozmiar elementu", default : "12", name:""})
+  @Attr({info:"Rozmiar elementu", default : "12", name:""})
   public size:SizeProperties;
   @Attr({info:"Kolor tla", default : "transparent", name:""})
   public backgroundColor:string;
@@ -22,9 +24,9 @@ export class FrontEndClass {
   cursor:string; // Tutaj przyda sie enum
 
   public params:MemberInfo[];
-
   constructor()
   {
+    this.params = this.params.concat(ComponentsRegister.attributes['FrontEndClass']);
     this.size = new SizeProperties(this);
     this.visible = true;
     this.backgroundColor = "white";
