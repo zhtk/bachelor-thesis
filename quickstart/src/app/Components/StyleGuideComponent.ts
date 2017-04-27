@@ -47,11 +47,10 @@ export class StyleGuideComponent implements OnInit {
     // const reg = new RegExp('"info":"(\w|\s)*",');
 
     this.json = ' { <br>';
-    /*for (let i = 0; i < FrontEndClass.params.length; i++) {
-      this.json += '"' +  FrontEndClass.params[i].name + '" : "' + 'val' + '"' + '<br>';
+    for (let i = 0; i < front.params.length; i++) {
+      this.json += '"' +  front.params[i].name + '" : "' + 'val' + '"' + '<br>';
     }
     this.json += '}';
-    this.test = front;*/
   }
 
 
