@@ -54,6 +54,16 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
     this.hidable = false;
     this.visible = true;
 
+    /*for (var s in specification) {
+      // console.log("typy:")
+      // console.log(typeof s == "string");
+      console.log(s);
+      // console.log(typeof typeof s);
+      if (typeof s == "string") {
+        this[s] = specification[s];
+      }
+    }*/
+
     if ("title" in specification)
       this.title = specification["title"];
     if ("panel_class" in specification)

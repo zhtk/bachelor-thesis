@@ -60,6 +60,7 @@ import { PacjentComponent } from './leave_components/pacjent-components/pacjent-
 import { ListaComponent } from './leave_components/pacjent-components/list-leaves-component';
 import { BreadCrumbComponent } from './dashboard_components/breadcrumb.component';
 import { InboxComponent } from './home_components/inbox.component';
+import { SendboxComponent } from './home_components/sendbox.component';
 import { RowComponent } from "./Components/FrontComponents/RowComponent";
 import {ComponentCreator} from "./Components/ComponentsCore/ComponentCreator";
 import {PanelComponent} from "./Components/FrontComponents/PanelComponent";
@@ -111,6 +112,7 @@ import {PiecsetComponent} from "./piecsetComponent";
 					ListaComponent,
 					BreadCrumbComponent,
 					InboxComponent,
+					SendboxComponent,
 					TextBox,
 					TestComponent,
 					RowComponent,

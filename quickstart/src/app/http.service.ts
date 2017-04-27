@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class MyHttp {
-	/*constructor (private http: Http, private router: Router) {}
+	constructor (private http: Http, private router: Router) {}
 
 	get(url: string) {
 		return this.http.get(url)
@@ -26,6 +26,6 @@ export class MyHttp {
 					this.router.navigateByUrl('/login');
 				}
 			});
-	}*/
+	}
 
 }
