@@ -16,10 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from endpoints import views as endpoint
+from menu import views as menu
+
 
 urlpatterns = [
 	url(r'^view/(?P<name>[a-zA-Z0-9_-]+)/$', endpoint.view_endpoint, name='view_endpoint'),
 	url(r'^read/(?P<name>[a-zA-Z0-9_-]+)/$', endpoint.read_endpoint, name='read_endpoint'),
 	url(r'^write/(?P<name>[a-zA-Z0-9_-]+)/$', endpoint.write_endpoint, name='write_endpoint'),
+	url(r'^menu/$', menu.get_menu, name='get_menu'),
 	url(r'^admin/', admin.site.urls),
 ]

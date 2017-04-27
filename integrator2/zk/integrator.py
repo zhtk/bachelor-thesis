@@ -68,6 +68,10 @@ def set_starting_endpoint(path):
 	zk.set("/start", path.encode('utf-8'))
 
 
+def get_starting_endpoint():
+	return zk.get("/start")[0].decode('utf-8')
+
+
 def get_view_endpoint(name):
 	return zk.get("/view/" + name)[0].decode("utf-8") 
 
@@ -83,3 +87,8 @@ def get_write_endpoint(name):
 	node = random.choice(servers)
 	return zk.get("/write/" + name + "/" + node)[0].decode("utf-8")
 
+
+def get_menu_node(path):
+	childs = zk.get_children("/menu" + path)
+	item = zk.get("/menu" + path)[0].decode("utf-8")
+	return (item, childs)

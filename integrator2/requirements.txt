@@ -1,5 +1,9 @@
 Django==1.11
+enum34==1.1.6
+grpcio==1.2.1
+grpcio-tools==1.2.1
 kazoo==2.2.1
+protobuf==3.2.0
 pytz==2017.2
 requests==2.13.0
 six==1.10.0
