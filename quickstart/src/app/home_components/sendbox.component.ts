@@ -6,21 +6,23 @@ import { Observable } from 'rxjs';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 
 @Component({
-  selector: 'inbox',
+  selector: 'sendbox',
   templateUrl: 'pages/home_subpages/inbox.html',
 })
-export class InboxComponent {
+export class SendboxComponent {
 	inboxName: string;
 	message_array: Message[];
 	current_message: Message;
-	SIZE_MAX = 150;	
+	SIZE_MAX = 150;
 	REFRESH_RATE = 10 * 1000; // w milisekundach
 	
-	constructor(private messagesService: MessagesService, private emailService: EmailService) {
+	 constructor(private messagesService: MessagesService, private emailService: EmailService) {
 		this.inboxName = "Nazwa skrzynki"
 		this.message_array = [];
-		this.messagesService.getMessagesInbox().then(messages => 
+		this.messagesService.getMessagesSendbox().then(messages => 
 		{
+			console.log("wiado:");
+			console.log(messages);
 			this.message_array = messages;
 			this.current_message = null;
 
@@ -32,7 +34,7 @@ export class InboxComponent {
 				.create(this.REFRESH_RATE)
 				.subscribe(
 						() => {
-						this.messagesService.getMessagesInbox().then(messages => this.message_array = messages);
+						this.messagesService.getMessagesSendbox().then(messages => this.message_array = messages);
 						console.log("raz za razem")}
 					);
 		});

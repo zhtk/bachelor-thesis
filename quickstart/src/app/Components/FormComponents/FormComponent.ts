@@ -7,9 +7,13 @@ import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 
 @Component({
   selector: 'formular',
-  template: `<form (ngSubmit)="alert()" [ngClass] = "grid_class" action = "{{action}}" method = "{{method}}" >
-                <template #target></template>
-            </form>`
+  template: `<form ngNoForm (ngSubmit)="alert()" [ngClass] = "grid_class" action = "{{action}}" method = "{{method}}" id = "{{id}}">
+                <fieldset>
+                    <template #target></template>
+                    <input type="submit" />
+                </fieldset>
+            </form>
+            `
 })
 export class FormComponent extends FormClass implements Container
 {
@@ -29,6 +33,10 @@ export class FormComponent extends FormClass implements Container
   renderJSON(parsed: any): void {
     if("action" in parsed)
       this.action = parsed["action"];
+    if("id" in parsed)
+      this.id = parsed["id"];
+    else
+      throw new Error('Error with JSON form.');
 
     if("method" in parsed)
       this.method = parsed["method"];

@@ -34,6 +34,7 @@ import { LekarzComponent } from './leave_components/lekarz-component';
 import { PacjentComponent } from './leave_components/pacjent-components/pacjent-component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { InboxComponent } from './home_components/inbox.component';
+import { SendboxComponent } from './home_components/sendbox.component';
 import {StyleGuideComponent} from "./Components/StyleGuideComponent";
 import {PiecsetComponent} from "./piecsetComponent";
 
@@ -52,6 +53,7 @@ const routes: Routes = [
       { path: 'messages',  component: MessagesComponent, children: [
         { path: '', redirectTo: 'inbox', pathMatch: 'full' },
         { path: 'inbox', component: InboxComponent },
+        { path: 'sendbox', component: SendboxComponent },
 
       ]},
       { path: 'meeting',  component: MeetingComponent },
