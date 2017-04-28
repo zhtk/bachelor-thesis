@@ -14,7 +14,7 @@ export class SendboxComponent {
 	message_array: Message[];
 	current_message: Message;
 	SIZE_MAX = 150;
-	REFRESH_RATE = 1000; // w milisekundach
+	REFRESH_RATE = 10 * 1000; // w milisekundach
 	
 	 constructor(private messagesService: MessagesService, private emailService: EmailService) {
 		this.inboxName = "Nazwa skrzynki"

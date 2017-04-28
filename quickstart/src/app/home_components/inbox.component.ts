@@ -3,6 +3,7 @@ import { MessagesService } from '../service/messages.service';
 import { EmailService } from '../service/email.service';
 import { Message } from '../message';
 import { Observable } from 'rxjs';
+import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 
 @Component({
   selector: 'inbox',
@@ -12,31 +13,30 @@ export class InboxComponent {
 	inboxName: string;
 	message_array: Message[];
 	current_message: Message;
-	SIZE_MAX = 150;
-	REFRESH_RATE = 1000; // w milisekundach
+	SIZE_MAX = 150;	
+	REFRESH_RATE = 10 * 1000; // w milisekundach
 	
 	constructor(private messagesService: MessagesService, private emailService: EmailService) {
 		this.inboxName = "Nazwa skrzynki"
-		this.message_array = messagesService.getMessagesInbox();
-		this.current_message = null;
-		/*this.playerService.counter().subscribe(
-			data => {
-				console.log(data);
+		this.message_array = [];
+		this.messagesService.getMessagesInbox().then(messages => 
+		{
+			this.message_array = messages;
+			this.current_message = null;
+
+			if (this.message_array.length != 0) {
+				this.current_message = this.message_array[0];
 			}
-		);*/
 
-		if (this.message_array.length != 0) {
-			this.current_message = this.message_array[0];
-		}
+			IntervalObservable
+				.create(this.REFRESH_RATE)
+				.subscribe(
+						() => {
+						this.messagesService.getMessagesInbox().then(messages => this.message_array = messages);
+						console.log("raz za razem")}
+					);
+		});
 	}
-
-	/*counter() {
-	    return Observable
-	        .interval(this.REFRESH_RATE)
-	        .flatMap(() => {
-	            return this.messagesService.getMessagesInbox();
-	        });
-	}*/
 
 	abbreviate(content: string) {
 		if (content.length <= this.SIZE_MAX - 3)

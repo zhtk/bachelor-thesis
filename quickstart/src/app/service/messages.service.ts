@@ -10,10 +10,13 @@ import { Observable }     from 'rxjs/Observable';
 export class MessagesService {
 	constructor(private http: Http) {}
 
-	getMessagesInbox(): Message[] {
-		// pobierz z urla, np. /api/msg/inbox?user=...
-		//this.http.get("/api/msg/inbox");
-		return INBOX_MESSAGES;
+	getMessagesInbox(): Promise<Message[]> {
+		// return this.http.get('/msgget') // url wlasciwy dla inboxa
+		// 	.toPromise()
+		// 	.then(res => res.json() as Message[])
+		// 	.catch(this.handleError);
+
+		return Promise.resolve(INBOX_MESSAGES);
 	}
 
 	getMessagesSendbox(): Promise<Message[]> {
