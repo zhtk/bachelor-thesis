@@ -34,9 +34,12 @@ export class TestComponent implements OnInit
     var parsed = JSON.parse(this.pageJSON)["components"];
     for(var elem = 0; elem < parsed.length; elem++)
     {
-      var added = ComponentCreator.insertComponent(
-        this.cfr, this.target, parsed[elem]["type"]);
-      added.renderJSON(parsed[elem]);
+      var added = ComponentCreator.createFromJSON(
+      parsed[elem], this.cfr, this.target)
+
+      // var added = ComponentCreator.insertComponent(
+      //   this.cfr, this.target, parsed[elem]["type"]);
+      // added.renderJSON(parsed[elem]);
     }
   }
 

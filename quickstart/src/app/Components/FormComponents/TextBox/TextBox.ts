@@ -1,6 +1,7 @@
 import { Component, Input, } from '@angular/core'
 import { FormClass } from '../FormClass'
 import { FormsModule }   from '@angular/forms';
+import {Attr, SetterAlg, ComponentsInfo, ComponentsRegister, Register} from "../../ComponentsRegister";
 
 @Component({
   selector: 'textBox',
@@ -8,16 +9,29 @@ import { FormsModule }   from '@angular/forms';
 })
 export class TextBox extends FormClass implements RenderFromJSON
 {
-
+  @SetterAlg()
+  id: string;
+  @SetterAlg()
   maxLength: number;
+  @SetterAlg()
   minLength: number;
+  @SetterAlg()
   defaultText: string;
+  @SetterAlg()
   text: string;
+  @SetterAlg()
   regex: RegExp;
+  @SetterAlg()
   visible: boolean;
+  @SetterAlg()
   backgroundColor: string;
+  @SetterAlg()
   name:string;
+  @SetterAlg()
   infoText: string;
+
+  // @SetterAlg("size", )
+  // size: string;
 
   constructor ()
   {

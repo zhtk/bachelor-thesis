@@ -1,5 +1,5 @@
 const layout_dict =
-	{
+	/*{
 		"components":
 		[
 			{
@@ -1156,6 +1156,18 @@ const layout_dict =
 				]
 			}
 		]
+	}*/
+
+	{
+		"components":
+		[
+			{
+				"type": "TextBox",
+				"id": "test1",
+				"infoText" : "Imię i nazwisko dziecka",
+				"defaultText": "Imię i nazwisko dziecka",
+			}
+		]		
 	}
 ;
 export const LAYOUT = JSON.stringify(layout_dict);

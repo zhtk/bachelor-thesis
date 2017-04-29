@@ -4,7 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
 import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 import {FrontEndClass} from "../ComponentsCore/MainClasses/FrontEndClass";
-import {Attr, ComponentsInfo, ComponentsRegister, Register} from "../ComponentsRegister";
+import {Attr, SetterAlg, ComponentsInfo, ComponentsRegister, Register} from "../ComponentsRegister";
 import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 
 @Component
@@ -22,7 +22,9 @@ import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 export class PanelComponent extends FrontEndClass implements RenderFromJSON, Container {
 
   @Attr({info:"Tekst na górnej belce", default : "", name:""})
+  //@SetterAlg("title", () => 1)
   public title:string;
+
   @Attr({info:"Kolor panelu", default : "", name:""})
   panel_class:string;
 
