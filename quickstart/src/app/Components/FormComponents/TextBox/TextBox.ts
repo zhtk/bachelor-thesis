@@ -2,6 +2,7 @@ import { Component, Input, } from '@angular/core'
 import { FormClass } from '../FormClass'
 import { FormsModule }   from '@angular/forms';
 import {Attr, SetterAlg, ComponentsInfo, ComponentsRegister, Register} from "../../ComponentsRegister";
+import {SizeProperties} from "../../ComponentsCore/MainClasses/SizeProperties";
 
 @Component({
   selector: 'textBox',
@@ -9,8 +10,8 @@ import {Attr, SetterAlg, ComponentsInfo, ComponentsRegister, Register} from "../
 })
 export class TextBox extends FormClass implements RenderFromJSON
 {
-  @SetterAlg()
-  id: string;
+  // @SetterAlg()
+  // id: string;
   @SetterAlg()
   maxLength: number;
   @SetterAlg()
@@ -30,8 +31,8 @@ export class TextBox extends FormClass implements RenderFromJSON
   @SetterAlg()
   infoText: string;
 
-  // @SetterAlg("size", )
-  // size: string;
+  @SetterAlg("size", (ci: TextBox, v: any) => {ci.setGridClass({"size": v})})
+  size: SizeProperties;
 
   constructor ()
   {

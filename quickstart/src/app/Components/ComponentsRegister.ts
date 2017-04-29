@@ -9,7 +9,6 @@ import {StyleGuideComponent} from "./StyleGuideComponent";
 import {BaseClass} from "./ComponentsCore/MainClasses/BaseClass";
 
 
-@Inject()
 export function Attr(label: MemberInfo) {
     return function (target: any, key: any) {
 
@@ -83,7 +82,7 @@ export class MemberInfo {
     default: string;
 }
 
-
+@Injectable()
 export class ComponentsInfo {
  public name: string;
  public description: string;

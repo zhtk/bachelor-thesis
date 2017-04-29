@@ -6,6 +6,7 @@ import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 import {FrontEndClass} from "../ComponentsCore/MainClasses/FrontEndClass";
 import {Attr, SetterAlg, ComponentsInfo, ComponentsRegister, Register} from "../ComponentsRegister";
 import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
+import {SizeProperties} from "../ComponentsCore/MainClasses/SizeProperties";
 
 @Component
 ({
@@ -22,39 +23,48 @@ import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 export class PanelComponent extends FrontEndClass implements RenderFromJSON, Container {
 
   @Attr({info:"Tekst na górnej belce", default : "", name:""})
-  //@SetterAlg("title", () => 1)
+  @SetterAlg()
   public title:string;
 
   @Attr({info:"Kolor panelu", default : "", name:""})
+  @SetterAlg("panel_class", (ci: any, v: any) => {ci.panel_class = "panel panel-" + v})
   panel_class:string;
 
   panel_body_class:string;
 
   @Attr({info:"Czy ciało panelu rozwijane", default : "false", name:""})
+  @SetterAlg()
   collapsible:boolean;
 
   @Attr({info:"Id panelu", default : "", name:""})
+  @SetterAlg()
   main_id:string;
+
   @Attr({info:"Czy panel usuwalny", default : "false", name:""})
+  @SetterAlg()
   hidable:boolean;
+
+ @SetterAlg("size", (ci: PanelComponent, v: any) => {ci.setGridClass({"size": v})})
+  size: SizeProperties;
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
-  constructor(private cfr: ComponentFactoryResolver) {
+  constructor(public cfr: ComponentFactoryResolver) {
 
     super();
     //this.params = this.params.concat(ComponentsRegister.attributes['PanelComponent']);
     this.main_id = Math.floor((Math.random() * 10000) + 1).toString();
     this.arrayOfKeys += Object.keys(this);
-  }
-
-  renderJSON(specification: any): void {
-
-    this.panel_class = "panel panel-";
+    this.panel_class = "panel panel-default";
     this.panel_body_class ="panel-body";
     this.grid_class = "col-lg-";
     this.hidable = false;
     this.visible = true;
+    this.collapsible = false;
+  }
+
+  renderJSON(specification: any): void {
+
 
     /*for (var s in specification) {
       // console.log("typy:")
@@ -82,8 +92,6 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
       this.panel_body_class += " collapse";
       this.cursor = "pointer";
     }
-    else
-      this.collapsible = false;
 
     if("hidable" in specification)
       this.hidable = true;

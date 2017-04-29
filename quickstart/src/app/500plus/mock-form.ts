@@ -1162,10 +1162,23 @@ const layout_dict =
 		"components":
 		[
 			{
-				"type": "TextBox",
-				"id": "test1",
-				"infoText" : "Imię i nazwisko dziecka",
-				"defaultText": "Imię i nazwisko dziecka",
+				"type": "PanelComponent",
+				"title": "uwaga panel",
+				"id": "panel3",
+				"size": {
+					"large": 10,
+				},
+				"children": [
+					{
+						"type": "TextBox",
+						"id": "test1",
+						"infoText" : "Imię i nazwisko dziecka",
+						"defaultText": "Imię i nazwisko dziecka",
+						"size": {
+							"large": 8,
+						},
+					}
+				]
 			}
 		]		
 	}
