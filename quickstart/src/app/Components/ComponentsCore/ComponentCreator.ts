@@ -20,8 +20,7 @@ import {FrontEndClass} from './MainClasses/FrontEndClass';
 
 export class ComponentCreator {
 
-	static componentMapping = new Map();
-
+	private componentMapping = new Map();
 
 	static insertComponent(factory:ComponentFactoryResolver,
 		target:ViewContainerRef, type: string):RenderFromJSON {
@@ -109,6 +108,27 @@ export class ComponentCreator {
 	}
 	// TODO refactor!!!
 
+	constructor() {
+		this.componentMapping.set("TextBox", TextBox);
+		this.componentMapping.set("RowComponent", RowComponent);
+		this.componentMapping.set("PeselComponent", PeselComponent);
+		this.componentMapping.set("PasswordComponent", PasswordComponent);
+		this.componentMapping.set("PanelComponent", PanelComponent);
+		this.componentMapping.set("LabelComponent", LabelComponent);
+		this.componentMapping.set("Submit", SubmitComponent);
+		this.componentMapping.set("Form", FormComponent);
+		this.componentMapping.set("ProgBar", ProgressBarComponent);
+		this.componentMapping.set("Zipcode", ZipcodeComponent);
+		this.componentMapping.set("Heading", HeadingComponent);
+		this.componentMapping.set("PanelGroup", PanelGroupComponent);
+		this.componentMapping.set("Content", ContentComponent);
+		this.componentMapping.set("Icon", IconComponent);
+		this.componentMapping.set("Span", SpanComponent);
+
+	}
+
+
+
 	static createFromJSON(jsonObject: any, factory:ComponentFactoryResolver,
 		target:ViewContainerRef) {
 		var compFactory: any;
@@ -121,7 +141,7 @@ export class ComponentCreator {
 		compFactory = factory.resolveComponentFactory(PanelComponent);
 		// tu powyzej: decyzja na podst. mapy "type" -> ClassName
 
-		// zniknie
+		// HACK, zniknie
 		switch (jsonObject["type"]) {
 			case ("TextBox"):
 				compFactory = factory.resolveComponentFactory(TextBox);
@@ -217,20 +237,20 @@ export class ComponentCreator {
 				break;
 
 
-			default: // powinno byc explicite
+			case ("PanelComponent"):
 				compFactory = factory.resolveComponentFactory(PanelComponent);
 				ref = target.createComponent(compFactory);
 				obj = <PanelComponent> ref.instance
 				break;
 
+			default:
+				throw "Błędny typ komponentu";
 		}
 
 		//endof zniknie
 
 		// ref = target.createComponent(compFactory);
 		// obj = <FrontEndClass> ref.instance
-
-		// ref.instance.renderJSON(...)
 
 		for (var elem in jsonObject) {
 			console.log("jest element " + elem);
@@ -239,7 +259,7 @@ export class ComponentCreator {
 				for (var i = 0; i < jsonObject.children.length; i++) {
 					console.log(jsonObject.children[i]);
 					console.log("bedzie render")
-					this.createFromJSON(jsonObject.children[i], obj.cfr, target);
+					this.createFromJSON(jsonObject.children[i], factory, obj.target);
 				}
 			} else if (elem != "type" && elem != "id") {
 				renderInstr[jsonObject["type"]][elem](obj, jsonObject[elem]);
