@@ -49,9 +49,9 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
-  constructor(public cfr: ComponentFactoryResolver) {
-
+  constructor(private cfr: ComponentFactoryResolver) {
     super();
+    console.log("tworze PANELCOMPONENT");
     //this.params = this.params.concat(ComponentsRegister.attributes['PanelComponent']);
     this.main_id = Math.floor((Math.random() * 10000) + 1).toString();
     this.arrayOfKeys += Object.keys(this);
@@ -79,9 +79,8 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
     if ("title" in specification)
       this.title = specification["title"];
     if ("panel_class" in specification)
-      this.panel_class += specification["panel_class"];
-    else
-      this.panel_class += "default";
+      this.panel_class = "panel panel-" + specification["panel_class"];
+    
     if ("size" in specification)
       this.setGridClass(specification);
     if ("children" in specification)

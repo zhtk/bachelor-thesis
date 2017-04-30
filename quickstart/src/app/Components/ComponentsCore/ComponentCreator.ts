@@ -16,6 +16,7 @@ import {PanelGroupComponent} from "../FrontComponents/PanelGroupComponent";
 import {ContentComponent} from "../FrontComponents/ContentComponent";
 import {IconComponent} from "../FrontComponents/IconComponent";
 import {SpanComponent} from "../FrontComponents/SpanComponent";
+import {FrontEndClass} from './MainClasses/FrontEndClass';
 
 export class ComponentCreator {
 
@@ -82,21 +83,21 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(ZipcodeComponent);
 				break;
 
-      case ("Heading"):
-        compFactory = factory.resolveComponentFactory(HeadingComponent);
-        break;
-      case ("PanelGroup"):
-        compFactory = factory.resolveComponentFactory(PanelGroupComponent);
-        break;
-      case ("Content"):
-        compFactory = factory.resolveComponentFactory(ContentComponent);
-        break;
-      case ("Icon"):
-        compFactory = factory.resolveComponentFactory(IconComponent);
-        break;
-      case ("Span"):
-        compFactory = factory.resolveComponentFactory(SpanComponent);
-        break;
+			case ("Heading"):
+				compFactory = factory.resolveComponentFactory(HeadingComponent);
+				break;
+			case ("PanelGroup"):
+				compFactory = factory.resolveComponentFactory(PanelGroupComponent);
+				break;
+			case ("Content"):
+				compFactory = factory.resolveComponentFactory(ContentComponent);
+				break;
+			case ("Icon"):
+				compFactory = factory.resolveComponentFactory(IconComponent);
+				break;
+			case ("Span"):
+				compFactory = factory.resolveComponentFactory(SpanComponent);
+				break;
 
 			default: // powinno byc explicite
 				compFactory = factory.resolveComponentFactory(PanelComponent);
@@ -111,6 +112,8 @@ export class ComponentCreator {
 	static createFromJSON(jsonObject: any, factory:ComponentFactoryResolver,
 		target:ViewContainerRef) {
 		var compFactory: any;
+		var ref: any;
+		var obj: any;
 
 		console.log("tworze sobie obiekt " + jsonObject["type"])
 		console.log(jsonObject);
@@ -122,65 +125,110 @@ export class ComponentCreator {
 		switch (jsonObject["type"]) {
 			case ("TextBox"):
 				compFactory = factory.resolveComponentFactory(TextBox);
+				ref = target.createComponent(compFactory);
+				obj = <TextBox> ref.instance
 				break;
+
 
 			case ("RowComponent"):
 				compFactory = factory.resolveComponentFactory(RowComponent);
+				ref = target.createComponent(compFactory);
+				obj = <RowComponent> ref.instance
 				break;
+
 
 			case ("PeselComponent"):
 				compFactory = factory.resolveComponentFactory(PeselComponent);
+				ref = target.createComponent(compFactory);
+				obj = <PeselComponent> ref.instance
 				break;
+
 
 			case ("PasswordComponent"):
 				compFactory = factory.resolveComponentFactory(PasswordComponent);
+				ref = target.createComponent(compFactory);
+				obj = <PasswordComponent> ref.instance
 				break;
+
 
 			case ("LabelComponent"):
 				compFactory = factory.resolveComponentFactory(LabelComponent);
+				ref = target.createComponent(compFactory);
+				obj = <LabelComponent> ref.instance
 				break;
+
 
 			case ("Submit"):
 				compFactory = factory.resolveComponentFactory(SubmitComponent);
+				ref = target.createComponent(compFactory);
+				obj = <SubmitComponent> ref.instance
 				break;
+
 
 			case ("Form"):
 				compFactory = factory.resolveComponentFactory(FormComponent);
+				ref = target.createComponent(compFactory);
+				obj = <FormComponent> ref.instance
 				break;
+
 
 			case ("ProgBar"):
 				compFactory = factory.resolveComponentFactory(ProgressBarComponent);
+				ref = target.createComponent(compFactory);
+				obj = <ProgressBarComponent> ref.instance
 				break;
+
 
 			case ("Zipcode"):
 				compFactory = factory.resolveComponentFactory(ZipcodeComponent);
+				ref = target.createComponent(compFactory);
+				obj = <ZipcodeComponent> ref.instance
 				break;
 
-      case ("Heading"):
-        compFactory = factory.resolveComponentFactory(HeadingComponent);
-        break;
-      case ("PanelGroup"):
-        compFactory = factory.resolveComponentFactory(PanelGroupComponent);
-        break;
-      case ("Content"):
-        compFactory = factory.resolveComponentFactory(ContentComponent);
-        break;
-      case ("Icon"):
-        compFactory = factory.resolveComponentFactory(IconComponent);
-        break;
-      case ("Span"):
-        compFactory = factory.resolveComponentFactory(SpanComponent);
-        break;
+
+			case ("Heading"):
+				compFactory = factory.resolveComponentFactory(HeadingComponent);
+				ref = target.createComponent(compFactory);
+				obj = <HeadingComponent> ref.instance
+				break;
+
+			case ("PanelGroup"):
+				compFactory = factory.resolveComponentFactory(PanelGroupComponent);
+				ref = target.createComponent(compFactory);
+				obj = <PanelGroupComponent> ref.instance
+				break;
+
+			case ("Content"):
+				compFactory = factory.resolveComponentFactory(ContentComponent);
+				ref = target.createComponent(compFactory);
+				obj = <ContentComponent> ref.instance
+				break;
+
+			case ("Icon"):
+				compFactory = factory.resolveComponentFactory(IconComponent);
+				ref = target.createComponent(compFactory);
+				obj = <IconComponent> ref.instance
+				break;
+
+			case ("Span"):
+				compFactory = factory.resolveComponentFactory(SpanComponent);
+				ref = target.createComponent(compFactory);
+				obj = <SpanComponent> ref.instance
+				break;
+
 
 			default: // powinno byc explicite
 				compFactory = factory.resolveComponentFactory(PanelComponent);
+				ref = target.createComponent(compFactory);
+				obj = <PanelComponent> ref.instance
 				break;
+
 		}
 
 		//endof zniknie
 
-		const ref = target.createComponent(compFactory);
-		var obj = ref.instance;
+		// ref = target.createComponent(compFactory);
+		// obj = <FrontEndClass> ref.instance
 
 		// ref.instance.renderJSON(...)
 
@@ -190,7 +238,8 @@ export class ComponentCreator {
 				console.log(jsonObject.children)
 				for (var i = 0; i < jsonObject.children.length; i++) {
 					console.log(jsonObject.children[i]);
-					this.createFromJSON(jsonObject.children[i], factory, target);
+					console.log("bedzie render")
+					this.createFromJSON(jsonObject.children[i], obj.cfr, target);
 				}
 			} else if (elem != "type" && elem != "id") {
 				renderInstr[jsonObject["type"]][elem](obj, jsonObject[elem]);

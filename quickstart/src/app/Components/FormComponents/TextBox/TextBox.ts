@@ -37,6 +37,7 @@ export class TextBox extends FormClass implements RenderFromJSON
   constructor ()
   {
     super();
+    console.log("tworze TEXTBOX")
     this.maxLength = 0;
     this.minLength = 0;
     this.defaultText = "DefaultText";
