@@ -2,6 +2,7 @@ import { Component, Input, } from '@angular/core'
 import { FormsModule }   from '@angular/forms';
 import { TextBox } from './TextBox/TextBox';
 import {FormClass} from "./FormClass";
+import { SetterAlg } from "../ComponentsRegister";
 
 @Component({
   selector: 'submit',
@@ -9,7 +10,11 @@ import {FormClass} from "./FormClass";
 })
 export class SubmitComponent extends FormClass
 {
-  title:string;
+  @SetterAlg()
+  title: string;
+  @SetterAlg()
+  width: string;
+
   constructor() {
     super();
     this.title = "Wyślij";

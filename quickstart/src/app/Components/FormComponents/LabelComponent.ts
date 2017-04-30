@@ -1,15 +1,24 @@
-import { Component, Input, } from '@angular/core'
+/*import { Component, Input, } from '@angular/core'
 import { FormClass } from './FormClass'
 import { FormsModule }   from '@angular/forms';
+import { SetterAlg } from "../ComponentsRegister";
+import { SizeProperties } from "../ComponentsCore/MainClasses/SizeProperties";
 
 @Component({
   selector: 'labelcomp',
   template: `<h5 style="margin: 15px;">{{ text }}</h5>`
 })
-export class LabelComponent extends FormClass {
+export class LabelComponent extends FormClass implements RenderFromJSON {
 
+  @SetterAlg()
   text: string;
+  @SetterAlg()
   backgroundColor: string;
+  // @SetterAlg()
+  // id: number;
+
+  @SetterAlg("size", (ci: LabelComponent, v: any) => {ci.setGridClass({"size": v})})
+  size: SizeProperties;
 
   constructor ()
   {
@@ -30,3 +39,4 @@ export class LabelComponent extends FormClass {
       this.backgroundColor = parsed["backgroundColor"];
   }
 }
+*/

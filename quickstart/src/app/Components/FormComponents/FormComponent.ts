@@ -4,10 +4,11 @@ import { TextBox } from './TextBox/TextBox';
 import {FormClass} from "./FormClass";
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
 import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
+import { SetterAlg } from "../ComponentsRegister";
 
 @Component({
   selector: 'formular',
-  template: `<form ngNoForm (ngSubmit)="alert()" [ngClass] = "grid_class" action = "{{action}}" method = "{{method}}" id = "{{id}}">
+  template: `<form ngNoForm (ngSubmit)="alert()" [ngClass] = "grid_class" action = "{{form_action}}" method = "{{method}}" id = "{{id}}">
                 <fieldset>
                     <template #target></template>
                     <input type="submit" />
@@ -18,8 +19,11 @@ import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 export class FormComponent extends FormClass implements Container
 {
 
-  title:string;
-  action:string;
+  @SetterAlg()
+  id:number;
+  @SetterAlg()
+  form_action:string;
+  @SetterAlg()
   method:string;
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
@@ -27,12 +31,12 @@ export class FormComponent extends FormClass implements Container
 
     super();
     this.grid_class = "col-lg-12";
-    this.action = "";
+    this.form_action = "/";
     this.method = "get";
   }
   renderJSON(parsed: any): void {
     if("action" in parsed)
-      this.action = parsed["action"];
+      this.form_action = parsed["action"];
     if("id" in parsed)
       this.id = parsed["id"];
     else

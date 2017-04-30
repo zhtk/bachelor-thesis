@@ -28,10 +28,27 @@ export function Attr(label: MemberInfo) {
 export var renderInstr : {[id: string] : {[id: string] : Function }} = {}; 
 // mapa ze slowa JSONowego na funkcje do wywolania
 
-export function SetterAlg(field?: string, func?: Function) {
+export function SetterAlg(obj?: {field: string, func: Function}) {
     return function recordInjection(target: Object, decoratedPropertyName: string) : void {
-        
+
+        var field: string;
+        var func: Function;
+
+        if (obj) {
+            field = obj.field;
+            func = obj.func;
+        }
+        else {
+            field = func = undefined;
+        }
+
         var className = target.constructor.name;
+        console.log("rejestruje dla klasy " + className + " property " + decoratedPropertyName)
+
+        if (field)
+            console.log("pole " + field);
+        else
+            console.log("nie ma pola")
         
         if (!renderInstr[className]) {
             renderInstr[className] = {};
@@ -39,14 +56,15 @@ export function SetterAlg(field?: string, func?: Function) {
 
 
         if (!field)
-            var field = decoratedPropertyName;
+            field = decoratedPropertyName;
 
         if (func) {
             renderInstr[className][field] = func;
+            console.log("dostarczono funkcje")
         }
         else {
-            renderInstr[className][decoratedPropertyName] = 
-                (classInstance: any, val: any) => { classInstance[field] = val }; // tu funkcja settera
+            renderInstr[className][field] = 
+                (classInstance: any, val: any) => { classInstance[decoratedPropertyName] = val }; // tu funkcja settera
         }
 
     }

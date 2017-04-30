@@ -10,6 +10,7 @@ import {ViewContainer} from "@angular/core/src/linker/view_container";
 import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
 import {Register} from "../ComponentsRegister";
+import { SetterAlg } from "../ComponentsRegister";
 
 @Component
 ({
@@ -27,6 +28,7 @@ import {Register} from "../ComponentsRegister";
 )
 export class RowComponent implements RenderFromJSON, OnInit, Container{
 
+  @SetterAlg()
   id:number;
   parsed:any;
 

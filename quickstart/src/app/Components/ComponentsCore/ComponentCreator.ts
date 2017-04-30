@@ -134,11 +134,11 @@ export class ComponentCreator {
 		var compFactory: any;
 		var ref: any;
 		var obj: any;
+		var className: string;
 
 		console.log("tworze sobie obiekt " + jsonObject["type"])
 		console.log(jsonObject);
 
-		compFactory = factory.resolveComponentFactory(PanelComponent);
 		// tu powyzej: decyzja na podst. mapy "type" -> ClassName
 
 		// HACK, zniknie
@@ -147,6 +147,7 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(TextBox);
 				ref = target.createComponent(compFactory);
 				obj = <TextBox> ref.instance
+				className = "TextBox";
 				break;
 
 
@@ -154,6 +155,7 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(RowComponent);
 				ref = target.createComponent(compFactory);
 				obj = <RowComponent> ref.instance
+				className = "RowComponent";
 				break;
 
 
@@ -161,6 +163,7 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(PeselComponent);
 				ref = target.createComponent(compFactory);
 				obj = <PeselComponent> ref.instance
+				className = "PeselComponent";
 				break;
 
 
@@ -168,6 +171,7 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(PasswordComponent);
 				ref = target.createComponent(compFactory);
 				obj = <PasswordComponent> ref.instance
+				className = "PasswordComponent";
 				break;
 
 
@@ -175,6 +179,7 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(LabelComponent);
 				ref = target.createComponent(compFactory);
 				obj = <LabelComponent> ref.instance
+				className = "LabelComponent";
 				break;
 
 
@@ -182,6 +187,7 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(SubmitComponent);
 				ref = target.createComponent(compFactory);
 				obj = <SubmitComponent> ref.instance
+				className = "SubmitComponent";
 				break;
 
 
@@ -189,6 +195,7 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(FormComponent);
 				ref = target.createComponent(compFactory);
 				obj = <FormComponent> ref.instance
+				className = "FormComponent";
 				break;
 
 
@@ -196,6 +203,7 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(ProgressBarComponent);
 				ref = target.createComponent(compFactory);
 				obj = <ProgressBarComponent> ref.instance
+				className = "ProgressBarComponent";
 				break;
 
 
@@ -203,6 +211,7 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(ZipcodeComponent);
 				ref = target.createComponent(compFactory);
 				obj = <ZipcodeComponent> ref.instance
+				className = "ZipcodeComponent";
 				break;
 
 
@@ -210,30 +219,35 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(HeadingComponent);
 				ref = target.createComponent(compFactory);
 				obj = <HeadingComponent> ref.instance
+				className = "HeadingComponent";
 				break;
 
 			case ("PanelGroup"):
 				compFactory = factory.resolveComponentFactory(PanelGroupComponent);
 				ref = target.createComponent(compFactory);
 				obj = <PanelGroupComponent> ref.instance
+				className = "PanelGroupComponent";
 				break;
 
 			case ("Content"):
 				compFactory = factory.resolveComponentFactory(ContentComponent);
 				ref = target.createComponent(compFactory);
 				obj = <ContentComponent> ref.instance
+				className = "ContentComponent";
 				break;
 
 			case ("Icon"):
 				compFactory = factory.resolveComponentFactory(IconComponent);
 				ref = target.createComponent(compFactory);
 				obj = <IconComponent> ref.instance
+				className = "IconComponent";
 				break;
 
 			case ("Span"):
 				compFactory = factory.resolveComponentFactory(SpanComponent);
 				ref = target.createComponent(compFactory);
 				obj = <SpanComponent> ref.instance
+				className = "SpanComponent";
 				break;
 
 
@@ -241,6 +255,7 @@ export class ComponentCreator {
 				compFactory = factory.resolveComponentFactory(PanelComponent);
 				ref = target.createComponent(compFactory);
 				obj = <PanelComponent> ref.instance
+				className = "PanelComponent";
 				break;
 
 			default:
@@ -255,14 +270,16 @@ export class ComponentCreator {
 		for (var elem in jsonObject) {
 			console.log("jest element " + elem);
 			if (elem == "children") {
-				console.log(jsonObject.children)
 				for (var i = 0; i < jsonObject.children.length; i++) {
 					console.log(jsonObject.children[i]);
 					console.log("bedzie render")
 					this.createFromJSON(jsonObject.children[i], factory, obj.target);
 				}
 			} else if (elem != "type" && elem != "id") {
-				renderInstr[jsonObject["type"]][elem](obj, jsonObject[elem]);
+				console.log("czy bedzie wywrotka?");
+				console.log("className = " + className + ", elem = " + elem);
+				renderInstr[className][elem](obj, jsonObject[elem]);
+				console.log("nie ma wywrotki")
 			}
 		}
 		

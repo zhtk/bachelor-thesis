@@ -27,13 +27,13 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
   public title:string;
 
   @Attr({info:"Kolor panelu", default : "", name:""})
-  @SetterAlg("panel_class", (ci: any, v: any) => {ci.panel_class = "panel panel-" + v})
+  @SetterAlg({field: "panel_class", func: (ci: any, v: any) => {ci.panel_class = "panel panel-" + v}})
   panel_class:string;
 
   panel_body_class:string;
 
   @Attr({info:"Czy ciało panelu rozwijane", default : "false", name:""})
-  @SetterAlg()
+  @SetterAlg({field: "collapse", func: undefined})
   collapsible:boolean;
 
   @Attr({info:"Id panelu", default : "", name:""})
@@ -44,7 +44,7 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
   @SetterAlg()
   hidable:boolean;
 
- @SetterAlg("size", (ci: PanelComponent, v: any) => {ci.setGridClass({"size": v})})
+ @SetterAlg({field: "size", func: (ci: PanelComponent, v: any) => {ci.setGridClass({"size": v})}})
   size: SizeProperties;
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;

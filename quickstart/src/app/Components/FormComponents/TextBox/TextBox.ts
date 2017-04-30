@@ -10,8 +10,8 @@ import {SizeProperties} from "../../ComponentsCore/MainClasses/SizeProperties";
 })
 export class TextBox extends FormClass implements RenderFromJSON
 {
-  // @SetterAlg()
-  // id: string;
+  @SetterAlg()
+  id: number;
   @SetterAlg()
   maxLength: number;
   @SetterAlg()
@@ -30,8 +30,12 @@ export class TextBox extends FormClass implements RenderFromJSON
   name:string;
   @SetterAlg()
   infoText: string;
+  @SetterAlg()
+  disabled: boolean;
+  @SetterAlg()
+  required: boolean;
 
-  @SetterAlg("size", (ci: TextBox, v: any) => {ci.setGridClass({"size": v})})
+  @SetterAlg({field: "size", func: (ci: TextBox, v: any) => {ci.setGridClass({"size": v})}})
   size: SizeProperties;
 
   constructor ()
