@@ -79,6 +79,8 @@ import {SpanComponent} from "./Components/FrontComponents/SpanComponent";
 import {StyleGuideComponent} from "./Components/StyleGuideComponent";
 import {PiecsetComponent} from "./piecsetComponent";
 
+import { KeysPipe } from './keys.pipe';
+
 
 @NgModule({
   imports:      [ BrowserModule,
@@ -88,6 +90,7 @@ import {PiecsetComponent} from "./piecsetComponent";
 					        FormsModule,
   				      ],
   declarations: [ AppComponent,
+  					KeysPipe,
   				  	HomeComponent,
   				  	PreprocComponent,
   				  	PageNotFoundComponent,

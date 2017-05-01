@@ -15,8 +15,14 @@
     <div class="panel panel-primary">
       <div class="panel-heading">Json</div>
       <div class="panel-body">
-        <div [innerHTML]="json">
+        <!-- <div [innerHTML]="json"> -->
+        <small>{{ '{' }}</small><br>
+        <div style="padding-left: 20px;">
+          <small *ngFor="let item of obj.params">
+            "{{ item.name }}" : "{{ getMapName(item.name) }}" <br>
+          </small>
         </div>
+        <small>{{ '}' }}</small>
       </div>
     </div>
   </div>
@@ -44,7 +50,23 @@
             <td>{{param.name}}</td>
             <td>{{param.info}}</td>
             <td>{{param.default}}</td>
-            <td> <input [(ngModel)]="obj[param.name]" (focusout) = "attr_change()"></td>
+            <td *ngIf="!isObject(obj[param.name])">
+              <input [(ngModel)]="obj[param.name]" (change) = "attr_change()"></td>
+            <td *ngIf="isObject(obj[param.name])"> 
+              <table class="table ">
+                <tbody>
+                  <tr *ngFor = "let nestedParam of listaParam(obj[param.name]) ">
+                    <td>
+                      {{ nestedParam }}
+                    </td>
+                    <td>
+                       <input (ngModel)="jsonVal[param.name][nestedParam]" (change) = "attr_change()">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </td>
           </tr>
           </tbody>
         </table>

@@ -26,14 +26,14 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
   @SetterAlg()
   public title:string;
 
-  @Attr({info:"Kolor panelu", default : "", name:""})
+  @Attr({info:"Kolor panelu", default : "default", name:""})
   @SetterAlg({field: "panel_class", func: (ci: any, v: any) => {ci.panel_class = "panel panel-" + v}})
   panel_class:string;
 
   panel_body_class:string;
 
   @Attr({info:"Czy ciało panelu rozwijane", default : "false", name:""})
-  @SetterAlg({field: "collapse", func: undefined})
+  @SetterAlg()//{field: "collapse", func: undefined})
   collapsible:boolean;
 
   @Attr({info:"Id panelu", default : "", name:""})

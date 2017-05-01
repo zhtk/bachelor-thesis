@@ -10,7 +10,7 @@ const layout_dict =
 				"children": [
 					{
 						"type": "PanelComponent",
-						"collapse" : true,
+						"collapsible" : true,
 						"hidable" : true,
 						"size": {
 							"large": 12,
@@ -172,7 +172,7 @@ const layout_dict =
 								"size": {
 									"large": 10,
 								},
-								"collapse" : true,
+								"collapsible" : true,
 								"title": `3. Ustalenie prawa do świadczenia wychowawczego na kolejne dziecko/dzieci w wieku poniżej
 		18. roku życia, inne niż pierwsze dziecko.`,
 								"children": [
@@ -538,7 +538,7 @@ const layout_dict =
 									"large": 10,
 								},
 								"title": "4. Dane członków rodziny",
-								"collapse" : true,
+								"collapsible" : true,
 								"children": [
 									{
 										"type": "LabelComponent",

@@ -7,8 +7,7 @@ import {PanelComponent} from "./FrontComponents/PanelComponent";
 import {RowComponent} from "./FrontComponents/RowComponent";
 import {IconComponent} from "./FrontComponents/IconComponent";
 import {ComponentCreator} from "./ComponentsCore/ComponentCreator";
-
-
+import { KeysPipe } from '../keys.pipe';
 
 @Component
 ({
@@ -24,6 +23,7 @@ export class StyleGuideComponent implements OnInit {
   };
 
   json: string;
+
   obj:any;
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
@@ -39,25 +39,85 @@ export class StyleGuideComponent implements OnInit {
     const that = <RenderFromJSON> main;
     that.renderJSON({'title' : 'ok'});
 
-    const front = <FrontEndClass> main;
-    this.obj = front;
+    this.front = <FrontEndClass> main;
+    this.obj = this.front;
 
-
+    this.updateJSON();
 
     // const reg = new RegExp('"info":"(\w|\s)*",');
 
+
     this.json = ' { <br>';
-    for (let i = 0; i < front.params.length; i++) {
-      this.json += '"' +  front.params[i].name + '" : "' + 'val' + '"' + '<br>';
+    for (let i = 0; i < this.front.params.length; i++) {
+      this.json += '"' +  this.front.params[i].name + '" : "' + this.valMap.get(this.front.params[i].name) +
+                   '"' + '<br>';
     }
     this.json += '}';
+
+    console.log("RAPORT")
+    console.log(this.json);
+    console.log(this.obj);
+
+  }
+
+  private jsonVal = {};
+  private valMap = new Map();
+  private front: any;
+
+  isObject(sth: any): boolean {
+    console.log("obiekt:")
+    
+    if (sth) {
+      console.log(sth);
+      console.log(Object.getOwnPropertyNames(sth));
+    }
+    else {
+      console.log("jakiś UNDEF")
+    }
+    return (sth instanceof Object);
+  }
+
+  listaParam(obj: any) {
+    if (obj) {
+      var toReturn = Object.getOwnPropertyNames(obj);
+      var index = toReturn.indexOf("parent");
+      if (index > -1) {
+        toReturn.splice(index, 1);
+        console.log("wyciety parent")
+      }
+      else console.log("nie bylo parenta")
+      return toReturn;
+    }
+    else
+      return [];
+  }
+
+  updateJSON() {
+    for (let param of this.obj.params) {
+      this.valMap.set(param.name, "");
+      if (this.obj[param.name]) {
+        this.valMap.set(param.name, this.obj[param.name]);
+      }
+      if (param.default) {
+        this.valMap.set(param.name, param.default);
+      }
+    }
+  }
+
+  private getMapName(name: string) {
+    return this.valMap.get(name)
   }
 
 
-
-
-
   attr_change () {
+    console.log("wywolano attr_change")
+    this.updateJSON();
+
+    for (let param of this.obj.params) {
+      var className: string = 
+        StyleGuideComponent.components[this.route.snapshot.params['category']].constructor.name;
+      ComponentCreator.setObjectProperty(className, param, this.obj, this.jsonVal[param.name]);
+    }
     //this.test.renderJSON(this.json);
   }
 }

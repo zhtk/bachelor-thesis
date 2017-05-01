@@ -130,7 +130,7 @@ export class ComponentCreator {
 
 
 	static createFromJSON(jsonObject: any, factory:ComponentFactoryResolver,
-		target:ViewContainerRef) {
+		target:ViewContainerRef): RenderFromJSON {
 		var compFactory: any;
 		var ref: any;
 		var obj: any;
@@ -278,10 +278,17 @@ export class ComponentCreator {
 			} else if (elem != "type" && elem != "id") {
 				console.log("czy bedzie wywrotka?");
 				console.log("className = " + className + ", elem = " + elem);
-				renderInstr[className][elem](obj, jsonObject[elem]);
+				//renderInstr[className][elem](obj, jsonObject[elem]);
+				this.setObjectProperty(className, elem, obj, jsonObject[elem]);
 				console.log("nie ma wywrotki")
 			}
 		}
+
+		return <RenderFromJSON> obj;
 		
+	}
+
+	static setObjectProperty(className: string, jsonElem: string, obj: any, val: any) {
+		renderInstr[className][jsonElem](obj, val);
 	}
 }
