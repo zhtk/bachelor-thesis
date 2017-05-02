@@ -12,7 +12,7 @@ export class FrontEndClass{
 
   @Attr({info:"Czy element widzialny", default : "true", name:""})
   public visible: boolean;
-  @Attr({info:"Rozmiar elementu", default : "12", name:""})
+  @Attr({info:"Rozmiar elementu", default : "", name:""})
   public size:SizeProperties;
   @Attr({info:"Kolor tla", default : "transparent", name:""})
   public backgroundColor:string;

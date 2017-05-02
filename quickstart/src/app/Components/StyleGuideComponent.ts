@@ -43,7 +43,13 @@ export class StyleGuideComponent implements OnInit {
     this.obj = this.front;
 
     this.updateJSON();
-
+    // for (let param of this.obj.params) {
+    //   this.valMap.set(param.name, "");
+    //   if (param.default) {
+    //     this.valMap.set(param.name, param.default);
+    //     this.jsonVal[param.name] = param.default;
+    //   }
+    // }
     // const reg = new RegExp('"info":"(\w|\s)*",');
 
 
@@ -65,15 +71,15 @@ export class StyleGuideComponent implements OnInit {
   private front: any;
 
   isObject(sth: any): boolean {
-    console.log("obiekt:")
+    //console.log("obiekt:")
     
-    if (sth) {
-      console.log(sth);
-      console.log(Object.getOwnPropertyNames(sth));
-    }
-    else {
-      console.log("jakiś UNDEF")
-    }
+    // if (sth) {
+    //   console.log(sth);
+    //   console.log(Object.getOwnPropertyNames(sth));
+    // }
+    // else {
+    //   console.log("jakiś UNDEF")
+    // }
     return (sth instanceof Object);
   }
 
@@ -94,30 +100,44 @@ export class StyleGuideComponent implements OnInit {
 
   updateJSON() {
     for (let param of this.obj.params) {
-      this.valMap.set(param.name, "");
+      //this.valMap.set(param.name, "");
       if (this.obj[param.name]) {
-        this.valMap.set(param.name, this.obj[param.name]);
+        this.valMap.set(param.name, this.jsonVal[param.name]);
+        this.jsonVal[param.name] = this.obj[param.name]
       }
       if (param.default) {
         this.valMap.set(param.name, param.default);
+        this.jsonVal[param.name] = param.default;
       }
     }
   }
 
   private getMapName(name: string) {
-    return this.valMap.get(name)
+    return this.jsonVal[name];
   }
 
 
   attr_change () {
     console.log("wywolano attr_change")
-    this.updateJSON();
 
     for (let param of this.obj.params) {
       var className: string = 
-        StyleGuideComponent.components[this.route.snapshot.params['category']].constructor.name;
-      ComponentCreator.setObjectProperty(className, param, this.obj, this.jsonVal[param.name]);
+        StyleGuideComponent.components[this.route.snapshot.params['category']].name;
+
+      console.log("nazwa coto: " + this.route.snapshot.params['category'])
+      console.log(StyleGuideComponent.components[this.route.snapshot.params['category']].name);
+      console.log("nazwa klasy: " + className);
+      if (this.isObject(param.name))
+        for (let nestedParam of this.listaParam(this.jsonVal[param.name]))
+          ComponentCreator.setObjectProperty(className, this.jsonVal[param.name][nestedParam].name, this.obj, this.jsonVal[param.name]);  
+      else
+        ComponentCreator.setObjectProperty(className, param.name, this.obj, this.jsonVal[param.name]);
     }
+
+    console.log(this.jsonVal)
+    console.log(this.jsonVal["size"])
+    console.log(this.jsonVal["size"]["small"])
+    //this.updateJSON();
     //this.test.renderJSON(this.json);
   }
 }

@@ -44,6 +44,21 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
   @SetterAlg()
   hidable:boolean;
 
+  @SetterAlg()
+  visible:boolean;
+
+  @SetterAlg()
+  public backgroundColor:string;
+
+  @SetterAlg()
+  public textColor:string;
+
+  @SetterAlg()
+  public grid_class:string;
+  
+  @SetterAlg()
+  cursor:string;
+
  @SetterAlg({field: "size", func: (ci: PanelComponent, v: any) => {ci.setGridClass({"size": v})}})
   size: SizeProperties;
 
