@@ -355,7 +355,6 @@ W trakcie dyskusji w naszym zespole padła myśl, by udostępnić klientowi pros
 Mimo niewątpliwie fascynujących możliwości wymienionych frameworków porzuciliśmy pomysł zgłębienia i wykorzystania któregoś z nich z powodu nikłego zainteresowania klienta takim rozwiązaniem.
 
 \chapter{Projekt}
-
 Po przedstawieniu naszych wyników klientowi doszliśmy do wniosku, że zakres naszego projektu znacznie pokrywa się z już istniejącymi rozwiązaniami takimi jak Eventuate. Zdecydowaliśmy się przenieść środek ciężkości naszego projektu w stronę warstwy integracji klienta z backendem. Ustalono, że do osiągnięcia sukcesu wystarczy spełnienie następujących warunków: %TODO
 \begin{itemize}
 	\item Zrobicie warstwę FE + BFF w ten sposób, że zostanie zrobione środowisko Web Style Guide z podstawowymi i złożonymi kontrolkami oraz z generacją kodu.
@@ -373,23 +372,38 @@ odporniejszy na błędy popełnione w serwerach mikrousług, a w przypadku wykry
 jakiejś luki można ad-hoc wprowadzić łatkę bezpieczeństwa w serwerze pośredniczącym
 zamiast łatać wszystkie podatne serwery mikrousług.
 
+
+\chapter{FrontEnd}
+\section{Technologie}
+
+Do tworzenia cześć wizualnej oraz logiki bezpośrednio z nią związanej, użyliśmy frameworka Angular2. Jest to narzędzie stworzone przez Google, opierające się
+na Type Script - języku będącym nadzbiorem Java Script. W stosunku do js główną funkcjonalnością ts jest dodanie obiektowości, jednakże można stwierdzić,
+że wszystko co związane z obiektowością w ts to tylko lukier syntaktyczny, ponieważ w ts koniec konców jest przetłumaczony do czystego js. Ts implementuje większość
+funkcjonalności, które język obiektowy powinien oferować - możliwe jest dziedziczenie, tworzenie interfesjów, konstruktory itp. Ciekawą opcją są dekoratory, czyli
+odzobniki klas. Dekoratory (szerzej opisane w dalszej części pracy) pozwalają na zmianą ``zachowania'' klasy już w trakcie kompilacji.
+
+Za wygląd strony odpowiada HTML5, połączony z Bootstrapem. Bootstrap to zbiór gotowych komponentów wizulanych, pozwalający, bez zbędnego wnikania
+w stronę ``artystyczną'', tworzyć strony estetyczne oraz wygodne w użyciu. Jako, że tematem naszej pracy nie jest projektowanie stron internetowych,
+użyliśmy gotowej skórki - sbAdmin2. Właściwie, lepszym określeniem, jest użycie sbAdmin2 jako punktu wyjścia, ponieważ liczba wprowadzliśmy
+liczne zmiany w wyglądzie platformy.
+
+\section{Tworzenie mockupów}
+Tutaj opis wszystkich stworzonych podstron
+\section{Stworznie systemu komponentów}
+Opis posczególnych komponentów, oraz całej idei architektury tego rozwiązania.
+\section{System tworzenia automatycznej dokumentacji}
+Opis dekoratorów.
+\section{Edytor}
+TODO
+\section{Platforma developera}
+Sposób dodawania mikrosusług, style guide.
+\chapter{BackEnd}
+TODO = DJANGO
+\chapter{Warstwa Integracji}
+TODO = INTEGRATOR
+
 \chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
-Michał Jaroń, członek podzespołu frontendowego zaproponował koncepcję edytorka
-mikrousług. Wykazał się także niezwykłym talentem w dziedzinie logistyki i
-organizowaniu spotkań członków zespołu.
-
-Jarosław Socha, członek podzespołu frontendowego zajmował się bardzo delikatnymi
-sprawami organizacyjnymi z klientem, takimi jak zarządzanie terminami kolejnych
-iteracji i dostarczaniem rzetelnych informacji o obiektywnych  trudnościach
-występujących przy realizacji projektu. Ponadto miał niebagatelny udział w
-dzielnym rozwiewaniu pesymizmu Krzysztofa.
-
-Krzysztof Stanisławek, członek podzespołu backendowego zajmował się przeglądem
-technologii i wspierał zespół swoimi krytycznymi uwagami.
-
-Piotr Zalas, członek podzespołu backendowego zajmował się przeglądem technologii
-i spisaniem niniejszego dokumentu.
-
+TODO
 \appendix
 \chapter{Spis zawartości dołączonej płyty CD}\label{r:spis}
 Dokładny spis zawartości towarzyszącej płytki (p. dalej). To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział). Płytka CD/DVD/Blu-ray/...
