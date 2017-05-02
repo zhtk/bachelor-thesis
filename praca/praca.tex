@@ -180,15 +180,25 @@ Jeszcze innym, ciekawym podejściem byłoby zastosowanie usługi udostępniając
 \section{Mikrousługi}
 TODO
 
-\chapter{Funkcjonalności}\label{r:fun}
-
-
 \chapter{Wykorzystane technologie}\label{r:tech}
 
 \section{Języki programowania}
 Python, Java, Node.js, typescript
 
 \section{Angular 2}
+
+Do tworzenia cześć wizualnej oraz logiki bezpośrednio z nią związanej, użyliśmy frameworka Angular2. Jest to narzędzie stworzone przez Google, opierające się
+na Type Script - języku będącym nadzbiorem Java Script. W stosunku do js główną funkcjonalnością ts jest dodanie obiektowości, jednakże można stwierdzić,
+że wszystko co związane z obiektowością w ts to tylko lukier syntaktyczny, ponieważ w ts koniec konców jest przetłumaczony do czystego js. Ts implementuje większość
+funkcjonalności, które język obiektowy powinien oferować - możliwe jest dziedziczenie, tworzenie interfesjów, konstruktory itp. Ciekawą opcją są dekoratory, czyli
+odzobniki klas. Dekoratory (szerzej opisane w dalszej części pracy) pozwalają na zmianą ``zachowania'' klasy już w trakcie kompilacji.
+
+\section{Bootstrap}
+
+Za wygląd strony odpowiada HTML5, połączony z Bootstrapem. Bootstrap to zbiór gotowych komponentów wizulanych, pozwalający, bez zbędnego wnikania
+w stronę ``artystyczną'', tworzyć strony estetyczne oraz wygodne w użyciu. Jako, że tematem naszej pracy nie jest projektowanie stron internetowych,
+użyliśmy gotowej skórki - sbAdmin2. Właściwie, lepszym określeniem, jest użycie sbAdmin2 jako punktu wyjścia, ponieważ liczba wprowadzliśmy
+liczne zmiany w wyglądzie platformy.
 
 \section{Express.js}
 
@@ -251,28 +261,26 @@ składowisko informacji potrzebnych przy wykonywaniu operacji. W takim modelu ro
 transparentny dla usługi wywołującej. Z uwagi na prototypowych charakterze naszego projektu poprzestaliśmy na
 bazie SQLite, jako że znakomicie integruje się on z Django, ponadto zastąpienie go PostgreSQLem jest praktycznie bezkosztowe.
 
+\chapter{Funkcjonalności}\label{r:fun}
+
+\section{Tworzenie mockupów}
+Tutaj opis wszystkich stworzonych podstron
+\section{Stworznie systemu komponentów}
+Opis posczególnych komponentów, oraz całej idei architektury tego rozwiązania.
+\section{System tworzenia automatycznej dokumentacji}
+Opis dekoratorów.
+\section{Edytor}
+TODO
+\section{Platforma developera}
+Sposób dodawania mikrosusług, style guide.
+
 \chapter{Obserwator emerytalny}
 Z uwagi na bardzo niepewny charakter naszego projektu i trudności związane z
 formalnym rozliczeniem naszej pracy zdecydowaliśmy się wykonać niejako poza
 głównym projektem serwis ,,Obserwator emerytalny''.
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
-Michał Jaroń, członek podzespołu frontendowego zaproponował koncepcję edytorka
-mikrousług. Wykazał się także niezwykłym talentem w dziedzinie logistyki i
-organizowaniu spotkań członków zespołu.
-
-Jarosław Socha, członek podzespołu frontendowego zajmował się bardzo delikatnymi
-sprawami organizacyjnymi z klientem, takimi jak zarządzanie terminami kolejnych
-iteracji i dostarczaniem rzetelnych informacji o obiektywnych  trudnościach
-występujących przy realizacji projektu. Ponadto miał niebagatelny udział w
-dzielnym rozwiewaniu pesymizmu Krzysztofa.
-
-Krzysztof Stanisławek, członek podzespołu backendowego zajmował się przeglądem
-technologii i wspierał zespół swoimi krytycznymi uwagami.
-
-Piotr Zalas, członek podzespołu backendowego zajmował się przeglądem technologii
-i spisaniem niniejszego dokumentu.
-
+TODO
 \appendix
 \chapter{Spis zawartości dołączonej płyty CD}\label{r:spis}
 Dokładny spis zawartości towarzyszącej płytki (p. dalej). To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział). Płytka CD/DVD/Blu-ray/...
