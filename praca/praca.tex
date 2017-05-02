@@ -2,6 +2,7 @@
 
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
 
 % Dane magistranta:
 
@@ -22,12 +23,11 @@
 % (podać tytuł/stopień imię i nazwisko opiekuna
 % Instytut
 % ew. Wydział ew. Uczelnia (jeżeli nie MIM UW))
-\opiekun{mgr Michał Możdżonek\\
-  ZUS\\
+\opiekun{mgra Michała Możdżonka\\
   }
 
 % miesiąc i~rok:
-\date{Listopad 2016}
+\date{Maj 2017}
 
 %Podać dziedzinę wg klasyfikacji Socrates-Erasmus:
 \dziedzina{ 
@@ -59,19 +59,6 @@
 %\listoffigures
 %\listoftables
 
-\chapter*{Wprowadzenie} 
-\addcontentsline{toc}{chapter}{Wprowadzenie}
-Tutaj napiszemy jakiś wstęp, nie mam pojęcia o czym. Janusz mówi: ,,Wstęp (a czasem nie tylko wstęp): opis całego projektu, w naturalny sposób daje się tu wykorzystać fragmenty wizji. Dyskusja rozwiązań konkurencyjnych - w zależności od projektu: na świecie, w Polsce, w zamawiającej firmie - ze śladem w bibliografii. To może być część wstępu, może być też osobny rozdział. "
-
-\section{Uwagi Janusza}
-Główna część pracy. Jeden bądź kilka rozdziałów poświęconych osiągnięciom, problemom, sukcesom projektu. To jest to miejsce, gdzie należy się pochwalić tym, co Państwo osiągnęli. Jeśli Państwo się sami nie pochwalicie, nikt nigdy nie będzie wiedział ile pracy, pomysłowości i wysiłku kosztowało zrealizowanie projektu. Chwalić się można i należy różnymi rzeczami.
-
-Osiągnięciami (projekt ma świetny interfejs; projekt jako pierwszy rozwiązuje jakiś problem; użytkownicy projektu są bardzo zadowoleni, a klient zawarł z Państwem umowę na przyszłość; Państwa firma właśnie wchodzi na New Connect; 10\% z pierwszych zarobionych milionów przeznaczyli Państwo na fundację wspierania UW; itp.).
-Ciekawymi rozwiązaniami i dobrym kodem (projekt stworzono od początku do końca wg nowoczesnej metodologii; w projekcie użyto zaawansowanych narzędzi np. do recenzji kodu; projekt korzysta z nowoczesnych bibliotek; w projekcie zastosowano niebanalne algorytmy; projekt używa dedykowanego sprzętu; projekt korzysta z rozbudowanej infrastruktury: serwer WWW + serwer b.d. + serwer aplikacji + serwer poczty + dwa mendle innych ważnych serwerów; itp.).
-Włożoną w projekt pracą (dyskusja innych możliwych rozwiązań odrzucanych na kolejnych etapach pracy; opis problemów z biblioteką pobraną z internetu, która wg dokumentacji miała działać, a na skutek jej błędów uruchomienie systemu zajęło miesiąc dodatkowej pracy; problemów z zamawiającym, którego poszczególni przedstawiciele uparli się składać sprzeczne między sobą wymagania; opis organizacji pracy zespołu, w którym wszyscy członkowie mieszkają każdy w innym mieście poza Warszawą, studiują na różnych kierunkach i dotąd się nie znali, jednocześnie pracują i to każdy w innych godzinach, a na koniec dwójka z nich się pobrała, ma trojaczki, właśnie wzięła urlop dziekański i chwilowo podróżuje tratwą po Pacyfiku; itp.).
-
-Zwykle warto dodać jakiś kluczowy przypadek użycia z Państwa dokumentacji. W zależności od projektu mogą być bardzo pożądane zrzuty ekranów kluczowych części projektu. Znów w zależności od projektu mogą być potrzebne fragmenty kodu (do kilkunastu wierszy bezpośrednio w kodzie, do 2 stron jako załączniki do treści dokumentu).
-
 %\chapter{Organizacja pracy}
 
 %Pierwszym poważnym wyzwaniem, przed którym staneliśmy, była organizacja pracy zespołu. Każdy członek zespołu
@@ -81,11 +68,11 @@ Zwykle warto dodać jakiś kluczowy przypadek użycia z Państwa dokumentacji. W
 %Komunikacja między członkami zespołu odbywała się głównie przez internet, przy pomocy facebooka %i slacka.
 %Projekt prowadziliśmy w lekko zmodyfikowanej zwinnej metodyce opracowanej specjalnie na potrzeby naszego klienta.
 
-\chapter{Wizja systemu}\label{r:wizja}
+\chapter*{Wprowadzenie}\label{r:wstep}
+\addcontentsline{toc}{chapter}{Wprowadzenie}
 
 Celem naszego projektu było stworzenie prototypu internetowego frameworka do komunikacji obywatela z urzędami
-podobnego do Platformy Usług Elektronicznych ZUS \cite{zuspue}, a następnie zaimplementowanie na niej jednego
-wybranego przypadku użycia, np. usługi dokumentowania okresów zatrudnienia \cite{zusdoz}. Dzięki temu petent chcący
+podobnego do Platformy Usług Elektronicznych ZUS \cite{zuspue}, a następnie zaimplementowanie na niej kilku wybranych przypadków użycia. Dzięki temu petent chcący
 coś załatwić w urzędzie nie będzie musiał wychodzić z domu. Pewną inspiracją do stworzenia takiego systemu był
 rządowy portal obywatel.gov.pl \cite{mcobywatel}.
 
@@ -142,106 +129,30 @@ przyszłość konieczność przebudowy systemu z powodu zmieniających się tren
 %Elementy, które powinny się znaleźć w dokumencie opisującym wizję to:
 %Opis rozwiązania, Korzyści biznesowe, Wizja projektu i zakres, Analiza korzyści, Wymagania biznesowe, Wymagania użytkowników, Wymagania operacyjne, Wymagania systemowe, Wymagania bezpieczeństwa, Zakres projektu, Cele biznesowe, Cele techniczne, Kryteria operacyjne, Ograniczenia, Definicja profili użytkowników, Analizy użytkowania, Scenariusze wykorzystania
 
-\chapter{Przegląd istniejących rozwiązań}\label{r:przeglad}
+\chapter{Architektura aplikacji}
 
-Przed przystąpieniem do opracowania projektu architektury wykonaliśmy przegląd
-obecnie dostępnych rozwiązań, które mogłyby nam pomóc w realizacji wyznaczonych
-celów. Nasz klient poprosił nas nie tylko o wykonanie prostego serwisu
-bazującego na skonstruowanym przez nas prototypie, ale także o wstępne
-zarysowanie rozwiązań problemów, które pojawią się przy dalszym rozwoju systemu
-w miarę dokładania kolejnych mikrousług. Przykładami takich problemów były:
+Zdecydowaliśmy się przenieść środek ciężkości naszego projektu w stronę warstwy integracji klienta z backendem. Ustalono, że do osiągnięcia sukcesu wystarczy spełnienie następujących warunków: %TODO
 \begin{itemize}
-	\item nieuniknione awarie sprzętu
-	\item konieczność współpracy między mikrousługami
-	\item współbieżne i kolidujące ze sobą operacje mikrousług
+	\item Zrobicie warstwę FE + BFF w ten sposób, że zostanie zrobione środowisko Web Style Guide z podstawowymi i złożonymi kontrolkami oraz z generacją kodu.
+	\item Następnie użytkownik będzie mógł sam wyklikać kontrolki i ustawić to w dashboardy.
+	\item Na końcu chciałbym mięc zrobiony mockup pue.zus.pl wyklikany w ten sposób.
 \end{itemize}
 
-\section{Problemy z współbieżnością mikrousług}
-%TODO poprawić wstęp
-Nietrudno wyobrazić sobie sytuację, w której dwie współbieżnie działające mikrousługi
-wprowadzają konfliktujące ze sobą zmiany. Pewną formą zabezpieczenia przed takimi sytuacjami
-mogłoby być rozwiązywanie konfliktów przez mikrousługę pośredniczącą w dostępie do bazy danych.
-Taka mikrousługa stanowiłaby wtedy coś w rodzaju sekcji krytycznej, uniemożliwiającej jednoczesne zapisy
-i niespójne odczyty (niezależnie od atomowości operacji na bazie danych). 
-Niestety, takie podejście może nie wystarczać, np. w przypadku dwóch niezależnie działających usług, które wpierw
-odczytują jakąś informację z bazy danych, a następnie na podstawie uzyskanej informacji wybierają rodzaj
-akcji do podjęcia i nadpisują część bazy danych.
+\section{Interfejs użytkownika}
+TODO
 
-Jest kilka możliwych rozwiązań tego problemu. Możemy je pogrupować ze względu na następujące cechy:
-\begin{itemize}
-	\item miejsce przechowywania blokad
-	\item sposób zakładania blokad na usługi
-	\item wielkość obiektów, które będą blokowane
-\end{itemize}
-Blokady mogą być przechowywane w dedykowanej, wydzielonej mikrousłudze lub w mikrousłudze, której dotyczą. W naszej opinii
-pierwsze podejście jest o tyle lepsze, że pozwala na wykrywanie zakleszczeń. Wadą takiego rozwiązania jest
-stosunkowo słabe zrównoleglanie i fakt, że taka mikrousługa stanowiłaby najsłabszy punkt systemu, którego awaria
-skutkowałaby zablokowaniem wszystkich pozostałych usług. Blokady mogą być zakładane pojedyńczo, w miarę
-postępu transakcji lub na jej samym początku (w takim przypadku mikrousługa musi dokładnie wiedzieć, z jakich
-zasobów ma zamiar skorzystać). Wydaje nam się, że najsensowniejszym wariantem jest wykorzystanie rozwiązań
-stosowanych w relacyjnych bazach danych, gdzie blokady są zakładane w miarę postępu transakcji, a w przypadku
-wykrycia zakleszczenia zmiany są wycofywane, sama zaś usługa wywłaszczana. Przy kolejnej próbie takiej mikrousłudze
-nadany zostaje większy priorytet, który zapewnia żywotność. W przypadku implementacji takiego podejścia należy
-pamiętać o zapewnieniu mechanizmów wywłaszczania mikrousług, księgowania zmian, śledzenia transakcji, wykrywania
-zakleszczeń, nadawania priorytetów oraz o możliwości zakładania możliwie małych blokad na pojedyńcze rekordy.
-Niestety, z uwagi na ograniczone zasoby nie byliśmy w stanie zaimplementować mechanizmu synchronizacji w
-przedstawiony wyżej sposób. Postanowiliśmy ograniczyć się do muteksów zakładanych na początku transakcji.
+Tego chcemy uniknąć:\\
+\includegraphics[width=\textwidth]{obrazki/logowaniezle.jpg}
 
-Do ustalenia pozostała tylko wielkość blokowanych przez muteks danych. Ze względów wydajnościowych blokowanie
-całych mikrousług zapewniających dostęp do danych nie było możliwe. Z uwagi na opóźnienia w przesyłaniu informacji
-przez sieć prowadziłoby to z jednej strony do marnowania mocy obliczeniowej serwera bazy danych, a z drugiej strony 
-znacząco ograniczałoby ilość jednoczesnych operacji. Z kolei zakładanie blokad na konkretne wiersze w poszczególnych
-mikrousługach jest nierealizowalne, gdyż w chwili zakładania muteksu usługa może nie wiedzieć, jakie konkretnie
-wiersze zmodyfikuje. Postanowiliśmy znaleźć złoty środek i zakładać blokady na właściciela danych. Wynika to z
-faktu, że w typowej urzędniczej praktyce wykonywane operacje dotyczą co najwyżej kilku osób.
-
-Uzbrojeni w powyższe informacje wytypowaliśmy dwie usługi mogące działać jako zarządca rozproszonego muteksa:
-redisson \cite{redisson} i ZooKeeper \cite{zookeeper}. Redisson jest rozwiązaniem implementującym algorytm Redlock
-\cite{redislock}. Jego najważniejszą cechą jest odporność na awarie usług poprzez automatyczne zwalnianie blokady
-po upływie określonego czasu. W internecie ukazała się bardzo interesująca polemika do przytoczonego algorytmu \cite{redisbad}.
-Głównym zarzutem czynionym wobec algorytmu Redlock jest brak mechanizmu, który zapobiegałby następującej sytuacji:
-mikrousługa A zakłada blokadę na zasób Z. Następnie zaczyna operację nadpisywania danych. W trakcie operacji
-działanie mikrousługi z losowego powodu zostaje zawieszone (np. wystąpiło znaczne opóźnienie w połączeniu sieciowym
-lub włączył się odśmiecacz pamięci). W tym czasie termin ważności blokady mija, zostaje ona zdjęta, a do akcji
-wkracza mikrousługa B, która zakłada swoją blokadę, nadpisuje dane utworzone przez usługę A i kończy swoje
-działanie. Na koniec usługa A zostaje wybudzona i kontynuuje swoje działanie, prowadząc do rozspójnienia danych.
-Według autora polemiki rozwiązaniem tego problemu jest skorzystanie z mechanizmu współdzielonej blokady
-zaimplementowanej w frameworku Apache Curator \cite{curatorlock} i korzystającej pod spodem z Apache ZooKeepera.
-Jest to bezpieczniejsze rozwiązanie które nie pozwala na wygaśnięcie blokady z powodu upływającego
-czasu, a w przypadku awarii mikrousługi i utraty połączenia z nią
-automatycznie zdejmuje blokadę. Ponadto, jest to stosunkowo nowoczesny projekt wykorzystywany i rozwijany przez
-duże firmy takie jak Netflix, co daje pewne nadzieje dotyczące stabilności i dojrzałości tego projektu.
-
-Jest jeszcze jeden problem, na który użytkownicy naszej platformy mogą się natknąć. Mianowicie, nasza platforma
-może integrować poprzez różne adaptery już istniejące usługi, które zupełnie nie są świadome istnienia
-zaproponowanego mechanizmu blokad, więc nie są odporne na błędy wynikające z współbieżności.
-Projektanci mikrousług korzystających z naszej platformy muszą być świadomi wszystkiego, co wyżej napisano.
-Aby maksymalnie ułatwić im pracę uwzględniliśmy wyniki powyższych rozważań przy projektowaniu API, jednak nie
-jesteśmy w stanie rozwiązać wszystkich pojawiających się problemów.
-
-\section{Zapewnianie odporności systemu na awarie}
-
-Nie jest możliwe przewidzenie wszystkich możliwych awarii, a tym bardziej zapobiegnięcie im. W typowej eksploatacji należy jednak liczyć się z tym, że pojedyńcze komponenty systemu mogą ulegać losowym awariom. Jednym z poważniejszych problemów, który pojawia się po wystąpieniu awarii jest niespójność danych w sytuacji, gdy mikrousługa przerwała swoje działanie w trakcie operacji zapisu. Często stosowanym sposobem radzenia sobie z taką sytuacją jest zapewnienie redundantnych komponentów, które w razie potrzeby mogą przejąć zadanie uszkodzonego elementu. Niestety takie rozwiązanie wprowadza dodatkowy stopień skomplikowania do naszego oprogramowania, gdyż trzeba zarządzać nadmiarowymi składowymi. Znaleźliśmy dwa rozwiązania, które automatyzują ten proces.
-
-Hystrix - zapewnia jednokrotny fallback i zapobiega zatykaniu się mikrousług, strażnik na lockach %TODO
-
-\section{Zapewnienie transakcyjności} %TODO brzmi myląco w kontekście JTA, lepiej dopisać do synchronizacji
-
-Jednym z wymagań pozafunkcjonalnych było zapewnienie skalowalności serwisu i mikrousług w sposób zachowujący transakcyjność.
-Dołożenie lub utrata serwera nie powinna wpływać na poprawność transakcji i nie powinna w żadnym przypadku
-prowadzić do utraty lub rozspójnienia danych. Typowym rozwiązaniem stosowanym w takim przypadku jest prowadzenie
-komunikacji między klientem a serwerem w sposób bezstanowy.
-
-Powstaje tutaj pytanie, czy w przypadku naszego serwisu jest to możliwe? Dopuszczalny jest scenariusz, w którym
-mikrousługa pyta użytkownika o jakąś informację (np. stan cywilny), a następnie w zależności od udzielonej odpowiedzi
-prosi o dodatkowe informacje, np. o dane małżonka. Rozwiązaniem tego problemu jest przeniesienie stanowości
-transakcji z serwera do klienta. Wszystkie informacje dotyczące transakcji będą trzymane po stronie klienta, a
-operacje, które mogą zaburzać integralność danych będą wykonywane w jednym momencie i w całości, bez rozbijania
-na wiele części. Dane przechowywane w kliencie przez poszczególne mikrousługi będą odseparowane między sobą, tak aby
-zapobiec konfliktom. W uzasadnionych przypadkach możliwe byłoby przechowywanie części danych (takich jak duże pliki)
-po stronie serwera, oraz trzymanie w kliencie ich identyfikatora.
-
-\section{Szyny danych a kolejki komunikatów}
+\section{Integrator}
+Integrator - autodiscovery usług, możliwość spinania różnych interfejsów gRPC, WSDL. 
+Z uwagi na to, że dane przechodzą przez niego w postaci nieszyfrowanej można
+go podłączyć do IDSa wykrywającego anomalie w przesyłanych danych i w ten sposób
+zapobiegać masowemu wyciekowi wrażliwych danych lub atakom hakerskim. Stanowi też
+dodatkową linię obrony, którą musi sforsować potencjalny haker. Dzięki temu system jest
+odporniejszy na błędy popełnione w serwerach mikrousług, a w przypadku wykrycia
+jakiejś luki można ad-hoc wprowadzić łatkę bezpieczeństwa w serwerze pośredniczącym
+zamiast łatać wszystkie podatne serwery mikrousług.
 
 W naszej architekturze mikrousług potrzebowaliśmy jakiejś metody komunikacji pomiędzy poszczególnymi mikrousługami.
 Na początku nasza uwaga została przykuta przez szyny danych jako standardowe rozwiązanie korporacyjne wykorzystywane
@@ -266,7 +177,22 @@ Innym sposobem osiągnięcia niezawodności może być kolejka ukryta wewnątrz 
 
 Jeszcze innym, ciekawym podejściem byłoby zastosowanie usługi udostępniającej niezawodny dostęp do czegoś w rodzaju dziennika. Wtedy moglibyśmy stosunkowo małym kosztem zaimplementować mechanizmy stosujące transakcyjność rodem z relacyjnych baz danych. Przykładami takich usług są DistributedLog i Kafka. Poszczególne mikrousługi monitorowałyby dziennik i z niego pobierały zmiany, a następnie reagowały na nie poprzez podjęcie jakiejś akcji. Można sobie wyobrazić dwa sposoby wykorzystania takiego dziennika. Pierwszy polegałby na tym, że wszystkie dokonane zmiany są atomowo publikowane w jednej dużej paczce, która musiałaby być potem rozpakowywana, a poszczególne zmiany wyłuskiwane. Drugim sposobem byłoby stworzenie dużej ilości dzienników na każdy rodzaj zdarzenia, a każda operacja byłaby wykonywana w małych krokach, w sposób potokowy.
 
-\section{Usługi rejestracji i monitorowania mikrousług}
+\section{Mikrousługi}
+TODO
+
+\chapter{Funkcjonalności}\label{r:fun}
+
+
+\chapter{Wykorzystane technologie}\label{r:tech}
+
+\section{Języki programowania}
+Python, Java, Node.js, typescript
+
+\section{Angular 2}
+
+\section{Express.js}
+
+\section{ZooKeeper}
 
 Jednym z elementów wizji naszego systemu był fakt, że poszczególne usługi
 powinny możliwie prosto ,,wpinać się'' w system. Serwer mikrousługi w trakcie
@@ -298,80 +224,37 @@ wyrejestrowywania usługi która kończy swe działanie i nie ma możliwości
 powiadomienia serwera o tym fakcie. Druga flaga to \textit{sequence}. Mówi ona,
 że należy do nazwy tworzonego węzła dopisać rosnący numer. Ma to zastosowanie we
 wszelkiego rodzaju kolejkach, algorytmach synchronizujących i przy wyborze
-lidera \cite{curatorlock}. Biblioteka Curator upraszcza wiele aspektów związanych
+lidera \cite{curatorlock}.
+
+\subsection{Curator}
+Biblioteka Curator upraszcza wiele aspektów związanych
 z wykorzystaniem ZooKeepera, między innymi rejestrację serwerów mikrousług,
 zapewnia implementację najczęściej wykorzystywanych algorytmów synchronizujących
-oraz łatwe buforowanie drzewa węzłów wraz z automatycznym pobieraniem zmian.
+oraz łatwe buforowanie drzewa węzłów wraz z automatycznym pobieraniem zmian. W
+trakcie prac nad integratorem okazało się, że oferowane możliwości znacznie przekraczają
+nasze potrzeby.
 
-Rozwiązaniem bardzo podobnym do ZooKeepera jest Consul. Zasadniczą różnicą
-między tymi dwoma serwerami było zastosowanie w Consulu słownika typu
-klucz-wartość oraz znacznie bardziej zaawansowane raportowanie stanu
-mikrousługi, które obejmowało nie tylko informację o działaniu serwera usługi,
-ale także okresowe sprawdzanie jego stanu przy pomocy specjalnie
-zaprojektowanego RESTowego interfejsu. Ułatwiał on integrację z platformami na
-których nie był dostępny klient Consula.
+\subsection{Kazoo}
+Zk dla pythona
 
-Podobną, chociaż nieco okrojoną funkcjonalność w stosunku do Consula zapełniały
-serwery etcd i Netflix Eureka. Ten pierwszy pozwalał na rozproszone składowanie
-danych w słowniku typu klucz-wartość. Eureka z kolei zapewniała automatyczną
-rejestrację, wykrywanie i odpytywanie mikrousług z zadaną częstotliwością oraz
-monitorowanie ich stanu.
+\section{Django}
 
-\section{Przegląd baz danych}
+\section{Play Framework}
+
+\section{GRPC}
+
+\section{SQLite}
 
 W naszym projekcie rodzaj użytej bazy danych nie miał większego znaczenia, gdyż dostęp do niej odbywa się poprzez
 wyspecjalizowaną usługę zapewniającą dostęp do danych lub w ramach jednej mikrousługi, gdzie służy jako tymczasowe
 składowisko informacji potrzebnych przy wykonywaniu operacji. W takim modelu rodzaj użytej bazy danych jest
-transparentny dla usługi wywołującej.
-Wymaganiami postawionymi przed użytą bazą danych były:
-\begin{itemize}
-\item Możliwość zapewnienia wysokiej niezawodności i odporności na utratę integralności danych.
-\item Skalowalność
-\item Elastyczny model danych pasujący do specyfiki informacji przetwarzanych przez naszego klienta.
-\end{itemize}
-W naszym projekcie użyliśmy bazy PostgreSQL, która jest rozwiązaniem spełniającym powyższe wymagania i znanym przez naszego klienta. Skalowalność jest zapewniona przez rozszerzenie pg\_shard które pozwala na sharding danych pomiędzy różnymi serwerami. Jest to dość unikalne rozwiązanie w świecie otwartych relacyjnych baz danych.
+transparentny dla usługi wywołującej. Z uwagi na prototypowych charakterze naszego projektu poprzestaliśmy na
+bazie SQLite, jako że znakomicie integruje się on z Django, ponadto zastąpienie go PostgreSQLem jest praktycznie bezkosztowe.
 
-Spośród baz danych typu NoSQL szczególnie interesujące było Mongo DB. Zastosowany model danych wygląda na spełnienie
-marzeń typowego urzędnika, gdyż wszystkie informacje przechowywane w tej bazie są zorganizowane w dokumenty,
-które mogą być zagnieżdżone w sobie. W obrębie jednego dokumenty gwarantowane są atomowe odczyty i zapisy, które
-działają jak transakcje.
-% TODO
-Sensowne jest też CouchDB. Redis jest zbyt prymitywny, a jego obsługa transakcji zbyt ograniczona, chociaż
-może się przydać przy synchronizacji \cite{redislock}. Niezawodne: cassandra, hbase?
-
-\section{Inne ciekawe narzędzia}
-Eventuate
-axonframework.org % TODO
-%\section{Przegląd technologii do tworzenia frontendu}
-Django, PHP, Spring i inne serwerowe podejścia są be. Zastanawiamy się nad dojo (najlepszą antyrekomendacją jest obecnie istniejący system PUE) vs angular 2 vs react (odpada, słaba licencja). % TODO
-
-W trakcie dyskusji w naszym zespole padła myśl, by udostępnić klientowi proste w użyciu oprogramowanie, które pozwoliłoby na graficzne zamodelowanie udostępnianych usług. Następnie na podstawie tego modelu byłaby generowana gotowa do wdrożenia mikrousługa. Okazuje się, że istnieją rozwiązania zapewniające zbliżoną funkcjonalność. Pozwalają one na modelowanie procesów biznesowych przy pomocy graficznej ,,Notacji i Modelu Procesu Biznesowego'' (ang. \textit{Business Process Modeling Notation}) a następnie wykonanie ich na specjalnie do tego celu skonstruowanym silniku. Poszczególne mikrousługi stanowią w tym modelu ,,klocki'', z których klient może sobie kontruować bardziej złożone procesy. Przykładami technologii które implementują wyżej wymienioną funkcjonalność są:
-\begin{itemize}
-	\item Camunda (oparty na Activiti)
-	\item Bonita BPM
-	\item jBPM
-	\item Intalio BPMS
-\end{itemize}
-Mimo niewątpliwie fascynujących możliwości wymienionych frameworków porzuciliśmy pomysł zgłębienia i wykorzystania któregoś z nich z powodu nikłego zainteresowania klienta takim rozwiązaniem.
-
-\chapter{Projekt}
-
-Po przedstawieniu naszych wyników klientowi doszliśmy do wniosku, że zakres naszego projektu znacznie pokrywa się z już istniejącymi rozwiązaniami takimi jak Eventuate. Zdecydowaliśmy się przenieść środek ciężkości naszego projektu w stronę warstwy integracji klienta z backendem. Ustalono, że do osiągnięcia sukcesu wystarczy spełnienie następujących warunków: %TODO
-\begin{itemize}
-	\item Zrobicie warstwę FE + BFF w ten sposób, że zostanie zrobione środowisko Web Style Guide z podstawowymi i złożonymi kontrolkami oraz z generacją kodu.
-	\item Następnie użytkownik będzie mógł sam wyklikać kontrolki i ustawić to w dashboardy.
-	\item Na końcu chciałbym mięc zrobiony mockup pue.zus.pl wyklikany w ten sposób.
-	\item Móc zmieniać sam kolory i etc.
-\end{itemize}
-
-Integrator - autodiscovery usług, możliwość spinania różnych interfejsów gRPC, WSDL. 
-Z uwagi na to, że danem przechodzą przez niego w postaci nieszyfrowanej można
-go podłączyć do IDSa wykrywającego anomalie w przesyłanych danych i w ten sposób
-zapobiegać masowemu wyciekowi wrażliwych danych lub atakom hakerskim. Stanowi też
-dodatkową linię obrony, którą musi sforsować potencjalny haker. Dzięki temu system jest
-odporniejszy na błędy popełnione w serwerach mikrousług, a w przypadku wykrycia
-jakiejś luki można ad-hoc wprowadzić łatkę bezpieczeństwa w serwerze pośredniczącym
-zamiast łatać wszystkie podatne serwery mikrousług.
+\chapter{Obserwator emerytalny}
+Z uwagi na bardzo niepewny charakter naszego projektu i trudności związane z
+formalnym rozliczeniem naszej pracy zdecydowaliśmy się wykonać niejako poza
+głównym projektem serwis ,,Obserwator emerytalny''.
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
 Michał Jaroń, członek podzespołu frontendowego zaproponował koncepcję edytorka
