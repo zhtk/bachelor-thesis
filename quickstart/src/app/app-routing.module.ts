@@ -37,6 +37,7 @@ import { InboxComponent } from './home_components/inbox.component';
 import { SendboxComponent } from './home_components/sendbox.component';
 import {StyleGuideComponent} from "./Components/StyleGuideComponent";
 import {PiecsetComponent} from "./piecsetComponent";
+import {EditorComponent} from "./Editor/EditorComponent";
 
 const routes: Routes = [
 
@@ -66,6 +67,7 @@ const routes: Routes = [
       { path: 'lekarz',  component: LekarzComponent },
       { path: 'pacjent',  component: PacjentComponent },
       { path: 'komponenty', component: TestComponent},
+      { path: 'editor', component: EditorComponent}
     ]},
     { path: '**', redirectTo: '/404'} // ostatni komponent - dodajemy nowe sciezki przed nim!
 ];

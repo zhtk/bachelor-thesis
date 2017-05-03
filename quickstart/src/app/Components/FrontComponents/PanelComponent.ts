@@ -10,7 +10,7 @@ import {SizeProperties} from "../ComponentsCore/MainClasses/SizeProperties";
 
 @Component
 ({
-  selector: 'panelgroup',
+  selector: 'panel',
   templateUrl: '../../pages/Components/Panel/panel.html'
 })
 @Register
@@ -55,7 +55,7 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
 
   @SetterAlg()
   public grid_class:string;
-  
+
   @SetterAlg()
   cursor:string;
 
@@ -72,10 +72,11 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
     this.arrayOfKeys += Object.keys(this);
     this.panel_class = "panel panel-default";
     this.panel_body_class ="panel-body";
-    this.grid_class = "col-lg-";
+    this.grid_class = "col-lg-6";
     this.hidable = false;
     this.visible = true;
     this.collapsible = false;
+    this.title = "panel";
   }
 
   renderJSON(specification: any): void {
@@ -95,7 +96,7 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
       this.title = specification["title"];
     if ("panel_class" in specification)
       this.panel_class = "panel panel-" + specification["panel_class"];
-    
+
     if ("size" in specification)
       this.setGridClass(specification);
     if ("children" in specification)

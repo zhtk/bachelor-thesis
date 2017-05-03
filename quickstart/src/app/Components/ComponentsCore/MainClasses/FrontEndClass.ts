@@ -1,6 +1,7 @@
 import {SizeProperties} from "./SizeProperties";
 import {MemberInfo, Attr, ComponentsRegister} from "../../ComponentsRegister";
 import {BaseClass} from "./BaseClass";
+import {ElementRef} from "@angular/core";
 
 /*
  Klasa "abstrakcyjna" korzeń drzewa wszystkich komponentow

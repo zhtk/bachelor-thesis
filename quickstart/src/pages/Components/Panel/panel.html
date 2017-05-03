@@ -1,4 +1,4 @@
-<div [ngClass] = "grid_class"  [hidden]="!visible">
+<div class= "panelowy" [ngClass] = "grid_class"  [hidden]="!visible">
     <div [ngClass] = "panel_class" id= "{{id}}">
       <div [style.cursor] = "cursor" class="panel-heading" *ngIf="title || hidable"
            [attr.data-toggle]=" collapsible ? 'collapse' : null " [attr.data-target]="'#' + main_id">

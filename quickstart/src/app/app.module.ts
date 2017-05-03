@@ -10,6 +10,10 @@ import { PreprocComponent } from './preproc.component';
 import {TextBox} from './Components/FormComponents/TextBox/TextBox'
 import {TestComponent} from './TestComponent'
 
+
+
+import { NgDraggableModule } from 'angular-draggable';
+
 // Home page components
 import { HomeComponent }  from './home_components/home.component';
 import { Notify } from './home_components/notifications.component';
@@ -80,6 +84,7 @@ import {StyleGuideComponent} from "./Components/StyleGuideComponent";
 import {PiecsetComponent} from "./piecsetComponent";
 
 import { KeysPipe } from './keys.pipe';
+import {Button, EditorComponent} from "./Editor/EditorComponent";
 
 
 @NgModule({
@@ -131,6 +136,8 @@ import { KeysPipe } from './keys.pipe';
           HeadingComponent,
           PanelGroupComponent,
           ContentComponent,
+    EditorComponent,
+    Button,
     IconComponent,
     SpanComponent,
     StyleGuideComponent,
