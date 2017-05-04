@@ -113,7 +113,7 @@ export class StyleGuideComponent implements OnInit {
         this.valMap.set(param.name, this.jsonVal[param.name]);
         this.jsonVal[param.name] = this.obj[param.name]
       }
-      if (param.default != undefined) {
+      if (typeof param.default != undefined) {
         console.log("ustawilem w jsonVal " + param.name + " na")
         console.log(param.default)
         this.valMap.set(param.name, param.default);
@@ -123,7 +123,7 @@ export class StyleGuideComponent implements OnInit {
   }
 
   private getMapName(name: string) {
-    return this.jsonVal[name] != undefined ? this.jsonVal[name] : "UNDEFINED"; 
+    return typeof this.jsonVal[name] != undefined ? this.jsonVal[name] : "UNDEFINED"; 
   }
 
   makeString(obj: any) {
