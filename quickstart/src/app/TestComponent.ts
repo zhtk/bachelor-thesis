@@ -31,6 +31,8 @@ export class TestComponent implements OnInit
 
 
   ngOnInit(): void {
+    console.log("rozwazany json:")
+    console.log(LAYOUT);
     var parsed = JSON.parse(this.pageJSON)["components"];
     for(var elem = 0; elem < parsed.length; elem++)
     {

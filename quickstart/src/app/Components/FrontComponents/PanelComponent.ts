@@ -32,15 +32,15 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
 
   panel_body_class:string;
 
-  @Attr({info:"Czy ciało panelu rozwijane", default : "false", name:""})
-  @SetterAlg()//{field: "collapse", func: undefined})
+  @Attr({info:"Czy ciało panelu rozwijane", default : false, name:""})
+  @SetterAlg()
   collapsible:boolean;
 
   @Attr({info:"Id panelu", default : "", name:""})
   @SetterAlg()
   main_id:string;
 
-  @Attr({info:"Czy panel usuwalny", default : "false", name:""})
+  @Attr({info:"Czy panel usuwalny", default : false, name:""})
   @SetterAlg()
   hidable:boolean;
 

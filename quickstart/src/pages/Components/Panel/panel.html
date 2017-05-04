@@ -4,7 +4,7 @@
            [attr.data-toggle]=" collapsible ? 'collapse' : null " [attr.data-target]="'#' + main_id">
         <h3 class="panel-title">{{ title }}
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true"
-                  *ngIf="hidable" (click)="hide()">×
+                  *ngIf="hidable == true" (click)="hide()">×
           </button>
         </h3>
       </div>

@@ -35,14 +35,21 @@ export class StyleGuideComponent implements OnInit {
 
     let compFactory =
       this.cfr.resolveComponentFactory(StyleGuideComponent.components[this.route.snapshot.params['category']]);
-    const main = this.target.createComponent(compFactory).instance;
-    const that = <RenderFromJSON> main;
+    this.main = this.target.createComponent(compFactory).instance;
+    const that = <RenderFromJSON> this.main;
     that.renderJSON({'title' : 'ok'});
+    ComponentCreator.setObjectProperty(that.constructor.name, 'title', that, 'okey');
 
-    this.front = <FrontEndClass> main;
+    this.front = <FrontEndClass> this.main;
     this.obj = this.front;
 
+    ComponentCreator.setObjectProperty(this.main.constructor.name, 'title', this.main, 'oxa');
+    ComponentCreator.setObjectProperty(this.main.constructor.name, 'hidable', this.main, 'true');
     this.updateJSON();
+
+    console.log("paramsy:");
+    console.log(this.obj.params);
+
     // for (let param of this.obj.params) {
     //   this.valMap.set(param.name, "");
     //   if (param.default) {
@@ -66,6 +73,7 @@ export class StyleGuideComponent implements OnInit {
 
   }
 
+  private main: any;
   private jsonVal = {};
   private valMap = new Map();
   private front: any;
@@ -105,7 +113,9 @@ export class StyleGuideComponent implements OnInit {
         this.valMap.set(param.name, this.jsonVal[param.name]);
         this.jsonVal[param.name] = this.obj[param.name]
       }
-      if (param.default) {
+      if (param.default != undefined) {
+        console.log("ustawilem w jsonVal " + param.name + " na")
+        console.log(param.default)
         this.valMap.set(param.name, param.default);
         this.jsonVal[param.name] = param.default;
       }
@@ -113,21 +123,24 @@ export class StyleGuideComponent implements OnInit {
   }
 
   private getMapName(name: string) {
-    return this.jsonVal[name];
+    return this.jsonVal[name] != undefined ? this.jsonVal[name] : "UNDEFINED"; 
   }
 
+  makeString(obj: any) {
+    return JSON.stringify(obj)
+  }
 
   attr_change () {
     console.log("wywolano attr_change")
 
+    var className: string = this.obj.constructor.name;
     for (let param of this.obj.params) {
-      var className: string = 
-        StyleGuideComponent.components[this.route.snapshot.params['category']].name;
 
       console.log("nazwa coto: " + this.route.snapshot.params['category'])
       console.log(StyleGuideComponent.components[this.route.snapshot.params['category']].name);
       console.log("nazwa klasy: " + className);
-      if (this.isObject(param.name))
+      
+      if (this.isObject(this.jsonVal[param.name]))
         for (let nestedParam of this.listaParam(this.jsonVal[param.name]))
           ComponentCreator.setObjectProperty(className, this.jsonVal[param.name][nestedParam].name, this.obj, this.jsonVal[param.name]);  
       else
@@ -135,10 +148,30 @@ export class StyleGuideComponent implements OnInit {
     }
 
     console.log(this.jsonVal)
-    console.log(this.jsonVal["size"])
-    console.log(this.jsonVal["size"]["small"])
+    console.log(this.jsonVal["hidable"])
+    console.log(this.obj)
+    console.log(this.obj["hidable"])
+
+    // console.log(this.jsonVal["size"]["small"])
     //this.updateJSON();
     //this.test.renderJSON(this.json);
   }
+
+  printTypeBased(item: any, value: any) {
+    console.log(item + " ma typ ");
+    console.log(typeof item)
+    console.log(value + " ma typ ");
+    console.log(typeof value)
+    if (item == "boolean")
+      return value.toString();
+    if (item == "number")
+      return value.toString();
+    if (item == "string")
+      return "\"" + value + "\"";
+
+    return JSON.stringify(value)
+  }
+
+
 }
 

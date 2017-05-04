@@ -19,7 +19,7 @@
         <small>{{ '{' }}</small><br>
         <div style="padding-left: 20px;">
           <small *ngFor="let item of obj.params">
-            "{{ item.name }}" : "{{ getMapName(item.name) }}" <br>
+            "{{ item.name }}" : {{ printTypeBased(item.type, getMapName(item.name)) }} <br>
           </small>
         </div>
         <small>{{ '}' }}</small>
@@ -30,7 +30,7 @@
 
 <div style ="padding:20px"></div>
 <div class="row">
-  <div class="col-lg-8">
+  <div class="col-lg-10">
     <div class="panel panel-primary">
       <div class="panel-heading">Atrybuty</div>
       <div class="panel-body">
@@ -41,6 +41,7 @@
           <tr>
             <th>Nazwa</th>
             <th>Opis</th>
+            <th>Typ wartości</th>
             <th>Wartość domyślna</th>
             <th>Zmień wartość</th>
           </tr>
@@ -49,7 +50,9 @@
           <tr *ngFor = "let param of obj.params">
             <td>{{param.name}}</td>
             <td>{{param.info}}</td>
-            <td>{{param.default}}</td>
+            <td>{{param.type}}</td>
+            <td *ngIf="!isObject(obj[param.name])">{{printTypeBased(param.type, param.default)}}</td>
+            <td *ngIf="isObject(obj[param.name])">{{makeString(param.default)}}</td>
             <td *ngIf="!isObject(obj[param.name])">
               <input [(ngModel)]="jsonVal[param.name]" (change) = "attr_change()">
             </td>
@@ -61,7 +64,7 @@
                       {{ nestedParam }}
                     </td>
                     <td>
-                       <input [(ngModel)]="jsonVal[param.name][nestedParam].name" (change) = "attr_change()">
+                       <input (ngModel)="jsonVal[param.name][nestedParam]" (change) = "attr_change()">
                     </td>
                   </tr>
                 </tbody>

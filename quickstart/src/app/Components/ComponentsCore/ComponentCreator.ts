@@ -288,7 +288,7 @@ export class ComponentCreator {
 		
 	}
 
-	static setObjectProperty(className: string, jsonElem: string, obj: any, val: any) {
+	static setObjectProperty(className: string, jsonElem: string, obj: any, val: string) {
 		console.log("ustawiam w " + className + " wartosc property " + jsonElem + " na " + val);
 		console.log(val)
 		renderInstr[className][jsonElem](obj, val);
