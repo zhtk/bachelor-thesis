@@ -84,7 +84,7 @@ import {StyleGuideComponent} from "./Components/StyleGuideComponent";
 import {PiecsetComponent} from "./piecsetComponent";
 
 import { KeysPipe } from './keys.pipe';
-import {Button, EditorComponent} from "./Editor/EditorComponent";
+import {Button, EditorComponent, HighlightDirective} from "./Editor/EditorComponent";
 
 
 @NgModule({
@@ -96,6 +96,7 @@ import {Button, EditorComponent} from "./Editor/EditorComponent";
   				      ],
   declarations: [ AppComponent,
   					KeysPipe,
+    HighlightDirective,
   				  	HomeComponent,
   				  	PreprocComponent,
   				  	PageNotFoundComponent,

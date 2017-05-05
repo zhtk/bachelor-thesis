@@ -1,11 +1,48 @@
 import {Component, ElementRef, HostBinding, HostListener, OnInit, ViewChild} from '@angular/core';
 import {PanelComponent} from "../Components/FrontComponents/PanelComponent";
 
+import { Directive, Input } from '@angular/core';
+
+@Directive({ selector: '[draggable]' })
+export class HighlightDirective {
+
+  top= "0px";
+  left = "0px";
+  clicked =false;
+  x = 0;
+  y =0;
+  @HostListener('mousedown', ['$event']) onMouseDown(event:any) {
+    event.preventDefault();
+    if (event.button == 0) {
+      this.clicked = true;
+      this.x = event.clientX - this.el.nativeElement.offsetLeft;
+      this.y = event.clientY - this.el.nativeElement.offsetTop;
+    }
+  }
+
+  @HostListener('document:mouseup', ['$event'])
+  onMouseup(event:any) {
+    event.preventDefault();
+    this.clicked = false;
+  }
+  @HostListener('document:mousemove', ['$event'])
+  onMousemove(event:any) {
+    event.preventDefault();
+    if (this.clicked) {
+      this.el.nativeElement.style.top = event.clientY - this.y + 'px';
+      this.el.nativeElement.style.left = event.clientX  - this.x+ 'px';
+    }
+  }
+
+  constructor(private el: ElementRef) {
+    this.el.nativeElement.style.position ='absolute';
+  }
+}
 
 @Component({
   selector: 'btn',
   template: '<panel id="me" oncontextmenu="return false;" style="display:block; position: relative;"  [style.cursor] = "mouse"[style.left] = "pos_left" [style.top] = "pos_top" #panel>' +
-  '</panel>',
+  ' <div id="clear" style="clear:both;"></div></panel>',
 })
 export class Button extends PanelComponent{
   pos_left = "0px";
