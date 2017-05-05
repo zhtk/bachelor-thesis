@@ -44,7 +44,7 @@ export class StyleGuideComponent implements OnInit {
     this.front = <FrontEndClass> this.main;
     this.obj = this.front;
 
-    ComponentCreator.setObjectProperty(this.main.constructor.name, 'size', this.main, {"large": 5});
+    ComponentCreator.setObjectProperty(this.main.constructor.name, 'size', this.main, {"large": 10});
     ComponentCreator.setObjectProperty(this.main.constructor.name, 'hidable', this.main, 'true');
     this.updateJSON();
 
@@ -143,16 +143,15 @@ export class StyleGuideComponent implements OnInit {
 
         console.log("toSend:")
         console.log(toSend)
+
         ComponentCreator.setObjectProperty(
-                         className, param.name, this.obj, toSend);  
+                          className, param.name, this.obj, this.jsonVal[param.name]);
       }
       else {
         var realVal: any;
         switch (param.type) {
           case "boolean":
-            console.log("sprawdzmy czy prawdą jest " + this.jsonVal[param.name])
-            realVal = (this.jsonVal[param.name] == "true");
-            console.log(realVal)
+            realVal = (this.jsonVal[param.name] == 'true') || (this.jsonVal[param.name]);
             break;
 
           case "number":
@@ -169,9 +168,8 @@ export class StyleGuideComponent implements OnInit {
     }
 
     console.log(this.jsonVal)
-    console.log(this.jsonVal["hidable"])
-    console.log(this.obj)
-    console.log(this.obj["hidable"])
+    console.log(this.jsonVal["size"])
+    console.log({"large": 997})
 
     // console.log(this.jsonVal["size"]["small"])
     //this.updateJSON();
