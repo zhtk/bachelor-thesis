@@ -85,6 +85,7 @@ import {PiecsetComponent} from "./piecsetComponent";
 
 import { KeysPipe } from './keys.pipe';
 import { DraggableDirective, EditorComponent, ResizableDirective} from "./Editor/EditorComponent";
+import {PanelEditor} from "./Editor/PanelEditor";
 
 
 @NgModule({
@@ -139,6 +140,7 @@ import { DraggableDirective, EditorComponent, ResizableDirective} from "./Editor
           PanelGroupComponent,
           ContentComponent,
     EditorComponent,
+    PanelEditor,
     IconComponent,
     SpanComponent,
     StyleGuideComponent,

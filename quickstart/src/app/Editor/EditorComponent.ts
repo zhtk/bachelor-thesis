@@ -10,11 +10,30 @@ export class DraggableDirective {
   left = "0px";
   clicked =false;
   x = 0;
-  y =0;
+  y = 0;
+  menu:any;
 
   @HostListener('mousedown', ['$event']) onMouseDown(event:any) {
     event.preventDefault();
+    this.el.nativeElement.style.boxShadow = "0px 0px 5px blue";
+    this.el.nativeElement.after = "a";
+
+    if(event.button == 2)
+    {
+      this.menu.hidden=false;
+      var w = this.el.nativeElement.offsetLeft+this.el.nativeElement.getBoundingClientRect().width;
+      var h = this.el.nativeElement.offsetTop + this.el.nativeElement.getBoundingClientRect().height;
+      this.menu.setAttribute("style", "background-color:grey;position:absolute; top:"+
+        h  +"px;left:" +
+        w+"px;");
+    }
+
+
+
+    //this.menu.setAttribute("style", "background-color:grey;position:absolute; top:"+ this.el.nativeElement.offsetTop +"px;left:" +  this.el.nativeElement.offsetLeft+"px;");
+    document.body.appendChild(this.menu);
     if (event.button == 0) {
+      this.menu.hidden=true;
       this.clicked = true;
       this.x = event.clientX - this.el.nativeElement.offsetLeft;
       this.y = event.clientY - this.el.nativeElement.offsetTop;
@@ -25,10 +44,19 @@ export class DraggableDirective {
   onMouseup(event:any) {
     event.preventDefault();
     this.clicked = false;
+    this.el.nativeElement.style.boxShadow = "0px 0px 0px white";
+    //this.menu.hidden=true;
   }
   @HostListener('document:mousemove', ['$event'])
   onMousemove(event:any) {
     event.preventDefault();
+    var w = this.el.nativeElement.offsetLeft+this.el.nativeElement.getBoundingClientRect().width;
+    var h = this.el.nativeElement.offsetTop + this.el.nativeElement.getBoundingClientRect().height;
+    this.menu.setAttribute("style", "background-color:grey;position:absolute; top:"+
+     h  +"px;left:" +
+      w+"px;");
+
+    console.log(this.el.nativeElement.offsetLeft+this.el.nativeElement.getBoundingClientRect().width);
     if (this.clicked && this.el.nativeElement.style.cursor == "move") {
       this.el.nativeElement.style.top = event.clientY - this.y + 'px';
       this.el.nativeElement.style.left = event.clientX  - this.x+ 'px';
@@ -38,6 +66,23 @@ export class DraggableDirective {
   constructor(private el: ElementRef) {
     this.el.nativeElement.style.position ='absolute';
     this.el.nativeElement.style.cursor = 'move';
+    this.menu = document.createElement("DIV");        // Create a <button> element
+    var t1 = document.createTextNode("pole1");       // Create a text node
+    var t2 = document.createTextNode("pole2");       // Create a text node
+    var t3 = document.createTextNode("pole3");       // Create a text node
+    var t4 = document.createTextNode("pole4");       // Create a text node
+
+    var s = document.createElement("P");
+    var s1 = document.createElement("P");
+    var s2 = document.createElement("P");
+    this.menu.appendChild(t1);
+    this.menu.appendChild(s);
+    this.menu.appendChild(t2);
+    this.menu.appendChild(s1);
+    this.menu.appendChild(t3);
+    this.menu.appendChild(s2);
+    this.menu.appendChild(t4);
+    this.menu.hidden=true;
   }
 }
 
@@ -57,6 +102,7 @@ export class ResizableDirective {
     var top = this.el.nativeElement.offsetTop;
     var w = this.el.nativeElement.getBoundingClientRect().width;
     var h = this.el.nativeElement.getBoundingClientRect().height;
+    console.log(this.el);
 
     if(!this.clicked ) {
 
