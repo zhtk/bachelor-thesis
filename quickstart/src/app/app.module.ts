@@ -12,7 +12,7 @@ import {TestComponent} from './TestComponent'
 
 
 
-import { NgDraggableModule } from 'angular-draggable';
+
 
 // Home page components
 import { HomeComponent }  from './home_components/home.component';
@@ -84,7 +84,7 @@ import {StyleGuideComponent} from "./Components/StyleGuideComponent";
 import {PiecsetComponent} from "./piecsetComponent";
 
 import { KeysPipe } from './keys.pipe';
-import {Button, EditorComponent, HighlightDirective} from "./Editor/EditorComponent";
+import {Button, DraggableDirective, EditorComponent, ResizableDirective} from "./Editor/EditorComponent";
 
 
 @NgModule({
@@ -96,7 +96,8 @@ import {Button, EditorComponent, HighlightDirective} from "./Editor/EditorCompon
   				      ],
   declarations: [ AppComponent,
   					KeysPipe,
-    HighlightDirective,
+    DraggableDirective ,
+  				  	ResizableDirective,
   				  	HomeComponent,
   				  	PreprocComponent,
   				  	PageNotFoundComponent,
