@@ -22,8 +22,6 @@ export class StyleGuideComponent implements OnInit {
     'Icon' : IconComponent
   };
 
-  json: string;
-
   obj:any;
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
@@ -44,12 +42,7 @@ export class StyleGuideComponent implements OnInit {
     this.front = <FrontEndClass> this.main;
     this.obj = this.front;
 
-    ComponentCreator.setObjectProperty(this.main.constructor.name, 'size', this.main, {"large": 10});
-    ComponentCreator.setObjectProperty(this.main.constructor.name, 'hidable', this.main, 'true');
     this.updateJSON();
-
-    console.log("paramsy:");
-    console.log(this.obj.params);
 
     for (let param of this.obj.params) {
       if (this.isObject(this.obj[param.name])) {
@@ -57,19 +50,6 @@ export class StyleGuideComponent implements OnInit {
       }
     }
     // const reg = new RegExp('"info":"(\w|\s)*",');
-
-
-    this.json = ' { <br>';
-    for (let i = 0; i < this.front.params.length; i++) {
-      this.json += '"' +  this.front.params[i].name + '" : "' + this.valMap.get(this.front.params[i].name) +
-                   '"' + '<br>';
-    }
-    this.json += '}';
-
-    console.log("RAPORT")
-    console.log(this.json);
-    console.log(this.obj);
-
   }
 
   private main: any;
@@ -87,9 +67,7 @@ export class StyleGuideComponent implements OnInit {
       var index = toReturn.indexOf("parent");
       if (index > -1) {
         toReturn.splice(index, 1);
-        console.log("wyciety parent")
       }
-      else console.log("nie bylo parenta")
       return toReturn;
     }
     else
@@ -98,14 +76,11 @@ export class StyleGuideComponent implements OnInit {
 
   updateJSON() {
     for (let param of this.obj.params) {
-      //this.valMap.set(param.name, "");
       if (this.obj[param.name]) {
         this.valMap.set(param.name, this.jsonVal[param.name]);
         this.jsonVal[param.name] = this.obj[param.name]
       }
       if (typeof param.default != undefined) {
-        console.log("ustawilem w jsonVal " + param.name + " na")
-        console.log(param.default)
         this.valMap.set(param.name, param.default);
         this.jsonVal[param.name] = param.default;
       }
@@ -121,29 +96,11 @@ export class StyleGuideComponent implements OnInit {
   }
 
   attr_change () {
-    console.log("wywolano attr_change")
-    console.log(this.jsonVal)
-
     var className: string = this.obj.constructor.name;
+
     for (let param of this.obj.params) {
 
       if (this.isObject(this.jsonVal[param.name])) {
-        console.log("tu jest obiekt")
-        console.log(this.jsonVal[param.name])
-        var toSend = {};
-        for (let nestedParam of this.listaParam(this.jsonVal[param.name])) {
-          console.log("nestedparam to");
-          // console.log(nestedParam);
-          // toSend[nestedParam]
-          this.jsonVal[param.name][nestedParam] = Number(this.jsonVal[param.name][nestedParam])
-          console.log(this.jsonVal[param.name][nestedParam])
-          var realVal = this.jsonVal[param.name][nestedParam];
-          toSend[nestedParam.toString()] = realVal;
-        }
-
-        console.log("toSend:")
-        console.log(toSend)
-
         ComponentCreator.setObjectProperty(
                           className, param.name, this.obj, this.jsonVal[param.name]);
       }
@@ -166,14 +123,6 @@ export class StyleGuideComponent implements OnInit {
         ComponentCreator.setObjectProperty(className, param.name, this.obj, realVal);
       }
     }
-
-    console.log(this.jsonVal)
-    console.log(this.jsonVal["size"])
-    console.log({"large": 997})
-
-    // console.log(this.jsonVal["size"]["small"])
-    //this.updateJSON();
-    //this.test.renderJSON(this.json);
   }
 
   printTypeBased(item: any, value: any) {
