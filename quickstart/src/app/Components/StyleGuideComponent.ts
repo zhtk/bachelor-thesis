@@ -38,25 +38,24 @@ export class StyleGuideComponent implements OnInit {
     this.main = this.target.createComponent(compFactory).instance;
     const that = <RenderFromJSON> this.main;
     that.renderJSON({'title' : 'ok'});
+
     ComponentCreator.setObjectProperty(that.constructor.name, 'title', that, 'okey');
 
     this.front = <FrontEndClass> this.main;
     this.obj = this.front;
 
-    ComponentCreator.setObjectProperty(this.main.constructor.name, 'title', this.main, 'oxa');
+    ComponentCreator.setObjectProperty(this.main.constructor.name, 'size', this.main, {"large": 5});
     ComponentCreator.setObjectProperty(this.main.constructor.name, 'hidable', this.main, 'true');
     this.updateJSON();
 
     console.log("paramsy:");
     console.log(this.obj.params);
 
-    // for (let param of this.obj.params) {
-    //   this.valMap.set(param.name, "");
-    //   if (param.default) {
-    //     this.valMap.set(param.name, param.default);
-    //     this.jsonVal[param.name] = param.default;
-    //   }
-    // }
+    for (let param of this.obj.params) {
+      if (this.isObject(this.obj[param.name])) {
+        this.jsonVal[param.name] = {};
+      }
+    }
     // const reg = new RegExp('"info":"(\w|\s)*",');
 
 
@@ -79,15 +78,6 @@ export class StyleGuideComponent implements OnInit {
   private front: any;
 
   isObject(sth: any): boolean {
-    //console.log("obiekt:")
-    
-    // if (sth) {
-    //   console.log(sth);
-    //   console.log(Object.getOwnPropertyNames(sth));
-    // }
-    // else {
-    //   console.log("jakiś UNDEF")
-    // }
     return (sth instanceof Object);
   }
 
@@ -132,13 +122,30 @@ export class StyleGuideComponent implements OnInit {
 
   attr_change () {
     console.log("wywolano attr_change")
+    console.log(this.jsonVal)
 
     var className: string = this.obj.constructor.name;
     for (let param of this.obj.params) {
 
-      if (this.isObject(this.jsonVal[param.name]))
-        for (let nestedParam of this.listaParam(this.jsonVal[param.name]))
-          ;//ComponentCreator.setObjectProperty(className, this.jsonVal[param.name][nestedParam].name, this.obj, this.jsonVal[param.name]);  
+      if (this.isObject(this.jsonVal[param.name])) {
+        console.log("tu jest obiekt")
+        console.log(this.jsonVal[param.name])
+        var toSend = {};
+        for (let nestedParam of this.listaParam(this.jsonVal[param.name])) {
+          console.log("nestedparam to");
+          // console.log(nestedParam);
+          // toSend[nestedParam]
+          this.jsonVal[param.name][nestedParam] = Number(this.jsonVal[param.name][nestedParam])
+          console.log(this.jsonVal[param.name][nestedParam])
+          var realVal = this.jsonVal[param.name][nestedParam];
+          toSend[nestedParam.toString()] = realVal;
+        }
+
+        console.log("toSend:")
+        console.log(toSend)
+        ComponentCreator.setObjectProperty(
+                         className, param.name, this.obj, toSend);  
+      }
       else {
         var realVal: any;
         switch (param.type) {

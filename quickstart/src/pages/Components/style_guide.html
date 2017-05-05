@@ -51,11 +51,13 @@
             <td>{{param.name}}</td>
             <td>{{param.info}}</td>
             <td>{{param.type}}</td>
+            
             <td *ngIf="!isObject(obj[param.name])">{{printTypeBased(param.type, param.default)}}</td>
-            <td *ngIf="isObject(obj[param.name])">{{makeString(param.default)}}</td>
             <td *ngIf="!isObject(obj[param.name])">
               <input [(ngModel)]="jsonVal[param.name]" (change) = "attr_change()">
             </td>
+            
+            <td *ngIf="isObject(obj[param.name])">{{makeString(param.default)}}</td>
             <td *ngIf="isObject(obj[param.name])"> 
               <table class="table ">
                 <tbody>
@@ -64,13 +66,13 @@
                       {{ nestedParam }}
                     </td>
                     <td>
-                       <input (ngModel)="jsonVal[param.name][nestedParam]" (change) = "attr_change()">
+                       <input [(ngModel)]="(jsonVal[param.name])[nestedParam]" (change) = "attr_change(param, nestedParam)">
                     </td>
                   </tr>
                 </tbody>
               </table>
-
             </td>
+
           </tr>
           </tbody>
         </table>
