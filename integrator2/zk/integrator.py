@@ -93,6 +93,10 @@ def get_write_endpoint(name):
 	return zk.get("/write/" + name + "/" + node)[0].decode("utf-8")
 
 
+def get_write_endpoint_permissions(name):
+	return zk.get("/write/" + name)[0].decode("utf-8")
+
+
 def get_menu_node(path):
 	childs = zk.get_children("/menu" + path)
 	item = zk.get("/menu" + path)[0].decode("utf-8")

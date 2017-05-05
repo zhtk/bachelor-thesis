@@ -57,10 +57,41 @@ def read_endpoint(request, name):
 		r = requests.get(url, params=payload)
 		return HttpResponse(r.text)
 	except:
-		raise Http404("Unknown view endpoint")
+		raise Http404("Unknown read endpoint")
 
 
 @csrf_exempt
 def write_endpoint(request, name):
-	return HttpResponse("TODO") # TODO
+	# Uprawnienia użytkownika
+	try:
+		token = request.POST.dict()['token']
+		response = stub.GetPermissions(auth_pb2.Token(token=token))
+		perm = response.mask
+	except:
+		perm = ''
+	
+	# Sprawdzenie uprawnień
+	try:
+		expected = i.get_write_endpoint_permissions(name)
+		
+		if not i.check_permissions(expected, perm):
+			raise Http404("")
+	except:
+		raise Http404("")
+	
+	try:
+		ep = i.get_write_endpoint(name)
+		server = json.loads(ep)
+		
+		url = server['address']
+		
+		if server['port'] is not None:
+			url += ":"
+			url += str(server['port'])
+		
+		payload = request.POST.dict()
+		r = requests.post(url, data=payload)
+		return HttpResponse(r.text)
+	except:
+		raise Http404("Unknown write endpoint")
 

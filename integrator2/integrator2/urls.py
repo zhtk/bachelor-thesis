@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from endpoints import views as endpoint
 from menu import views as menu
+from editor import views as editor
 
 
 urlpatterns = [
@@ -24,5 +25,6 @@ urlpatterns = [
 	url(r'^read/(?P<name>[a-zA-Z0-9_-]+)/$', endpoint.read_endpoint, name='read_endpoint'),
 	url(r'^write/(?P<name>[a-zA-Z0-9_-]+)/$', endpoint.write_endpoint, name='write_endpoint'),
 	url(r'^menu/$', menu.get_menu, name='get_menu'),
+	url(r'^list/(?P<token>[^/]+)/$', editor.list_endpoints, name='list_endpoints'),
 	url(r'^admin/', admin.site.urls),
 ]
