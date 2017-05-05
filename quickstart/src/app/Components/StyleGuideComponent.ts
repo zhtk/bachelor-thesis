@@ -123,7 +123,7 @@ export class StyleGuideComponent implements OnInit {
   }
 
   private getMapName(name: string) {
-    return typeof this.jsonVal[name] != undefined ? this.jsonVal[name] : "UNDEFINED"; 
+    return typeof this.jsonVal[name] != undefined ? this.jsonVal[name] : "undefined"; 
   }
 
   makeString(obj: any) {
@@ -136,15 +136,29 @@ export class StyleGuideComponent implements OnInit {
     var className: string = this.obj.constructor.name;
     for (let param of this.obj.params) {
 
-      console.log("nazwa coto: " + this.route.snapshot.params['category'])
-      console.log(StyleGuideComponent.components[this.route.snapshot.params['category']].name);
-      console.log("nazwa klasy: " + className);
-      
       if (this.isObject(this.jsonVal[param.name]))
         for (let nestedParam of this.listaParam(this.jsonVal[param.name]))
-          ComponentCreator.setObjectProperty(className, this.jsonVal[param.name][nestedParam].name, this.obj, this.jsonVal[param.name]);  
-      else
-        ComponentCreator.setObjectProperty(className, param.name, this.obj, this.jsonVal[param.name]);
+          ;//ComponentCreator.setObjectProperty(className, this.jsonVal[param.name][nestedParam].name, this.obj, this.jsonVal[param.name]);  
+      else {
+        var realVal: any;
+        switch (param.type) {
+          case "boolean":
+            console.log("sprawdzmy czy prawdą jest " + this.jsonVal[param.name])
+            realVal = (this.jsonVal[param.name] == "true");
+            console.log(realVal)
+            break;
+
+          case "number":
+            realVal = Number(this.jsonVal[param.name]);
+            break;
+          
+          default:
+            realVal = this.jsonVal[param.name];
+            break;
+        }
+
+        ComponentCreator.setObjectProperty(className, param.name, this.obj, realVal);
+      }
     }
 
     console.log(this.jsonVal)
@@ -158,10 +172,6 @@ export class StyleGuideComponent implements OnInit {
   }
 
   printTypeBased(item: any, value: any) {
-    console.log(item + " ma typ ");
-    console.log(typeof item)
-    console.log(value + " ma typ ");
-    console.log(typeof value)
     if (item == "boolean")
       return value.toString();
     if (item == "number")
