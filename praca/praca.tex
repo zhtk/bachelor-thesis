@@ -68,8 +68,9 @@
 %Komunikacja między członkami zespołu odbywała się głównie przez internet, przy pomocy facebooka %i slacka.
 %Projekt prowadziliśmy w lekko zmodyfikowanej zwinnej metodyce opracowanej specjalnie na potrzeby naszego klienta.
 
-\chapter*{Wprowadzenie}\label{r:wstep}
-\addcontentsline{toc}{chapter}{Wprowadzenie}
+\chapter{Wprowadzenie}\label{r:wstep}
+
+\section{Motywacja}
 
 Celem naszego projektu było stworzenie prototypu internetowego frameworka do komunikacji obywatela z urzędami
 podobnego do Platformy Usług Elektronicznych ZUS \cite{zuspue}, a następnie zaimplementowanie na niej kilku wybranych przypadków użycia. Dzięki temu petent chcący
@@ -109,27 +110,48 @@ programistów, których nie pociągają uroki życia w dużym mieście. W ten sp
 zrównoważonego rozwoju, zapobiegając zwijaniu się polski lokalnej, a z drugiej strony prowadziłby do wymiernych
 oszczędności na wynagrodzeniach.
 
-Innym istotnym aspektem naszego projektu było zerwanie z wizerunkiem ZUSu jako instytucji przestarzałej, niewydolnej
-i pochodzącej ze słusznie minionego ustroju. Szata graficzna naszej platformy powinna być przyjemna dla oka, a układ
-graficzny elementów logiczny, prosty do zrozumienia i konsekwentny. Użytkownik nie może być bombardowany zagadkowo
-brzmiącymi komunikatami o ,,wchodzeniu na poziom bezpieczeństwa 1'' i ,,zamiarze korzystania z usług biznesowych''.
-W żadnym przypadku praca z naszym systemem nie
-powinna przypominać interakcji ze znudzonym i ślamazarnie wykonującym swoje obowiązki urzędnikiem, a to nakłada na
-nas obowiązek rozwiązania problemu skalowalności aplikacji.
+\section{Zleceniodawca - ZUS}
 
-W związku z tym, że projektowaliśmy system dla administracji państwowej z którego będą korzystać miliony obywateli,
-musieliśmy bardzo ostrożnie dobierać technologie, z których korzystaliśmy. Wybranie rozwiązania opartego na
-niekorzystnej licencji mogło się w przyszłości srogo zemścić w postaci konieczności zapłacenia ogromnej opłaty
-licencyjnej, wyłączenia usługi i przebudowania jej na nowo, udostępnienia części systemu na licencji open source, a
-nawet konieczności nieodpłatnego przekazania przechowywanych danych obywateli licencjodawcy. Preferowane były
-rozwiązania które albo były darmowe, albo do których nasz klient posiadał licencje (m. in. IBM DB2, komercyjna wersja PostgreSQL oraz cała gama produktów firmy Microsoft). W miarę możliwości
-powinniśmy korzystać z nowoczesnych, przyszłościowych i rozwijanych technologii, tak, by odsunąć jak najdalej w
-przyszłość konieczność przebudowy systemu z powodu zmieniających się trendów i narastającego długu technologicznego.
+Naszym zleceniodawcą był Zakład Ubezpieczeń Społecznych. Według ,,Rocznika
+Statystycznego Ubezpieczeń Społecznych'' \cite{rocznik} w 2011 roku w ZUS było ubezpieczonych
+14 milionów obywateli. Dochód Zakładu wyniósł w owym roku 155 796 milionów
+złotych. Do obsługi takiej ilości petentów i zarządzania taką kwotą pieniędzy
+było zatrudnionych przeciętnie 44 766 urzędników.
 
-%Elementy, które powinny się znaleźć w dokumencie opisującym wizję to:
-%Opis rozwiązania, Korzyści biznesowe, Wizja projektu i zakres, Analiza korzyści, Wymagania biznesowe, Wymagania użytkowników, Wymagania operacyjne, Wymagania systemowe, Wymagania bezpieczeństwa, Zakres projektu, Cele biznesowe, Cele techniczne, Kryteria operacyjne, Ograniczenia, Definicja profili użytkowników, Analizy użytkowania, Scenariusze wykorzystania
+W związku z tym, że projektowaliśmy system dla administracji państwowej z
+którego będą korzystać miliony obywateli, musieliśmy bardzo ostrożnie dobierać
+technologie, z których korzystaliśmy. Wybranie rozwiązania opartego na
+niekorzystnej licencji mogło się w przyszłości srogo zemścić w postaci
+konieczności zapłacenia ogromnej opłaty licencyjnej, wyłączenia usługi i
+przebudowania jej na nowo, udostępnienia części systemu na licencji open source,
+a nawet konieczności nieodpłatnego przekazania przechowywanych danych obywateli
+licencjodawcy. Preferowane były rozwiązania które albo były darmowe, albo do
+których nasz klient posiadał licencje (m. in. IBM DB2, komercyjna wersja
+PostgreSQL oraz cała gama produktów firmy Microsoft). W miarę możliwości
+powinniśmy korzystać z nowoczesnych, przyszłościowych i rozwijanych technologii,
+tak, by odsunąć jak najdalej w przyszłość konieczność przebudowy systemu z
+powodu zmieniających się trendów i narastającego długu technologicznego.
 
-\chapter{Architektura aplikacji}
+Innym istotnym aspektem naszego projektu było zerwanie z wizerunkiem ZUSu jako
+instytucji przestarzałej, niewydolnej i pochodzącej ze słusznie minionego
+ustroju. Szata graficzna naszej platformy powinna być przyjemna dla oka, a układ
+graficzny elementów logiczny, prosty do zrozumienia i konsekwentny. Użytkownik
+nie może być bombardowany zagadkowo brzmiącymi komunikatami o ,,wchodzeniu na
+poziom bezpieczeństwa 1'' i ,,zamiarze korzystania z usług biznesowych''. W
+żadnym przypadku praca z naszym systemem nie powinna przypominać interakcji
+ze znudzonym i ślamazarnie wykonującym swoje obowiązki urzędnikiem, a to
+nakłada na nas obowiązek rozwiązania problemu skalowalności aplikacji.
+
+\section{Produkt końcowy}
+TODO
+
+\chapter{Teoretyka}
+
+\section{Mikrousługi}
+
+\section{Integracja mikrousług}
+
+\chapter{Wymagania}
 
 Zdecydowaliśmy się przenieść środek ciężkości naszego projektu w stronę warstwy integracji klienta z backendem. Ustalono, że do osiągnięcia sukcesu wystarczy spełnienie następujących warunków: %TODO
 \begin{itemize}
@@ -143,6 +165,8 @@ TODO
 
 Tego chcemy uniknąć:\\
 \includegraphics[width=\textwidth]{obrazki/logowaniezle.jpg}
+
+\chapter{Architektura aplikacji}
 
 \section{Integrator}
 Integrator - autodiscovery usług, możliwość spinania różnych interfejsów gRPC, WSDL. 
@@ -180,7 +204,8 @@ Jeszcze innym, ciekawym podejściem byłoby zastosowanie usługi udostępniając
 \section{Mikrousługi}
 TODO
 
-\chapter{Wykorzystane technologie}\label{r:tech}
+
+\chapter{Wykorzystane technologie}
 
 \section{Języki programowania}
 Python, Java, Node.js, typescript
@@ -261,20 +286,24 @@ składowisko informacji potrzebnych przy wykonywaniu operacji. W takim modelu ro
 transparentny dla usługi wywołującej. Z uwagi na prototypowych charakterze naszego projektu poprzestaliśmy na
 bazie SQLite, jako że znakomicie integruje się on z Django, ponadto zastąpienie go PostgreSQLem jest praktycznie bezkosztowe.
 
-\chapter{Frontend}\label{r:fe}
+\chapter{Realizacja}
 
-\section{Tworzenie mockupów}
+\section{Frontend}
+
+\subsection{Tworzenie mockupów}
 Tutaj opis wszystkich stworzonych podstron
-\section{Stworznie systemu komponentów}
+\subsection{Stworznie systemu komponentów}
 Opis posczególnych komponentów, oraz całej idei architektury tego rozwiązania.
-\section{System tworzenia automatycznej dokumentacji}
+\subsection{System tworzenia automatycznej dokumentacji}
 Opis dekoratorów.
-\section{Edytor}
+\subsection{Edytor}
 TODO
-\section{Platforma developera}
+\subsection{Platforma developera}
 Sposób dodawania mikrosusług, style guide.
 
-\chapter{Integrator i mikrousługi}\label{r:ims}
+\section{Integrator}
+
+\section{Mikrousługi}
 
 \chapter{Obserwator emerytalny}
 Z uwagi na bardzo niepewny charakter naszego projektu i trudności związane z
@@ -334,6 +363,9 @@ http://curator.apache.org/curator-recipes/shared-lock.html
 
 \bibitem[Fowler]{fowlermicroservices} Martin Fowler, \textit{Microservices},
 https://martinfowler.com/articles/microservices.html
+
+\bibitem[RSUS]{rocznik} ZUS, \textit{Rocznik Statystyczny Ubezpieczeń Społecznych},
+http://www.zus.pl/documents/10182/167642/Rocznik+Statystyczny+Ubezpiecze\%C5\%84+Spo\%C5\%82ecznych+2009-2011/7e6fcc34-8333-4af0-b3e6-9e64ea734600
 
 \end{thebibliography}
 
