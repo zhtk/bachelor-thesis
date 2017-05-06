@@ -23,6 +23,10 @@ export class StyleGuideComponent implements OnInit {
   };
 
   obj:any;
+  private main: any;
+  private jsonVal = {};
+  private valMap = new Map();
+  private front: any;
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
@@ -31,14 +35,13 @@ export class StyleGuideComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // Utwórz instancje danego komponentu
     let compFactory =
       this.cfr.resolveComponentFactory(StyleGuideComponent.components[this.route.snapshot.params['category']]);
     this.main = this.target.createComponent(compFactory).instance;
     const that = <RenderFromJSON> this.main;
-    that.renderJSON({'title' : 'ok'});
 
-    ComponentCreator.setObjectProperty(that.constructor.name, 'title', that, 'okey');
-
+    // Rzutowanie
     this.front = <FrontEndClass> this.main;
     this.obj = this.front;
 
@@ -49,13 +52,7 @@ export class StyleGuideComponent implements OnInit {
         this.jsonVal[param.name] = {};
       }
     }
-    // const reg = new RegExp('"info":"(\w|\s)*",');
   }
-
-  private main: any;
-  private jsonVal = {};
-  private valMap = new Map();
-  private front: any;
 
   isObject(sth: any): boolean {
     return (sth instanceof Object);
@@ -88,7 +85,7 @@ export class StyleGuideComponent implements OnInit {
   }
 
   private getMapName(name: string) {
-    return typeof this.jsonVal[name] != undefined ? this.jsonVal[name] : "undefined"; 
+    return typeof this.jsonVal[name] != undefined ? this.jsonVal[name] : "undefined";
   }
 
   makeString(obj: any) {
@@ -114,7 +111,7 @@ export class StyleGuideComponent implements OnInit {
           case "number":
             realVal = Number(this.jsonVal[param.name]);
             break;
-          
+
           default:
             realVal = this.jsonVal[param.name];
             break;
@@ -135,7 +132,5 @@ export class StyleGuideComponent implements OnInit {
 
     return JSON.stringify(value)
   }
-
-
 }
 

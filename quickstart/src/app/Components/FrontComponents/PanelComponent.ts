@@ -80,37 +80,6 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
   }
 
   renderJSON(specification: any): void {
-
-
-    /*for (var s in specification) {
-      // console.log("typy:")
-      // console.log(typeof s == "string");
-      console.log(s);
-      // console.log(typeof typeof s);
-      if (typeof s == "string") {
-        this[s] = specification[s];
-      }
-    }*/
-
-    if ("title" in specification)
-      this.title = specification["title"];
-    if ("panel_class" in specification)
-      this.panel_class = "panel panel-" + specification["panel_class"];
-
-    if ("size" in specification)
-      this.setGridClass(specification);
-    if ("children" in specification)
-    // Stworz wszystkie komponenty i dodaj je w sobie
-      this.renderChildren(specification["children"]);
-    if ("collapse" in specification) {
-      this.collapsible = specification["collapse"]
-      this.panel_body_class += " collapse";
-      this.cursor = "pointer";
-    }
-
-    if("hidable" in specification)
-      this.hidable = true;
-
   }
 
   renderChildren(children: any): void {

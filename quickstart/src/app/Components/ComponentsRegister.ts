@@ -9,7 +9,7 @@ import {StyleGuideComponent} from "./StyleGuideComponent";
 import {BaseClass} from "./ComponentsCore/MainClasses/BaseClass";
 
 
-export var renderInstr : {[id: string] : {[id: string] : Function }} = {}; 
+export var renderInstr : {[id: string] : {[id: string] : Function }} = {};
 // mapa ze slowa JSONowego na funkcje do wywolania
 
 export function SetterAlg(obj?: {field: string, func: Function}) {
@@ -27,13 +27,7 @@ export function SetterAlg(obj?: {field: string, func: Function}) {
         }
 
         var className = target.constructor.name;
-        console.log("rejestruje dla klasy " + className + " property " + decoratedPropertyName)
 
-        if (field)
-            console.log("pole " + field);
-        else
-            console.log("nie ma pola")
-        
         if (!renderInstr[className]) {
             renderInstr[className] = {};
         }
@@ -44,10 +38,9 @@ export function SetterAlg(obj?: {field: string, func: Function}) {
 
         if (func) {
             renderInstr[className][field] = func;
-            console.log("dostarczono funkcje")
         }
         else {
-            renderInstr[className][field] = 
+            renderInstr[className][field] =
                 (classInstance: any, val: any) => { classInstance[decoratedPropertyName] = val }; // tu funkcja settera
         }
 
@@ -64,22 +57,15 @@ export function Attr(label: MemberInfo) {
         if(!(target.constructor.name in ComponentsRegister.attributes))
             ComponentsRegister.attributes[target.constructor.name] = [];
 
-        console.log("kostruktor")
-        console.log(target)
-        console.log(key)
-        console.log(typeof target.constructor.key)
         label.type = typeof label.default;
         ComponentsRegister.attributes[target.constructor.name].push(label);
         //Object.defineProperty(label, 'class_name', {value: target.constructor.name});
-
     };
 }
 
 export function Register(info: Docs) {
 
     return (ctor: Function) => {
-        console.log(ctor.name);
-        console.log(ctor.prototype.constructor);
         if(!ComponentsRegister.components)
             ComponentsRegister.components = [];
         ComponentsRegister.components.push(info.name);

@@ -26,25 +26,6 @@ export class ComponentCreator {
 		target:ViewContainerRef, type: string):RenderFromJSON {
 		var compFactory: any;
 		// Rozwiazanie tymczasowe, z mapą z góry nie chce działać
-		
-		/*this.componentMapping.set("TextBox", TextBox);
-		this.componentMapping.set("RowComponent", RowComponent);
-		this.componentMapping.set("PeselComponent", PeselComponent);
-		this.componentMapping.set("PasswordComponent", PasswordComponent);
-		this.componentMapping.set("PanelComponent", PanelComponent);
-		this.componentMapping.set("LabelComponent", LabelComponent);
-		this.componentMapping.set("Submit", SubmitComponent);
-		this.componentMapping.set("Form", FormComponent);
-		this.componentMapping.set("ProgBar", ProgressBarComponent);
-		this.componentMapping.set("Zipcode", ZipcodeComponent);
-		this.componentMapping.set("Heading", HeadingComponent);
-		this.componentMapping.set("PanelGroup", PanelGroupComponent);
-		this.componentMapping.set("Content", ContentComponent);
-		this.componentMapping.set("Icon", IconComponent);
-		this.componentMapping.set("Span", SpanComponent);
-
-		compFactory = factory.resolveComponentFactory(this.componentMapping[type]);
-*/
 		switch (type) {
 			case ("TextBox"):
 				compFactory = factory.resolveComponentFactory(TextBox);
@@ -109,22 +90,6 @@ export class ComponentCreator {
 	// TODO refactor!!!
 
 	constructor() {
-		this.componentMapping.set("TextBox", TextBox);
-		this.componentMapping.set("RowComponent", RowComponent);
-		this.componentMapping.set("PeselComponent", PeselComponent);
-		this.componentMapping.set("PasswordComponent", PasswordComponent);
-		this.componentMapping.set("PanelComponent", PanelComponent);
-		this.componentMapping.set("LabelComponent", LabelComponent);
-		this.componentMapping.set("Submit", SubmitComponent);
-		this.componentMapping.set("Form", FormComponent);
-		this.componentMapping.set("ProgBar", ProgressBarComponent);
-		this.componentMapping.set("Zipcode", ZipcodeComponent);
-		this.componentMapping.set("Heading", HeadingComponent);
-		this.componentMapping.set("PanelGroup", PanelGroupComponent);
-		this.componentMapping.set("Content", ContentComponent);
-		this.componentMapping.set("Icon", IconComponent);
-		this.componentMapping.set("Span", SpanComponent);
-
 	}
 
 
@@ -136,8 +101,6 @@ export class ComponentCreator {
 		var obj: any;
 		var className: string;
 
-		console.log("tworze sobie obiekt " + jsonObject["type"])
-		console.log(jsonObject);
 
 		// tu powyzej: decyzja na podst. mapy "type" -> ClassName
 
@@ -268,30 +231,22 @@ export class ComponentCreator {
 		// obj = <FrontEndClass> ref.instance
 
 		for (var elem in jsonObject) {
-			console.log("jest element " + elem);
 			if (elem == "children") {
 				for (var i = 0; i < jsonObject.children.length; i++) {
-					console.log(jsonObject.children[i]);
-					console.log("bedzie render")
 					this.createFromJSON(jsonObject.children[i], factory, obj.target);
 				}
 			} else if (elem != "type" && elem != "id") {
-				console.log("czy bedzie wywrotka?");
-				console.log("className = " + className + ", elem = " + elem);
 				//renderInstr[className][elem](obj, jsonObject[elem]);
 				this.setObjectProperty(className, elem, obj, jsonObject[elem]);
-				console.log("nie ma wywrotki")
+
 			}
 		}
 
 		return <RenderFromJSON> obj;
-		
+
 	}
 
 	static setObjectProperty(className: string, jsonElem: string, obj: any, val: any) {
-		console.log("ustawiam w " + className + " wartosc property " + jsonElem + " na " + val);
-		console.log(val)
 		renderInstr[className][jsonElem](obj, val);
-		console.log(obj[jsonElem])
 	}
 }

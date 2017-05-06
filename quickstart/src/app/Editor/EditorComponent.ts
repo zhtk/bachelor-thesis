@@ -92,7 +92,7 @@ export class ResizableDirective {
 
   cursor: string;
   direction = "";
-  bound = 15;
+  bound = 10;
   clicked = false;
 
   @HostListener('document:mousemove', ['$event'])
