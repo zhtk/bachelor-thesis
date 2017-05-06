@@ -11,9 +11,9 @@ export class FrontEndClass{
   public arrayOfKeys:any;
 
 
-  @Attr({info:"Czy element widzialny", default : "true", name:""})
+  @Attr({info:"Czy element widzialny", default : true, name:""})
   public visible: boolean;
-  @Attr({info:"Rozmiar elementu", default : "", name:""})
+  @Attr({info:"Rozmiar elementu", default : ({}), name:""})
   public size:SizeProperties;
   @Attr({info:"Kolor tla", default : "transparent", name:""})
   public backgroundColor:string;

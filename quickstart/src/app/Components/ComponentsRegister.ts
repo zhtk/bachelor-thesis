@@ -9,22 +9,6 @@ import {StyleGuideComponent} from "./StyleGuideComponent";
 import {BaseClass} from "./ComponentsCore/MainClasses/BaseClass";
 
 
-export function Attr(label: MemberInfo) {
-    return function (target: any, key: any) {
-
-        if(!ComponentsRegister.attributes)
-            ComponentsRegister.attributes = {};
-
-        label.name = key;
-        if(!(target.constructor.name in ComponentsRegister.attributes))
-            ComponentsRegister.attributes[target.constructor.name] = [];
-
-        ComponentsRegister.attributes[target.constructor.name].push(label);
-        //Object.defineProperty(label, 'class_name', {value: target.constructor.name});
-
-    };
-}
-
 export var renderInstr : {[id: string] : {[id: string] : Function }} = {}; 
 // mapa ze slowa JSONowego na funkcje do wywolania
 
@@ -70,6 +54,26 @@ export function SetterAlg(obj?: {field: string, func: Function}) {
     }
 }
 
+export function Attr(label: MemberInfo) {
+    return function (target: any, key: any) {
+
+        if(!ComponentsRegister.attributes)
+            ComponentsRegister.attributes = {};
+
+        label.name = key;
+        if(!(target.constructor.name in ComponentsRegister.attributes))
+            ComponentsRegister.attributes[target.constructor.name] = [];
+
+        console.log("kostruktor")
+        console.log(target)
+        console.log(key)
+        console.log(typeof target.constructor.key)
+        label.type = typeof label.default;
+        ComponentsRegister.attributes[target.constructor.name].push(label);
+        //Object.defineProperty(label, 'class_name', {value: target.constructor.name});
+
+    };
+}
 
 export function Register(info: Docs) {
 
@@ -97,7 +101,8 @@ export function Register(info: Docs) {
 export class MemberInfo {
     name: string;
     info: string;
-    default: string;
+    default: any;
+    type?: any;
 }
 
 @Injectable()
