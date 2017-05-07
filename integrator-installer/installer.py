@@ -8,6 +8,7 @@ def clean_database():
 	i.try_delete("/write")
 	i.try_delete("/start")
 	i.try_delete("/menu")
+	i.try_delete("/hook")
 
 
 def prepare_database_layout():

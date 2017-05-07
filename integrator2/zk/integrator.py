@@ -49,8 +49,8 @@ def add_read_endpoint(name, serverId, address, port, temp=True):
 	add_service_server("/read/", name, serverId, address, port, temp=temp)
 
 
-def add_write_endpoint(name, serverId, address, port):
-	add_service_server("/write/", name, serverId, address, port)
+def add_write_endpoint(name, serverId, address, port, temp=True):
+	add_service_server("/write/", name, serverId, address, port, temp=temp)
 
 
 def add_menu_element(name, link, path, nr=0, icon="", perm=""):
@@ -123,9 +123,10 @@ def get_hooks_list(hook, etype, endpoint):
 	try:
 		path = "/hook/" + hook + "/" + etype + "/" + endpoint
 		nodes = zk.get_children(path)
-		sort(nodes)
+		nodes.sort()
 		path = path + "/"
 		nodes = list(map(lambda x: zk.get(path + x)[0].decode("utf-8"), nodes))
+		print(nodes)
 		return nodes
 	except:
 		return []

@@ -61,7 +61,7 @@ def serve():
 	try:
 		print("Running...")
 		while True:
-			time.sleep(1)
+			time.sleep(1000)
 	except KeyboardInterrupt:
 		server.stop(0)
 		print("Stopped")
