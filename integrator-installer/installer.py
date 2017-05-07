@@ -16,6 +16,14 @@ def prepare_database_layout():
 	i.add_node("/write", "")
 	i.add_node("/start", "")
 	i.add_node("/menu", "")
+	
+	i.add_node("/hook", "")
+	i.add_node("/hook/in", "")
+	i.add_node("/hook/in/read", "")
+	i.add_node("/hook/in/write", "")
+	i.add_node("/hook/out", "")
+	i.add_node("/hook/out/read", "")
+	i.add_node("/hook/out/write", "")
 
 
 def create_endpoints():

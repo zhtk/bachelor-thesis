@@ -117,3 +117,16 @@ def check_permissions(required, obtained):
 			return False
 	
 	return True
+
+
+def get_hooks_list(hook, etype, endpoint):
+	try:
+		path = "/hook/" + hook + "/" + etype + "/" + endpoint
+		nodes = zk.get_children(path)
+		sort(nodes)
+		path = path + "/"
+		nodes = list(map(lambda x: zk.get(path + x)[0].decode("utf-8"), nodes))
+		return nodes
+	except:
+		return []
+

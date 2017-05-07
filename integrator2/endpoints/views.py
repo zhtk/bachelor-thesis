@@ -23,6 +23,26 @@ def view_endpoint(request, name):
 		raise Http404("Unknown view endpoint")
 
 
+def hook_in(params, etype, endpoint):
+	hooks = i.get_hooks_list('in', etype, endpoint)
+	
+	for url in hooks:
+		params = requests.post(url, data=params)
+		params = json.loads(params.text)
+	
+	return params
+
+
+def hook_out(result, etype, endpoint):
+	hooks = i.get_hooks_list('out', etype, endpoint)
+	
+	for url in hooks:
+		pack = {'data':result}
+		result = requests.post(url, data=pack).text
+	
+	return result
+
+
 @csrf_exempt
 def read_endpoint(request, name):
 	# Uprawnienia użytkownika
@@ -54,8 +74,10 @@ def read_endpoint(request, name):
 			url += str(server['port'])
 		
 		payload = request.GET.dict()
+		payload = hook_in(payload, 'read', name)
 		r = requests.get(url, params=payload)
-		return HttpResponse(r.text)
+		r = hook_out(r.text, 'read', name)
+		return HttpResponse(r)
 	except:
 		raise Http404("Unknown read endpoint")
 
@@ -90,8 +112,10 @@ def write_endpoint(request, name):
 			url += str(server['port'])
 		
 		payload = request.POST.dict()
+		payload = hook_in(payload, 'write', name)
 		r = requests.post(url, data=payload)
-		return HttpResponse(r.text)
+		r = hook_out(r.text, 'write', name)
+		return HttpResponse(r)
 	except:
 		raise Http404("Unknown write endpoint")
 
