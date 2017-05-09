@@ -6,13 +6,13 @@ import json
 
 @csrf_exempt
 def in_hook(request):
-	res = request.POST.dict()
-	print("IN: " + str(res))
-	return HttpResponse(json.dumps(res, ensure_ascii=False))
+    res = request.POST.dict()
+    print("IN: " + str(res))
+    return HttpResponse(json.dumps(res, ensure_ascii=False))
 
 
 @csrf_exempt
 def out_hook(request):
-	res = request.POST.dict()['data']
-	print("OUT: " + res)
-	return HttpResponse(res)
+    res = request.POST.dict()['data']
+    print("OUT: " + res)
+    return HttpResponse(res)
