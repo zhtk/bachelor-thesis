@@ -122,9 +122,9 @@ def check_permissions(required, obtained):
 
 
 def get_hooks_list(hook, etype, endpoint):
+    path = "/hook/" + hook + "/" + etype + "/" + endpoint
     # noinspection PyBroadException
     try:
-        path = "/hook/" + hook + "/" + etype + "/" + endpoint
         nodes = zk.get_children(path)
         nodes.sort()
         path = path + "/"
@@ -132,5 +132,5 @@ def get_hooks_list(hook, etype, endpoint):
         print(nodes)
         return nodes
     except Exception:
-        logging.exception("Problem with getting hooks list")
+        logging.exception("Problem with getting hooks list %s" % path)
         return []
