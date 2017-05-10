@@ -145,10 +145,40 @@ nakłada na nas obowiązek rozwiązania problemu skalowalności aplikacji.
 \section{Produkt końcowy}
 TODO
 
+\chapter{Wymagania}
+
+Zdecydowaliśmy się przenieść środek ciężkości naszego projektu w stronę warstwy integracji klienta z backendem. Ustalono, że do osiągnięcia sukcesu wystarczy spełnienie następujących warunków: %TODO
+\begin{itemize}
+	\item Zrobicie warstwę FE + BFF w ten sposób, że zostanie zrobione środowisko Web Style Guide z podstawowymi i złożonymi kontrolkami oraz z generacją kodu.
+	\item Następnie użytkownik będzie mógł sam wyklikać kontrolki i ustawić to w dashboardy.
+	\item Na końcu chciałbym mięc zrobiony mockup pue.zus.pl wyklikany w ten sposób.
+\end{itemize}
+
+\section{Interfejs użytkownika}
+TODO
+
+Tego chcemy uniknąć:\\
+\includegraphics[width=\textwidth]{obrazki/logowaniezle.jpg}
+
+\section{Wymagania funkcjonalne}
+
+\section{Wymagania niefunkcjonalne}
+
+
 \chapter{Teoretyka}
 
 \section{Problem}
-TODO
+
+Nasz produkt powinien w sposób maksymalnie prosty umożliwiać integrację systemów
+informatycznych zakładu ubezpieczeń społecznych. Podstawowymi problemami jakie
+należało uwzględnić na etapie projektowania systemu były:
+\begin{itemize}
+	\item Znaczny poziom skomplikowania istniejącego oprogramowania
+	\item Duża ilość użytkowników naszego systemu
+	\item Zapewnienie wysokiego poziomu odporności na awarie
+\end{itemize}
+Po przejrzeniu istniejących rozwiązań zaproponowaliśmy naszemu klientowi
+architekturę opartą o mikrousługi.
 
 \section{Mikrousługi}
 
@@ -338,32 +368,29 @@ danych w słowniku typu klucz-wartość. Eureka z kolei zapewniała automatyczn�
 rejestrację, wykrywanie i odpytywanie mikrousług z zadaną częstotliwością oraz
 monitorowanie ich stanu. Obydwa projekty mają otwarty kod źródłowy.
 
-\section{Konkluzje}
-TODO
+\section{Wnioski}
 
-% odnośnie tego powyżej:
-Jest jeszcze jeden problem, na który użytkownicy naszej platformy mogą się natknąć. Mianowicie, nasza platforma
-może integrować poprzez różne adaptery już istniejące usługi, które zupełnie nie są świadome istnienia
-zaproponowanego mechanizmu blokad, więc nie są odporne na błędy wynikające z współbieżności.
-Projektanci mikrousług korzystających z naszej platformy muszą być świadomi wszystkiego, co wyżej napisano.
-Aby maksymalnie ułatwić im pracę uwzględniliśmy wyniki powyższych rozważań przy projektowaniu API, jednak nie
-jesteśmy w stanie rozwiązać wszystkich pojawiających się problemów.
+Nasz zespół zdecydował, że opracujemy rozwiązanie wykorzystujące mikrousługi.
+Komunikacja z poszczególnymi serwerami powinna być bezstanowa. Konfiguracja
+mikrousług będzie przechowywana w formie drzewa w centralnym serwerze o dużym
+stopniu niezawodności.
 
-\chapter{Wymagania}
+Rozwiązania realizujące komunikację między mikrousługami uważamy za wysoce
+niewystarczające i zbyt mało elastyczne. Postanowiliśmy stworzyć własną usługę
+o funkcjonalnościach zbliżonych do szyny danych, która na dodatek pozwala na
+zautomatyzowaną konfigurację bez przerywania swojej pracy.
 
-Zdecydowaliśmy się przenieść środek ciężkości naszego projektu w stronę warstwy integracji klienta z backendem. Ustalono, że do osiągnięcia sukcesu wystarczy spełnienie następujących warunków: %TODO
-\begin{itemize}
-	\item Zrobicie warstwę FE + BFF w ten sposób, że zostanie zrobione środowisko Web Style Guide z podstawowymi i złożonymi kontrolkami oraz z generacją kodu.
-	\item Następnie użytkownik będzie mógł sam wyklikać kontrolki i ustawić to w dashboardy.
-	\item Na końcu chciałbym mięc zrobiony mockup pue.zus.pl wyklikany w ten sposób.
-\end{itemize}
-
-\section{Interfejs użytkownika}
-TODO
-
-Tego chcemy uniknąć:\\
-\includegraphics[width=\textwidth]{obrazki/logowaniezle.jpg}
-
+Nasz framework nie będzie rozwiązywał problemu rozproszonej synchronizacji między
+usługami. Wynika to z bardzo dużej różnorodności sposobów na jakie można to uczynić.
+Nasza platforma może integrować poprzez różne adaptery już istniejące usługi,
+które zupełnie nie są świadome istnienia zaproponowanego mechanizmu blokad,
+więc możliwe byłyby niekompatybilności między rozwiązaniem zaproponowanym
+przez nas a wymienionymi usługami. Przykładami problematycznych usług mogą być
+,,System Rejestrów Państwowych'' oraz ,,Kompleksowy System Informatyczny'' do
+których dokumentacji z oczywistych względów nie mamy dostępu, więc nie możemy
+przewidzieć trudności jakie nasza platforma będzie narzucać naszym użytkownikom.
+To programiści korzystający z naszego systemu będą musieli rozwiązać ten problem
+w sposób, jaki uznają za optymalny.
 
 \chapter{Wykorzystane technologie}
 
