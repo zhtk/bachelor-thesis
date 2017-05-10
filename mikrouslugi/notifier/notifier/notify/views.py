@@ -1,6 +1,10 @@
+import json
+
 from django.shortcuts import render
 from django.http import HttpResponse
 import random
+
+from django.views.decorators.csrf import csrf_exempt
 
 
 def mainpage(request):
@@ -23,3 +27,24 @@ def negative(request):
 
 def pending(request):
     return HttpResponse("999")
+
+
+@csrf_exempt
+def print_to_stdout(request):
+    print("print_to_stdout:")
+    print(json.dumps(request.POST.dict(), ensure_ascii=False))
+    return HttpResponse()
+
+value = "default"
+
+@csrf_exempt
+def set_variable(request):
+    new_value = request.POST.dict().get("variable", "")
+    print("set variable: from %s to %s" % (value, new_value))
+    global value
+    value = new_value
+    return HttpResponse()
+
+def get_variable(request):
+    print("get variable: %s" % value)
+    return HttpResponse(value)
