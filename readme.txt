@@ -19,6 +19,3 @@ $ZOOKEEPER_PATH/bin/zkCli.sh
 # w otwartej sesji przydają się dwie operacje:
 # - ls <ścieżka>, np. ls /, lub ls /read - listuje node'y-dzieci
 # - get <ścieżka> - odczytuje zawartość node'a. węzły "katalogi" mogą jej nie mieć
-
-# Obecnie dostępne na integratorze są strony:
-# localhost
