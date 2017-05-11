@@ -23,8 +23,7 @@
 % (podać tytuł/stopień imię i nazwisko opiekuna
 % Instytut
 % ew. Wydział ew. Uczelnia (jeżeli nie MIM UW))
-\opiekun{mgra Michała Możdżonka\\
-  }
+\opiekun{mgra Michała Możdżonka}
 
 % miesiąc i~rok:
 \date{Maj 2017}
@@ -143,27 +142,57 @@ ze znudzonym i ślamazarnie wykonującym swoje obowiązki urzędnikiem, a to
 nakłada na nas obowiązek rozwiązania problemu skalowalności aplikacji.
 
 \section{Produkt końcowy}
-TODO
+TODO % TODO
 
 \chapter{Wymagania}
 
-Zdecydowaliśmy się przenieść środek ciężkości naszego projektu w stronę warstwy integracji klienta z backendem. Ustalono, że do osiągnięcia sukcesu wystarczy spełnienie następujących warunków: %TODO
-\begin{itemize}
-	\item Zrobicie warstwę FE + BFF w ten sposób, że zostanie zrobione środowisko Web Style Guide z podstawowymi i złożonymi kontrolkami oraz z generacją kodu.
-	\item Następnie użytkownik będzie mógł sam wyklikać kontrolki i ustawić to w dashboardy.
-	\item Na końcu chciałbym mięc zrobiony mockup pue.zus.pl wyklikany w ten sposób.
-\end{itemize}
-
-\section{Interfejs użytkownika}
-TODO
-
-Tego chcemy uniknąć:\\
-\includegraphics[width=\textwidth]{obrazki/logowaniezle.jpg}
+Głównym wymaganiem postawionym przed naszym frameworkiem było umożliwienie reimplementacji
+Platformy Usług Elektronicznych ZUS (widocznej na poniższym obrazku) oraz stworzenie
+przykładowego portalu ilustrującego jego możliwości.\\
+\includegraphics[width=\textwidth]{obrazki/pue2.jpg}
+Naszemu zespołowi pozostawiono bardzo duży stopień swobody przy projektowaniu i
+implementacji portalu. Główny nacisk położono na innowacyjność stworzonego rozwiązania.
+Niezależnie od tego, w trakcie naszych rozmów z klientem zostały wyłonione przedstawione
+niżej wymagania.
 
 \section{Wymagania funkcjonalne}
 
+TODO - FE i mikrousługi % TODO
+
 \section{Wymagania niefunkcjonalne}
 
+Bardzo wiele uwagi poświęciliśmy wymaganiom niefunkcjonalnym. Nasz Klient bardzo
+wyraźnie życzył sobie, by były spełnione normy ,,12 Factor App'' \cite{tfa}.
+W szczególności, nasz serwis powinien cechować się wysokim współczynnikiem
+niezawodnośći i odporności na losowe awarie. Ma to szczególne duże znaczenie
+podczas komunikacji na linii obywatel -- państwo, gdzie jakiekolwiek rozbieżności
+mogą być opłakane w skutkach. W miarę postępu cyfryzacji państwa liczba użytkowników
+naszego serwisu będzie zbliżać się do 14-tu milionów osób. Należy zapewnić
+skalowalność tworzonej aplikacji w sposób pozwalający na ich obsłużenie.
+
+Platforma powinna być prosta w użyciu nawet dla relatywnie nisko wykwalifikowanych
+programistów i utrudniać im popełnienie przynajmniej części błędów. Przykład
+problemu występującego w obecnej wersji PUE jest widoczny na poniższym obrazku.
+Ze względu na niewłaściwą architekturę systemu możliwe jest wyświetlenie
+użytkownikowi sprzecznych komunikatów dotyczących stanu zalogowania. Nasz framework
+nie powinien pozwalać na powstanie takiej sytuacji.\\
+\includegraphics[width=\textwidth]{obrazki/logowaniezle.jpg}
+
+Nasz serwis powinien cechować się spójnym i jednolitym wyglądem oraz wysoką
+reużywalnością komponentów wykorzystywanych do tworzenia interfejsu użytkownika.
+Interfejsy powininny być łatwo rozszerzalne bez łamania wstecznej kompatybilności
+i konieczności modyfikacji już napisanych fragmentów aplikacji. W projekcie
+należy uwzględnić dynamicznie zmieniające się środowisko w jakim przyjdzie działać
+naszej aplikacji. Z powodu ciągle postępującej cyfryzacji państwa i związanych z
+tym znacznych zmian w prawie możemy być pewni, że po oddaniu serwisu do użytku
+ulegnie on znaczącym przekształceniom. Powinniśmy sprawić, by koszt owego przekształcenia
+był jak najmniej dotkliwy dla naszego Klienta.
+
+System utworzony na bazie naszego frameworka powinien cechować się znacznym stopniem
+automatyzacji. Dołączanie i odłączanie kolejnych serwerów powinno odbywać się w locie,
+bez konieczności ręcznej rekonfiguracji. Ten postulat bardzo wydatnie łączy się z
+wymaganiem skalowalności i niezawodności. Przeprowadzane zmiany w konfiguracji serwerów
+nie powinny rzutować na niezawodność serwisu.
 
 \chapter{Teoretyka}
 
