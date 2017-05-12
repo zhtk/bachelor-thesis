@@ -188,6 +188,14 @@ tym znacznych zmian w prawie możemy być pewni, że po oddaniu serwisu do użyt
 ulegnie on znaczącym przekształceniom. Powinniśmy sprawić, by koszt owego przekształcenia
 był jak najmniej dotkliwy dla naszego Klienta.
 
+Wymaganiem bardzo podobnym do powyższego jest konieczność łatwej integracji z już
+istniejącymi systemami informatycznymi. Przykładem takiego systemu w ZUS jest
+,,Kompleksowy System Informatyczny''. Systemy które nie znajdują się pod zarządem ZUS
+to między innymi ,,Profil Zaufany -- eGO'' oraz ,,System Rejestrów Państwowych''.
+Nasz serwis powinien łatwo integrować się z wymienionym wyżej oprogramowaniem.
+Należy uwzględnić fakt, że możliwość modyfikacji i dostosowania zewnętrznych
+systemów do naszych potrzeb jest bardzo ograniczona.
+
 System utworzony na bazie naszego frameworka powinien cechować się znacznym stopniem
 automatyzacji. Dołączanie i odłączanie kolejnych serwerów powinno odbywać się w locie,
 bez konieczności ręcznej rekonfiguracji. Ten postulat bardzo wydatnie łączy się z
@@ -423,23 +431,45 @@ w sposób, jaki uznają za optymalny.
 
 \chapter{Wykorzystane technologie}
 
+Nasz serwis wykorzystuje bardzo dużą ilość różnych technologii. Związane jest to
+z charakterem naszego projektu, który polegał na integracji usług napisanych w
+możliwie różnych technologiach.
+
 \section{Języki programowania}
-Python, Java, Node.js, typescript
+
+Do realizacji części frontendowej wykorzystaliśmy platformę Node.js. Jej użycie
+było związane z biblioteką Angular 2. Rzeczą całkowicie naturalną okazał się
+wybór języków JavaScript i TypeScript do implementacji tej części serwisu.
+
+Do napisania części backendowej początkowo wykorzystywaliśmy język JAVA. Głównymi
+argumentami przemawiającymi za tym wyborem był bogaty zbiór bibliotek wykorzystywanych
+w aplikacjach korporacyjnych, wysoka wydajność maszyny wirtualnej Java oraz fakt, że
+obecnie istniejące systemy prawdopodobnie wykorzystują ten język. W trakcie naszych
+prac okazało się, że jest to zupełnie nietrafiony wybór. Narastające problemy
+pojawiające się podczas współpracy z wybranymi bibliotekami oraz niezadowalające
+tempo prac w połączeniu ze zbliżającymi się terminami skłoniły nas do przepisania
+już napisanego oprogramowania na język Python.
+
+W przypadku naszego projektu radykalna decyzja o zmianie wykorzystywanego ekosystemu
+była o tyle prosta, że nasz serwis miał charakter prototypu ilustrującego pewne
+idee i niewykorzystywanego w środowisku produkcyjnym. Bardzo szybko okazało się, że
+była to trafiona decyzja pozwalająca na mitygacje problemów, które pojawiły się w
+trakcie naszych prac.
 
 \section{Angular 2}
 
-Do tworzenia cześć wizualnej oraz logiki bezpośrednio z nią związanej, użyliśmy frameworka Angular2. Jest to narzędzie stworzone przez Google, opierające się
-na Type Script - języku będącym nadzbiorem Java Script. W stosunku do js główną funkcjonalnością ts jest dodanie obiektowości, jednakże można stwierdzić,
-że wszystko co związane z obiektowością w ts to tylko lukier syntaktyczny, ponieważ w ts koniec konców jest przetłumaczony do czystego js. Ts implementuje większość
-funkcjonalności, które język obiektowy powinien oferować - możliwe jest dziedziczenie, tworzenie interfesjów, konstruktory itp. Ciekawą opcją są dekoratory, czyli
-odzobniki klas. Dekoratory (szerzej opisane w dalszej części pracy) pozwalają na zmianą ``zachowania'' klasy już w trakcie kompilacji.
+Do tworzenia cześć wizualnej oraz logiki bezpośrednio z nią związanej, użyliśmy frameworka Angular 2. Jest to narzędzie stworzone przez Google, opierające się
+na TypeScript - języku będącym nadzbiorem JavaScript. W stosunku do JavaScript główną funkcjonalnością TypeScript jest dodanie obiektowości, jednakże można stwierdzić,
+że wszystko co związane z obiektowością w TypeScript to tylko lukier syntaktyczny, ponieważ kod TypeScript podczas kompilacji jest tłumaczony do czystego JavaScript. TypeScript implementuje większość
+funkcjonalności, które język obiektowy powinien oferować - możliwe jest dziedziczenie, tworzenie interfesjów, konstruktory itp. Ciekawą opcją są dekoratory (szerzej opisane w dalszej części pracy), czyli
+ozdobniki klas które pozwalają na zmianę ``zachowania'' klasy już w trakcie kompilacji.
 
 \section{Bootstrap}
 
-Za wygląd strony odpowiada HTML5, połączony z Bootstrapem. Bootstrap to zbiór gotowych komponentów wizulanych, pozwalający, bez zbędnego wnikania
+Za wygląd strony odpowiada HTML5, połączony z Bootstrapem. Bootstrap to zbiór gotowych komponentów wizualnych, pozwalający, bez zbędnego wnikania
 w stronę ``artystyczną'', tworzyć strony estetyczne oraz wygodne w użyciu. Jako, że tematem naszej pracy nie jest projektowanie stron internetowych,
-użyliśmy gotowej skórki - sbAdmin2. Właściwie, lepszym określeniem, jest użycie sbAdmin2 jako punktu wyjścia, ponieważ liczba wprowadzliśmy
-liczne zmiany w wyglądzie platformy.
+użyliśmy gotowej skórki sbAdmin2, w której wprowadziliśmy
+liczne zmiany.
 
 \section{Express.js}
 
