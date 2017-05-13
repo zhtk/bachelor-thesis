@@ -441,7 +441,7 @@ Do realizacji części frontendowej wykorzystaliśmy platformę Node.js. Jej uż
 było związane z biblioteką Angular 2. Rzeczą całkowicie naturalną okazał się
 wybór języków JavaScript i TypeScript do implementacji tej części serwisu.
 
-Do napisania części backendowej początkowo wykorzystywaliśmy język JAVA. Głównymi
+Do napisania części backendowej początkowo wykorzystywaliśmy język Java. Głównymi
 argumentami przemawiającymi za tym wyborem był bogaty zbiór bibliotek wykorzystywanych
 w aplikacjach korporacyjnych, wysoka wydajność maszyny wirtualnej Java oraz fakt, że
 obecnie istniejące systemy prawdopodobnie wykorzystują ten język. W trakcie naszych
@@ -471,7 +471,47 @@ w stronę ``artystyczną'', tworzyć strony estetyczne oraz wygodne w użyciu. J
 użyliśmy gotowej skórki sbAdmin2, w której wprowadziliśmy
 liczne zmiany.
 
+\section{Django}
+
+TODO
+
 \section{Express.js}
+
+Do serwowania części frontendowej serwisu wykorzystujemy serwer Express.js.
+Korzystanie z niego jest proste i stosunkowo przyjemne, znakomicie integruje się
+on z platformą Node.js. W przeciwieństwie do Lite--servera z którego korzystaliśmy
+wcześniej, Express.js jest dobrze udokumentowany i udostępnia bogate API, z którego
+skorzystaliśmy przy integracji z backendem.
+
+\section{gRPC}
+
+Podczas projektowania mechanizmu komunikacji pomiędzy mikrousługami nasz Klient
+zasugerował użycie WSDL. Nie zgodziliśmy się na to, gdyż użycie tak ciężkiego
+protokołu jest sprzeczne z typowymi praktykami stosowanymi w architekturze
+mikrousług \cite{mammatustech}. Jednocześnie nie chcieliśmy, by nasza aplikacja
+była ograniczona tylko i wyłącznie do RESTowych protokołów. Ostatecznie
+zaproponowaliśmy użycie gRPC, który łączy zalety obu wymienionych wcześniej
+rozwiązań. Z jednej strony jest stosunkowo lekkim i wykorzystującym niewiele
+zasobów protokołem sieciowym, a z drugiej strony pozwala na ścisłe zdefiniowanie
+udostępnianych przez serwer usług w czytelnym dla ludzi formacie. Po napisaniu
+odpowiednich definicji możliwa jest ich kompilacja do gotowego kodu źródłowego
+włączanego bezpośrednio w pliki projektu. Dzięki temu minimalizowane jest ryzyko
+popełnienia błędu przy pisaniu modułu do komunikacji z innymi usługami.
+
+\section{Play Framework}
+
+TODO
+
+\section{SQLite}
+
+W naszym projekcie rodzaj użytej bazy danych nie miał większego znaczenia, gdyż
+dostęp do niej odbywa się poprzez wyspecjalizowaną usługę zapewniającą dostęp do
+danych lub w ramach jednej mikrousługi, gdzie służy jako tymczasowe składowisko
+informacji potrzebnych przy wykonywaniu operacji. W takim modelu rodzaj użytej
+bazy danych jest transparentny dla usługi wywołującej. Z uwagi na prototypowy
+charakter naszego projektu poprzestaliśmy na bazie SQLite, jako że znakomicie
+integruje się ona z Django, ponadto zastąpienie jej PostgreSQLem jest
+praktycznie bezkosztowe.
 
 \section{ZooKeeper}
 
@@ -506,6 +546,7 @@ wszelkiego rodzaju kolejkach, algorytmach synchronizujących i przy wyborze
 lidera \cite{curatorlock}.
 
 \subsection{Curator}
+
 Biblioteka Curator upraszcza wiele aspektów związanych
 z wykorzystaniem ZooKeepera, między innymi rejestrację serwerów mikrousług,
 zapewnia implementację najczęściej wykorzystywanych algorytmów synchronizujących
@@ -514,24 +555,9 @@ trakcie prac nad integratorem okazało się, że oferowane możliwości znacznie
 nasze potrzeby.
 
 \subsection{Kazoo}
-Zk dla pythona
 
-\section{Django}
-
-\section{Play Framework}
-
-\section{GRPC}
-
-\section{SQLite}
-
-W naszym projekcie rodzaj użytej bazy danych nie miał większego znaczenia, gdyż
-dostęp do niej odbywa się poprzez wyspecjalizowaną usługę zapewniającą dostęp do
-danych lub w ramach jednej mikrousługi, gdzie służy jako tymczasowe składowisko
-informacji potrzebnych przy wykonywaniu operacji. W takim modelu rodzaj użytej
-bazy danych jest transparentny dla usługi wywołującej. Z uwagi na prototypowy
-charakter naszego projektu poprzestaliśmy na bazie SQLite, jako że znakomicie
-integruje się ona z Django, ponadto zastąpienie jej PostgreSQLem jest
-praktycznie bezkosztowe.
+Kazoo jest nieoficjalnym klientem ZooKeepera dla języka Python. W trakcie
+implementacji naszej aplikacji doceniliśmy jego niezawodność i prostotę użycia.
 
 \chapter{Realizacja}
 
@@ -556,7 +582,7 @@ TODO
 
 \subsection{Tworzenie mockupów}
 Tutaj opis wszystkich stworzonych podstron
-\subsection{Stworznie systemu komponentów}
+\subsection{Stworzenie systemu komponentów}
 Opis posczególnych komponentów, oraz całej idei architektury tego rozwiązania.
 \subsection{System tworzenia automatycznej dokumentacji}
 Opis dekoratorów.
@@ -565,23 +591,31 @@ TODO
 \subsection{Platforma developera}
 Sposób dodawania mikrosusług, style guide.
 
+\section{Serwer uwierzytelniania i autoryzacji}
+
 \section{Integrator}
 
+TODO - O integratorze (niedziałający SSL, ciągle się zawiesza), integrator 2.0
+
 \section{Mikrousługi}
+
+\subsection{Powiadomienia}
+
+\subsection{Logger}
 
 \chapter{Obserwator emerytalny}
 Z uwagi na bardzo niepewny charakter naszego projektu i trudności związane z
 formalnym rozliczeniem naszej pracy zdecydowaliśmy się wykonać niejako poza
 głównym projektem serwis ,,Obserwator emerytalny''.
 
-\chapter{Wkład poszczególnych członków zespołu w projekt}\label{r:wklad}
+\chapter{Wkład poszczególnych członków zespołu w projekt}
 TODO
 
 \chapter{Podsumowanie}
 TODO
 
 \appendix
-\chapter{Spis zawartości dołączonej płyty CD}\label{r:spis}
+\chapter{Spis zawartości dołączonej płyty CD}
 Dokładny spis zawartości towarzyszącej płytki (p. dalej). To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział). Płytka CD/DVD/Blu-ray/...
 
 Zawiera:\\
@@ -643,6 +677,9 @@ http://distributedlog.incubator.apache.org/
 
 \bibitem[Netflix]{nginx} Tony Mauro, \textit{Adopting Microservices at Netflix: Lessons for Architectural Design},
 https://www.nginx.com/blog/microservices-at-netflix-architectural-best-practices/
+
+\bibitem[mammatustech]{mammatustech} Rick Hightower, \textit{Java Microservices Architecture},
+http://www.mammatustech.com/java-microservices-architecture
 
 \end{thebibliography}
 
