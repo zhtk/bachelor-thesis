@@ -473,7 +473,13 @@ liczne zmiany.
 
 \section{Django}
 
-TODO
+Powszechnie przyjętym zwyczajem jest, że mikrousługi komunikują się przy pomocy
+RESTowych API \cite{mammatustech}. Naszym zdaniem do kontrukcji takiego interfejsu
+idealnie nadają się frameworki do tworzenia aplikacji webowych. Z uwagi na swoją
+prostotę wybraliśmy Django. Dodatkowym argumentem za takim wyborem był tutaj fakt,
+że architektura mikrousług zachęca do dywersyfikacji technologii. Wybierając
+framework napisany w języku Python chcieliśmy pokazać, że nasze rozwiązanie dobrze
+integruje usługi napisane w różnych językach.
 
 \section{Express.js}
 
@@ -496,11 +502,19 @@ zasobów protokołem sieciowym, a z drugiej strony pozwala na ścisłe zdefiniow
 udostępnianych przez serwer usług w czytelnym dla ludzi formacie. Po napisaniu
 odpowiednich definicji możliwa jest ich kompilacja do gotowego kodu źródłowego
 włączanego bezpośrednio w pliki projektu. Dzięki temu minimalizowane jest ryzyko
-popełnienia błędu przy pisaniu modułu do komunikacji z innymi usługami.
+popełnienia błędu przy pisaniu modułu do komunikacji z innymi usługami. Co ważne,
+kompilator gRPC jest dostępny dla wszystkich wykorzystanych przez nas języków
+programowania.
 
 \section{Play Framework}
 
-TODO
+Play Framework opiera się na podobnych ideach architektonicznych co Django. Kiedy
+go wybieraliśmy mieliśmy nadzieję, że będzie się on bardzo dobrze integrował z
+ekosystemem Javowym. Okazało się, że było to błędne założenie. Kłopoty pojawiły
+się już na samym początku, kiedy odkryliśmy że między frameworkiem Play i gRPC ma
+miejsce konflikt zależności. Zdecydowaliśmy się użyć wersji niestabilnej, w
+której ten konflikt był już rozwiązany. Narastające w trakcie trwania projektu
+problemy ostatecznie zmusiły nas do porzucenia tego frameworka na rzecz Django.
 
 \section{SQLite}
 
