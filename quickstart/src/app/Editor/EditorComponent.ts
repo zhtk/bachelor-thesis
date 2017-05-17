@@ -175,25 +175,8 @@ export class ResizableDirective {
   selector: 'editor',
   templateUrl: 'pages/editor.html',
 })
-export class EditorComponent implements OnInit{
-  components = [
-    'TextBoxEditor',
-    'PanelEditor'
-  ];
-  @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
-  @ViewChildren(FrontEndClass) viewChildren: QueryList<FrontEndClass>;
+export class EditorComponent{
 
-  ngOnInit(): void {
-
-    var added = ComponentCreator.insertComponent(this.cfr, this.target, this.components[0]);
-    var added = ComponentCreator.insertComponent(this.cfr, this.target, this.components[1]);
-    console.log("gg");
-    console.log(this.viewChildren);
-  }
-
-  constructor(private cfr: ComponentFactoryResolver)
-  {
-  }
 
 
 }

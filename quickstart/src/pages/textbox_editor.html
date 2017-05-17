@@ -1,4 +1,4 @@
-<div [ngClass] = "grid_class" style="z-index :10;margin-top: 3px; margin-bottom: 3px;" draggable resizable>
+<div [ngClass] = "grid_class" style="z-index :10;margin-top: 3px; margin-bottom: 3px;" draggable resizable #textbox_editor>
   <small *ngIf="infoText" style="margin-left: 3px;">{{ infoText }}</small>
   <input id= "{{id}}" [attr.name]="name" type="text"  class="form-control"  aria-describedby="basic-addon1" [disabled]="disabled"
          [(ngModel)]="text" (keyup)="textInputValidate()" [disabled] ="disabled" [style.background] ="backgroundColor"

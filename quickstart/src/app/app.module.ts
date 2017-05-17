@@ -87,6 +87,7 @@ import { KeysPipe } from './keys.pipe';
 import { DraggableDirective, EditorComponent, ResizableDirective} from "./Editor/EditorComponent";
 import {PanelEditor} from "./Editor/PanelEditor";
 import {TextBoxEditor} from "./Editor/TextBoxEditor";
+import {EditorBox} from "./Editor/EditorBox";
 
 
 @NgModule({
@@ -147,6 +148,7 @@ import {TextBoxEditor} from "./Editor/TextBoxEditor";
     SpanComponent,
     StyleGuideComponent,
     PiecsetComponent,
+    EditorBox
   ],
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
