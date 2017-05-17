@@ -1,1 +1,4 @@
+W pliku 500plus.form ma się znaleźć JSON opisujący wniosek w formacie
+akceptowanym przez frontend.
+
 Gdyby json nie działał należy zwefyfikować jego poprawność https://jsonlint.com/
