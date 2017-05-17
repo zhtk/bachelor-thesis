@@ -15,7 +15,9 @@ class Wnioskodawca(models.Model):
     ulica = models.CharField(max_length=200)
     nr_domu = models.CharField(max_length=20)
     nr_mieszkania = models.CharField(max_length=20)
-
+    
+    def __str__(self):
+        return str(self.pesel)
 
 class Dziecko(models.Model):
     id_dziecka = models.AutoField(primary_key=True)
@@ -28,14 +30,21 @@ class Dziecko(models.Model):
     obywatelstwo = models.CharField(max_length=100)
     data_urodzenia = models.CharField(max_length=100)
     
+    def __str__(self):
+        return str(self.pesel)
 	
 
 class CzlonekRodziny(models.Model):
     id_osoby = models.AutoField(primary_key=True)
-	
+    
+    imie = models.CharField(max_length=50)
+    nazwisko = models.CharField(max_length=50)
+    pesel = models.CharField(max_length=11)
     pokrewienstwo = models.CharField(max_length=100)
     urzad_skarbowy = models.CharField(max_length=255)
-
+    
+    def __str__(self):
+        return str(self.pesel)
 
 class Wniosek(models.Model):
     STATUS_WNIOSKU = (
@@ -49,7 +58,12 @@ class Wniosek(models.Model):
     autor = models.ForeignKey(Wnioskodawca, on_delete=models.CASCADE)
     dzieci = models.ManyToManyField(Dziecko)
     rodzina = models.ManyToManyField(CzlonekRodziny)
-    status = models.CharField(max_length=1, choices=STATUS_WNIOSKU, default='1')
+    status = models.CharField(max_length=1, choices=STATUS_WNIOSKU, default='0')
+    dodano = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return "wniosek nr " + str(self.id_wniosku)
+		
 
 
 admin.site.register(Wnioskodawca)
