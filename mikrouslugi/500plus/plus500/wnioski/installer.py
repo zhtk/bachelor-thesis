@@ -41,6 +41,7 @@ def add_service_server(basePath, serviceName, serverId, address, port,
 
 
 def add_view_endpoint(name, content):
+    try_delete("/view/" + name)
     add_node("/view/" + name, content)
 
 

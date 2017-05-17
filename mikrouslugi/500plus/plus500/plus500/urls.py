@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from wnioski import views
 
 urlpatterns = [
-    #TODO
+    url(r'^lista/', views.lista),
+    url(r'^wyslij/', views.wyslij),
     url(r'^admin/', admin.site.urls),
 ]

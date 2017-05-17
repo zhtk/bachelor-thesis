@@ -11,16 +11,11 @@ class WnioskiConfig(AppConfig):
     def register_microservice(self):
         addr = self.service_address()
         inst.zk.start()
-
-        inst.add_read_endpoint("notify-pending", "server1", addr + "/notify/pending/", "null")
-        inst.add_read_endpoint("notify-negative", "server1", addr + "/notify/negative/", "null")
-        inst.add_read_endpoint("notify-positive", "server1", addr + "/notify/positive/", "null")
-        inst.add_read_endpoint("notify-listing", "server1", addr + "/notify/listing/", "null")
-        inst.add_read_endpoint("notify-main", "server1", addr + "/notify/main/", "null")
-        inst.add_write_endpoint("notify-print_to_stdout", "server1", addr + "/notify/print_to_stdout/", "null")
-        inst.add_write_endpoint("notify-set_variable", "server1", addr + "/notify/set_variable/", "null")
-        inst.add_read_endpoint("notify-get_variable", "server1", addr + "/notify/get_variable/", "null")
+        
+        inst.add_view_endpoint_from_file("plus500-wniosek", '500plus.form')
+        inst.add_read_endpoint("plus500-lista", "server1", addr + "/lista/", "null")
+        inst.add_write_endpoint("plus500-send", "server1", addr + "/wyslij/", "null")
 
     def ready(self):
-        #self.register_microservice()
+        self.register_microservice()
         print("Service ready!")
