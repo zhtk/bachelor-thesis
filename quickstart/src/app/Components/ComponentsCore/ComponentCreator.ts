@@ -17,6 +17,8 @@ import {ContentComponent} from "../FrontComponents/ContentComponent";
 import {IconComponent} from "../FrontComponents/IconComponent";
 import {SpanComponent} from "../FrontComponents/SpanComponent";
 import {FrontEndClass} from './MainClasses/FrontEndClass';
+import {PanelEditor} from "../../Editor/PanelEditor";
+import {TextBoxEditor} from "../../Editor/TextBoxEditor";
 
 export class ComponentCreator {
 
@@ -78,7 +80,12 @@ export class ComponentCreator {
 			case ("Span"):
 				compFactory = factory.resolveComponentFactory(SpanComponent);
 				break;
-
+      case ("PanelEditor"):
+        compFactory = factory.resolveComponentFactory(PanelEditor);
+        break;
+      case ("TextBoxEditor"):
+        compFactory = factory.resolveComponentFactory(TextBoxEditor);
+        break;
 			default: // powinno byc explicite
 				compFactory = factory.resolveComponentFactory(PanelComponent);
 				break;

@@ -86,6 +86,7 @@ import {PiecsetComponent} from "./piecsetComponent";
 import { KeysPipe } from './keys.pipe';
 import { DraggableDirective, EditorComponent, ResizableDirective} from "./Editor/EditorComponent";
 import {PanelEditor} from "./Editor/PanelEditor";
+import {TextBoxEditor} from "./Editor/TextBoxEditor";
 
 
 @NgModule({
@@ -140,6 +141,7 @@ import {PanelEditor} from "./Editor/PanelEditor";
           PanelGroupComponent,
           ContentComponent,
     EditorComponent,
+    TextBoxEditor,
     PanelEditor,
     IconComponent,
     SpanComponent,
@@ -149,7 +151,8 @@ import {PanelEditor} from "./Editor/PanelEditor";
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
   					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, PanelGroupComponent, ContentComponent,
-    IconComponent, ProgressBarComponent, SpanComponent, StyleGuideComponent, PiecsetComponent, ZipcodeComponent]
+    IconComponent, ProgressBarComponent, SpanComponent, StyleGuideComponent, PiecsetComponent, ZipcodeComponent,TextBoxEditor,
+  PanelEditor]
 })
 export class AppModule {
 }

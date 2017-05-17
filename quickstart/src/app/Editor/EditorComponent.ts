@@ -1,7 +1,7 @@
 import {
   AfterContentInit, Component, ComponentFactoryResolver, ContentChildren, ElementRef, HostBinding, HostListener, OnInit,
   QueryList,
-  ViewChild, ViewContainerRef
+  ViewChild, ViewChildren, ViewContainerRef
 } from '@angular/core';
 import {PanelComponent} from "../Components/FrontComponents/PanelComponent";
 
@@ -71,6 +71,7 @@ export class DraggableDirective {
   }
 
   constructor(private el: ElementRef) {
+    console.log(this.el.nativeElement.attributes);
     this.el.nativeElement.style.position ='absolute';
     this.el.nativeElement.style.cursor= 'move';
     //this.el.nativeElement.style.setProperty('curosr' , 'move', "important");
@@ -176,20 +177,22 @@ export class ResizableDirective {
 })
 export class EditorComponent implements OnInit{
   components = [
-    'Panel',
-    'TextBox'
+    'TextBoxEditor',
+    'PanelEditor'
   ];
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
-
+  @ViewChildren(FrontEndClass) viewChildren: QueryList<FrontEndClass>;
 
   ngOnInit(): void {
-    //var added = ComponentCreator.insertComponent(this.cfr, this.target, this.components[0]);
+
+    var added = ComponentCreator.insertComponent(this.cfr, this.target, this.components[0]);
     var added = ComponentCreator.insertComponent(this.cfr, this.target, this.components[1]);
+    console.log("gg");
+    console.log(this.viewChildren);
   }
 
   constructor(private cfr: ComponentFactoryResolver)
   {
-
   }
 
 
