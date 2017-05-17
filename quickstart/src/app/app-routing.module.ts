@@ -41,6 +41,7 @@ import {EditorComponent} from "./Editor/EditorComponent";
 
 const routes: Routes = [
 
+    { path: 'editor', component: EditorComponent},
     //{ path: '', redirectTo: '/app', pathMatch: 'full' },
     { path: 'auth',  component: LoginComponent },
     { path: '404', component: PageNotFoundComponent },
@@ -67,7 +68,6 @@ const routes: Routes = [
       { path: 'lekarz',  component: LekarzComponent },
       { path: 'pacjent',  component: PacjentComponent },
       { path: 'komponenty', component: TestComponent},
-      { path: 'editor', component: EditorComponent}
     ]},
     { path: '**', redirectTo: '/404'} // ostatni komponent - dodajemy nowe sciezki przed nim!
 ];

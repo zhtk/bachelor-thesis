@@ -1,7 +1,15 @@
-import {Component, ElementRef, HostBinding, HostListener, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterContentInit, Component, ComponentFactoryResolver, ContentChildren, ElementRef, HostBinding, HostListener, OnInit,
+  QueryList,
+  ViewChild, ViewContainerRef
+} from '@angular/core';
 import {PanelComponent} from "../Components/FrontComponents/PanelComponent";
 
 import { Directive, Input } from '@angular/core';
+import {PanelEditor} from "./PanelEditor";
+import {FrontEndClass} from "../Components/ComponentsCore/MainClasses/FrontEndClass";
+import {TextBox} from "../Components/FormComponents/TextBox/TextBox";
+import {ComponentCreator} from "../Components/ComponentsCore/ComponentCreator";
 
 @Directive({ selector: '[draggable]' })
 export class DraggableDirective {
@@ -56,7 +64,6 @@ export class DraggableDirective {
      h  +"px;left:" +
       w+"px;");
 
-    console.log(this.el.nativeElement.offsetLeft+this.el.nativeElement.getBoundingClientRect().width);
     if (this.clicked && this.el.nativeElement.style.cursor == "move") {
       this.el.nativeElement.style.top = event.clientY - this.y + 'px';
       this.el.nativeElement.style.left = event.clientX  - this.x+ 'px';
@@ -65,7 +72,8 @@ export class DraggableDirective {
 
   constructor(private el: ElementRef) {
     this.el.nativeElement.style.position ='absolute';
-    this.el.nativeElement.style.cursor = 'move';
+    this.el.nativeElement.style.cursor= 'move';
+    //this.el.nativeElement.style.setProperty('curosr' , 'move', "important");
     this.menu = document.createElement("DIV");        // Create a <button> element
     var t1 = document.createTextNode("pole1");       // Create a text node
     var t2 = document.createTextNode("pole2");       // Create a text node
@@ -102,10 +110,10 @@ export class ResizableDirective {
     var top = this.el.nativeElement.offsetTop;
     var w = this.el.nativeElement.getBoundingClientRect().width;
     var h = this.el.nativeElement.getBoundingClientRect().height;
-    console.log(this.el);
 
     if(!this.clicked ) {
-
+      console.log(left);
+      console.log(event.clientX);
       this.direction = "";
       if (Math.abs(top - event.clientY) < this.bound)
         this.direction = "n";
@@ -117,7 +125,7 @@ export class ResizableDirective {
         this.direction += "w";
       else if (Math.abs((left + w) - event.clientX) < this.bound)
         this.direction += "e";
-
+      console.log(this.direction);
       if (this.direction)
         this.el.nativeElement.style.cursor = this.direction + "-resize";
       else
@@ -166,9 +174,23 @@ export class ResizableDirective {
   selector: 'editor',
   templateUrl: 'pages/editor.html',
 })
-export class EditorComponent {
+export class EditorComponent implements OnInit{
+  components = [
+    'Panel',
+    'TextBox'
+  ];
+  @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
 
+  ngOnInit(): void {
+    //var added = ComponentCreator.insertComponent(this.cfr, this.target, this.components[0]);
+    var added = ComponentCreator.insertComponent(this.cfr, this.target, this.components[1]);
+  }
+
+  constructor(private cfr: ComponentFactoryResolver)
+  {
+
+  }
 
 
 }
