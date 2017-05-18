@@ -653,6 +653,60 @@ TODO
 
 \section{Integrator}
 
+Integrator został zrealizowany jako standardowa aplikacja internetowa obsługująca
+klientów poprzez protokół HTTP. Każda mikrousługa rejestrująca się w integratorze
+może poprosić o wystawienie dowolnej liczby tzw. końcówek (ang. \textit{endpoint}).
+Końcówka jest jednoznacznie określonym adresem, pod którym serwer usługi udostępnia
+swoje zasoby. Wyróżniamy trzy typy końcówek:
+\begin{itemize}
+	\item View - służy do udostępniania statycznych danych bez bezpośredniego
+	udziału usługi, która ją utworzyła. Głównym zastosowaniem tej końcówki jest
+	przechowywanie JSONa opisującego interfejs użytkownika po stronie frontendu.
+	Integrator umożliwia dynamiczną zmianę zawartości końcówek tego typu, co znacząco
+	ułatwia prototypowanie interfejsu użytkownika, gdyż projektant nie musi pisać
+	własnej mikrousługi która serwowałaby stosowną treść.
+	\item Read - służy do pobierania danych z serwera mikrousługi bez powodowania
+	skutków ubocznych. Format przesyłanych informacji zależy od typu komponentu
+	proszącego o nie w warstwie frontendu.
+	\item Write - służy do wykonywania akcji mających efekt uboczny, np. złożenia
+	wniosku.
+\end{itemize}
+
+Dzięki współpracy integratora z serwerem uwierzytelniania dostęp do poszczególnych
+końcówek może być ograniczony tylko do autoryzowanych użytkowników. Identyfikacja
+uprawnionych klientów odbywa się poprzez przekazanie tokenu sesji w parametrze zapytania.
+W przypadku końcówek o typie Read i Write możliwe jest przechwytywanie i modyfikacja
+przesyłanych danych przy pomocy tzw. haków (ang. \textit{hook}). Haki mogą być
+osobno zakładane na każdą końcówkę. Na jednej końcówce może być założonych dowolnie
+wiele haków, których kolejność wykonywania zależy od nadanego im liczbowego priorytetu.
+Wyróżniamy dwa typy haków:
+\begin{itemize}
+	\item In - modyfikują zapytania wchodzące do mikrousługi.
+	\item Out - modyfikują wychodzące z mikrousługi odpowiedzi na zapytania.
+\end{itemize}
+Do jednej końcówki typu Read i Write może być przypisanych dowolnie wiele serwerów
+usługi. Integrator dla każdego zapytania losowo wybiera jeden z nich i do niego
+kieruje wchodzące zapytanie, a następnie przekazuje odpowiedź z powrotem.
+
+Integrator oferuje dwie metody pobierania listy aktywnych końcówek. Dostępne są
+one pod adresami:
+\begin{itemize}
+	\item /menu - zawiera informację o pierwszej końcówce, która powinna zostać
+	wyświetlona po załadowaniu frontendu oraz spis zawartości menu. Menu jest
+	personalizowane dla każdego użytkownika osobno i zawiera wpisy tylko o tych
+	usługach, do których ma dostęp użytkownik. Na wpis menu składają się stopień
+	zagnieżdżenia w strukturze drzewa, wyświetlany tytuł i ikonka oraz końcówka,
+	która powinna zostać wyświetlona po kliknięciu danego elementu.
+	\item /list - wyświetla dane o wszystkich końcówkach i serwerach mikrousług
+	do których dostęp ma obecnie zalogowany użytkownik. Otrzymana lista odzwierciedla
+	informacje składowane w bazie danych, co czyni ją przydatną przy poszukiwaniu
+	błędów podczas fazy rejestracji mikrousług.
+\end{itemize}
+W każdym z tych przypadków integrator przysyła odpowiedź w formacie JSON, dzięki
+czemu możliwe jest maszynowe jej przetwarzanie (na przykład w edytorze mikrousług).
+
+Konfiguracja w zk
+
 TODO - O integratorze (niedziałający SSL, ciągle się zawiesza), integrator 2.0
 
 \section{Mikrousługi}
@@ -665,6 +719,9 @@ mikrousług.
 \subsection{Logger}
 
 \subsection{Plus500}
+
+Z powodu ograniczeń nałożonych na nazwy pakietów w języku Python usługę odpowiedzialną
+za obsługę wniosków o świadczenie $500+$ nazwaliśmy ,,Plus500''.
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}
 TODO
