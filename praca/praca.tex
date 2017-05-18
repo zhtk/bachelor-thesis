@@ -191,7 +191,7 @@ był jak najmniej dotkliwy dla naszego Klienta.
 Wymaganiem bardzo podobnym do powyższego jest konieczność łatwej integracji z już
 istniejącymi systemami informatycznymi. Przykładem takiego systemu w ZUS jest
 ,,Kompleksowy System Informatyczny''. Systemy które nie znajdują się pod zarządem ZUS
-to między innymi ,,Profil Zaufany -- eGO'' oraz ,,System Rejestrów Państwowych''.
+to między innymi ,,Profil Zaufany (eGO)'' oraz ,,System Rejestrów Państwowych''.
 Nasz serwis powinien łatwo integrować się z wymienionym wyżej oprogramowaniem.
 Należy uwzględnić fakt, że możliwość modyfikacji i dostosowania zewnętrznych
 systemów do naszych potrzeb jest bardzo ograniczona.
@@ -577,22 +577,64 @@ implementacji naszej aplikacji doceniliśmy jego niezawodność i prostotę uży
 
 \section{Architektura aplikacji}
 
+Nasza aplikacja jest podzielona na trzy warstwy: frontend, mikrousługi oraz
+warstwę integrującą, na którą składają się serwery autoryzacji i integratora.
+Komunikacja pomiędzy poszczególnymi warstwami jest bezstanowa, co przynajmniej
+w teorii powinno pozwolić na osiągnięcie niemal nieograniczonej skalowalności.
+
 \subsection{Frontend}
 
-\subsection{Integrator}
-Integrator - autodiscovery usług, możliwość spinania różnych interfejsów gRPC, WSDL. 
+Główną ideą którą kierowaliśmy się przy projektowaniu frontendu było udostępnienie
+programiście mikrousług komponentów, z których mógłby następnie tworzyć interfejs
+użytkownika. Przykładowymi komponentami są: pole tekstowe, przycisk, grupa zagnieżdżonych
+komponentów. Po utworzeniu interfejsu jest on serializowany do formatu JSON. Kiedy
+nadchodzi zapytanie od klienta, otrzymuje on opis interfejsu użytkownika który ma
+być wyświetlony. Rzeczony opis utrzymany jest na wysokim poziomie abstracji --
+jest w nim zawarta informacja \textbf{co} ma być wyświetlone, ale nie \textbf{jak}.
+Dodatkowo dokonaliśmy rozdzielenia warstwy prezentacji od danych. Efektem takiego
+podejścia jest możliwość integracji z bardzo różnymi rodzajami zewnętrznych klientów.
+Przykładowo, użytkownik mobilny mógłby zobaczyć na swoim telefonie lub tablecie natywnie
+wyrenderowane kontrolki. U użytkownika wchodzącego na nasz portal poprzez przeglądarkę
+internetową JSON opisujący komponenty powinien zostać przekonwertowany na kod HTML
+dostosowany do jego przeglądarki. Co więcej, systemy służące do automatycznego
+zarządzania pracownikami mogą zupełnie pomijać warstwę prezentacji i operować
+bezpośrednio na danych dostarczanych przez warstwę integracji.
+
+\subsection{Warstwa integracji}
+
+Kluczowym elementem tej warstwy jest integrator, przez który przechodzi niemal
+cały ruch w systemie. Każda mikrousługa wchodząca w skład portalu musi być
+zarejestrowana w integratorze. Dostęp do mikrousług jest możliwy tylko poprzez
+integratora, który sprawdza, czy klient mikrousługi ma odpowiednie uprawnienia
+dostępowe, dokonuje tłumaczenia komunikatów pomiędzy różnymi interfejsami,
+wyszukuje adres serwera, do którego ma trafić komunikat oraz go wywołuje.
+
 Z uwagi na to, że dane przechodzą przez niego w postaci nieszyfrowanej można
-go podłączyć do IDSa wykrywającego anomalie w przesyłanych danych i w ten sposób
-zapobiegać masowemu wyciekowi wrażliwych danych lub atakom hakerskim. Stanowi też
-dodatkową linię obrony, którą musi sforsować potencjalny haker. Dzięki temu system jest
-odporniejszy na błędy popełnione w serwerach mikrousług, a w przypadku wykrycia
-jakiejś luki można ad-hoc wprowadzić łatkę bezpieczeństwa w serwerze pośredniczącym
-zamiast łatać wszystkie podatne serwery mikrousług.
+go podłączyć do IDSa (ang. \textit{Intrusion Detection System}) wykrywającego
+anomalie w przesyłanych danych i w ten sposób zapobiegać masowemu wyciekowi
+wrażliwych danych lub atakom hakerskim. Stanowi też dodatkową linię obrony, którą
+musi sforsować potencjalny haker. Dzięki temu system jest odporniejszy na błędy
+popełnione w serwerach mikrousług, a w przypadku wykrycia jakiejś luki można
+wprowadzić łatkę bezpieczeństwa w serwerze pośredniczącym zamiast łatać
+wszystkie podatne serwery mikrousług.
+
+Integrator współpracuje z serwerem uwierzytelniania i autoryzacji, który przechowuje
+listę wszystkich użytkowników systemu wraz z ich uprawnieniami. Dostęp do tego
+serwera jest możliwy z dowolnej części sieci. Z uwagi na konieczność zapewnienia
+łatwej integracji z zewnętrznymi usługami typu ,,Profil Zaufany (eGO)'', do
+identyfikacji użytkowników użyliśmy jednorazowych tokenów.
 
 \subsection{Mikrousługi}
-TODO
+
+Mikrousługi realizują logikę biznesową. Typowym cyklem życia serwera usługi jest
+przygotowanie do obsługi nadchodzących żądań, rejestracja w integratorze i obsługa
+zapytań. W końcowej fazie cyklu serwer się wyrejestrowuje z integratora. Realizacja
+integratora oczekuje, że poszczególne serwery będą z punktu widzenia klienta
+nierozróżnialne.
 
 \section{Frontend}
+
+TODO
 
 \subsection{Tworzenie mockupów}
 Tutaj opis wszystkich stworzonych podstron
@@ -607,15 +649,22 @@ Sposób dodawania mikrosusług, style guide.
 
 \section{Serwer uwierzytelniania i autoryzacji}
 
+TODO
+
 \section{Integrator}
 
 TODO - O integratorze (niedziałający SSL, ciągle się zawiesza), integrator 2.0
 
 \section{Mikrousługi}
 
+W trakcie prac nad naszym portalem zaimplementowaliśmy niżej wymienione rodzaje
+mikrousług.
+
 \subsection{Powiadomienia}
 
 \subsection{Logger}
+
+\subsection{Plus500}
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}
 TODO
