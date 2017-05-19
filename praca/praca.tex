@@ -3,6 +3,7 @@
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{minted}
 
 % Dane magistranta:
 
@@ -598,7 +599,10 @@ wyrenderowane kontrolki. U użytkownika wchodzącego na nasz portal poprzez prze
 internetową JSON opisujący komponenty powinien zostać przekonwertowany na kod HTML
 dostosowany do jego przeglądarki. Co więcej, systemy służące do automatycznego
 zarządzania pracownikami mogą zupełnie pomijać warstwę prezentacji i operować
-bezpośrednio na danych dostarczanych przez warstwę integracji.
+bezpośrednio na danych dostarczanych przez warstwę integracji. Dzięki temu,
+że wygląd panelu użytkownika jest zapisany w formacie pośrednim możliwa jest
+zmiana wyglądu portalu bez konieczności ponownego wdrażania wszystkich serwerów
+mikrousług.
 
 \subsection{Warstwa integracji}
 
@@ -649,7 +653,17 @@ Sposób dodawania mikrosusług, style guide.
 
 \section{Serwer uwierzytelniania i autoryzacji}
 
-TODO
+Z uwagi na prototypowy charakter naszej pracy nasz Klient nie przywiązywał większej
+wagi do rozwiązania problemu uwierzytelniania i autoryzacji użytkowników. Zdecydowaliśmy
+się jednak zaimplementować przykładowy serwer celem ukazania kilku ciekawych
+możliwości integratora. Serwer autoryzacji jest napisany w języku Python i wykorzystuje
+framework gRPC do udostępniania usług, którymi są: zalogowanie i pobranie tokena
+dostępowego, unieważnienie tokena, pobranie identyfikatora i uprawnień użytkownika.
+Informacją, która identyfikuje użytkownika jest jednorazowy sesyjny token, który
+z punktu widzenia pozostałych usług nie zawiera żadnych użytecznych informacji.
+Dzięki temu możliwa jest reimplementacja serwera autoryzacji bez utraty kompatybilności
+z pozostałymi częściami systemu. Uprawnienia użytkowników są składowane jako maska
+bitowa, w której zapalony bit oznacza posiadanie danego uprawnienia.
 
 \section{Integrator}
 
@@ -705,23 +719,81 @@ one pod adresami:
 W każdym z tych przypadków integrator przysyła odpowiedź w formacie JSON, dzięki
 czemu możliwe jest maszynowe jej przetwarzanie (na przykład w edytorze mikrousług).
 
-Konfiguracja w zk
+Konfiguracja integratora przechowywana jest w bazie danych ZooKeeper. Każda
+mikrousługa musi podczas uruchamiania dodać do niej swoje wpisy. Takie rozwiązanie
+jest świadomym złamaniem zasady mówiącej, że baza danych z której korzysta usługa
+nie powinna być bezpośrednio dostępna dla innych mikrousług \cite{microsvc}.
+Wynikało ono z unikalnych własności wpisów w ZooKeeperze, które mogą być automatycznie
+usuwane po ustaniu pracy serwera mikrousługi, np. na skutek awarii lub utraty
+połączenia internetowego. Ponadto poszczególne węzły które składają się na drzewo
+przechowujące konfigurację integratora mogą być chronione poprzez mechanizm ACL.
+Uznaliśmy, że w naszym prototypie nie ma potrzeby reimplementowania funkcjonalności
+zapewnianej przez gotowe komponenty.
 
-TODO - O integratorze (niedziałający SSL, ciągle się zawiesza), integrator 2.0
+Początkowo integrator był implementowany w technologii Play Framework. Niestety
+w miarę postępu prac ujawnialiśmy kolejne problemy związane z tym frameworkiem,
+począwszy od konfliktu zależności pomiędzy pakietami, poprzez niedziałający tryb
+SSL, aż po zawieszanie się serwera. Być może było to spowodowane koniecznością
+użycia wersji niestabilnej frameworka. Wymienione kłopoty w połączeniu z niezadowalającym
+postępem prac skłoniły nas do przepisania integratora w języku Python. Nowa wersja
+nazwana przez nas integratorem 2 nie posiada wymienionych wyżej wad i została
+dogłębnie przetestowana.
 
 \section{Mikrousługi}
 
 W trakcie prac nad naszym portalem zaimplementowaliśmy niżej wymienione rodzaje
-mikrousług.
+mikrousług. Ich głównym zadaniem było zilustrowanie interfejsu programisty
+wykorzystywanego przy współpracy z integratorem.
 
 \subsection{Powiadomienia}
 
+Powiadomienia są pierwszą zaimplementowaną mikrousługą. Jej zadaniem jest wyświetlenie
+liczby rozpatrzonych spraw. Aby dokładniej odzwierciedlić realia panujące w
+administracji przy każdym zapytaniu odpowiedź jest losowana. Rejestracja usługi
+odbywa się podczas startu serwera przy użyciu kawałka kodu analogicznego do poniższego:
+
+\begin{minted}{python}
+import notify.installer as inst
+
+addr = "http://localhost:8000"
+inst.zk.start()
+
+inst.add_read_endpoint("notify-pending", "server1", 
+	addr + "/notify/pending/", "null")
+inst.add_write_endpoint("notify-set_variable", "server1",
+	addr + "/notify/set_variable/", "null")
+\end{minted}
+W przedstawionym przykładzie następuje zaimportowanie biblioteki dostarczanej wraz z
+integratorem służącej do komunikacji z nim. Następnie zostaje nawiązane połączenie z
+serwerem integratora i tworzone są dwie końcówki typu Read i Write o nazwach
+,,notify-pending'' i ,,notify-set\_variable'' przypisane do serwera o identyfikatorze
+,,server1''. Kiedy integrator zostanie poproszony o dane z końcówki ,,notify-pending'',
+wyśle on zapytanie pod adres \texttt{http://localhost:8000/notify/pending/} i przekaże
+odpowiedź z powrotem. Wyrejestrowanie usługi z integratora nastąpi automatycznie po
+wyłączeniu serwera.
+
 \subsection{Logger}
+
+Logger jest mikrousługą ilustrującą działanie mechanizmu haków. Na początku
+rejestrowana jest końcówka typu Read o nazwie ,,google'' wraz z odpowiadającym
+jej serwerem. Następnie zakładane są haki przy pomocy następujących poleceń:
+\begin{minted}{python}
+inst.add_node('/hook/in/read/google', '', temp=False)
+inst.add_node('/hook/out/read/google', '', temp=False)
+inst.add_node('/hook/in/read/google/h1', addr + "/in/", temp=True)
+inst.add_node('/hook/out/read/google/h1', addr + "/out/", temp=True)
+\end{minted}
+Od tej pory cała komunikacja do i z wymienionej końcówki przechodzi przez serwer
+mikrousługi, która wykorzystuje ten fakt do wypisywania całego ruchu na konsolę.
+Kolejność aplikowania haków zależy od nazwy haka (w tym przypadku ,,h1'').
+Haki o mniejszych leksykograficznie nazwach są wykonywane wcześniej.
 
 \subsection{Plus500}
 
 Z powodu ograniczeń nałożonych na nazwy pakietów w języku Python usługę odpowiedzialną
 za obsługę wniosków o świadczenie $500+$ nazwaliśmy ,,Plus500''.
+
+TODO menu itp.
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}
 TODO
@@ -740,10 +812,10 @@ Wszelkie inne dokumenty powstałe podczas zajęć (np. teksty prezentacji, tekst
 
 Płyta jest częścią pracy - trzeba tyle płyt co drukowanych egzemplarzy pracy. Płytkę trzeba przymocować do pracy, tak by a) nie wypadała b) dało się ją wyjąć i odczytać w komputerze :).
 
-\chapter{Obserwator emerytalny}
-Z uwagi na bardzo niepewny charakter naszego projektu i trudności związane z
-formalnym rozliczeniem naszej pracy zdecydowaliśmy się wykonać niejako poza
-głównym projektem serwis ,,Obserwator emerytalny''.
+%\chapter{Obserwator emerytalny}
+%Z uwagi na bardzo niepewny charakter naszego projektu i trudności związane z
+%formalnym rozliczeniem naszej pracy zdecydowaliśmy się wykonać niejako poza
+%głównym projektem serwis ,,Obserwator emerytalny''.
 
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}

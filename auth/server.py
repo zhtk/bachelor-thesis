@@ -13,10 +13,10 @@ class Server(auth_pb2_grpc.AuthServiceServicer):
 
     USERS = {
         # Login: (hasło, uprawnienia, pesel)
-        'admin': ('admin', '111', '9901020300001'),
-        'user': ('user', '100', '9901020300002'),
-        'rzecznik': ('zalewajka', '010', '9901020300003'),
-        'lekarz': ('zus', '001', '9901020300003'),
+        'admin': ('admin', '111', '99010203001'),
+        'user': ('user', '100', '99010203002'),
+        'rzecznik': ('zalewajka', '010', '99010203003'),
+        'lekarz': ('zus', '001', '99010203004'),
     }
 
     def GetToken(self, request, context):
