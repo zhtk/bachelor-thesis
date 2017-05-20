@@ -150,7 +150,7 @@ TODO % TODO
 Głównym wymaganiem postawionym przed naszym frameworkiem było umożliwienie reimplementacji
 Platformy Usług Elektronicznych ZUS (widocznej na poniższym obrazku) oraz stworzenie
 przykładowego portalu ilustrującego jego możliwości.\\
-\includegraphics[width=\textwidth]{obrazki/pue2.jpg}
+\includegraphics[width=\textwidth]{obrazki/pue2.png}
 Naszemu zespołowi pozostawiono bardzo duży stopień swobody przy projektowaniu i
 implementacji portalu. Główny nacisk położono na innowacyjność stworzonego rozwiązania.
 Niezależnie od tego, w trakcie naszych rozmów z klientem zostały wyłonione przedstawione
@@ -177,7 +177,7 @@ problemu występującego w obecnej wersji PUE jest widoczny na poniższym obrazk
 Ze względu na niewłaściwą architekturę systemu możliwe jest wyświetlenie
 użytkownikowi sprzecznych komunikatów dotyczących stanu zalogowania. Nasz framework
 nie powinien pozwalać na powstanie takiej sytuacji.\\
-\includegraphics[width=\textwidth]{obrazki/logowaniezle.jpg}
+\includegraphics[width=\textwidth]{obrazki/logowaniezle.png}
 
 Nasz serwis powinien cechować się spójnym i jednolitym wyglądem oraz wysoką
 reużywalnością komponentów wykorzystywanych do tworzenia interfejsu użytkownika.
@@ -743,14 +743,21 @@ dogłębnie przetestowana.
 
 W trakcie prac nad naszym portalem zaimplementowaliśmy niżej wymienione rodzaje
 mikrousług. Ich głównym zadaniem było zilustrowanie interfejsu programisty
-wykorzystywanego przy współpracy z integratorem.
+wykorzystywanego przy współpracy z integratorem, niekoniecznie zaś implementacja
+produkcyjnej funkcjonalności. Naszemu Klientowi zależało bowiem, by integracja
+poszczególnych warstw aplikacji była możliwie prosta i osiągalna nawet dla nisko
+wykształconych i niedoświadczonych programistów.
 
 \subsection{Powiadomienia}
 
 Powiadomienia są pierwszą zaimplementowaną mikrousługą. Jej zadaniem jest wyświetlenie
 liczby rozpatrzonych spraw. Aby dokładniej odzwierciedlić realia panujące w
-administracji przy każdym zapytaniu odpowiedź jest losowana. Rejestracja usługi
-odbywa się podczas startu serwera przy użyciu kawałka kodu analogicznego do poniższego:
+administracji przy każdym zapytaniu odpowiedź jest losowana. Otrzymane dane
+zostają następnie wyświetlone na poniższym ekranie:\\
+\includegraphics[width=\textwidth]{obrazki/powiadomienia2.png}
+
+Rejestracja usługi odbywa się podczas startu serwera przy użyciu kawałka kodu
+analogicznego do poniższego:
 
 \begin{minted}{python}
 import notify.installer as inst
@@ -791,9 +798,29 @@ Haki o mniejszych leksykograficznie nazwach są wykonywane wcześniej.
 \subsection{Plus500}
 
 Z powodu ograniczeń nałożonych na nazwy pakietów w języku Python usługę odpowiedzialną
-za obsługę wniosków o świadczenie $500+$ nazwaliśmy ,,Plus500''.
+za obsługę wniosków o świadczenie $500+$ nazwaliśmy ,,Plus500''. Nasza mikrousługa
+umożliwia wyświetlenie statusu złożonych wniosków (nazwy, daty udostępnienia i informacji
+czy wniosek został rozpatrzony) oraz wysłanie wypełnionego formularza.
 
-TODO menu itp.
+Szablon formularza wniosku o świadczenie 500+ plus znajduje się w pliku ,,500plus.form''
+i jest opisany w formacie JSON. Po połączeniu z serwerem mikrousługi szablon jest
+wysyłany do klienta i wyświetlany. Po naciśnięciu odpowiedniego guzika zawartość
+wniosku jest serializowana i wysyłana do mikrousługi.\\
+\includegraphics[width=\textwidth]{obrazki/piecset.png}
+
+Rejestracja usługi w integratorze zajmuje tylko 5 linijek kodu:
+\begin{minted}{python}
+inst.add_view_endpoint_from_file("plus500-wniosek", '500plus.form')
+inst.add_read_endpoint("plus500-lista", "server1", addr + "/lista/", "null")
+inst.add_write_endpoint("plus500-send", "server1", addr + "/wyslij/", "null")
+inst.add_menu_element("Moje wnioski 500+", "read/plus500-lista", "/plus500lista")
+inst.add_menu_element("Złóż wniosek 500+", "view/plus500-wniosek", "/plus500nowy")
+\end{minted}
+W powyższym fragmencie widać większość możliwości integratora. Na początku
+instalujemy w integratorze plik opisujący formularz o świadczenie 500+. Następnie
+dodajemy końcówki które pozwalają na złożenie wniosku i wyświetlenie ich stanu. Na
+samym końcu rejestrujemy wpisy w menu. Od tej chwili zmiany są widoczne w interfejsie
+użytkownika i możliwa jest interakcja z mikrousługą.
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}
 TODO
