@@ -404,27 +404,6 @@ danych w słowniku typu klucz-wartość. Eureka z kolei zapewniała automatyczn�
 rejestrację, wykrywanie i odpytywanie mikrousług z zadaną częstotliwością oraz
 monitorowanie ich stanu. Obydwa projekty mają otwarty kod źródłowy.
 
-\section{Responsywny Frontend}
-
-Aby rozwinąć swoje skrzydła, asynchroniczne działanie mikrousług wymaga również działającej asynchronicznie warstwy użytkownika. Spośród obecnie stosowanych frameworków frontendowych wyróżniały się dwa: Angular oraz React.js. Zdecydowaliśmy się na ten pierwszy z powodu kluczowej dla klienta, całkowicie otwartej licencji. Wykorzystaliśmy drugą wersję Angulara, ponieważ jest oparta o nowsze rozwiązania, a w szczególności język TypeScript, czyli obiektowe rozszerzenie języka Javascript.
-
-\section{Język TypeScipt}
-TODO
-
-\section{Mechanizm komponentów}
-
-Projektując naszą platformę, pamiętaliśmy o istotnym nacisku, jaki klient kładł na jej proste rozszerzanie. Postanowiliśmy zatem zaprojektować własny mechanizm, który usprawniłby wytwarzanie mikrousług gotowych do pracy w naszym systemie. Od strony backendu, dużo łatwiej jest uzgodnić wspólny interfejs, którego implementacja w nowej mikrousłudze pozwoli podłączyć ją do działającej platformy. Frontend natomiast jest wytwarzany w zasadzie wyłącznie w języku HTML ze wsparciem ze strony języka skryptowego Javascript oraz jego bibliotek.
-
-Docelowe mikrousługi, wykorzystywane na naszej platformie, będą komunikowały się z REST-owym backendem w głównej mierze za pomocą formularzy. Formularze z kolei posiadają zazwyczaj dosyć generyczne interfejsy graficzne i programistyczne.
-
-Od strony użytkownika, są to etykietowane nazwami pola do wprowadzania konkretnych danych, plansze z komunikatami albo opisami tekstowymi, przyciski, rozwijane menu wyboru jednej (lub wielu) konkretnej opcji. Do tego można też zaliczyć elementy ułatwiające rozmieszczenie, niekoniecznie widoczne, np. obramowany panel, wiersz czy kolumna. Elementów nie jest dużo, a pozwalają one w zdecydowanej większości przypadków uzyskać od użytkownika wszystkie żadane dane.
-
-Programista natomiast widzi formularz jako encję (lub sumę encji) jakiejś tabeli w relacyjnej bazie danych - lub też słownik, mapę, czy kontener asocjacyjny. Jest to również zatem realizacja bardzo prosta i zwięzła.
-
-Stając przed tak ocenioną sytuacją, postanowiliśmy nie oddawać w ręce programistów mikrousług możliwości umieszczenia na stronie platformy dowolnego kodu HTML. Przede wszystkim, ze względów bezpieczeństwa - usługa mogłaby uruchamiać zlośliwy bądź posiadający krytyczne luki kod javascript. Ważne dla nas były jednak także kwestie stylistyczne - dużo wygodniej, niż publikować przewodniki styli (tzw. "Style Guide"), byłoby nam udostępnić już gotowe, wystylizowane przez nas kawałki kodu HTML.
-
-Osadzanie wewnątrz naszej aplikacji przekazanego w jakiś sposób szablonu HTML nie jest trudne, ale pozostaje pytanie o to, na kim będzie spoczywała odpowiedzialność jego napisania. Nie chcieliśmy, żeby była do tego potrzebna wiedza frontendowa, dlatego postanowiliśmy zwiększyć poziom abstrakcji w naszych szablonach, a co za tym idzie - zbudować mały framework (szkielet), który uprości ich tworzenie, przekazywanie i interpretację, z poziomu osoby lub programu czytającego ich opis.
-
 \section{Wnioski}
 
 Nasz zespół zdecydował, że opracujemy rozwiązanie wykorzystujące mikrousługi.
@@ -478,11 +457,14 @@ trakcie naszych prac.
 
 \section{Angular 2}
 
-Do tworzenia cześć wizualnej oraz logiki bezpośrednio z nią związanej, użyliśmy frameworka Angular 2. Jest to narzędzie stworzone przez Google, opierające się
-na TypeScript - języku będącym niejako obiektowym rozszerzeniem JavaScript. W stosunku do JavaScript można stwierdzić,
-że wszystko co związane z obiektowością w TypeScript to tylko lukier syntaktyczny, ponieważ kod TypeScript podczas kompilacji jest tłumaczony do czystego JavaScript. TypeScript implementuje większość
-funkcjonalności, które język obiektowy powinien oferować - możliwe jest dziedziczenie, tworzenie interfesjów, konstruktory itp. Ciekawą opcją są dekoratory (szerzej opisane w dalszej części pracy), czyli
-ozdobniki klas które pozwalają na zmianę ``zachowania'' klasy już w trakcie kompilacji.
+Aby rozwinąć swoje skrzydła, asynchroniczne działanie mikrousług wymaga również działającej asynchronicznie warstwy użytkownika. Spośród obecnie stosowanych frameworków frontendowych wyróżniały się dwa: Angular oraz React.js. Zdecydowaliśmy się na ten pierwszy z powodu kluczowej dla klienta, całkowicie otwartej licencji. Wykorzystaliśmy drugą wersję Angulara od Google, ponieważ jest oparta o nowsze rozwiązania niż pierwsza, a w szczególności wykorzystuje język TypeScript, czyli obiektowe rozszerzenie języka Javascript.
+W stosunku do JavaScript można stwierdzić, że wszystko co związane z obiektowością
+w TypeScript to tylko lukier syntaktyczny, ponieważ kod TypeScript podczas kompilacji
+jest tłumaczony do czystego JavaScript. TypeScript implementuje większość
+funkcjonalności, które język obiektowy powinien oferować - możliwe jest dziedziczenie,
+tworzenie interfesjów, konstruktory itp. Ciekawą opcją są dekoratory (szerzej opisane
+w dalszej części pracy), czyli ozdobniki klas które pozwalają na zmianę ``zachowania''
+klasy już w trakcie kompilacji.
 
 \section{Bootstrap}
 
@@ -663,8 +645,21 @@ TODO
 
 \subsection{Tworzenie mockupów}
 Tutaj opis wszystkich stworzonych podstron
-\subsection{Stworzenie systemu komponentów}
-Opis posczególnych komponentów, oraz całej idei architektury tego rozwiązania.
+
+\subsection{Mechanizm komponentów}
+
+Projektując naszą platformę, pamiętaliśmy o istotnym nacisku, jaki klient kładł na jej proste rozszerzanie. Postanowiliśmy zatem zaprojektować własny mechanizm, który usprawniłby wytwarzanie mikrousług gotowych do pracy w naszym systemie. Od strony backendu, dużo łatwiej jest uzgodnić wspólny interfejs, którego implementacja w nowej mikrousłudze pozwoli podłączyć ją do działającej platformy. Frontend natomiast jest wytwarzany w zasadzie wyłącznie w języku HTML ze wsparciem ze strony języka skryptowego Javascript oraz jego bibliotek.
+
+Docelowe mikrousługi, wykorzystywane na naszej platformie, będą komunikowały się z REST-owym backendem w głównej mierze za pomocą formularzy. Formularze z kolei posiadają zazwyczaj dosyć generyczne interfejsy graficzne i programistyczne.
+
+Od strony użytkownika, są to etykietowane nazwami pola do wprowadzania konkretnych danych, plansze z komunikatami albo opisami tekstowymi, przyciski, rozwijane menu wyboru jednej (lub wielu) konkretnej opcji. Do tego można też zaliczyć elementy ułatwiające rozmieszczenie, niekoniecznie widoczne, np. obramowany panel, wiersz czy kolumna. Elementów nie jest dużo, a pozwalają one w zdecydowanej większości przypadków uzyskać od użytkownika wszystkie żadane dane.
+
+Programista natomiast widzi formularz jako encję (lub sumę encji) jakiejś tabeli w relacyjnej bazie danych - lub też słownik, mapę, czy kontener asocjacyjny. Jest to również zatem realizacja bardzo prosta i zwięzła.
+
+Stając przed tak ocenioną sytuacją, postanowiliśmy nie oddawać w ręce programistów mikrousług możliwości umieszczenia na stronie platformy dowolnego kodu HTML. Przede wszystkim, ze względów bezpieczeństwa - usługa mogłaby uruchamiać zlośliwy bądź posiadający krytyczne luki kod javascript. Ważne dla nas były jednak także kwestie stylistyczne - dużo wygodniej, niż publikować przewodniki styli (tzw. "Style Guide"), byłoby nam udostępnić już gotowe, wystylizowane przez nas kawałki kodu HTML.
+
+Osadzanie wewnątrz naszej aplikacji przekazanego w jakiś sposób szablonu HTML nie jest trudne, ale pozostaje pytanie o to, na kim będzie spoczywała odpowiedzialność jego napisania. Nie chcieliśmy, żeby była do tego potrzebna wiedza frontendowa, dlatego postanowiliśmy zwiększyć poziom abstrakcji w naszych szablonach, a co za tym idzie - zbudować mały framework (szkielet), który uprości ich tworzenie, przekazywanie i interpretację, z poziomu osoby lub programu czytającego ich opis.
+
 \subsection{System tworzenia automatycznej dokumentacji}
 Opis dekoratorów.
 \subsection{Edytor}
