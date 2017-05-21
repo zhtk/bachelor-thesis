@@ -105,9 +105,9 @@ rozwojem cyfrowej administracji. Usługi powinny tworzyć jeden ekosystem, z kt�
 powinien być w dużej mierze odporny na awarie i zachowywać spójność oraz poprawność przechowywanych danych obywateli.
 W szczególności powinny być spełnione normy ,,12 Factor App'' \cite{tfa}, w tym ta mówiąca, że awaria jednego serwera
 lub usługi nie powinna wpływać na działanie pozostałych, niezależnych od niej udostępnianych usług.
-Rozwój i utrzymanie platformy powinien być możliwy także dla słabiej wykształconych lub mniej doświadczonych
-programistów, których nie pociągają uroki życia w dużym mieście. W ten sposób nasz projekt realizowałby plan
-zrównoważonego rozwoju, zapobiegając zwijaniu się polski lokalnej, a z drugiej strony prowadziłby do wymiernych
+Rozwój i utrzymanie platformy powinien być możliwy także dla mniej doświadczonych
+programistów, których zatrudnienie generuje mniejsze koszty wytworzenia kodu. W ten sposób nasz projekt realizowałby plan
+zrównoważonego rozwoju, zapobiegając centalizacji ośrodków programistycznych, a z drugiej strony prowadziłby do wymiernych
 oszczędności na wynagrodzeniach.
 
 \section{Zleceniodawca - ZUS}
@@ -121,25 +121,23 @@ było zatrudnionych przeciętnie 44 766 urzędników.
 W związku z tym, że projektowaliśmy system dla administracji państwowej z
 którego będą korzystać miliony obywateli, musieliśmy bardzo ostrożnie dobierać
 technologie, z których korzystaliśmy. Wybranie rozwiązania opartego na
-niekorzystnej licencji mogło się w przyszłości srogo zemścić w postaci
-konieczności zapłacenia ogromnej opłaty licencyjnej, wyłączenia usługi i
+niekorzystnej licencji mogło się w przyszłości łączyć z problemami w postaci
+konieczności zapłacenia bardzo wysokiej opłaty licencyjnej, wyłączenia usługi i
 przebudowania jej na nowo, udostępnienia części systemu na licencji open source,
 a nawet konieczności nieodpłatnego przekazania przechowywanych danych obywateli
-licencjodawcy. Preferowane były rozwiązania które albo były darmowe, albo do
-których nasz klient posiadał licencje (m. in. IBM DB2, komercyjna wersja
-PostgreSQL oraz cała gama produktów firmy Microsoft). W miarę możliwości
+licencjodawcy. Preferowane były rozwiązania, które albo były oparte na tzw. wolnych licencjach (Apache, MIT), albo takie, do
+których nasz klient licencje już posiadał (m. in. IBM DB2, komercyjna wersja
+PostgreSQL oraz korporacyjne rozwiązania firmy Microsoft). W miarę możliwości
 powinniśmy korzystać z nowoczesnych, przyszłościowych i rozwijanych technologii,
 tak, by odsunąć jak najdalej w przyszłość konieczność przebudowy systemu z
 powodu zmieniających się trendów i narastającego długu technologicznego.
 
 Innym istotnym aspektem naszego projektu było zerwanie z wizerunkiem ZUSu jako
-instytucji przestarzałej, niewydolnej i pochodzącej ze słusznie minionego
-ustroju. Szata graficzna naszej platformy powinna być przyjemna dla oka, a układ
+instytucji przestarzałej, niewydolnej i przeciążonej biurokracją. Szata graficzna naszej platformy powinna być przyjemna dla oka, a układ
 graficzny elementów logiczny, prosty do zrozumienia i konsekwentny. Użytkownik
 nie może być bombardowany zagadkowo brzmiącymi komunikatami o ,,wchodzeniu na
-poziom bezpieczeństwa 1'' i ,,zamiarze korzystania z usług biznesowych''. W
-żadnym przypadku praca z naszym systemem nie powinna przypominać interakcji
-ze znudzonym i ślamazarnie wykonującym swoje obowiązki urzędnikiem, a to
+poziom bezpieczeństwa 1'' i ,,zamiarze korzystania z usług biznesowych'', a sytuacje takie miały nierzadko miejsce w obecnej, produkcyjnej wersji platformy PUE. 
+W żadnym przypadku praca z naszym systemem nie powinna przypominać nieprzyjemnych interakcji, jakich można doświadczyć w tzw. urzędowym "okienku", a to
 nakłada na nas obowiązek rozwiązania problemu skalowalności aplikacji.
 
 \section{Produkt końcowy}
@@ -406,6 +404,27 @@ danych w słowniku typu klucz-wartość. Eureka z kolei zapewniała automatyczn�
 rejestrację, wykrywanie i odpytywanie mikrousług z zadaną częstotliwością oraz
 monitorowanie ich stanu. Obydwa projekty mają otwarty kod źródłowy.
 
+\section{Responsywny Frontend}
+
+Aby rozwinąć swoje skrzydła, asynchroniczne działanie mikrousług wymaga również działającej asynchronicznie warstwy użytkownika. Spośród obecnie stosowanych frameworków frontendowych wyróżniały się dwa: Angular oraz React.js. Zdecydowaliśmy się na ten pierwszy z powodu kluczowej dla klienta, całkowicie otwartej licencji. Wykorzystaliśmy drugą wersję Angulara, ponieważ jest oparta o nowsze rozwiązania, a w szczególności język TypeScript, czyli obiektowe rozszerzenie języka Javascript.
+
+\section{Język TypeScipt}
+TODO
+
+\section{Mechanizm komponentów}
+
+Projektując naszą platformę, pamiętaliśmy o istotnym nacisku, jaki klient kładł na jej proste rozszerzanie. Postanowiliśmy zatem zaprojektować własny mechanizm, który usprawniłby wytwarzanie mikrousług gotowych do pracy w naszym systemie. Od strony backendu, dużo łatwiej jest uzgodnić wspólny interfejs, którego implementacja w nowej mikrousłudze pozwoli podłączyć ją do działającej platformy. Frontend natomiast jest wytwarzany w zasadzie wyłącznie w języku HTML ze wsparciem ze strony języka skryptowego Javascript oraz jego bibliotek.
+
+Docelowe mikrousługi, wykorzystywane na naszej platformie, będą komunikowały się z REST-owym backendem w głównej mierze za pomocą formularzy. Formularze z kolei posiadają zazwyczaj dosyć generyczne interfejsy graficzne i programistyczne.
+
+Od strony użytkownika, są to etykietowane nazwami pola do wprowadzania konkretnych danych, plansze z komunikatami albo opisami tekstowymi, przyciski, rozwijane menu wyboru jednej (lub wielu) konkretnej opcji. Do tego można też zaliczyć elementy ułatwiające rozmieszczenie, niekoniecznie widoczne, np. obramowany panel, wiersz czy kolumna. Elementów nie jest dużo, a pozwalają one w zdecydowanej większości przypadków uzyskać od użytkownika wszystkie żadane dane.
+
+Programista natomiast widzi formularz jako encję (lub sumę encji) jakiejś tabeli w relacyjnej bazie danych - lub też słownik, mapę, czy kontener asocjacyjny. Jest to również zatem realizacja bardzo prosta i zwięzła.
+
+Stając przed tak ocenioną sytuacją, postanowiliśmy nie oddawać w ręce programistów mikrousług możliwości umieszczenia na stronie platformy dowolnego kodu HTML. Przede wszystkim, ze względów bezpieczeństwa - usługa mogłaby uruchamiać zlośliwy bądź posiadający krytyczne luki kod javascript. Ważne dla nas były jednak także kwestie stylistyczne - dużo wygodniej, niż publikować przewodniki styli (tzw. "Style Guide"), byłoby nam udostępnić już gotowe, wystylizowane przez nas kawałki kodu HTML.
+
+Osadzanie wewnątrz naszej aplikacji przekazanego w jakiś sposób szablonu HTML nie jest trudne, ale pozostaje pytanie o to, na kim będzie spoczywała odpowiedzialność jego napisania. Nie chcieliśmy, żeby była do tego potrzebna wiedza frontendowa, dlatego postanowiliśmy zwiększyć poziom abstrakcji w naszych szablonach, a co za tym idzie - zbudować mały framework (szkielet), który uprości ich tworzenie, przekazywanie i interpretację, z poziomu osoby lub programu czytającego ich opis.
+
 \section{Wnioski}
 
 Nasz zespół zdecydował, że opracujemy rozwiązanie wykorzystujące mikrousługi.
@@ -439,7 +458,7 @@ możliwie różnych technologiach.
 \section{Języki programowania}
 
 Do realizacji części frontendowej wykorzystaliśmy platformę Node.js. Jej użycie
-było związane z biblioteką Angular 2. Rzeczą całkowicie naturalną okazał się
+było związane z frameworkiem Angular 2. Konsekwencją wyboru Angulara był 
 wybór języków JavaScript i TypeScript do implementacji tej części serwisu.
 
 Do napisania części backendowej początkowo wykorzystywaliśmy język Java. Głównymi
@@ -460,7 +479,7 @@ trakcie naszych prac.
 \section{Angular 2}
 
 Do tworzenia cześć wizualnej oraz logiki bezpośrednio z nią związanej, użyliśmy frameworka Angular 2. Jest to narzędzie stworzone przez Google, opierające się
-na TypeScript - języku będącym nadzbiorem JavaScript. W stosunku do JavaScript główną funkcjonalnością TypeScript jest dodanie obiektowości, jednakże można stwierdzić,
+na TypeScript - języku będącym niejako obiektowym rozszerzeniem JavaScript. W stosunku do JavaScript można stwierdzić,
 że wszystko co związane z obiektowością w TypeScript to tylko lukier syntaktyczny, ponieważ kod TypeScript podczas kompilacji jest tłumaczony do czystego JavaScript. TypeScript implementuje większość
 funkcjonalności, które język obiektowy powinien oferować - możliwe jest dziedziczenie, tworzenie interfesjów, konstruktory itp. Ciekawą opcją są dekoratory (szerzej opisane w dalszej części pracy), czyli
 ozdobniki klas które pozwalają na zmianę ``zachowania'' klasy już w trakcie kompilacji.
@@ -587,8 +606,10 @@ w teorii powinno pozwolić na osiągnięcie niemal nieograniczonej skalowalnośc
 
 Główną ideą którą kierowaliśmy się przy projektowaniu frontendu było udostępnienie
 programiście mikrousług komponentów, z których mógłby następnie tworzyć interfejs
-użytkownika. Przykładowymi komponentami są: pole tekstowe, przycisk, grupa zagnieżdżonych
-komponentów. Po utworzeniu interfejsu jest on serializowany do formatu JSON. Kiedy
+użytkownika. Chodziło nam zasadniczo o komponenty do tworzenia formularzy, jakimi są: pole tekstowe, przycisk, grupa zagnieżdżonych
+komponentów, itp. 
+
+Informację o układzie strony chcieliśmy przechowywać w postaci szablonu, który jest serializowany do formatu JSON. Kiedy
 nadchodzi zapytanie od klienta, otrzymuje on opis interfejsu użytkownika który ma
 być wyświetlony. Rzeczony opis utrzymany jest na wysokim poziomie abstracji --
 jest w nim zawarta informacja \textbf{co} ma być wyświetlone, ale nie \textbf{jak}.
