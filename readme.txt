@@ -25,3 +25,9 @@ $ZOOKEEPER_PATH/bin/zkCli.sh
 # w otwartej sesji przydają się dwie operacje:
 # - ls <ścieżka>, np. ls /, lub ls /read - listuje node'y-dzieci
 # - get <ścieżka> - odczytuje zawartość node'a. węzły "katalogi" mogą jej nie mieć
+
+
+# Kategorie:
+# - chodzi nam np. o kategorie "formularze", żeby frontend mógł sobie listować mikrousługi danego typu
+# - dziś, mikrousługa "notifier" rejestruje swoje endpointy w dwóch kategoriach
+# - można to zauważyć, wchodząc do: http://localhost:9000/category/notifiers/ i http://localhost:9000/category/counters/
