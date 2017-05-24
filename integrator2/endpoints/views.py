@@ -115,3 +115,13 @@ def write_endpoint(request, name):
         return HttpResponse(r)
     except:
         raise Http404("Unknown write endpoint")
+
+
+@csrf_exempt
+def category_endpoint(request, category_name):
+    try:
+        print("category name: " + category_name)
+        return HttpResponse(json.dumps(i.get_services_in_category(category_name)))
+    except:
+        logging.exception("Something doesnt work")  # Is it required? Maybe Django logs most recent exception?
+        raise Http404("Something doesnt work")

@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^menu/$', menu.get_menu, name='get_menu'),
     url(r'^list/(?P<token>[^/]+)/$', editor.list_endpoints, name='list_endpoints'),
     url(r'^admin/', admin.site.urls),
+    url(r'^category/(?P<category_name>[a-zA-Z0-9_-]+)/$', endpoint.category_endpoint, name='category_endpoint'),
 ]

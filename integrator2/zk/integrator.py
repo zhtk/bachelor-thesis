@@ -134,3 +134,7 @@ def get_hooks_list(hook, etype, endpoint):
     except Exception:
         logging.exception("Problem with getting hooks list %s" % path)
         return []
+
+
+def get_services_in_category(category_name):
+    return zk.get_children("/category/" + category_name)

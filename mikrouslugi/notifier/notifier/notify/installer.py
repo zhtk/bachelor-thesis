@@ -15,7 +15,7 @@ def try_delete(path):
 
 def add_node(path, content, temp=False):
     try:
-        zk.create(path, content.encode('utf-8'), ephemeral=temp)
+        zk.create(path, content.encode('utf-8'), ephemeral=temp, makepath=True)
     except NodeExistsError as e:
         pass
 
@@ -49,8 +49,10 @@ def add_view_endpoint_from_file(name, filename):
     add_view_endpoint(name, content)
 
 
-def add_read_endpoint(name, serverId, address, port):
+def add_read_endpoint(name, serverId, address, port, categories=tuple()):
     add_service_server("/read/", name, serverId, address, port)
+    for category in categories:
+        add_node("/category/" + category + "/" + name, "")
 
 
 def add_write_endpoint(name, serverId, address, port):
