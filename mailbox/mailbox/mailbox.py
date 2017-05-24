@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.5
 
-#http://flask.pocoo.org/docs/0.12/quickstart/
+# http://flask.pocoo.org/docs/0.12/quickstart/
 import json
 
 from flask import request
@@ -21,16 +21,17 @@ class UserData:
     def __str__(self):
         return repr(self)
 
-def get_userdata_for_token(token: str) -> UserData:
-    userdata_cache = get_userdata_cache()
-    if token not in userdata_cache:
-        userdata_cache[token] = UserData(user_id=get_user_id(token))
-    return userdata_cache[token]
+
+def get_user_data_for_token(token: str) -> UserData:
+    user_data_cache = get_userdata_cache()
+    if token not in user_data_cache:
+        user_data_cache[token] = UserData(user_id=get_user_id(token))
+    return user_data_cache[token]
 
 
 @app_global_state.app.route('/get_sent_emails/<token>', methods=['GET'])
 def get_sent_emails(token: str):
-    user_data = get_userdata_for_token(token)
+    user_data = get_user_data_for_token(token)
     json_output = json.dumps([{
         "id": 1,
         "from": user_data.user_id,
@@ -46,7 +47,7 @@ def get_sent_emails(token: str):
 
 @app_global_state.app.route('/send_email/<token>', methods=['POST'])
 def send_email(token: str):
-    user_data = get_userdata_for_token(token)
+    user_data = get_user_data_for_token(token)
     req = request.get_json()
     print("I'm sending email to={to}, topic={topic}, content={content}"
           .format(to=req["to"], topic=req["topic"], content=req["content"]))
