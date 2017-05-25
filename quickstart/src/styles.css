@@ -19,10 +19,12 @@ h1 {
 }
 
 div.page-center {
-	position: fixed;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transform: translate(-60px, 0px);
 }
 
 ul {list-style-type: none;}

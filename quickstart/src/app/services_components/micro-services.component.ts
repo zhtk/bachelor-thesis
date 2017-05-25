@@ -47,7 +47,7 @@ export class ServicesComponent implements OnInit {
     test :string;
 
     constructor() {
-        this.category=[];
+        this.category = [];
         this.tagStyles = Array(SERIVICES_LIST.length).fill("label label-primary");
     }
 

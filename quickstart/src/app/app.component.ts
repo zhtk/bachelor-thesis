@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuService } from './menu-service';
 import { MessagesService } from './service/messages.service';
+import { NotificationsService } from './service/notifications.service';
 import { EmailService } from './service/email.service';
 import { MyHttp } from './http.service';
 import { LoginService } from './login.service';
@@ -12,7 +13,7 @@ import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCanc
   selector: 'my-app',
   template: `<router-outlet></router-outlet>`,
   //templateUrl: 'pages/mockup.html',
-  providers: [MenuService, MessagesService, EmailService, LocationProviderService, LoginService, MyHttp]
+  providers: [MenuService, MessagesService, NotificationsService, EmailService, LocationProviderService, LoginService, MyHttp]
 })
 export class AppComponent {
 	constructor(private router: Router, private locationProviderService: LocationProviderService) {
