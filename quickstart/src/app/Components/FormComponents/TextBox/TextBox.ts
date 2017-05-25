@@ -56,6 +56,11 @@ export class TextBox extends FormClass implements RenderFromJSON
   // Wołana po wpisnaiu znaku do pola
   textInputValidate (a:string)
   {
+    if(this.text.length == 0) {
+      this.backgroundColor = "rgba(0, 0, 0, 0)";
+      return false;
+    }
+
     if(this.regex.test(this.text) && this.text.length > 0)
       this.backgroundColor = "rgba(0, 255, 0, 0.3)";
     else

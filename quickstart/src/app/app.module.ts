@@ -66,6 +66,7 @@ import { BreadCrumbComponent } from './dashboard_components/breadcrumb.component
 import { InboxComponent } from './home_components/inbox.component';
 import { SendboxComponent } from './home_components/sendbox.component';
 import { RowComponent } from "./Components/FrontComponents/RowComponent";
+import { RepeatableComponent } from "./Components/FrontComponents/RepeatableComponent";
 import {ComponentCreator} from "./Components/ComponentsCore/ComponentCreator";
 import {PanelComponent} from "./Components/FrontComponents/PanelComponent";
 import { PeselComponent } from './Components/FormComponents/TextBox/PeselComponent';
@@ -129,6 +130,7 @@ import {EditorBox} from "./Editor/EditorBox";
 					TextBox,
 					TestComponent,
 					RowComponent,
+          RepeatableComponent,
 					PanelComponent,
 					PeselComponent,
 					ProgressBarComponent,
@@ -151,7 +153,7 @@ import {EditorBox} from "./Editor/EditorBox";
     EditorBox
   ],
   bootstrap:    [ AppComponent ],
-  entryComponents: [TestComponent, TextBox, RowComponent, PanelComponent, PeselComponent, PasswordComponent,
+  entryComponents: [TestComponent, TextBox, RowComponent, RepeatableComponent, PanelComponent, PeselComponent, PasswordComponent,
   					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, PanelGroupComponent, ContentComponent,
     IconComponent, ProgressBarComponent, SpanComponent, StyleGuideComponent, PiecsetComponent, ZipcodeComponent,TextBoxEditor,
   PanelEditor]

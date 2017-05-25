@@ -7,7 +7,7 @@ import { EmailService } from '../service/email.service';
 })
 export class EmailComponent implements OnInit{
 
-	hidden : boolean;
+	hidden : boolean = true;
 	resized : boolean;
 	fullscreen : boolean;
 
@@ -23,7 +23,17 @@ export class EmailComponent implements OnInit{
 		this.fullscreen = false;
 		
 		if (this.checkForCache()) {
-			this.hidden = false;
+			console.log("zawartosc cache wiadomosci to:")
+
+			var sumlen = 
+				localStorage.getItem("email-cache-addresser").length +
+				localStorage.getItem("email-cache-topic").length +
+				localStorage.getItem("email-cache-content").length;
+
+			if(sumlen > 0)
+				this.hidden = false;
+			else
+				this.clearCache();
 
 			this.addresser = localStorage.getItem("email-cache-addresser");
 			this.topic = localStorage.getItem("email-cache-topic");
@@ -63,7 +73,7 @@ export class EmailComponent implements OnInit{
 
 	sendMessage() {
 		// tu pojawi sie protokol przesyłania wiadomości
-		
+		// if response wyslania 200, to:
 		this.clearCache();
 		this.exit();
 	}

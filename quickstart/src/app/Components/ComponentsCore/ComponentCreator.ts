@@ -1,4 +1,5 @@
 import {RowComponent} from "../FrontComponents/RowComponent";
+import {RepeatableComponent} from "../FrontComponents/RepeatableComponent";
 import {PeselComponent} from "../FormComponents/TextBox/PeselComponent";
 import {PasswordComponent} from "../FormComponents/TextBox/PasswordComponent";
 import {ZipcodeComponent} from "../FormComponents/TextBox/PostalCodeComponent";
@@ -35,6 +36,10 @@ export class ComponentCreator {
 
 			case ("RowComponent"):
 				compFactory = factory.resolveComponentFactory(RowComponent);
+				break;
+
+			case ("RepeatableComponent"):
+				compFactory = factory.resolveComponentFactory(RepeatableComponent);
 				break;
 
 			case ("PeselComponent"):
@@ -128,6 +133,12 @@ export class ComponentCreator {
 				className = "RowComponent";
 				break;
 
+			case ("RepeatableComponent"):
+				compFactory = factory.resolveComponentFactory(RepeatableComponent);
+				ref = target.createComponent(compFactory);
+				obj = <RepeatableComponent> ref.instance
+				className = "RepeatableComponent";
+				break;
 
 			case ("PeselComponent"):
 				compFactory = factory.resolveComponentFactory(PeselComponent);

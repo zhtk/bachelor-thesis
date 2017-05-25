@@ -76,7 +76,7 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
     this.hidable = false;
     this.visible = true;
     this.collapsible = false;
-    this.title = "panel";
+    // this.title = "panel";
   }
 
   renderJSON(specification: any): void {

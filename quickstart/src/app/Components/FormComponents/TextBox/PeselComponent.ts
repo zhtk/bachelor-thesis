@@ -21,9 +21,16 @@ export class PeselComponent extends TextBox
 	}
 
 	textInputValidate(a: string) {
+		if(a.length == 0) {
+			this.backgroundColor = "rgba(0, 0, 0, 0)";
+			return true;
+		}
 		if (super.textInputValidate(a)) {
 			if (!this.validate()) {
 				this.backgroundColor = "rgba(255, 0, 0, 0.3)";
+			}
+			else {
+				this.backgroundColor = "rgba(0, 0, 0, 0)";
 			}
 		}
 		return true;
