@@ -694,7 +694,7 @@ Powiadomienie zostaje jednorazowo pobrane z podanej końcówki.\\\hline
 Wygląd:\\\hline
 \end{tabularx}
 
-\begin{tabularx}{\linewidth}{|l|l|c|X|l|}\hline
+\begin{tabularx}{\linewidth}{|l}\hline
 Nazwa:
 Lista powiadomień
 \\\hline
@@ -717,8 +717,58 @@ do stworzenia komponentu Powiadomienia z danym adresem końcówki, a następnie 
 Wygląd:\\\hline
 \end{tabularx}
 
+
+
+\begin{tabularx}{\linewidth}{|l}\hline
+Nazwa:
+Panel
+\\\hline
+Opis:\\
+
+Kontener z paskiem tytułowym i zawartością.\\\hline
+Końcówki:\\
+końcówka pobierająca tytuł\\
+\\\hline
+JSON: \\
+title: \\
+msg:\\
+time:\\\hline
+Opis działania:\\
+Komponent, w zależnosci od konfiguracji, cyklicznie lub jednorazowo pobiera treść
+górenego paska. W ciele panelu możliwe jest osadzanie innych komponentów.\\\hline
+Wygląd:\\\hline
+\end{tabularx}
+
 \subsection{System tworzenia automatycznej dokumentacji}
-Opis dekoratorów.
+Każdy komponent można opisać w podobny sposób(Co udowadnia powyższy podrodział).
+Z uwagi na tę regularność stworzyliśmy mechanizm tworzenia automatycznej dokumentacji.
+Jako, że platforma składa się z wielu komponentów, w założeniu tworzonych przez wielu
+programistów, istnieje potrzeba usystematyzowania opisu komponentów.
+Nasz mechanizm przyczynia się do zwiększenia spójności platformy, pozwala zachować porządek
+wśród komponentów, oraz niejako wymusza na programiście większą staranność.
+Na podstawie naszych doświadczeń stwierdzialiśmy, że bardzo wygodne jest opisywanie
+kodu w trakcie i miejscu jego tworzenia. Dlatego używając dekoratorów,
+stworzyliśmy mechanizm pozwalający tworzyć komponenty niejako w sposób opisowy.
+Zapewne dużym nadużyciem będzie nazwanie użytego podejście terminem programowanie w paradygmacie opisowym,
+jednak na dobrą sprawę sam sposób kreacji komponentów został, faktycznie, sprowadzony do
+automatycznego generowanie kodu na podstawie opisy składowych.
+Dekoratory pozwalają na zmianę zachowanie dekorowanego przez siebie elementu już w momencie kompilacji,
+lub w momencie wywływania danego elementu(dla metod).
+Stworzyliśmy następujące dekoratory:
+Dekorator register - dodaje komponent do bibliotki komonentów. Wymaga podania nazwy komponentu,
+jego opisu ogólnego, słów kluczowych(charakteryzacja komponentu),
+oraz opisu działania. Dekorator dekoruje klasę, tzn. modyfikuje zawartość
+klasy w momencie kompilacji.
+
+Dekorator Attr - dodaje do opisu komponentu, w którym się znajduję, opis samego siebie.
+Komponent to nic innego jak zbiór wielu parametrów, które określają jego wygląd i zachowanie.
+Oczywiście niewszystkie atrybuty danego komponentu są widocznego na zewnątrz, niektóre wykorzystywane
+są tylko w wewnętrznych działaniach (obliczeniach klasy), dlatego też nie wprowadziliśmy mechanizmu, który
+automatycznie listowałby wszystkie atrybuty danego komponentu. To od programisty
+zależy, które parametry będą ``wyprowadzone'' na zewnątrz, czyli które komponentu bedą edywalne z zewnątrz
+i będą miały wpływ na zachowanie komponentu, a które będą ukryte na potrzeby wewnętrznych działan komponentu.
+
+
 \subsection{Edytor}
 TODO
 \subsection{Platforma developera}

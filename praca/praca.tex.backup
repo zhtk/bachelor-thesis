@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{minted}
+\usepackage{ltablex}
 
 % Dane magistranta:
 
@@ -675,10 +676,56 @@ a co za tym idzie - zbudować mały framework (szkielet),
 który uprości ich tworzenie, przekazywanie i interpretację, z poziomu osoby lub programu czytającego ich opis.
 
 \subsection{Opis komponentów}
-\subsubsection{Lista powiadomień}
+\begin{tabularx}{\linewidth}{|l|l|c|X|l|}\hline
+Nazwa:
+Powiadomienie
+\\\hline
+Opis:\\
+
+Rodzaj krótkiej wiadomości, składający się z tytyłu i treści powiadomienia.\\\hline
+Końcówki:\\
+Końcówka pobierająca powiadomienie\\\hline
+JSON: \\
+title: \\
+msg:\\
+time:\\\hline
+Opis działania:\\
+Powiadomienie zostaje jednorazowo pobrane z podanej końcówki.\\\hline
+Wygląd:\\\hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|l}\hline
+Nazwa:
+Lista powiadomień
+\\\hline
+Opis:\\
+
+Pojemnik na powiadomienia, koordynujący pobieranie powiadomień\\\hline
+Końcówki:\\
+Końcówka z powiadomieniami\\
+Końcówka z liczbą powiadomień
+\\\hline
+JSON: \\
+title: \\
+msg:\\
+time:\\\hline
+Opis działania:\\
+Cyklicznie (w ustalonych odstępach czasu, obecnie co 5 sekund), komponent
+wysyła zapytanie o liczbę dostępnych powiadomień, następnie w pętli, iteruje zwróconą liczbę razy,
+pobierając za każdym razem powiadomienie z końcówki. Pobieranie powiadomienia z końcówki sprowadza się
+do stworzenia komponentu Powiadomienia z danym adresem końcówki, a następnie osadzenie komponentu w sobie.\\\hline
+Wygląd:\\\hline
+\end{tabularx}
 
 \subsection{System tworzenia automatycznej dokumentacji}
-Opis dekoratorów.
+Co udowadnia powyższy podrodział, każdy komponent można opisać w podobny sposób.
+Z uwagi na tę regularność stworzyliśmy mechanizm tworzenia automatycznej dokumentacji.
+Użyliśmy ciekawej konstrukcji jaką oferuje ts, a mianowicie dekoratorów.
+Stworzyliśmy następujące własne dekoratory:
+
+Dekorator register - dodaje komponent do bibliotki komonentów. 
+
+
 \subsection{Edytor}
 TODO
 \subsection{Platforma developera}
