@@ -1,0 +1,8 @@
+_minted-praca
+*.aux
+*.bbl
+*.blg
+*.log
+*.synctex.gz
+*.toc
+
