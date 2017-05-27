@@ -10,7 +10,6 @@ import { HOME } from './home_components/home-json'
 import {ActivatedRoute} from "@angular/router";
 import { MicroServicesService } from './service/micro-services.service';
 
-
 @Component
 ({
   selector: 'testowe',
@@ -34,7 +33,7 @@ export class TestComponent implements OnInit
     else
       this.msService.getFormJSON(this.route.snapshot.params['name'])
         .then(resp => {
-          this.pageJSON = resp;
+          //this.pageJSON = JSON.parse(resp);
         });
   }
 

@@ -40,17 +40,18 @@ export class MessagesService {
 		headers.set("Content-Type", 'multipart/form-data')
 
 		var requestOptions = new RequestOptions({
-			method: RequestMethod.Post,
-			url: '/api/write/mail-send/',
+			//method: RequestMethod.Post,
+			//url: '/api/write/mail-send/',
 			headers: headers,
-			body: msg
+			//body: msg
 		})
 
 		//console.log(new Request(requestOptions))
 		console.log("poszło")
 		
 		//return this.http.request(new Request(requestOptions))
-		this.http.post("/api/write/mail-send/", JSON.stringify(msg), requestOptions)
+		// this.http.post("/api/write/mail-send/", JSON.stringify(msg), requestOptions)
+		this.http.post("/main", JSON.stringify(msg), requestOptions)
 				.toPromise()
 		 		.then(res => res.json())
 		 		.catch(this.handleError);
