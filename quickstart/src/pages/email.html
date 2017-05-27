@@ -13,13 +13,14 @@
 
         </div> 
         <div *ngIf="!fullscreen" class="panel-body collapse in" style = "width: 400px; height: 440px;" id="rozwin">
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresat" [(ngModel)]="addresser" (ngModelChange)="myOnChanges()">
-            <div style ="padding: 7px"></div>
-            <input type="text" class="form-control" placeholder="Temat" [(ngModel)]="topic" (ngModelChange)="myOnChanges()">
-            <div style ="padding: 7px"></div>
-            <textarea class="form-control" id="exampleTextarea" rows="12" [(ngModel)]="msgContent" (ngModelChange)="myOnChanges()">{{ msgContent }}</textarea>  
-            <div style ="padding: 7px"></div>
-            <button type="button" style="float:right"class="btn btn-primary" (click)="sendMessage()">Wyślij</button>
+            <form ngNoForm role="form" action=""/api/write/msg-send/"">
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresat" [(ngModel)]="addresser" (ngModelChange)="myOnChanges()">
+                <div style ="padding: 7px"></div>
+                <input type="text" class="form-control" placeholder="Temat" [(ngModel)]="topic" (ngModelChange)="myOnChanges()">
+                <div style ="padding: 7px"></div>
+                <textarea class="form-control" id="exampleTextarea" rows="12" [(ngModel)]="msgContent" (ngModelChange)="myOnChanges()">{{ msgContent }}</textarea>  
+                <div style ="padding: 7px"></div>
+                <button type="button" style="float:right"class="btn btn-primary" (click)="sendMessage()">Wyślij</button>
         </div>
         <div *ngIf="fullscreen" class="panel-body collapse in" style = "width: 1050px; height: 650px; border: 10px;" id="rozwin">
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresat" [(ngModel)]="addresser" (ngModelChange)="myOnChanges()">

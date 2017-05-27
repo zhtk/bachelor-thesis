@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, Input, ViewChild, ViewContainerRef,} from '@angular/core'
+import {Component, ComponentFactoryResolver, Input, ViewChild, ViewContainerRef, OnInit} from '@angular/core'
 import { FormClass } from '../FormComponents/FormClass'
 import { FormsModule }   from '@angular/forms';
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
@@ -20,7 +20,7 @@ import {SizeProperties} from "../ComponentsCore/MainClasses/SizeProperties";
      tag : "kontener"
    }
 )
-export class PanelComponent extends FrontEndClass implements RenderFromJSON, Container {
+export class PanelComponent extends FrontEndClass implements RenderFromJSON, Container, OnInit {
 
   @Attr({info:"Tekst na górnej belce", default : "", name:""})
   @SetterAlg()
@@ -77,6 +77,15 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
     this.visible = true;
     this.collapsible = false;
     // this.title = "panel";
+  }
+
+  ngOnInit() {
+    console.log("szukam elementu takiego: " + this.main_id)
+    var v = document.getElementById(this.main_id)
+    if (v)
+      v.classList.remove("in");
+    else 
+      console.log("ale nie znalazlem " + this.main_id)
   }
 
   renderJSON(specification: any): void {

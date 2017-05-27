@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { EmailService } from '../service/email.service';
+import { Message } from '../message'
 
 @Component({
 	selector: 'email',
@@ -71,10 +72,28 @@ export class EmailComponent implements OnInit{
 		localStorage.removeItem("email-cache-content");
 	}
 
+	private getDateFormatted() {
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth() + 1; //January is 0!
+		var yyyy = today.getFullYear();
+
+		return new String(yyyy + '-' + mm + '-' + dd);
+	}
+
 	sendMessage() {
 		// tu pojawi sie protokol przesyłania wiadomości
+		var toSend = new Message();
+		toSend.topic = this.topic;
+		toSend.content = this.msgContent;
+		let today = new Date().toISOString().slice(0, 10);
+		toSend.date = today;
+		toSend.from = "USERNAME"; //TODO sciaganie
+		toSend.toWho = this.addresser;
+
+		this.emailService.sendMessage(toSend)
 		// if response wyslania 200, to:
-		this.clearCache();
+			this.clearCache();
 		this.exit();
 	}
 

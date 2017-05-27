@@ -2,32 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 
 //import {MenuService} from './menu-service'
-
-export class Service{
-    id:String;
-    title:String;
-    description:String;
-    hidden:Boolean;
-    tag:String
-}
+import { MsTile }  from '../mstile';
+import { MicroServicesService } from '../service/micro-services.service';
 
 const FilterTags: string[] = ['renta', 'urlop', 'zwolnienie', 'emerytura', 'skladki'];
-
-const SERIVICES_LIST: Service[] = [
-    {tag:"renta", id : '0', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},
-    {tag:"emerytura", id : '1', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},
-    {tag:"urlop", id : '2', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},
-    {tag:"Zwolnienie", id : '3', title :'', description : 'Wystawianie, sprawdzanie' , hidden : false},
-    {tag:"urlop", id : '4', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},  
-    {tag:"zwolnienie", id : '5', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},    
-    {tag:"zwolnienie", id : '6', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},  
-    {tag:"renta",  id : '7', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},  
-    {tag:"renta", id : '8', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false},  
-];
-
-
 
 @Component({
   selector: 'services',
@@ -35,29 +16,42 @@ const SERIVICES_LIST: Service[] = [
   //providers: [MenuService]
 })
 export class ServicesComponent implements OnInit {
-        
-
-
     tags = FilterTags;
     tagStyles : string[];
     category:string[];
-    list = SERIVICES_LIST;
+    servicesList: MsTile[];
     showStyle: false;
     profile = {};
-    test :string;
+    test:string;
 
-    constructor() {
+
+    constructor(private msService: MicroServicesService) {
         this.category = [];
-        this.tagStyles = Array(SERIVICES_LIST.length).fill("label label-primary");
+        this.tagStyles = new Array();
     }
 
-        ngOnInit(): void {
-        
+    ngOnInit(): void {
         //this.menuService
         //.getAll2()
         //.subscribe(p => this.test = p, err => console.log(err));
         
-        console.log("ok")
+        this.msService.getGrid().then(gridjson => 
+        {
+            console.log("dostalem kafelki");
+            this.servicesList = gridjson;
+            console.log(this.servicesList);
+            this.tagStyles = Array(this.servicesList.length).fill("label label-primary");
+
+            // IntervalObservable
+            //     .create(this.REFRESH_RATE)
+            //     .subscribe(
+            //             () => {
+            //             this.msService.getGrid().then(gridjson => { this.servicesList = gridjson });
+            //         );
+            
+        });
+
+        console.log("okej")
     }
     
     filter(what: string, index :number): void {

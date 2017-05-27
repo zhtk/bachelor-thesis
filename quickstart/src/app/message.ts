@@ -5,6 +5,7 @@ export class Message {
 		this.content = "";
 		this.date = "";
 		this.from = "";
+		this.toWho = "";
 	}
 
 	id: number;
@@ -12,4 +13,5 @@ export class Message {
 	content: string;
 	date: string;
 	from: string;
+	toWho: string;
 }

@@ -72,9 +72,26 @@ const SENT_MESSAGES = [
   {id: 7, from: 'John Doe1', date: '2017-01-11', topic: 'Ubezpiecz się', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum '},
 ];
 
+const SERVICES_LIST = [
+  {tag:"renta", id : '0', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},
+  {tag:"emerytura", id : '1', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},
+  {tag:"urlop", id : '2', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},
+  {tag:"Zwolnienie", id : '3', title :'', description : 'Wystawianie, sprawdzanie' , hidden : false, renderInstr: null, redirectUrl: 'testt'},
+  {tag:"urlop", id : '4', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
+  {tag:"zwolnienie", id : '5', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},    
+  {tag:"zwolnienie", id : '6', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
+  {tag:"renta",  id : '7', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
+  {tag:"renta", id : '8', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
+];
+
 app.get('/msgget', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(SENT_MESSAGES));
+});
+
+app.get('/get_grid', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify(SERVICES_LIST));
 });
 
 app.use('/api', proxy);

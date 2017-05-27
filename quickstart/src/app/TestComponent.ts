@@ -8,6 +8,9 @@ import {ComponentCreator} from "./Components/ComponentsCore/ComponentCreator";
 import { LAYOUT } from './500plus/mock-form'
 import { HOME } from './home_components/home-json'
 import {ActivatedRoute} from "@angular/router";
+import { MicroServicesService } from './service/micro-services.service';
+
+
 @Component
 ({
   selector: 'testowe',
@@ -21,10 +24,18 @@ export class TestComponent implements OnInit
     'piecset' : LAYOUT,
     'main' : HOME
   };
-  constructor(private route: ActivatedRoute, public cfr: ComponentFactoryResolver) {
+
+  constructor(private route: ActivatedRoute, public cfr: ComponentFactoryResolver,
+              private msService: MicroServicesService ) {
     this.factory = cfr;
     console.log(this.route.snapshot.params['name']);
-    this.pageJSON = this.pages[this.route.snapshot.params['name']];
+    if (this.pages[this.route.snapshot.params['name']])
+      this.pageJSON = this.pages[this.route.snapshot.params['name']];
+    else
+      this.msService.getFormJSON(this.route.snapshot.params['name'])
+        .then(resp => {
+          this.pageJSON = resp;
+        });
   }
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
