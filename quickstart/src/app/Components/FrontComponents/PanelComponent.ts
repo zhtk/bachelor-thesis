@@ -22,6 +22,9 @@ import {SizeProperties} from "../ComponentsCore/MainClasses/SizeProperties";
 )
 export class PanelComponent extends FrontEndClass implements RenderFromJSON, Container, OnInit {
 
+  @SetterAlg()
+  id: string
+
   @Attr({info:"Tekst na górnej belce", default : "", name:""})
   @SetterAlg()
   public title:string;

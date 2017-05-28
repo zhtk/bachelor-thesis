@@ -57,7 +57,7 @@ export class PeselComponent extends TextBox
 	}
 
 	@SetterAlg()
-	id: number;
+	id: string;
 	@SetterAlg()
 	maxLength: number;
 	@SetterAlg()

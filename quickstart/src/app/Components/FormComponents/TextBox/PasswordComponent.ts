@@ -16,7 +16,7 @@ export class PasswordComponent extends TextBox
 	}
 
 	@SetterAlg()
-	id: number;
+	id: string;
 	@SetterAlg()
 	maxLength: number;
 	@SetterAlg()

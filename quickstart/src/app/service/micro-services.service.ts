@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { MsTile } from '../mstile';
-import { INBOX_MESSAGES, SENT_MESSAGES } from './mock-messages';
+import { LAYOUT } from '../500plus/mock-form';
 import { MyHttp } from '../http.service';
 import 'rxjs/add/operator/toPromise';
 import { Observable }     from 'rxjs/Observable';
@@ -22,7 +22,9 @@ export class MicroServicesService {
 		var headers = new Headers();
 		headers.append('service_name', serviceName);
 
-		return this.http.get('/getJSON', { headers: headers })
+		//return Promise.resolve(LAYOUT);
+
+		return this.http.get('/get500', { headers: headers })
 			.toPromise()
 			.then(res => res.json())
 			.catch(this.handleError);

@@ -4,6 +4,7 @@ export class MsTile { //MicroserviceTile, kafelka na gridzie
     description: String;
     hidden: Boolean;
     tag: String;
+    
     renderInstr: Object;
     redirectUrl: string;
 

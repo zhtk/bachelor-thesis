@@ -11,7 +11,7 @@ import {SizeProperties} from "../../ComponentsCore/MainClasses/SizeProperties";
 export class TextBox extends FormClass implements RenderFromJSON
 {
   @SetterAlg()
-  id: number;
+  id: string;
   @SetterAlg()
   maxLength: number;
   @SetterAlg()

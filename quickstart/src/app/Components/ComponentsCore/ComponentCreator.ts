@@ -253,7 +253,7 @@ export class ComponentCreator {
 				for (var i = 0; i < jsonObject.children.length; i++) {
 					this.createFromJSON(jsonObject.children[i], factory, obj.target);
 				}
-			} else if (elem != "type" && elem != "id") {
+			} else if (elem != "type") {
 				//renderInstr[className][elem](obj, jsonObject[elem]);
 				this.setObjectProperty(className, elem, obj, jsonObject[elem]);
 

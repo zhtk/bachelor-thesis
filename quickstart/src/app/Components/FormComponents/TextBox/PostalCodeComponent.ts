@@ -20,7 +20,7 @@ export class ZipcodeComponent
 	}
 
 	@SetterAlg()
-	id: number;
+	id: string;
 	@SetterAlg()
 	maxLength: number;
 	@SetterAlg()

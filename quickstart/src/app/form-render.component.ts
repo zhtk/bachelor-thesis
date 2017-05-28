@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+/*import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
 	selector: 'form-render',
-	templateUrl: 'pages/form-render.html',
+	template: 'pages/form-render.html',
 })
 
 export class RenderComponent implements OnInit {
@@ -25,3 +25,4 @@ export class RenderComponent implements OnInit {
 		return (this.menu.length > 0);
 	}
 }
+*/

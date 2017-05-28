@@ -9,10 +9,8 @@ import { PreprocComponent } from './preproc.component';
 
 import {TextBox} from './Components/FormComponents/TextBox/TextBox'
 import {TestComponent} from './TestComponent'
-
-
-
-
+import { CreatedSubmissionsComponent } from "./created-submissions.component";
+import { PreviewComponent } from './preview.component'
 
 // Home page components
 import { HomeComponent }  from './home_components/home.component';
@@ -110,6 +108,7 @@ import {EditorBox} from "./Editor/EditorBox";
   				  	NavbarComponent,
   				  	MessagesComponent,
   				  	RenderComponent,
+              PreviewComponent,
 					Notify,
 					ServicesComponent,
 					MeetingComponent,
@@ -143,6 +142,7 @@ import {EditorBox} from "./Editor/EditorBox";
           HeadingComponent,
           PanelGroupComponent,
           ContentComponent,
+          CreatedSubmissionsComponent,
     EditorComponent,
     TextBoxEditor,
     PanelEditor,

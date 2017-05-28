@@ -11,6 +11,8 @@ import { SizeProperties } from "../ComponentsCore/MainClasses/SizeProperties";
 export class LabelComponent extends FormClass implements RenderFromJSON {
 
   @SetterAlg()
+  id: string
+  @SetterAlg()
   text: string;
   @SetterAlg()
   backgroundColor: string;

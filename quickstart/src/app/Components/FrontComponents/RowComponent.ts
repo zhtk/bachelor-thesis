@@ -29,7 +29,7 @@ import { SetterAlg } from "../ComponentsRegister";
 export class RowComponent implements RenderFromJSON, OnInit, Container{
 
   @SetterAlg()
-  id:number;
+  id: string
   parsed:any;
 
   visible:boolean;

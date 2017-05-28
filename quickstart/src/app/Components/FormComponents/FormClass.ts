@@ -11,7 +11,7 @@ export class FormClass extends FrontEndClass implements RenderFromJSON{
     throw new Error('Method not implemented.');
   }
 
-  public id:number;
+  public id:string;
   public required:boolean;
   public disabled:boolean;
 

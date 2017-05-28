@@ -32,7 +32,7 @@ const layout_dict =
 										"children": [
 											{
 												"type": "TextBox",
-												"id": "test1",
+												"id": "wnioskodawca_imie",
 												"infoText" : "Imię",
 												"defaultText": "Imię",
 												"size": {
@@ -41,7 +41,7 @@ const layout_dict =
 											},
 											{
 												"type": "TextBox",
-												"id": "test2",
+												"id": "wnioskodawca_nazwisko",
 												"infoText" : "Nazwisko",
 												"defaultText": "Nazwisko",
 												"size": {
@@ -64,7 +64,7 @@ const layout_dict =
 											},
 											{
 												"type": "TextBox",
-												"id": "test2",
+												"id": "wnioskodawca_stan_cyw",
 												"infoText" : "Stan cywilny",
 												"defaultText": "Stan cywilny",
 												"size": {
@@ -73,7 +73,7 @@ const layout_dict =
 											},
 											{
 												"type": "TextBox",
-												"id": "test2",
+												"id": "wnioskodawca_obywatelstwo",
 												"infoText" : "Obywatelstwo",
 												"defaultText": "Obywatelstwo",
 												"size": {
@@ -88,7 +88,7 @@ const layout_dict =
 										"children": [
 											{
 												"type": "TextBox",
-												"id": "test1",
+												"id": "wnioskodawca_miasto",
 												"infoText" : "Miejscowość",
 												"defaultText": "Miejscowość",
 												"size": {
@@ -97,7 +97,7 @@ const layout_dict =
 											},
 											{
 												"type": "Zipcode",
-												"id": "test2",
+												"id": "wnioskodawca_zipcode",
 												"defaultText": "Kod Pocztowy",
 												"size": {
 													"large": 3,
@@ -111,7 +111,7 @@ const layout_dict =
 										"children": [
 											{
 												"type": "TextBox",
-												"id": "test1",
+												"id": "wnioskodawca_ulica",
 												"infoText" : "Ulica",
 												"defaultText": "Ulica",
 												"size": {
@@ -120,7 +120,7 @@ const layout_dict =
 											},
 											{
 												"type": "TextBox",
-												"id": "test2",
+												"id": "wnioskodawca_nr_domu",
 												"infoText" : "Numer Domu",
 												"defaultText": "Numer Domu",
 												"size": {
@@ -129,7 +129,7 @@ const layout_dict =
 											},
 											{
 												"type": "TextBox",
-												"id": "test2",
+												"id": "wnioskodawca_nr_mieszk",
 												"infoText" : "Numer mieszkania",
 												"defaultText": "Numer mieszkania",
 												"size": {
@@ -203,7 +203,7 @@ const layout_dict =
 												"children": [
 													{
 														"type": "TextBox",
-														"id": "test1",
+														"id": "dziecko1_imie",
 														"infoText" : "Imię",
 														"defaultText": "Imię",
 														"size": {
@@ -212,7 +212,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko1_nazwisko",
 														"infoText" : "Nazwisko",
 														"defaultText": "Nazwisko",
 														"size": {
@@ -221,7 +221,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko1_plec",
 														"infoText" : "Płeć",
 														"defaultText": "Płeć",
 														"size": {
@@ -236,7 +236,7 @@ const layout_dict =
 												"children": [
 													{
 														"type": "PeselComponent",
-														"id": "test1",
+														"id": "dziecko1_pesel",
 														"infoText": "PESEL",
 														"defaultText": "PESEL", //TODO samo się ustawia
 														"size": {
@@ -245,7 +245,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko1_stan_cyw",
 														"infoText" : "Stan cywilny",
 														"defaultText": "Stan cywilny",
 														"size": {
@@ -254,7 +254,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko1_obywat",
 														"infoText" : "Obywatelstwo",
 														"defaultText": "Obywatelstwo",
 														"size": {
@@ -263,7 +263,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko1_data_ur",
 														"infoText" : "Data urodzenia",
 														"defaultText": "Data urodzenia",
 														"size": {
@@ -288,7 +288,7 @@ const layout_dict =
 												"children": [
 													{
 														"type": "TextBox",
-														"id": "test1",
+														"id": "dziecko2_imie",
 														"infoText" : "Imię",
 														"defaultText": "Imię",
 														"size": {
@@ -297,7 +297,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko2_nazwisko",
 														"infoText" : "Nazwisko",
 														"defaultText": "Nazwisko",
 														"size": {
@@ -306,7 +306,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko2_plec",
 														"infoText" : "Płeć",
 														"defaultText": "Płeć",
 														"size": {
@@ -321,7 +321,7 @@ const layout_dict =
 												"children": [
 													{
 														"type": "PeselComponent",
-														"id": "test1",
+														"id": "dziecko2_pesel",
 														"infoText": "PESEL",
 														"defaultText": "PESEL", //TODO samo się ustawia
 														"size": {
@@ -330,7 +330,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko2_stan_cyw",
 														"infoText" : "Stan cywilny",
 														"defaultText": "Stan cywilny",
 														"size": {
@@ -339,7 +339,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko2_obywat",
 														"infoText" : "Obywatelstwo",
 														"defaultText": "Obywatelstwo",
 														"size": {
@@ -348,7 +348,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko2_data_ur",
 														"infoText" : "Data urodzenia",
 														"defaultText": "Data urodzenia",
 														"size": {
@@ -373,7 +373,7 @@ const layout_dict =
 												"children": [
 													{
 														"type": "TextBox",
-														"id": "test1",
+														"id": "dziecko3_imie",
 														"infoText" : "Imię",
 														"defaultText": "Imię",
 														"size": {
@@ -382,7 +382,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko3_nazwisko",
 														"infoText" : "Nazwisko",
 														"defaultText": "Nazwisko",
 														"size": {
@@ -391,7 +391,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko3_plec",
 														"infoText" : "Płeć",
 														"defaultText": "Płeć",
 														"size": {
@@ -406,7 +406,7 @@ const layout_dict =
 												"children": [
 													{
 														"type": "PeselComponent",
-														"id": "test1",
+														"id": "dziecko3_pesel",
 														"infoText": "PESEL",
 														"defaultText": "PESEL", //TODO samo się ustawia
 														"size": {
@@ -415,7 +415,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko3_stan_cyw",
 														"infoText" : "Stan cywilny",
 														"defaultText": "Stan cywilny",
 														"size": {
@@ -424,7 +424,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko3_obywat",
 														"infoText" : "Obywatelstwo",
 														"defaultText": "Obywatelstwo",
 														"size": {
@@ -433,7 +433,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko3_data_ur",
 														"infoText" : "Data urodzenia",
 														"defaultText": "Data urodzenia",
 														"size": {
@@ -458,7 +458,7 @@ const layout_dict =
 												"children": [
 													{
 														"type": "TextBox",
-														"id": "test1",
+														"id": "dziecko4_imie",
 														"infoText" : "Imię",
 														"defaultText": "Imię",
 														"size": {
@@ -467,7 +467,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko4_nazwisko",
 														"infoText" : "Nazwisko",
 														"defaultText": "Nazwisko",
 														"size": {
@@ -476,7 +476,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko4_plec",
 														"infoText" : "Płeć",
 														"defaultText": "Płeć",
 														"size": {
@@ -491,7 +491,7 @@ const layout_dict =
 												"children": [
 													{
 														"type": "PeselComponent",
-														"id": "test1",
+														"id": "dziecko4_pesel",
 														"infoText": "PESEL",
 														"defaultText": "PESEL", //TODO samo się ustawia
 														"size": {
@@ -500,7 +500,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko4_stan_cyw",
 														"infoText" : "Stan cywilny",
 														"defaultText": "Stan cywilny",
 														"size": {
@@ -509,7 +509,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko4_obywat",
 														"infoText" : "Obywatelstwo",
 														"defaultText": "Obywatelstwo",
 														"size": {
@@ -518,7 +518,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "dziecko4_data_ur",
 														"infoText" : "Data urodzenia",
 														"defaultText": "Data urodzenia",
 														"size": {
@@ -591,7 +591,7 @@ const layout_dict =
 												"children": [
 													{
 														"type": "TextBox",
-														"id": "test1",
+														"id": "czlonek1_imie",
 														"infoText" : "Imię",
 														"defaultText": "Imię",
 														"size": {
@@ -600,7 +600,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "czlonek1_nazwisko",
 														"infoText" : "Nazwisko",
 														"defaultText": "Nazwisko",
 														"size": {
@@ -609,7 +609,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "czlonek1_stopien_pokr",
 														"infoText" : "Stopień pokrewieństwa",
 														"defaultText": "Stopień pokrewieństwa",
 														"size": {
@@ -624,7 +624,7 @@ const layout_dict =
 												"children": [
 													{
 														"type": "PeselComponent",
-														"id": "test1",
+														"id": "czlonek1_pesel",
 														"infoText": "PESEL",
 														"defaultText": "PESEL", //TODO samo się ustawia
 														"size": {
@@ -633,7 +633,7 @@ const layout_dict =
 													},
 													{
 														"type": "TextBox",
-														"id": "test2",
+														"id": "czlonek1_urzad_sk",
 														"infoText" : "Urząd skarbowy",
 														"defaultText": "Urząd skarbowy",
 														"size": {
@@ -1210,3 +1210,12 @@ const layout_dict =
 	}*/
 ;
 export const LAYOUT = JSON.stringify(layout_dict);
+
+
+const filled_form = {
+	"wnioskodawca_imie": "Janusz",
+	"wnioskodawca_nazwisko": "Tracz"
+
+}
+
+export const VALUES = JSON.stringify(filled_form);

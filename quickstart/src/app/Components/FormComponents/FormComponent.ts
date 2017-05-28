@@ -20,7 +20,7 @@ export class FormComponent extends FormClass implements Container
 {
 
   @SetterAlg()
-  id:number;
+  id:string;
   @SetterAlg()
   form_action:string;
   @SetterAlg()
