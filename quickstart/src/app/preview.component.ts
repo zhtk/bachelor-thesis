@@ -3,6 +3,7 @@ import {
     ReflectiveInjector, ComponentFactoryResolver,
     QueryList, ElementRef, TemplateRef
 } from '@angular/core'
+import {Location} from '@angular/common';
 import {TextBox} from "./Components/FormComponents/TextBox/TextBox";
 import {ComponentCreator} from "./Components/ComponentsCore/ComponentCreator";
 import { LAYOUT } from './500plus/mock-form'
@@ -14,10 +15,11 @@ import { VALUES } from './500plus/mock-form';
 @Component
 ({
     selector: 'preview',
+    //directives: [ROUTER_DIRECTIVES],
     //templateUrl: '../pages/test.html',
     template: 
     `
-        <button class="btn btn-info" style="margin-bottom: 10px;">Wróć do listy wniosków</button>
+        <button class="btn btn-info" style="margin-bottom: 10px;" routerLink="/sublist" routerLinkActive="active">Wróć do listy wniosków</button>
         <template #target></template>
     `
 })
@@ -31,7 +33,7 @@ export class PreviewComponent implements OnInit
     };
 
     constructor(private route: ActivatedRoute, public cfr: ComponentFactoryResolver,
-                private msService: MicroServicesService ) {
+                private msService: MicroServicesService, private location: Location ) {
         this.factory = cfr;        
     }
 
@@ -48,7 +50,7 @@ export class PreviewComponent implements OnInit
                 this.renderService();
                 
         })
-            .then( () => this.fillForm() );
+            .then( () => setTimeout(() => this.fillForm(), 3000 ));
     }
 
     private renderService() {
@@ -75,6 +77,7 @@ export class PreviewComponent implements OnInit
             if (document.getElementById(v)) {
                 console.log("ustawiona!");
                 (<HTMLInputElement> document.getElementById(v)).value = valuesList[v];
+                (<HTMLInputElement> document.getElementById(v)).disabled = true;
             }
             else {
                 console.log("nie znalazłem :c ")
@@ -83,7 +86,9 @@ export class PreviewComponent implements OnInit
         }
 
     }
-
-    
+*
+    private goBack() {
+        this.location.back();
+    }
 
 }
