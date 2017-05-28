@@ -86,7 +86,7 @@ export class PreviewComponent implements OnInit
         }
 
     }
-*
+
     private goBack() {
         this.location.back();
     }
