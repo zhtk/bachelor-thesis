@@ -24,10 +24,19 @@ export class MicroServicesService {
 
 		//return Promise.resolve(LAYOUT);
 
-		return this.http.get('/get500', { headers: headers })
-			.toPromise()
-			.then(res => res.json())
-			.catch(this.handleError);
+		if (serviceName == 'zwolnienie') {
+			console.log("zwolnionko")
+			return this.http.get('/getZwoln', { headers: headers })
+				.toPromise()
+				.then(res => res.json())
+				.catch(this.handleError);			
+		}
+		else {
+			return this.http.get('/get500', { headers: headers })
+				.toPromise()
+				.then(res => res.json())
+				.catch(this.handleError);
+		}
 	}
 
 	private handleError(error: any): Promise<any> {

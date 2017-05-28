@@ -1,5 +1,6 @@
 import {Component, ComponentFactoryResolver, Input, ViewChild, ViewContainerRef,} from '@angular/core'
 import { FormsModule }   from '@angular/forms';
+import { Router } from '@angular/router';
 import { TextBox } from './TextBox/TextBox';
 import {FormClass} from "./FormClass";
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
@@ -8,10 +9,11 @@ import { SetterAlg } from "../ComponentsRegister";
 
 @Component({
   selector: 'formular',
-  template: `<form ngNoForm (ngSubmit)="alert()" [ngClass] = "grid_class" action = "{{form_action}}" method = "{{method}}" id = "{{id}}">
+  template: `
+            <form (ngSubmit)="onSubmit(empForm, $event)" [ngClass] = "grid_class" action = "{{form_action}}" method = "{{method}}" id = "{{id}}">
                 <fieldset>
                     <template #target></template>
-                    <input type="submit" />
+                    <input type="submit" class="btn btn-info" style="margin-left: 15px"/>
                 </fieldset>
             </form>
             `
@@ -27,9 +29,12 @@ export class FormComponent extends FormClass implements Container
   method:string;
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
-  constructor(private cfr: ComponentFactoryResolver) {
+  private sended: boolean = false;
+
+  constructor(private cfr: ComponentFactoryResolver, private router: Router) {
 
     super();
+    //this.sended = false;
     this.grid_class = "col-lg-12";
     this.form_action = "/";
     this.method = "get";
@@ -55,6 +60,16 @@ export class FormComponent extends FormClass implements Container
     {
       var added = ComponentCreator.insertComponent(this.cfr, this.target, children[child]["type"]);
       added.renderJSON(children[child]);
+    }
+  }
+
+  public onSubmit(empForm: any, event: Event) {
+    event.preventDefault();
+    this.sended = true;
+
+    if (window.confirm('Wniosek wysłany! Możesz teraz wrócić na stronę główną. Kopię wniosku znajdziesz w usłudze "Moje wnioski".'))
+    {
+        this.router.navigateByUrl('/main');
     }
   }
 }

@@ -5,7 +5,7 @@ const layout_dict =
 			{
 				"type": "Form",
 				"id": "500main",
-				//"form_action": "500recieve",
+				"form_action": "/api/write/plus500-send/",
 				"method": "get",
 				"children": [
 					{
@@ -56,7 +56,7 @@ const layout_dict =
 										"children": [
 											{
 												"type": "PeselComponent",
-												"id": "test1",
+												"id": "wnioskodawca_pesel",
 												"defaultText": "PESEL",
 												"size": {
 													"large": 5,
@@ -1209,7 +1209,63 @@ const layout_dict =
 		]
 	}*/
 ;
+
 export const LAYOUT = JSON.stringify(layout_dict);
+
+
+const zwolnienie = 
+{
+	"components":
+	[
+		{
+			"type": "RepeatableComponent",
+
+			"children": [
+				{
+					"type": "PanelComponent",
+					"id": "panel3",
+					"size": {
+						"large": 10,
+					},
+					"children": [
+						{
+							"type": "LabelComponent",
+							"id": "test2",
+							"size": {
+								"large": 10,
+							},
+							"text": 
+	`5. Oświadczam, że orzeczeniem o niepełnosprawności lub orzeczeniem o umiarkowanym lub
+	znacznym stopniu niepełnosprawności legitymuje się następujące dziecko wchodzące w skład
+	rodziny (wypełnić tylko w przypadku ubiegania się o świadczenie wychowawcze na pierwsze dziecko
+	jeśli członkiem rodziny jest dziecko legitymujące się ww. orzeczeniem):`,
+						},
+						{
+							"type": "RowComponent",
+							"id": "row1",
+							"children": [
+								{
+									"type": "TextBox",
+									"id": "test1",
+									"infoText" : "Imię i nazwisko dziecka",
+									"defaultText": "Imię i nazwisko dziecka",
+									"size": {
+										"large": 10,
+									},
+								}
+							]
+						},
+					]
+				}
+			]
+		}
+				
+	]
+};
+
+
+
+
 
 
 const filled_form = {

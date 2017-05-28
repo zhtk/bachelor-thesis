@@ -20,7 +20,7 @@ export class TextBox extends FormClass implements RenderFromJSON
   defaultText: string;
   @SetterAlg()
   text: string;
-  @SetterAlg()
+  @SetterAlg({field: 'regex', func: (ci: any, v: any) => {ci.regex = new RegExp(v)}})
   regex: RegExp;
   @SetterAlg()
   visible: boolean;
