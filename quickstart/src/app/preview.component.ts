@@ -84,12 +84,6 @@ export class PreviewComponent implements OnInit
 
     }
 
-    sleep(ms: number) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    async demo() {
-      await sleep(3000);
-    }
+    
 
 }
