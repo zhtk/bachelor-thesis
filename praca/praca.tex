@@ -9,7 +9,6 @@
 % Dane magistranta:
 
 \author{Autorzy}
-
 \nralbumu{Albumy}
 
 \title{Framework oparty o wzorzec mikrousług na przykładzie portalu dla ZUS}
@@ -918,11 +917,30 @@ mikrousługi, która wykorzystuje ten fakt do wypisywania całego ruchu na konso
 Kolejność aplikowania haków zależy od nazwy haka (w tym przypadku ,,h1'').
 Haki o mniejszych leksykograficznie nazwach są wykonywane wcześniej.
 
+\subsection{Poczta}
+Mikrousługa poczty była pierwszą zaimplementowaną usługą, z którą użytkownik
+naszej platformy mógł podjąć interakcję. Jak sama nazwa wskazuje, można przy jej
+pomocy wysyłać i odbierać wiadomości.\\
+\includegraphics[width=\textwidth]{obrazki/poczta.png}
+
+Tutaj ujawniły się pierwsze mocne strony przyjętej przez nas architektury całego
+portalu. Dzięki jasnemu odseparowaniu warstwy prezentacji od warstwy danych
+możliwe staje się korzystanie przez mikrousługi z dokładnie tego samego interfejsu,
+z którego korzysta warstwa frontendowa portalu do prezentacji danych użytkownikowi.
+Przykładowo, kiedy osoba siedząca przed komputerem wysyła wiadomość, to w tej samej
+chwili z tej samej końcówki może korzystać aplikacja kliencka na smartfona, system
+do zarządzania kadrami, a nawet inna mikrousługa znajdująca się w serwerowni ZUS.
+Wykorzystaliśmy ten fakt przy tworzeniu usługi 500+ do wysyłania powiadomień o
+udanym złożeniu wniosku.
+Unifikacja interfejsów sprawia, że utworzenie, utrzymanie i rozwój mikrousługi jest
+tańsze i prostsze. Eliminujemy w ten sposób konieczność utrzymywania kilku redundantnych
+kanałów do komunikacji z serwisem oraz w jego obrębie.
+
 \subsection{Plus500}
 
 Z powodu ograniczeń nałożonych na nazwy pakietów w języku Python usługę odpowiedzialną
 za obsługę wniosków o świadczenie $500+$ nazwaliśmy ,,Plus500''. Nasza mikrousługa
-umożliwia wyświetlenie statusu złożonych wniosków (nazwy, daty udostępnienia i informacji
+umożliwia wyświetlenie statusu złożonych wniosków (nazwy, daty udostępnienia i informacji,
 czy wniosek został rozpatrzony) oraz wysłanie wypełnionego formularza.
 
 Szablon formularza wniosku o świadczenie 500+ plus znajduje się w pliku ,,500plus.form''
@@ -930,7 +948,6 @@ i jest opisany w formacie JSON. Po połączeniu z serwerem mikrousługi szablon 
 wysyłany do klienta i wyświetlany. Po naciśnięciu odpowiedniego guzika zawartość
 wniosku jest serializowana i wysyłana do mikrousługi.\\
 \includegraphics[width=\textwidth]{obrazki/piecset.png}
-
 Rejestracja usługi w integratorze zajmuje tylko 5 linijek kodu:
 \begin{minted}{python}
 inst.add_view_endpoint_from_file("plus500-wniosek", '500plus.form')

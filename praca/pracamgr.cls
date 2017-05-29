@@ -38,11 +38,14 @@
     \begin{center}%
       {\LARGE\textbf{Uniwersytet Warszawski}\\
         Wydzia\l{} Matematyki, Informatyki i Mechaniki\par}
-      \vspace{1cm plus 1fill} 
-      {\Large\bf\@author\par}
-      \vspace{0.2cm}
-      {\large Nr albumu: \@nralbumu\par}
+      \vspace{1cm plus 1fill}
+      \begin{tabular}{c c c}
+      {\Large\bf Micha\l{} Jaro\'n\par} & {\Large\bf Jaros\l{}aw Socha\par}  & {\Large\bf Piotr Zalas\par}\\
+      \noalign{\vskip 0.2cm} %\vspace{0.2cm}
+      {\large Nr albumu: 123456\par} & {\large Nr albumu: 123456\par} & {\large Nr albumu: 361374\par}\\
       \vspace{8mm plus .1fill}
+      \end{tabular}
+      
       {\Huge\textbf{\@title}\par}
       \vspace{8mm plus .1fill}
       {\large\bf Praca \@rodzajpracy\\[3pt]
