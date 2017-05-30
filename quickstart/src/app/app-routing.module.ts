@@ -31,6 +31,7 @@ import { StyleGuideComponent }         from './Components/StyleGuideComponent';
 import { PiecsetComponent }            from "./piecsetComponent";
 import { EditorComponent }             from "./Editor/EditorComponent";
 import { CreatedSubmissionsComponent } from "./created-submissions.component";
+import { ApproveSubmissionsComponent } from "./approved-submissions.component";
 
 const routes: Routes = [
 
@@ -61,7 +62,8 @@ const routes: Routes = [
             { path: 'lekarz',  component: LekarzComponent },
             { path: 'pacjent',  component: PacjentComponent },
             //{ path: 'komponenty', component: TestComponent},
-            { path: 'sublist', component: CreatedSubmissionsComponent }
+            { path: 'sublist', component: CreatedSubmissionsComponent },
+            { path: 'approve', component: ApproveSubmissionsComponent }
         ]},
         { path: '**', redirectTo: '/404'} // ostatni komponent - dodajemy nowe sciezki przed nim!
 ];

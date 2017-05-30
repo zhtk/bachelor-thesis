@@ -10,6 +10,7 @@ import { PreprocComponent } from './preproc.component';
 import {TextBox} from './Components/FormComponents/TextBox/TextBox'
 import {TestComponent} from './TestComponent'
 import { CreatedSubmissionsComponent } from "./created-submissions.component";
+import { ApproveSubmissionsComponent } from "./approved-submissions.component";
 import { PreviewComponent } from './preview.component'
 
 // Home page components
@@ -143,6 +144,7 @@ import {EditorBox} from "./Editor/EditorBox";
           PanelGroupComponent,
           ContentComponent,
           CreatedSubmissionsComponent,
+          ApproveSubmissionsComponent,
     EditorComponent,
     TextBoxEditor,
     PanelEditor,

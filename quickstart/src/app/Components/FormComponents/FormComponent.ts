@@ -13,7 +13,7 @@ import { SetterAlg } from "../ComponentsRegister";
             <form (ngSubmit)="onSubmit(empForm, $event)" [ngClass] = "grid_class" action = "{{form_action}}" method = "{{method}}" id = "{{id}}">
                 <fieldset>
                     <template #target></template>
-                    <input type="submit" class="btn btn-info" style="margin-left: 15px"/>
+                    <input type="submit" class="btn btn-info" style="margin-left: 15px" value="Wyślij"/>
                 </fieldset>
             </form>
             `

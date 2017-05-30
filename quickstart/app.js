@@ -92,7 +92,6 @@ const SMALL_FORM =
       "type": "PanelComponent",
       "id": "panel3",
       "size": {
-        "large": 10,
       },
       "children": [
         {
@@ -153,6 +152,12 @@ const FILL_500 = {
 app.get('/plus500-fill', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(FILL_500));
+});
+
+app.get('/auth_check', function (req, res) {
+  res.status(403).json({
+        message: 'Jesteś zalogowany!'
+    });
 });
 
 

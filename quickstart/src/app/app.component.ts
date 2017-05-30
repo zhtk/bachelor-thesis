@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuService } from './menu-service';
 import { MessagesService } from './service/messages.service';
 import { NotificationsService } from './service/notifications.service';
@@ -17,10 +17,15 @@ import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCanc
   providers: [ MenuService, MessagesService, NotificationsService, EmailService, LocationProviderService,
                MicroServicesService, LoginService, MyHttp ]
 })
-export class AppComponent {
-    constructor(private router: Router, private locationProviderService: LocationProviderService) {
+export class AppComponent implements OnInit {
+    constructor(private router: Router, private locationProviderService: LocationProviderService, private loginService: LoginService) {
         this.router.events.subscribe(() => {
             this.locationProviderService.setWindowLocationPath(window.location.pathname);
         });
+        
+    }
+
+    ngOnInit() {
+      this.loginService.checkIfAuth();
     }
 }

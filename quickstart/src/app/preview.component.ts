@@ -50,7 +50,6 @@ export class PreviewComponent implements OnInit
                 this.renderService();
                 
         })
-            .then( () => setTimeout(() => this.fillForm(), 3000 ));
     }
 
     private renderService() {
@@ -60,9 +59,6 @@ export class PreviewComponent implements OnInit
             var added = ComponentCreator.createFromJSON(
             parsed[elem], this.cfr, this.target)
 
-            // var added = ComponentCreator.insertComponent(
-            //   this.cfr, this.target, parsed[elem]["type"]);
-            // added.renderJSON(parsed[elem]);
         }
         console.log("teraz wypelniam")
         

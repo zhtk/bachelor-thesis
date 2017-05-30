@@ -24,22 +24,29 @@ import {Observable} from "rxjs";
         <th>Data</th>
         <th>Status</th>
         <th>Podgląd</th>
+        <th>Ustaw status</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let elem of subList">
-        <td>{{ readableName(elem.typ) }}</td>
+        <td>{{ elem.typ }}</td>
         <td>{{ readable(elem.data) }}</td>
         <td>{{ parseVal(elem.status) }}</td>
         <td>
           <button class="btn btn-info" (click)="preview(elem.typ, elem.id)">Kliknij tutaj</button>
+        </td>
+        <td>
+          <button class="btn btn-success" (click)="accept(elem.typ, elem.id)">Zaakceptuj</button>
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="deny(elem.typ, elem.id)">Odrzuć</button>
         </td>
       </tr>
     </tbody>
   </table>
   `
 })
-export class CreatedSubmissionsComponent implements OnInit
+export class ApproveSubmissionsComponent implements OnInit
 {
   
   private readableName(subName: string) {
