@@ -16,7 +16,7 @@ const FilterTags: string[] = ['renta', 'urlop', 'zwolnienie', 'emerytura', 'skla
   //providers: [MenuService]
 })
 export class ServicesComponent implements OnInit {
-    tags = FilterTags;
+    tags: Set<string>;
     tagStyles : string[];
     category:string[];
     servicesList: MsTile[];
@@ -28,6 +28,7 @@ export class ServicesComponent implements OnInit {
     constructor(private msService: MicroServicesService) {
         this.category = [];
         this.tagStyles = new Array();
+        this.tags = new Set<string>();
     }
 
     ngOnInit(): void {
@@ -39,6 +40,9 @@ export class ServicesComponent implements OnInit {
         {
             console.log("dostalem kafelki");
             this.servicesList = gridjson;
+            for (let s of this.servicesList) {
+                this.tags.add(s.tag);
+            }
             console.log(this.servicesList);
             this.tagStyles = Array(this.servicesList.length).fill("label label-primary");
 

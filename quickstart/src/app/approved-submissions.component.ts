@@ -29,7 +29,7 @@ import {Observable} from "rxjs";
     </thead>
     <tbody>
       <tr *ngFor="let elem of subList">
-        <td>{{ elem.typ }}</td>
+        <td>{{ readableName(elem.typ) }}</td>
         <td>{{ readable(elem.data) }}</td>
         <td>{{ parseVal(elem.status) }}</td>
         <td>

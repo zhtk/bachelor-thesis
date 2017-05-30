@@ -69,7 +69,7 @@ export class TestComponent implements OnInit
         console.log("sprawdzam...")
         console.log(this.pageJSON);
         console.log("zagladne na url " + JSON.parse(this.pageJSON)["fill-url"])
-        this.msService.getFormPrefill(JSON.parse(this.pageJSON)["fill-url"])
+        this.msService.getFormPrefill(JSON.parse(this.pageJSON)["fill-url"], "7")
         .then(resp => this.applyFill(resp));
     }
 

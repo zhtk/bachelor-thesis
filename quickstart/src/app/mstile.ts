@@ -1,9 +1,9 @@
 export class MsTile { //MicroserviceTile, kafelka na gridzie
-    id: String;
-    title: String;
-    description: String;
-    hidden: Boolean;
-    tag: String;
+    id: string;
+    title: string;
+    description: string;
+    hidden: boolean;
+    tag: string;
     
     renderInstr: Object;
     redirectUrl: string;

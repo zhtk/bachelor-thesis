@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 import { MsTile } from '../mstile';
 import { LAYOUT } from '../500plus/mock-form';
 import { MyHttp } from '../http.service';
@@ -39,8 +39,12 @@ export class MicroServicesService {
 		}
 	}
 
-	getFormPrefill(path: string) {
-		return this.http.get(path)
+	getFormPrefill(serviceName: string, id: string) {
+		var url = "/api/read/plus500-pokaz/";
+		var urlSP = new URLSearchParams();
+		urlSP.set('id', id);
+
+		return this.http.get(url, {search: urlSP})
 				.toPromise()
 				.then(res => res.json())
 				.catch(this.handleError);

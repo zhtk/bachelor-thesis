@@ -50,6 +50,7 @@ export class PreviewComponent implements OnInit
                 this.renderService();
                 
         })
+            .then( () => setTimeout(() => this.getAndFillForm(), 3000 ));
     }
 
     private renderService() {
@@ -64,8 +65,15 @@ export class PreviewComponent implements OnInit
         
     }
 
-    private fillForm() {
-        var valuesList = JSON.parse(VALUES)
+    private getAndFillForm() {
+        this.msService.getFormPrefill(this.route.snapshot.params['name'], this.route.snapshot.params['id'])
+            .then(res => {
+                this.fillForm(res);
+            })
+    }
+
+    private fillForm(valuesList: Object) {
+        //var valuesList = JSON.parse(VALUES);
         console.log(valuesList)
         //TODO: http.get wartości od this.route.snapshot.params['id'] czyli id wniosku
         for (var v of Object.keys(valuesList)) {

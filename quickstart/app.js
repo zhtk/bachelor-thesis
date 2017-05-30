@@ -73,15 +73,15 @@ const SENT_MESSAGES = [
 ];
 
 const SERVICES_LIST = [
-  {tag:"500 plus", id : '0', title :'Wniosek 500+', description : 'Złóż nowy wniosek' , hidden : false, renderInstr: null, redirectUrl: 'get500'},
+  {tag:"500_plus", id : '0', title :'Wniosek 500+', description : 'Złóż nowy wniosek' , hidden : false, renderInstr: null, redirectUrl: 'get500'},
   {tag:"zwolnienie", id : '1', title :'Zwolnienie lekarskie', description : 'Wystaw zwolnienie lekarskie' , hidden : false, renderInstr: null, redirectUrl: 'getZwoln'},
-  // {tag:"urlop", id : '2', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},
-  // {tag:"Zwolnienie", id : '3', title :'', description : 'Wystawianie, sprawdzanie' , hidden : false, renderInstr: null, redirectUrl: 'testt'},
-  // {tag:"urlop", id : '4', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
-  // {tag:"zwolnienie", id : '5', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},    
-  // {tag:"zwolnienie", id : '6', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
-  // {tag:"renta",  id : '7', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
-  // {tag:"renta", id : '8', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
+  {tag:"urlop", id : '2', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},
+  {tag:"zwolnienie", id : '3', title :'<Nazwa>', description : 'Wystawianie, sprawdzanie' , hidden : false, renderInstr: null, redirectUrl: 'testt'},
+  {tag:"urlop", id : '4', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
+  {tag:"zwolnienie", id : '5', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},    
+  {tag:"zwolnienie", id : '6', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
+  {tag:"renta",  id : '7', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
+  {tag:"renta", id : '8', title :'<Nazwa>', description : 'Krótki opis...' , hidden : false, renderInstr: null, redirectUrl: 'testt'},  
 ];
 
 const SMALL_FORM = 

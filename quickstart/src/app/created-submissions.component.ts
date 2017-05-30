@@ -76,7 +76,7 @@ export class CreatedSubmissionsComponent implements OnInit
       case "1":
         return "Rozpatrzony pozytywnie"
 
-      case "-1":
+      case "2":
         return "Rozpatrzony negatywnie"
 
       default:

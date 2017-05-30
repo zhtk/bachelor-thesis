@@ -7,7 +7,7 @@ import { PreprocComponent }            from './preproc.component';
 import { RenderComponent }             from './render.component';
 import { TestComponent }               from './TestComponent'
 
-import { PreviewComponent }            from './preview.component'
+import { PreviewComponent }            from './preview.component';
 
 import { HomeComponent }               from './home_components/home.component';
 import { ServicesComponent }           from './services_components/micro-services.component';
