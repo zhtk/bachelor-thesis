@@ -25,7 +25,7 @@ export class TestComponent implements OnInit
     };
 
     constructor(private route: ActivatedRoute, public cfr: ComponentFactoryResolver,
-                private msService: MicroServicesService ) {
+                private msService: MicroServicesService) {
         this.factory = cfr;
         console.log("niebywałe")
         console.log(this.route.snapshot.params['name']);
@@ -34,7 +34,6 @@ export class TestComponent implements OnInit
     }
 
     @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
-
 
     ngOnInit(): void {
         console.log("rozwazany json:")
@@ -54,7 +53,7 @@ export class TestComponent implements OnInit
 
     private renderService() {
         var parsed = JSON.parse(this.pageJSON)["components"];
-        for(var elem = 0; elem < parsed.length; elem++)
+        for (var elem = 0; elem < parsed.length; elem++)
         {
             var added = ComponentCreator.createFromJSON(
             parsed[elem], this.cfr, this.target)
@@ -62,6 +61,30 @@ export class TestComponent implements OnInit
             // var added = ComponentCreator.insertComponent(
             //   this.cfr, this.target, parsed[elem]["type"]);
             // added.renderJSON(parsed[elem]);
+        }
+        setTimeout(() => { this.fillDefaults() }, 3000); // for demo only
+    }
+
+    private fillDefaults() {
+        console.log("sprawdzam...")
+        console.log(this.pageJSON);
+        console.log("zagladne na url " + JSON.parse(this.pageJSON)["fill-url"])
+        this.msService.getFormPrefill(JSON.parse(this.pageJSON)["fill-url"])
+        .then(resp => this.applyFill(resp));
+    }
+
+    private applyFill(valuesList: Object) {
+        for (var v of Object.keys(valuesList)) {
+            console.log("ustawie wartosc " + v)
+            if (document.getElementById(v)) {
+                console.log("ustawiona!");
+                (<HTMLInputElement> document.getElementById(v)).value = valuesList[v];
+                (<HTMLInputElement> document.getElementById(v)).disabled = true;
+            }
+            else {
+                console.log("nie znalazłem :c ")
+                console.log(typeof(v))
+            }
         }
     }
 

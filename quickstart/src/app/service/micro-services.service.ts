@@ -24,7 +24,7 @@ export class MicroServicesService {
 
 		//return Promise.resolve(LAYOUT);
 
-		if (serviceName == 'zwolnienie') {
+		if (serviceName == 'getZwoln') {
 			console.log("zwolnionko")
 			return this.http.get('/getZwoln', { headers: headers })
 				.toPromise()
@@ -37,6 +37,13 @@ export class MicroServicesService {
 				.then(res => res.json())
 				.catch(this.handleError);
 		}
+	}
+
+	getFormPrefill(path: string) {
+		return this.http.get(path)
+				.toPromise()
+				.then(res => res.json())
+				.catch(this.handleError);
 	}
 
 	private handleError(error: any): Promise<any> {

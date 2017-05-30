@@ -9,7 +9,7 @@ import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 import {SizeProperties} from "../ComponentsCore/MainClasses/SizeProperties";
 
 @Component
-({
+({ 
   selector: 'panel',
   templateUrl: '../../pages/Components/Panel/panel.html'
 })
