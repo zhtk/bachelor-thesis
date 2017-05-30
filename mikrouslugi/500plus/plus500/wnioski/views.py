@@ -44,6 +44,16 @@ def dajWniosek(request):
 
 
 @csrf_exempt
+def ustaw(request):
+	ident = request.POST.get('id', '')
+	wniosek = Wniosek.objects.get(id_wniosku=ident)
+	wniosek.status = request.POST.get('status', '0')
+	wniosek.save()
+	
+	return HttpResponse('')
+
+
+@csrf_exempt
 def wyslij(request):
 	autor = Wnioskodawca(
 		imie = request.POST.get('wnioskodawca_imie', 'Jan'),
