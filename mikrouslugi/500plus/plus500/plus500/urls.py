@@ -19,6 +19,7 @@ from wnioski import views
 
 urlpatterns = [
     url(r'^lista/', views.lista),
+    url(r'^pokaz/', views.dajWniosek),
     url(r'^wyslij/', views.wyslij),
     url(r'^admin/', admin.site.urls),
 ]

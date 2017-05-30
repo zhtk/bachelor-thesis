@@ -14,6 +14,7 @@ class WnioskiConfig(AppConfig):
         
         inst.add_view_endpoint_from_file("plus500-wniosek", '500plus.form')
         inst.add_read_endpoint("plus500-lista", "server1", addr + "/lista/", "null")
+        inst.add_read_endpoint("plus500-pokaz", "server1", addr + "/pokaz/", "null")
         inst.add_write_endpoint("plus500-send", "server1", addr + "/wyslij/", "null")
         
         inst.add_menu_element("Moje wnioski 500+", "read/plus500-lista", "/plus500lista")
