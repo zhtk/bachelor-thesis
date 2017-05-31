@@ -151,12 +151,38 @@ przykładowego portalu ilustrującego jego możliwości.\\
 \includegraphics[width=\textwidth]{obrazki/pue2.png}
 Naszemu zespołowi pozostawiono bardzo duży stopień swobody przy projektowaniu i
 implementacji portalu. Główny nacisk położono na innowacyjność stworzonego rozwiązania.
-Niezależnie od tego, w trakcie naszych rozmów z klientem zostały wyłonione przedstawione
+Niezależnie od tego, w trakcie naszych rozmów z Klientem zostały wyłonione przedstawione
 niżej wymagania.
 
 \section{Wymagania funkcjonalne}
 
-TODO - FE i mikrousługi % TODO
+Stworzony przez nas portal powinien implementować kilka rezprezentatywnych
+przypadków użycia celem ilustracji możliwości naszego frameworka i łatwości,
+z jaką się w nim tworzy aplikacje. Wybraliśmy następujące przypadki użycia:
+powiadomienia, skrzynkę pocztową, usługę 500 plus.
+
+Najprostrzym w implementacji przypadkiem użycia jest sprawdzanie dostępnych
+powiadomień przez użytkownika. Tuż po udanym wejściu na nasz portal użytkownikowi
+powinien zostać wyświetlony ekran na którym zobaczyłby krótkie statystyki i
+informację, co zmieniło się od jego ostatniej wizyty na portalu.
+
+Kolejna grupa przypadków użycia związana jest z mechanizmem przypominającym
+wewnętrzną pocztę. Użytkownik powinien być w stanie wyświetlić listę wysłanych
+i odebranych wiadomości. Po wybraniu odpowiedniej wiadomości z listy powinna
+ukazać mu się jej treść. Możliwa jest też odpowiedź na wiadomość do nadawcy.
+Szczególnie istotny jest fakt, że z opisanego mechanizmu mogą korzystać różne
+usługi. Przykładowo, usługa odpowiedzialna za obsługę wniosków 500+ wysyła
+wiadomości związane z różnymi zdarzeniami dotyczącymi cyklu życia wniosku.
+
+Sztandarowym przypadkiem użycia ilustrującym pełnię możliwości naszego frameworka
+jest usługa odpowiedzialna za wnioski 500+. Użytkownik może przy jej pomocy
+wypełnić i złożyć wniosek o świadczenie. Po wysłaniu formularza powinien otrzymać
+stosowne powiadomienie na swoją skrzynkę pocztową. Następnie będzie mógł sprawdzić
+status złożonego wniosku oraz podejrzeć jego treść. W międzyczasie urzędnik ZUS
+otrzyma dostęp do panelu, w którym będzie mógł zdecydować o dalszych losach
+wniosku. Jeżeli po sprawdzeniu załączonych danych postanowi zaakceptować lub
+odrzucić wniosek, to będzie mógł to uczynić przy pomocy odpowiedniego guzika.
+Informacja o tym fakcie natychmiast zostanie doręczona do wnioskodawcy.
 
 \section{Wymagania niefunkcjonalne}
 
@@ -168,14 +194,6 @@ podczas komunikacji na linii obywatel -- państwo, gdzie jakiekolwiek rozbieżno
 mogą być opłakane w skutkach. W miarę postępu cyfryzacji państwa liczba użytkowników
 naszego serwisu będzie zbliżać się do 14-tu milionów osób. Należy zapewnić
 skalowalność tworzonej aplikacji w sposób pozwalający na ich obsłużenie.
-
-Platforma powinna być prosta w użyciu nawet dla relatywnie nisko wykwalifikowanych
-programistów i utrudniać im popełnienie przynajmniej części błędów. Przykład
-problemu występującego w obecnej wersji PUE jest widoczny na poniższym obrazku.
-Ze względu na niewłaściwą architekturę systemu możliwe jest wyświetlenie
-użytkownikowi sprzecznych komunikatów dotyczących stanu zalogowania. Nasz framework
-nie powinien pozwalać na powstanie takiej sytuacji.\\
-\includegraphics[width=\textwidth]{obrazki/logowaniezle.png}
 
 Nasz serwis powinien cechować się spójnym i jednolitym wyglądem oraz wysoką
 reużywalnością komponentów wykorzystywanych do tworzenia interfejsu użytkownika.
@@ -194,6 +212,14 @@ to między innymi ,,Profil Zaufany (eGO)'' oraz ,,System Rejestrów Państwowych
 Nasz serwis powinien łatwo integrować się z wymienionym wyżej oprogramowaniem.
 Należy uwzględnić fakt, że możliwość modyfikacji i dostosowania zewnętrznych
 systemów do naszych potrzeb jest bardzo ograniczona.
+
+Platforma powinna być prosta w użyciu nawet dla relatywnie nisko wykwalifikowanych
+programistów i utrudniać im popełnienie przynajmniej części błędów. Przykład
+problemu występującego w obecnej wersji PUE jest widoczny na poniższym obrazku.
+Ze względu na niewłaściwą architekturę systemu możliwe jest wyświetlenie
+użytkownikowi sprzecznych komunikatów dotyczących stanu zalogowania. Nasz framework
+nie powinien pozwalać na powstanie takiej sytuacji.\\
+\includegraphics[width=\textwidth]{obrazki/logowaniezle.png}
 
 System utworzony na bazie naszego frameworka powinien cechować się znacznym stopniem
 automatyzacji. Dołączanie i odłączanie kolejnych serwerów powinno odbywać się w locie,
@@ -644,13 +670,13 @@ intensywnie tworzyliśmy prototypy. Chcialismy pokazać jak PUE może wyglądać
 sprawach żmudnych, czasochłonnych, a niekoniecznie potrzebnych do pokazanie idei.
 
 \section{Strona domowa}
-Nastawienie społeczeństwa do ZUS, jako organizacji jest zdecydowanie negatywne, dlatego tworząc nasz proejkt staraliśmy się
-zmienić wizerunek ZUSu. Postawiliśmy na personalizacje kontaktów z userem odwiedzającym naszą platformę. Dlatego już po zalogowaniu
+Nastawienie społeczeństwa do ZUS, jako organizacji jest zdecydowanie negatywne, dlatego tworząc nasz projekt staraliśmy się
+zmienić wizerunek ZUSu. Postawiliśmy na personalizacje kontaktów z użytkownikiem odwiedzającym naszą platformę. Dlatego już po zalogowaniu
 użytkownik otrzymuje większość potrzebnych informacji. Strona domowa jest dopracowana pod względem UX. Panele ([1]) informują
-obywatela o aktualnym stanie spraw, z nim związanych. Informację te są wyraźnie wyróżnione, a kolory jakie przyjmuję panele
+obywatela o aktualnym stanie spraw, z nim związanych. Informację te są wyraźnie wyróżnione, a kolory jakie przyjmują panele
 intuicyjnie wiążą się z kontekstem (np. czerwony kolor - sprawy odrzucone). Właściciel profilu nie musi marnować czasu
 na szukanie najbardziej potrzebnych mu informacji w innych miejschach strony. W założeniu strona domowa powinna być
-namiastką Wallu - znanego z popularnego protalu społecznościowego. Panel z powiadomieniami ([2]), to po prostu dostarczony
+namiastką ,,Ściany'' znanej z popularnego protalu społecznościowego. Panel z powiadomieniami ([2]), to po prostu dostarczony
 przez nas gotowy komponent o nazwie powiadomienia.
 
 \section{Komponenty}
@@ -790,7 +816,7 @@ bitowa, w której zapalony bit oznacza posiadanie danego uprawnienia.
 \section{Integrator}
 
 Integrator został zrealizowany jako standardowa aplikacja internetowa obsługująca
-klientów poprzez protokół HTTP. Każda mikrousługa rejestrująca się w integratorze
+klientów poprzez protokół HTTP(S). Każda mikrousługa rejestrująca się w integratorze
 może poprosić o wystawienie dowolnej liczby tzw. końcówek (ang. \textit{endpoint}).
 Końcówka jest jednoznacznie określonym adresem, pod którym serwer usługi udostępnia
 swoje zasoby. Wyróżniamy trzy typy końcówek:
@@ -807,22 +833,23 @@ swoje zasoby. Wyróżniamy trzy typy końcówek:
 	\item Write - służy do wykonywania akcji mających efekt uboczny, np. złożenia
 	wniosku.
 \end{itemize}
+Do jednej końcówki typu Read i Write może być przypisanych dowolnie wiele serwerów
+usługi. Integrator dla każdego zapytania losowo wybiera jeden z nich i do niego
+kieruje wchodzące zapytanie, a następnie przekazuje odpowiedź z powrotem.
 
 Dzięki współpracy integratora z serwerem uwierzytelniania dostęp do poszczególnych
 końcówek może być ograniczony tylko do autoryzowanych użytkowników. Identyfikacja
 uprawnionych klientów odbywa się poprzez przekazanie tokenu sesji w parametrze zapytania.
+
 W przypadku końcówek o typie Read i Write możliwe jest przechwytywanie i modyfikacja
 przesyłanych danych przy pomocy tzw. haków (ang. \textit{hook}). Haki mogą być
 osobno zakładane na każdą końcówkę. Na jednej końcówce może być założonych dowolnie
-wiele haków, których kolejność wykonywania zależy od nadanego im liczbowego priorytetu.
+wiele haków, których kolejność wykonywania zależy od nadanego im priorytetu.
 Wyróżniamy dwa typy haków:
 \begin{itemize}
 	\item In - modyfikują zapytania wchodzące do mikrousługi.
 	\item Out - modyfikują wychodzące z mikrousługi odpowiedzi na zapytania.
 \end{itemize}
-Do jednej końcówki typu Read i Write może być przypisanych dowolnie wiele serwerów
-usługi. Integrator dla każdego zapytania losowo wybiera jeden z nich i do niego
-kieruje wchodzące zapytanie, a następnie przekazuje odpowiedź z powrotem.
 
 Integrator oferuje dwie metody pobierania listy aktywnych końcówek. Dostępne są
 one pod adresami:
@@ -887,10 +914,9 @@ import notify.installer as inst
 addr = "http://localhost:8000"
 inst.zk.start()
 
-inst.add_read_endpoint("notify-pending", "server1", 
-	addr + "/notify/pending/", "null")
-inst.add_write_endpoint("notify-set_variable", "server1",
-	addr + "/notify/set_variable/", "null")
+inst.add_read_endpoint("notify-pending", "server1", addr + "/notify/pending/")
+inst.add_write_endpoint("notify-set_variable", "server1", addr +
+	"/notify/set_variable/")
 \end{minted}
 W przedstawionym przykładzie następuje zaimportowanie biblioteki dostarczanej wraz z
 integratorem służącej do komunikacji z nim. Następnie zostaje nawiązane połączenie z
@@ -914,8 +940,8 @@ inst.add_node('/hook/out/read/google/h1', addr + "/out/", temp=True)
 \end{minted}
 Od tej pory cała komunikacja do i z wymienionej końcówki przechodzi przez serwer
 mikrousługi, która wykorzystuje ten fakt do wypisywania całego ruchu na konsolę.
-Kolejność aplikowania haków zależy od nazwy haka (w tym przypadku ,,h1'').
-Haki o mniejszych leksykograficznie nazwach są wykonywane wcześniej.
+Kolejność aplikowania haków zależy od nazwy haka (w tym przypadku ,,h1''), tj.
+haki o mniejszych leksykograficznie nazwach są wykonywane wcześniej.
 
 \subsection{Poczta}
 Mikrousługa poczty była pierwszą zaimplementowaną usługą, z którą użytkownik
@@ -940,19 +966,21 @@ kanałów do komunikacji z serwisem oraz w jego obrębie.
 
 Z powodu ograniczeń nałożonych na nazwy pakietów w języku Python usługę odpowiedzialną
 za obsługę wniosków o świadczenie $500+$ nazwaliśmy ,,Plus500''. Nasza mikrousługa
-umożliwia wyświetlenie statusu złożonych wniosków (nazwy, daty udostępnienia i informacji,
-czy wniosek został rozpatrzony) oraz wysłanie wypełnionego formularza.
+umożliwia wyświetlenie złożonych wniosków, rozpatrzenie ich przez urzędnika oraz
+wysłanie wypełnionego formularza.
 
 Szablon formularza wniosku o świadczenie 500+ plus znajduje się w pliku ,,500plus.form''
 i jest opisany w formacie JSON. Po połączeniu z serwerem mikrousługi szablon jest
 wysyłany do klienta i wyświetlany. Po naciśnięciu odpowiedniego guzika zawartość
 wniosku jest serializowana i wysyłana do mikrousługi.\\
 \includegraphics[width=\textwidth]{obrazki/piecset.png}
-Rejestracja usługi w integratorze zajmuje tylko 5 linijek kodu:
+Rejestracja usługi w integratorze zajmuje tylko 7 linijek kodu:
 \begin{minted}{python}
 inst.add_view_endpoint_from_file("plus500-wniosek", '500plus.form')
-inst.add_read_endpoint("plus500-lista", "server1", addr + "/lista/", "null")
-inst.add_write_endpoint("plus500-send", "server1", addr + "/wyslij/", "null")
+inst.add_read_endpoint("plus500-lista", "server1", addr + "/lista/")
+inst.add_read_endpoint("plus500-pokaz", "server1", addr + "/pokaz/")
+inst.add_write_endpoint("plus500-send", "server1", addr + "/wyslij/")
+inst.add_write_endpoint("plus500-ustaw", "server1", addr + "/ustaw/")
 inst.add_menu_element("Moje wnioski 500+", "read/plus500-lista", "/plus500lista")
 inst.add_menu_element("Złóż wniosek 500+", "view/plus500-wniosek", "/plus500nowy")
 \end{minted}
