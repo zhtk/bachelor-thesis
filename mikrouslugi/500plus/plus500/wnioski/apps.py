@@ -13,10 +13,10 @@ class WnioskiConfig(AppConfig):
         inst.zk.start()
         
         inst.add_view_endpoint_from_file("plus500-wniosek", '500plus.form')
-        inst.add_read_endpoint("plus500-lista", "server1", addr + "/lista/", "null")
-        inst.add_read_endpoint("plus500-pokaz", "server1", addr + "/pokaz/", "null")
-        inst.add_write_endpoint("plus500-send", "server1", addr + "/wyslij/", "null")
-        inst.add_write_endpoint("plus500-ustaw", "server1", addr + "/ustaw/", "null")
+        inst.add_read_endpoint("plus500-lista", "server1", addr + "/lista/")
+        inst.add_read_endpoint("plus500-pokaz", "server1", addr + "/pokaz/")
+        inst.add_write_endpoint("plus500-send", "server1", addr + "/wyslij/")
+        inst.add_write_endpoint("plus500-ustaw", "server1", addr + "/ustaw/")
         
         inst.add_menu_element("Moje wnioski 500+", "read/plus500-lista", "/plus500lista")
         inst.add_menu_element("Złóż wniosek 500+", "view/plus500-wniosek", "/plus500nowy")

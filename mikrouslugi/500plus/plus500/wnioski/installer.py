@@ -50,11 +50,11 @@ def add_view_endpoint_from_file(name, filename):
     add_view_endpoint(name, content)
 
 
-def add_read_endpoint(name, serverId, address, port):
+def add_read_endpoint(name, serverId, address, port="null"):
     add_service_server("/read/", name, serverId, address, port)
 
 
-def add_write_endpoint(name, serverId, address, port):
+def add_write_endpoint(name, serverId, address, port="null"):
     add_service_server("/write/", name, serverId, address, port)
 
 
