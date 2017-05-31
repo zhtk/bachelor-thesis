@@ -5,6 +5,8 @@
 \usepackage{graphicx}
 \usepackage{minted}
 \usepackage{ltablex}
+\usepackage{tabularx}
+\usepackage{pbox}
 
 % Dane magistranta:
 
@@ -603,16 +605,14 @@ nasze potrzeby.
 Kazoo jest nieoficjalnym klientem ZooKeepera dla języka Python. W trakcie
 implementacji naszej aplikacji doceniliśmy jego niezawodność i prostotę użycia.
 
-\chapter{Realizacja}
-
-\section{Architektura aplikacji}
+\chapter{Architektura aplikacji}
 
 Nasza aplikacja jest podzielona na trzy warstwy: frontend, mikrousługi oraz
 warstwę integrującą, na którą składają się serwery autoryzacji i integratora.
 Komunikacja pomiędzy poszczególnymi warstwami jest bezstanowa, co przynajmniej
 w teorii powinno pozwolić na osiągnięcie niemal nieograniczonej skalowalności.
 
-\subsection{Frontend}
+\section{Frontend}
 
 Główną ideą którą kierowaliśmy się przy projektowaniu frontendu było udostępnienie
 programiście mikrousług komponentów, z których mógłby następnie tworzyć interfejs
@@ -631,7 +631,7 @@ bezpośrednio na danych dostarczanych przez warstwę integracji. Dzięki temu,
 zmiana wyglądu portalu bez konieczności ponownego wdrażania wszystkich serwerów
 mikrousług.
 
-\subsection{Warstwa integracji}
+\section{Warstwa integracji}
 
 Kluczowym elementem tej warstwy jest integrator, przez który przechodzi niemal
 cały ruch w systemie. Każda mikrousługa wchodząca w skład portalu musi być
@@ -655,7 +655,7 @@ serwera jest możliwy z dowolnej części sieci. Z uwagi na konieczność zapewn
 łatwej integracji z zewnętrznymi usługami typu ,,Profil Zaufany (eGO)'', do
 identyfikacji użytkowników użyliśmy jednorazowych tokenów.
 
-\subsection{Mikrousługi}
+\section{Mikrousługi}
 
 Mikrousługi realizują logikę biznesową. Typowym cyklem życia serwera usługi jest
 przygotowanie do obsługi nadchodzących żądań, rejestracja w integratorze i obsługa
@@ -663,6 +663,35 @@ zapytań. W końcowej fazie cyklu serwer się wyrejestrowuje z integratora. Real
 integratora oczekuje, że poszczególne serwery będą z punktu widzenia klienta
 nierozróżnialne.
 
+\section{Komunikacja między warstwami}
+
+Z uwagi na stosunkowo duży poziom złożoności architektury naszej aplikacji opis
+komunikacji podzieliliśmy na dwie części: backend i frontend. W obydwu dodatkowo
+zawarliśmy warstwę integracji.
+
+W części frontendowej (zaprezentowanej na poniższym obrazku) główną rolę odgrywa
+serwer express.js, który serwuje do
+przeglądarki na komputerze użytkownika kod aplikacji napisany w frameworku Angular.
+Następnie otrzymany program zostaje wykonany, a użytkownikowi zostaje zaprezentowany
+wygodny interfejs i możliwa staje się dalsza interakcja.
+
+\includegraphics[width=\textwidth]{../slajdy/Frontend.pdf}
+
+Z powodu różnych zabezpieczeń wbudowanych w przeglądarki bezpośrednie połączenie
+klienta z integratorem nie jest możliwe. W związku z tym serwer express.js pełni
+dodatkowo rolę pośrednika pomiędzy aplikacją internetową a integratorem i serwerem
+autoryzacji. Pozostałe rodzaje klientów naszego portalu mogą go całkowicie pominąć.
+
+Jak widać na poniższym schemacie, centralnym elementem w komunikacji elementów
+backendu jest integrator. Przechodzi przez niego praktycznie cały ruch między
+poszczególnymi mikrousługami i serwerami frontendu. Wyjątek stanowią tutaj serwery
+ZooKeepera oraz uwierzytelniania, do których dostęp jest bezpośredni. Wynika to ze
+specyficznych własności ZooKeepera który jest wykorzystywany do przechowywania
+konfiguracji integratora oraz pewnego rodzaju wyjątkowości serwera autoryzacji,
+która nie pozwala na zaklasyfikowanie go jako zwykłej mikrousługi.\\
+\includegraphics[width=\textwidth]{../slajdy/backend.pdf}
+
+\chapter{Realizacja}
 
 \section{Tworzenie mockupów}
 Jako, że naszym celem nie było stworzenie gotowej platformy (w sensie produkcyjnym), a raczej stworzenie proof of concept,
@@ -991,7 +1020,24 @@ samym końcu rejestrujemy wpisy w menu. Od tej chwili zmiany są widoczne w inte
 użytkownika i możliwa jest interakcja z mikrousługą.
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}
-TODO
+
+
+\begin{tabularx}{\linewidth}{|l|X|} \hline
+	\textbf{Członek zespołu} & \textbf{Wykonane zadania} \\
+	\hline
+	Michał Jaroń & TODO\\
+	\hline
+	Jarosław Socha & TODO\\
+	\hline 
+	Piotr Zalas & Zaproponowanie wstępnej architektury aplikacji.\newline
+	  Implementacja integratora i integratora 2.\newline
+	  Implementacja mikrousług powiadomień, loggera, poczty, 500+.\newline
+	  Implementacja usługi autoryzacji.\newline
+	  Implementacja serwera frontendu w Express.js.\newline
+	  Przygotowanie diagramów ilustrujących architekturę.\newline
+	  Spisanie niniejszej pracy (z wyjątkiem rozdziałów ...)\\
+	\hline
+\end{tabularx}
 
 \chapter{Podsumowanie}
 TODO
