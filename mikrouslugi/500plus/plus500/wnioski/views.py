@@ -24,7 +24,7 @@ def lista(request):
 
 @csrf_exempt
 def dajWniosek(request):
-	ident = request.GET.get('id', '')
+	ident = request.GET.get('id', '7')
 	wniosek = Wniosek.objects.get(id_wniosku=ident)
 		
 	res = {
@@ -45,9 +45,9 @@ def dajWniosek(request):
 
 @csrf_exempt
 def ustaw(request):
-	ident = request.POST.get('id', '')
+	ident = request.POST.get('id', '7')
 	wniosek = Wniosek.objects.get(id_wniosku=ident)
-	wniosek.status = request.POST.get('status', '0')
+	wniosek.status = request.POST.get('status', '1')
 	wniosek.save()
 	
 	return HttpResponse('')
