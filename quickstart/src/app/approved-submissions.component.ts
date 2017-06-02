@@ -8,7 +8,7 @@ import { Router } from '@angular/router'
 import {TextBox} from "./Components/FormComponents/TextBox/TextBox";
 import {ComponentCreator} from "./Components/ComponentsCore/ComponentCreator";
 import { LAYOUT } from './500plus/mock-form'
-import {Http} from "@angular/http";
+import { Http, Response, Headers, URLSearchParams, RequestOptions } from "@angular/http";
 import {Observable} from "rxjs";
 
 @Component
@@ -36,10 +36,10 @@ import {Observable} from "rxjs";
           <button class="btn btn-info" (click)="preview(elem.typ, elem.id)">Kliknij tutaj</button>
         </td>
         <td>
-          <button class="btn btn-success" (click)="accept(elem.typ, elem.id)">Zaakceptuj</button>
+          <button class="btn btn-success" (click)="accept(elem.id)">Zaakceptuj</button>
         </td>
         <td>
-          <button class="btn btn-danger" (click)="deny(elem.typ, elem.id)">Odrzuć</button>
+          <button class="btn btn-danger" (click)="deny(elem.id)">Odrzuć</button>
         </td>
       </tr>
     </tbody>
@@ -65,6 +65,10 @@ export class ApproveSubmissionsComponent implements OnInit
   constructor(private http: Http, private router: Router) {}
 
   ngOnInit(): void {
+    this.getSubs();
+  }
+
+  private getSubs() {
     this.http.get('/api/read/plus500-lista/')
       .toPromise()
       .then(res => res.json())
@@ -83,12 +87,36 @@ export class ApproveSubmissionsComponent implements OnInit
       case "1":
         return "Rozpatrzony pozytywnie"
 
-      case "-1":
+      case "2":
         return "Rozpatrzony negatywnie"
 
       default:
         return "Błąd wartości"
     }
+  }
+
+  private accept(id: string) {
+    this.setSumbissionStatus(id, "1"
+)  }
+
+  private deny(id: string) {
+    this.setSumbissionStatus(id, "2") 
+  }
+
+  private setSumbissionStatus(id: string, status: string) {
+   
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('status', status);
+
+    let headers = new Headers({});
+    let options = new RequestOptions({ headers });
+    let url = '/api/write/plus500-ustaw/';
+
+    this.http.post(url, formData, options)
+      .toPromise()
+      .then(this.getSubs)
+      .catch(this.handleError)
   }
 
   private readable(date: string) {
@@ -102,6 +130,11 @@ export class ApproveSubmissionsComponent implements OnInit
     // routuj czy cokolwiek
     //window.location.href = "/preview/" + type + "/" + id;
     this.router.navigateByUrl('/preview/' + type + '/' + id);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 
 }

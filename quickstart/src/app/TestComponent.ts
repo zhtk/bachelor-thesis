@@ -75,14 +75,11 @@ export class TestComponent implements OnInit
 
     private applyFill(valuesList: Object) {
         for (var v of Object.keys(valuesList)) {
-            console.log("ustawie wartosc " + v)
             if (document.getElementById(v)) {
-                console.log("ustawiona!");
                 (<HTMLInputElement> document.getElementById(v)).value = valuesList[v];
                 (<HTMLInputElement> document.getElementById(v)).disabled = true;
             }
             else {
-                console.log("nie znalazłem :c ")
                 console.log(typeof(v))
             }
         }

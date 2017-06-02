@@ -83,12 +83,9 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
   }
 
   ngOnInit() {
-    console.log("szukam elementu takiego: " + this.main_id)
     var v = document.getElementById(this.main_id)
     if (v)
       v.classList.remove("in");
-    else 
-      console.log("ale nie znalazlem " + this.main_id)
   }
 
   renderJSON(specification: any): void {

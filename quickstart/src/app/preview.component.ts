@@ -66,7 +66,8 @@ export class PreviewComponent implements OnInit
     }
 
     private getAndFillForm() {
-        this.msService.getFormPrefill(this.route.snapshot.params['name'], this.route.snapshot.params['id'])
+        console.log("uważajcie")
+        this.msService.getFormAnswers(this.route.snapshot.params['name'], this.route.snapshot.params['id'])
             .then(res => {
                 this.fillForm(res);
             })

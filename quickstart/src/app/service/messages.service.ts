@@ -35,25 +35,21 @@ export class MessagesService {
 	sendMessage(msg: Message) {
 		console.log(msg);
 
-		var headers = new Headers();
-		// headers.delete("Content-Type")
-		headers.set("Content-Type", 'multipart/form-data')
+		const formData = new FormData();
 
-		var requestOptions = new RequestOptions({
-			//method: RequestMethod.Post,
-			//url: '/api/write/mail-send/',
-			headers: headers,
-			//body: msg
-		})
+		formData.append('id', msg.id);
+		formData.append('topic', msg.topic);
+		formData.append('content', msg.content);
+		formData.append('date', msg.date);
+		formData.append('from', msg.from);
+		formData.append('to', msg.toWho);
 
-		//console.log(new Request(requestOptions))
-		console.log("poszło")
-		
-		//return this.http.request(new Request(requestOptions))
-		// this.http.post("/api/write/mail-send/", JSON.stringify(msg), requestOptions)
-		this.http.post("/main", JSON.stringify(msg), requestOptions)
-				.toPromise()
-		 		.then(res => res.json())
-		 		.catch(this.handleError);
+
+		let headers = new Headers({});
+		let options = new RequestOptions({ headers });
+
+		this.http.post('/api/write/mail-send/', formData, options)
+		    .toPromise()
+		    .catch(this.handleError)
 	}
 }

@@ -25,22 +25,33 @@ export class MicroServicesService {
 		//return Promise.resolve(LAYOUT);
 
 		if (serviceName == 'getZwoln') {
-			console.log("zwolnionko")
+			console.log("zwolnienie")
 			return this.http.get('/getZwoln', { headers: headers })
 				.toPromise()
 				.then(res => res.json())
 				.catch(this.handleError);			
 		}
 		else {
-			return this.http.get('/get500', { headers: headers })
+			// return this.http.get('/api/view/plus500-wniosek/')
+			return this.http.get('/get500')
 				.toPromise()
 				.then(res => res.json())
 				.catch(this.handleError);
 		}
 	}
 
-	getFormPrefill(serviceName: string, id: string) {
+	getFormAnswers(serviceName: string, id: string) {
 		var url = "/api/read/plus500-pokaz/";
+		var urlSP = new URLSearchParams();
+		urlSP.set('id', id);
+
+		return this.http.get(url, {search: urlSP})
+				.toPromise()
+				.then(res => res.json())
+				.catch(this.handleError);
+	}
+
+	getFormPrefill(url: string, id: string) {
 		var urlSP = new URLSearchParams();
 		urlSP.set('id', id);
 
