@@ -629,14 +629,14 @@ składać swój projekt, niewątpliwie upraszcza proces tworzenia nowych funkcjo
 
 Rzeczony opis utrzymany jest na wysokim poziomie abstracji --
 jest w nim zawarta informacja \textbf{co} ma być wyświetlone, ale nie \textbf{jak}.
-U użytkownika wchodzącego na nasz portal poprzez przeglądarkę
-internetową JSON opisujący komponenty powinien zostać przekonwertowany na kod HTML
-dostosowany do jego przeglądarki. Co więcej, systemy służące do automatycznego
+Użytkownik wchodzący na nasz portal poprzez przeglądarkę internetową otrzymuje
+JSONa opisującego komponenty do wyświetlenia, który następnie jest przekonwertowany
+na kod HTML dostosowany do jego przeglądarki. Dzięki temu, że wygląd panelu użytkownika
+jest zapisany w formacie pośrednim możliwa jest zmiana wyglądu portalu bez
+konieczności ponownego wdrażania wszystkich serwerów mikrousług.
+Systemy służące do automatycznego
 zarządzania pracownikami mogą zupełnie pomijać warstwę prezentacji i operować
-bezpośrednio na danych dostarczanych przez warstwę integracji. Dzięki temu,
-że wygląd panelu użytkownika jest zapisany w formacie pośrednim możliwa jest
-zmiana wyglądu portalu bez konieczności ponownego wdrażania wszystkich serwerów
-mikrousług.
+bezpośrednio na danych dostarczanych przez warstwę integracji. 
 
 \section{Warstwa integracji}
 
@@ -647,8 +647,8 @@ integratora, który sprawdza, czy klient mikrousługi ma odpowiednie uprawnienia
 dostępowe, dokonuje tłumaczenia komunikatów pomiędzy różnymi interfejsami,
 wyszukuje adres serwera, do którego ma trafić komunikat oraz go wywołuje.
 
-Z uwagi na to, że dane przechodzą przez niego w postaci nieszyfrowanej można
-go podłączyć do IDSa (ang. \textit{Intrusion Detection System}) wykrywającego
+Z uwagi na to, że integrator ma wgląd w przechodzące przez niego dane, można
+go podłączyć do ,,Systemu Wykrywania Intruzów'' (ang. \textit{Intrusion Detection System}) wykrywającego
 anomalie w przesyłanych danych i w ten sposób zapobiegać masowemu wyciekowi
 wrażliwych danych lub atakom hakerskim. Stanowi też dodatkową linię obrony, którą
 musi sforsować potencjalny haker. Dzięki temu system jest odporniejszy na błędy
@@ -919,10 +919,10 @@ Początkowo integrator był implementowany w technologii Play Framework. Niestet
 w miarę postępu prac ujawnialiśmy kolejne problemy związane z tym frameworkiem,
 począwszy od konfliktu zależności pomiędzy pakietami, poprzez niedziałający tryb
 SSL, aż po zawieszanie się serwera. Być może było to spowodowane koniecznością
-użycia wersji niestabilnej frameworka. Wymienione kłopoty w połączeniu z niezadowalającym
+użycia niestabilnej wersji frameworka. Wymienione kłopoty w połączeniu z niezadowalającym
 postępem prac skłoniły nas do przepisania integratora w języku Python. Nowa wersja
 nazwana przez nas integratorem 2 nie posiada wymienionych wyżej wad i została
-dogłębnie przetestowana.
+dogłębnie przetestowana w praktyce.
 
 \section{Mikrousługi}
 
@@ -1042,12 +1042,64 @@ użytkownika i możliwa jest interakcja z mikrousługą.
 	  Implementacja usługi autoryzacji.\newline
 	  Implementacja serwera frontendu w Express.js.\newline
 	  Przygotowanie diagramów ilustrujących architekturę.\newline
-	  Spisanie niniejszej pracy (z wyjątkiem rozdziałów ...)\\
+	  Spisanie niniejszej pracy (z wyjątkiem rozdziałów ...).\\
 	\hline
 \end{tabularx}
 
 \chapter{Podsumowanie}
-TODO
+
+Jesteśmy usatysfakcjonowani otrzymanym produktem. Udało nam się osiągnąć znaczną
+automatyzację procesu zarządzania infrastrukturą. Dzięki automatycznej rejestracji i
+wyrejestrowywaniu usług personel techniczny jest zwolniony z wykonywania żmudnej,
+powtarzalnej pracy. Zmniejszyliśmy możliwość popełnienia błędu podczas konfiguracji,
+a jednocześnie dzięki automatycznemu odcinaniu uszkodzonego serwera od reszty systemu
+zwiększyliśmy niezawodność w sposób odczuwalny dla przeciętnego użytkownika.
+
+Zaproponowany przez nas interfejs użytkownika jest wygodny i przyjemny dla oka,
+odpowiada najnowszym trendom w projektowaniu witryn internetowych. Spójność interfejsu
+została zagwarantowana przez opakowanie jego typowych elementów w system komponentów,
+przy projektowaniu którego kierowaliśmy się względami praktycznymi. W pewnych przypadkach
+(takich jak okienko wiadomości) bardziej opłacalne było stworzenie jednego dużego
+elementu, niż składanie go z kilku mniejszych. Przy tworzeniu formularzy wykorzystaliśmy
+wiele małych elementów takich jak pola tekstowe i guziki do stworzenia większej
+całości. Separacja danych i warstwy prezentacji pozwala na bezbolesną zmianę wyglądu
+portalu bez konieczności jakiejkolwiek ingerencji w elementy pozostałych warstw, w
+szczególności mikrousług.
+
+Programiści mikrousług otrzymali od nas narzędzie łączące prostotę tworzenia aplikacji
+i dużą siłę wyrazu. Zaproponowany przez nas interfejs pozwala skupić się na tworzeniu
+logiki biznesowej z pominięciem niepotrzebnych szczegółów związanych z komunikacją
+z innymi częściami systemu oraz dotyczących strony wizualnej. Dzięki rozbiciu
+elementów platformy na małe, niezależne części, dalsza rozbudowa i wprowadzanie zmian
+w portalu staje się łatwiejsze.
+
+Zastosowanie elastycznej architektury umożliwia dalszy rozwój platformy. Stworzyliśmy
+listę rzeczy, które warto w dalszej kolejności zaimplementować i które w znaczący
+sposób podniosłyby wartość stworzonego przez nas frameworka. Niestety, ze względu na
+ograniczony czas projektu nie byliśmy w stanie ich zaprogramować. Na wymienionej liście
+znalazł się miedzy innymi postulat głębszej automatyzacji warstwy frontendu. Obecnie
+dodanie nowej usługi wymaga zaangażowania zespołu opiekującego się częścią kliencką
+naszego portalu. Chcielibyśmy, żeby mikrousługi miały większy wpływ na jej działanie.
+Przykładowo, dodawanie nowych elementów do menu głównego mogłoby się odbywać w pełni
+automatycznie. Mikrousługa mogłaby też mieć możliwość zapisywania i odczytywania danych
+w kliencie, a także wskazywania końcówki która ma być wyświetlona jako następna.
+Dzięki temu możliwe stałoby się konstruowanie wielostronnicowych formularzy, które
+krok po kroku prowadziłyby użytkownika przez proces wypełniania wniosku.
+
+Usprawnienia są możliwe także po stronie backendu. Do najprostrzych może należeć
+automatyczne wykrywanie serwera integratora na zasadzie podobnej do stosowanej
+w protokole DHCP. Obecnie trzeba jawnie podawać adres integratora, co w dynamicznie
+zmieniającym się środowisku nie powinno mieć miejsca. Bardziej złożonymi problemami
+zarysowanymi już w rozdziale 3 jest orchestracja mikrousług i uspójnianie między
+nimi danych w przypadku konfliktu. Problem orchestracji może być częściowo
+rozwiązany poprzez mechanizm haków, który umożliwia tworzenie operacji obejmujących
+wiele usług, jednak naszym zdaniem jest to rozwiązanie dalekie od optymalnego.
+
+Powyższa lista powstała na wyraźne życzenie naszego Klienta, który był zainteresowany
+perspektywami dalszego rozwoju stworzonego przez nas prototypu. Niewątpliwie tematyka
+mikrousług i architektury zorientowanej na usługi jeszcze nie raz będzie przedmiotem
+naszego zawodowego zainteresowania. Jako zespół mamy wielką nadzieję, że spełniliśmy
+pokładane w nas oczekiwania.
 
 \appendix
 \chapter{Spis zawartości dołączonej płyty CD}
