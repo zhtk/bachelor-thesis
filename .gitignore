@@ -18,3 +18,9 @@ RUNNING_PID
 .idea
 __pycache__
 *.iml
+
+bin
+lib
+lib64
+pip-selfcheck.json
+pyvenv.cfg

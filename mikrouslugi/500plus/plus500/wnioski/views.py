@@ -50,6 +50,23 @@ def ustaw(request):
 	wniosek.status = request.POST.get('status', '1')
 	wniosek.save()
 	
+	if wniosek.status == '1':
+		status = 'pozytywna'
+	elif wniosek.status == '2':
+		status = 'negatywna'
+	else:
+		status = 'nieprawidłowa'
+	
+	data = strftime("%Y-%m-%d", gmtime())
+	msg = {
+		'from':'Usługa 500 plus',
+		'to':'user',
+		'date':data,
+		'topic':'Rozpatrzono wniosek 500+',
+		'content':'Rozpatrzono wniosek. Otrzymana odpowiedź jest ' + status + '.',
+	}
+	requests.post("http://localhost:9000/write/mail-send/", data=msg)
+	
 	return HttpResponse('')
 
 
