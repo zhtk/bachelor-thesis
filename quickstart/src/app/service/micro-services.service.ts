@@ -51,11 +51,9 @@ export class MicroServicesService {
 				.catch(this.handleError);
 	}
 
-	getFormPrefill(url: string, id: string) {
-		var urlSP = new URLSearchParams();
-		urlSP.set('id', id);
+	getFormPrefill(url: string) {
 
-		return this.http.get(url, {search: urlSP})
+		return this.http.get(url)
 				.toPromise()
 				.then(res => res.json())
 				.catch(this.handleError);

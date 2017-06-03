@@ -16,7 +16,7 @@ import { VALUES } from './500plus/mock-form';
 ({
     selector: 'preview',
     //directives: [ROUTER_DIRECTIVES],
-    //templateUrl: '../pages/test.html',
+    //templateUrl: '../pages/test.html'
     template: 
     `
         <button class="btn btn-info" style="margin-bottom: 10px;" routerLink="/sublist" routerLinkActive="active">Wróć do listy wniosków</button>
