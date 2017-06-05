@@ -115,7 +115,7 @@ export class ApproveSubmissionsComponent implements OnInit
 
     this.http.post(url, formData, options)
       .toPromise()
-      .then(this.getSubs)
+      .then(() => this.getSubs())
       .catch(this.handleError)
   }
 

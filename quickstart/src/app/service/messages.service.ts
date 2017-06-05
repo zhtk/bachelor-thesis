@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 import { RequestOptions, Request, RequestMethod } from '@angular/http';
 import { Message } from '../message';
 import { INBOX_MESSAGES, SENT_MESSAGES } from './mock-messages';
@@ -12,7 +12,10 @@ export class MessagesService {
 	constructor(private http: Http) {}
 
 	getMessagesInbox(): Promise<Message[]> {
-		return this.http.get('/api/read/mail-rec/?token=user')
+		var urlSP = new URLSearchParams();
+		urlSP.set('token', localStorage.getItem('token'));
+
+		return this.http.get('/api/read/mail-rec/', {search: urlSP})
 			.toPromise()
 			.then(res => res.json() as Message[])
 			.catch(this.handleError);
@@ -21,7 +24,10 @@ export class MessagesService {
 	getMessagesSendbox(): Promise<Message[]> {
 		// pobierz z urla, np. /api/msg/sendbox?user=...
 		//return SENT_MESSAGES;
-		return this.http.get('/api/read/mail-sent/?token=admin')
+		var urlSP = new URLSearchParams();
+		urlSP.set('token', localStorage.getItem('token'))
+
+		return this.http.get('/api/read/mail-sent/', {search: urlSP})
 			.toPromise()
 			.then(res => res.json() as Message[])
 			.catch(this.handleError);
@@ -41,7 +47,7 @@ export class MessagesService {
 		formData.append('topic', msg.topic);
 		formData.append('content', msg.content);
 		formData.append('date', msg.date);
-		formData.append('from', msg.from);
+		formData.append('from', localStorage.getItem('token'));
 		formData.append('to', msg.toWho);
 
 

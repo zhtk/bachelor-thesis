@@ -9,10 +9,15 @@ import { LoginService } from './login.service';
 
 export class LoginComponent implements OnInit {
 
-	//constructor (private loginService: LoginService) {}
+	constructor (private loginService: LoginService) {}
 
 	ngOnInit() {
-	//	this.loginService.checkIfAuth();
+		this.loginService.checkIfAuth();
 	}
-
+	
+	onSubmit(form: any) {
+		console.log("onSubmit")
+		console.log(form)
+		this.loginService.authenticate(form);
+	}
 }

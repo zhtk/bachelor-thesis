@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
   selector: 'navtools',
   templateUrl: 'pages/navigation-tools.html',
 })
-export class NavtoolsComponent  {}
+export class NavtoolsComponent {}

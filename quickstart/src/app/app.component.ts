@@ -9,6 +9,7 @@ import { LoginService } from './login.service';
 import { LocationProviderService } from './service/location-provider.service';
 import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, 
          RoutesRecognized, Event } from '@angular/router';
+import { Http, Response } from '@angular/http';
 
 @Component({
   selector: 'my-app',
@@ -22,10 +23,12 @@ export class AppComponent implements OnInit {
         this.router.events.subscribe(() => {
             this.locationProviderService.setWindowLocationPath(window.location.pathname);
         });
-        
+      // this.loginService.checkIfAuth()
+      //     .then(this.respond)
+      //     .catch(this.handleRejection);
     }
 
     ngOnInit() {
-      this.loginService.checkIfAuth();
+      
     }
 }

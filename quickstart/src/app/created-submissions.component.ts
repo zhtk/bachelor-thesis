@@ -53,18 +53,24 @@ export class CreatedSubmissionsComponent implements OnInit
     }
   }
 
-  private subList: { typ: string, data: string, status: string/*, id?: string*/ }[] = []
+  private subList: { typ: string, data: string, status: string/*, id?: string*/ }[];
 
   constructor(private http: Http, private router: Router) {}
 
   ngOnInit(): void {
-    this.http.get('/api/read/plus500-lista/')
+    this.subList = new Array();
+    this.concatFromNewService('/api/read/plus500-lista/')
+    // .then(
+    //   () => this.concatFromNewService('/api/read/ezla-lista/'))
+  }
+
+  private concatFromNewService(url: string) {
+    return this.http.get(url)
       .toPromise()
       .then(res => res.json())
       .then(res => {
-        console.log(res)
-        //console.log(JSON.parse(res))
-        this.subList = res; //JSON.parse(res);
+        this.subList = this.subList.concat(res); //JSON.parse(res);
+        console.log(this.subList)
       });
   }
 

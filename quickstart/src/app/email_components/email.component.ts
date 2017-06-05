@@ -88,7 +88,7 @@ export class EmailComponent implements OnInit{
 		toSend.content = this.msgContent;
 		let today = new Date().toISOString().slice(0, 10);
 		toSend.date = today;
-		toSend.from = "USERNAME"; //TODO sciaganie
+		toSend.from = undefined; //TODO sciaganie
 		toSend.toWho = this.addresser;
 
 		this.emailService.sendMessage(toSend)
