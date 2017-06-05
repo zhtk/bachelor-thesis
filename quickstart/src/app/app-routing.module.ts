@@ -32,6 +32,7 @@ import { PiecsetComponent }            from "./piecsetComponent";
 import { EditorComponent }             from "./Editor/EditorComponent";
 import { CreatedSubmissionsComponent } from "./created-submissions.component";
 import { ApproveSubmissionsComponent } from "./approved-submissions.component";
+import {DynamicListComponent} from "./Components/FrontComponents/DynamicListComponent";
 
 const routes: Routes = [
 
@@ -63,7 +64,8 @@ const routes: Routes = [
             { path: 'pacjent',  component: PacjentComponent },
             //{ path: 'komponenty', component: TestComponent},
             { path: 'sublist', component: CreatedSubmissionsComponent },
-            { path: 'approve', component: ApproveSubmissionsComponent }
+            { path: 'approve', component: ApproveSubmissionsComponent },
+            { path: 'lista_test', component: DynamicListComponent }
         ]},
         { path: '**', redirectTo: '/404'} // ostatni komponent - dodajemy nowe sciezki przed nim!
 ];

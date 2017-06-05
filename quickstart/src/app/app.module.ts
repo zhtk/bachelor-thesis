@@ -88,6 +88,7 @@ import { DraggableDirective, EditorComponent, ResizableDirective} from "./Editor
 import {PanelEditor} from "./Editor/PanelEditor";
 import {TextBoxEditor} from "./Editor/TextBoxEditor";
 import {EditorBox} from "./Editor/EditorBox";
+import {DynamicListComponent} from "./Components/FrontComponents/DynamicListComponent";
 
 
 @NgModule({
@@ -152,13 +153,14 @@ import {EditorBox} from "./Editor/EditorBox";
     SpanComponent,
     StyleGuideComponent,
     PiecsetComponent,
-    EditorBox
+    EditorBox,
+    DynamicListComponent
   ],
   bootstrap:    [ AppComponent ],
   entryComponents: [TestComponent, TextBox, RowComponent, RepeatableComponent, PanelComponent, PeselComponent, PasswordComponent,
   					 LabelComponent, SubmitComponent, FormComponent, HeadingComponent, PanelGroupComponent, ContentComponent,
     IconComponent, ProgressBarComponent, SpanComponent, StyleGuideComponent, PiecsetComponent, ZipcodeComponent,TextBoxEditor,
-  PanelEditor]
+  PanelEditor, DynamicListComponent]
 })
 export class AppModule {
 }
