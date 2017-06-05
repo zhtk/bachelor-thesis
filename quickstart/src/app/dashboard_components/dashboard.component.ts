@@ -11,14 +11,17 @@ import {ComponentsRegister} from "../Components/ComponentsRegister";
 export class DashboardComponent {
 
   display: string[];
+  superuser: boolean = false;
 
   constructor () {
-
     this.display = [];
 
     for (let i in ComponentsRegister.components) {
       this.display.push(ComponentsRegister.components[i]);
     }
 
+    if (localStorage.getItem('token') == 'admin')
+    	this.superuser = true;
   }
+
 }

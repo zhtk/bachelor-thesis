@@ -32,7 +32,7 @@
             <li>
                 <a routerLink="/sublist" routerLinkActive="active">Wnioski<br><small class="text-muted">Lista złożonych wniosków</small></a>
             </li>
-            <li>
+            <li *ngIf="superuser">
                 <a routerLink="/approve" routerLinkActive="active">Rozpatrywanie wniosków<br><small class="text-muted">Przejrzyj i zmień status wniosku</small></a>
             </li>
           <li data-toggle="collapse" data-target="#testy">
