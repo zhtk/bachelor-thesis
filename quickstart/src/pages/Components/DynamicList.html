@@ -1,7 +1,10 @@
-<span class="glyphicon glyphicon-plus" (click)="dodaj()"></span>
 <form (ngSubmit)="onSubmit()">
-  <div class="panel-group">
-    <template #target></template>
+  <div class="panel panel-default">
+      <div class="panel-body">
+        <template #target></template>
+      </div>
   </div>
-  <button type="submit">Send</button>
+  <button style="margin: 5px;" type="submit">Send</button>
 </form>
+<button style="margin: 5px;" class="btn btn-success" (click)="dodaj()"><span class="glyphicon glyphicon-plus"></span></button>
+<button style="margin: 5px;" class="btn btn-danger" (click)="usun()"><span class="glyphicon glyphicon-minus"></span></button>
