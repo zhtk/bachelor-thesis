@@ -20,6 +20,7 @@ import {SpanComponent} from "../FrontComponents/SpanComponent";
 import {FrontEndClass} from './MainClasses/FrontEndClass';
 import {PanelEditor} from "../../Editor/PanelEditor";
 import {TextBoxEditor} from "../../Editor/TextBoxEditor";
+import {DynamicListComponent} from "../FrontComponents/DynamicListComponent";
 
 export class ComponentCreator {
 
@@ -124,7 +125,6 @@ export class ComponentCreator {
 				obj = <TextBox> ref.instance
 				className = "TextBox";
 				break;
-
 
 			case ("RowComponent"):
 				compFactory = factory.resolveComponentFactory(RowComponent);
@@ -238,6 +238,13 @@ export class ComponentCreator {
 				obj = <PanelComponent> ref.instance
 				className = "PanelComponent";
 				break;
+
+			case ("DynamicList"):
+				compFactory = factory.resolveComponentFactory(DynamicListComponent);
+				ref = target.createComponent(compFactory);
+				obj = <DynamicListComponent> ref.instance
+				className = "DynamicListComponent";
+				break;			
 
 			default:
 				throw "Błędny typ komponentu";

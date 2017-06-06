@@ -98,12 +98,16 @@ export class DynamicListComponent extends FrontEndClass implements RenderFromJSO
     alert();
   }
 
+  @SetterAlg()
+  replicableElement: Object;
+
   private childCount = 0;
   private offspringArray: any[] = [];
   dodaj()
   {
     this.offspringArray.push(ComponentCreator.createFromJSON(
-            this.enhance_sibling_id(++this.childCount, JSON.parse(JSON.stringify(json2))), this.cfr, this.target))
+            this.enhance_sibling_id(++this.childCount, JSON.parse(JSON.stringify(this.replicableElement))), 
+            this.cfr, this.target))
     //var added = ComponentCreator.insertComponent(this.cfr, this.target, "TextBox");
   }
 

@@ -175,345 +175,96 @@ const layout_dict =
 									}
 								},
 								{
-									"type": "PanelComponent",
-									"id": "panel3",
-									"title": "1. Dziecko",
-									"size": {
-										"large": 12
-									},
-									"children": [
+									"type": "DynamicList",
+									"replicableElement": 
 										{
-											"type": "RowComponent",
-											"id": "row1",
+											"type": "PanelComponent",
+											"id": "panel3",
+											"title": "1. Dziecko",
+											"size": {
+												"large": 12
+											},
 											"children": [
 												{
-													"type": "TextBox",
-													"id": "dziecko1_imie",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
+													"type": "RowComponent",
+													"id": "row1",
+													"children": [
+														{
+															"type": "TextBox",
+															"id": "dziecko1_imie",
+															"infoText": "Imię",
+															"defaultText": "Imię",
+															"size": {
+																"large": 4
+															}
+														},
+														{
+															"type": "TextBox",
+															"id": "dziecko1_nazwisko",
+															"infoText": "Nazwisko",
+															"defaultText": "Nazwisko",
+															"size": {
+																"large": 4
+															}
+														},
+														{
+															"type": "TextBox",
+															"id": "dziecko1_plec",
+															"infoText": "Płeć",
+															"defaultText": "Płeć",
+															"size": {
+																"large": 3
+															}
+														}
+													]
 												},
 												{
-													"type": "TextBox",
-													"id": "dziecko1_nazwisko",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko1_plec",
-													"infoText": "Płeć",
-													"defaultText": "Płeć",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "dziecko1_pesel",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 2
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko1_stan_cyw",
-													"infoText": "Stan cywilny",
-													"defaultText": "Stan cywilny",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko1_obywat",
-													"infoText": "Obywatelstwo",
-													"defaultText": "Obywatelstwo",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko1_data_ur",
-													"infoText": "Data urodzenia",
-													"defaultText": "Data urodzenia",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"type": "PanelComponent",
-									"id": "panel3",
-									"title": "2. Dziecko",
-									"size": {
-										"large": 12
-									},
-									"children": [
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "TextBox",
-													"id": "dziecko2_imie",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko2_nazwisko",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko2_plec",
-													"infoText": "Płeć",
-													"defaultText": "Płeć",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "dziecko2_pesel",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 2
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko2_stan_cyw",
-													"infoText": "Stan cywilny",
-													"defaultText": "Stan cywilny",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko2_obywat",
-													"infoText": "Obywatelstwo",
-													"defaultText": "Obywatelstwo",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko2_data_ur",
-													"infoText": "Data urodzenia",
-													"defaultText": "Data urodzenia",
-													"size": {
-														"large": 3
-													}
+													"type": "RowComponent",
+													"id": "row1",
+													"children": [
+														{
+															"type": "PeselComponent",
+															"id": "dziecko1_pesel",
+															"infoText": "PESEL",
+															"defaultText": "PESEL",
+															"size": {
+																"large": 2
+															}
+														},
+														{
+															"type": "TextBox",
+															"id": "dziecko1_stan_cyw",
+															"infoText": "Stan cywilny",
+															"defaultText": "Stan cywilny",
+															"size": {
+																"large": 3
+															}
+														},
+														{
+															"type": "TextBox",
+															"id": "dziecko1_obywat",
+															"infoText": "Obywatelstwo",
+															"defaultText": "Obywatelstwo",
+															"size": {
+																"large": 3
+															}
+														},
+														{
+															"type": "TextBox",
+															"id": "dziecko1_data_ur",
+															"infoText": "Data urodzenia",
+															"defaultText": "Data urodzenia",
+															"size": {
+																"large": 3
+															}
+														}
+													]
 												}
 											]
 										}
-									]
-								},
-								{
-									"type": "PanelComponent",
-									"id": "panel3",
-									"title": "3. Dziecko",
-									"size": {
-										"large": 12
-									},
-									"children": [
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "TextBox",
-													"id": "dziecko3_imie",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko3_nazwisko",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko3_plec",
-													"infoText": "Płeć",
-													"defaultText": "Płeć",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "dziecko3_pesel",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 2
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko3_stan_cyw",
-													"infoText": "Stan cywilny",
-													"defaultText": "Stan cywilny",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko3_obywat",
-													"infoText": "Obywatelstwo",
-													"defaultText": "Obywatelstwo",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko3_data_ur",
-													"infoText": "Data urodzenia",
-													"defaultText": "Data urodzenia",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"type": "PanelComponent",
-									"id": "panel3",
-									"title": "4. Dziecko",
-									"size": {
-										"large": 12
-									},
-									"children": [
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "TextBox",
-													"id": "dziecko4_imie",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko4_nazwisko",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko4_plec",
-													"infoText": "Płeć",
-													"defaultText": "Płeć",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "dziecko4_pesel",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 2
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko4_stan_cyw",
-													"infoText": "Stan cywilny",
-													"defaultText": "Stan cywilny",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko4_obywat",
-													"infoText": "Obywatelstwo",
-													"defaultText": "Obywatelstwo",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "dziecko4_data_ur",
-													"infoText": "Data urodzenia",
-													"defaultText": "Data urodzenia",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										}
-									]
+										
 								}
+
 							]
 						},
 						{
