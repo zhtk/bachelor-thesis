@@ -75,6 +75,7 @@ export class DynamicListComponent extends FrontEndClass implements RenderFromJSO
 
   constructor(private cfr: ComponentFactoryResolver) {
     super();
+    this.sendCount = true;
   }
   
   ngOnInit(): void {
@@ -100,6 +101,12 @@ export class DynamicListComponent extends FrontEndClass implements RenderFromJSO
 
   @SetterAlg()
   replicableElement: Object;
+
+  @SetterAlg()
+  id: string;
+
+  @SetterAlg()
+  sendCount: boolean;
 
   private childCount = 0;
   private offspringArray: any[] = [];

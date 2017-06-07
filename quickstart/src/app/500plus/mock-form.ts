@@ -54,7 +54,7 @@ const layout_dict =
 									"children": [
 										{
 											"type": "PeselComponent",
-											"id": "test1",
+											"id": "wnioskodawca_pesel",
 											"defaultText": "PESEL",
 											"size": {
 												"large": 5
@@ -176,6 +176,7 @@ const layout_dict =
 								},
 								{
 									"type": "DynamicList",
+									"id": "kolejneDzieci",
 									"replicableElement": 
 										{
 											"type": "PanelComponent",
@@ -294,6 +295,7 @@ const layout_dict =
 								},
 								{
 									"type": "DynamicList",
+									"id": "czlonkowieRodziny",
 									"replicableElement": 
 									{
 										"type": "PanelComponent",

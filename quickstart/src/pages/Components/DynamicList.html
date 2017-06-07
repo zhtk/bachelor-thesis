@@ -3,5 +3,6 @@
     <template #target></template>
   </div>
 </div>
+<input *ngIf="sendCount" type="hidden" value="{{ childCount }}" name="{{ id }}_childCount" />
 <button style="margin: 5px;" class="btn btn-success" (click)="dodaj($event)"><span class="glyphicon glyphicon-plus"></span></button>
 <button style="margin: 5px;" class="btn btn-danger" (click)="usun($event)"><span class="glyphicon glyphicon-minus"></span></button>
