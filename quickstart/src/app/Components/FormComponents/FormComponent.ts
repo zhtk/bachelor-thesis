@@ -6,11 +6,15 @@ import {FormClass} from "./FormClass";
 import {Container} from "../ComponentsCore/Interfaces/ContainerInterface";
 import {ComponentCreator} from "../ComponentsCore/ComponentCreator";
 import { SetterAlg } from "../ComponentsRegister";
+import {NgForm} from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Http, Response, Headers, URLSearchParams } from '@angular/http';
+import { RequestOptions, Request, RequestMethod } from '@angular/http';
 
 @Component({
   selector: 'formular',
   template: `
-            <form (ngSubmit)="onSubmit(empForm, $event)" [ngClass] = "grid_class" action = "{{form_action}}" method = "{{method}}" id = "{{id}}">
+            <form name="{{ hash }}" (ngSubmit)="onSubmit($event)" [ngClass] = "grid_class" action = "{{form_action}}" method="{{method}}" id="{{id}}">
                 <fieldset>
                     <template #target></template>
                     <input type="submit" class="btn btn-info" style="margin-left: 15px" value="Wyślij"/>
@@ -20,6 +24,9 @@ import { SetterAlg } from "../ComponentsRegister";
 })
 export class FormComponent extends FormClass implements Container
 {
+
+  myForm: FormGroup;
+  private hash: string;
 
   @SetterAlg()
   id:string;
@@ -31,13 +38,14 @@ export class FormComponent extends FormClass implements Container
 
   private sended: boolean = false;
 
-  constructor(private cfr: ComponentFactoryResolver, private router: Router) {
+  constructor(private cfr: ComponentFactoryResolver, private router: Router, private http: Http) {
 
     super();
     //this.sended = false;
     this.grid_class = "col-lg-12";
     this.form_action = "/";
     this.method = "get";
+    this.hash = Date.now().toString();
   }
   renderJSON(parsed: any): void {
     if("action" in parsed)
@@ -63,8 +71,27 @@ export class FormComponent extends FormClass implements Container
     }
   }
 
-  public onSubmit(empForm: any, event: Event) {
+  public onSubmit(event: Event) {
+    console.log("OTO ONSUBMIT")
     event.preventDefault();
+    
+    const formData = new FormData();
+
+    let headers = new Headers({});
+    let options = new RequestOptions({ headers });
+
+
+    for (let el of (document.forms[this.hash]).getElementsByTagName("input"))
+    {
+      console.log("nazwa: " + el.name)
+      console.log("wartosc: " + el.value);
+      formData.append(el.name, el.value);
+    }
+    
+    this.http.post(this.form_action, formData, options)
+        .toPromise()
+        .catch(this.handleError)
+
     this.sended = true;
 
     if (window.confirm('Wniosek wysłany! Możesz teraz wrócić na stronę główną. Kopię wniosku znajdziesz w usłudze "Moje wnioski".'))
@@ -72,6 +99,9 @@ export class FormComponent extends FormClass implements Container
         this.router.navigateByUrl('/main');
     }
   }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
 }
-
-

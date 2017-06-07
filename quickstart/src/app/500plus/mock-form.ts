@@ -180,7 +180,7 @@ const layout_dict =
 										{
 											"type": "PanelComponent",
 											"id": "panel3",
-											"title": "1. Dziecko",
+											"title": "Dziecko",
 											"size": {
 												"large": 12
 											},
@@ -293,532 +293,74 @@ const layout_dict =
 									}
 								},
 								{
-									"type": "PanelComponent",
-									"id": "panel4",
-									"size": {
-										"large": 10
-									},
-									"children": [
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "TextBox",
-													"id": "czlonek1_imie",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "czlonek1_nazwisko",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "czlonek1_stopien_pokr",
-													"infoText": "Stopień pokrewieństwa",
-													"defaultText": "Stopień pokrewieństwa",
-													"size": {
-														"large": 3
-													}
-												}
-											]
+									"type": "DynamicList",
+									"replicableElement": 
+									{
+										"type": "PanelComponent",
+										"id": "panel4",
+										"size": {
+											"large": 10
 										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "czlonek1_pesel",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 3
+										"children": [
+											{
+												"type": "RowComponent",
+												"id": "row1",
+												"children": [
+													{
+														"type": "TextBox",
+														"id": "czlonek_imie",
+														"infoText": "Imię",
+														"defaultText": "Imię",
+														"size": {
+															"large": 4
+														}
+													},
+													{
+														"type": "TextBox",
+														"id": "czlonek_nazwisko",
+														"infoText": "Nazwisko",
+														"defaultText": "Nazwisko",
+														"size": {
+															"large": 4
+														}
+													},
+													{
+														"type": "TextBox",
+														"id": "czlonek_stopien_pokr",
+														"infoText": "Stopień pokrewieństwa",
+														"defaultText": "Stopień pokrewieństwa",
+														"size": {
+															"large": 3
+														}
 													}
-												},
-												{
-													"type": "TextBox",
-													"id": "czlonek1_urzad_sk",
-													"infoText": "Urząd skarbowy",
-													"defaultText": "Urząd skarbowy",
-													"size": {
-														"large": 8
+												]
+											},
+											{
+												"type": "RowComponent",
+												"id": "row1",
+												"children": [
+													{
+														"type": "PeselComponent",
+														"id": "czlonek_pesel",
+														"infoText": "PESEL",
+														"defaultText": "PESEL",
+														"size": {
+															"large": 3
+														}
+													},
+													{
+														"type": "TextBox",
+														"id": "czlonek_urzad_sk",
+														"infoText": "Urząd skarbowy",
+														"defaultText": "Urząd skarbowy",
+														"size": {
+															"large": 8
+														}
 													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"type": "PanelComponent",
-									"id": "panel4",
-									"size": {
-										"large": 10
-									},
-									"children": [
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "TextBox",
-													"id": "test1",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Stopień pokrewieństwa",
-													"defaultText": "Stopień pokrewieństwa",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "test1",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Urząd skarbowy",
-													"defaultText": "Urząd skarbowy",
-													"size": {
-														"large": 8
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"type": "PanelComponent",
-									"id": "panel4",
-									"size": {
-										"large": 10
-									},
-									"children": [
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "TextBox",
-													"id": "test1",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Stopień pokrewieństwa",
-													"defaultText": "Stopień pokrewieństwa",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "test1",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Urząd skarbowy",
-													"defaultText": "Urząd skarbowy",
-													"size": {
-														"large": 8
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"type": "PanelComponent",
-									"id": "panel4",
-									"size": {
-										"large": 10
-									},
-									"children": [
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "TextBox",
-													"id": "test1",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Stopień pokrewieństwa",
-													"defaultText": "Stopień pokrewieństwa",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "test1",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Urząd skarbowy",
-													"defaultText": "Urząd skarbowy",
-													"size": {
-														"large": 8
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"type": "PanelComponent",
-									"id": "panel4",
-									"size": {
-										"large": 10
-									},
-									"children": [
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "TextBox",
-													"id": "test1",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Stopień pokrewieństwa",
-													"defaultText": "Stopień pokrewieństwa",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "test1",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Urząd skarbowy",
-													"defaultText": "Urząd skarbowy",
-													"size": {
-														"large": 8
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"type": "PanelComponent",
-									"id": "panel4",
-									"size": {
-										"large": 10
-									},
-									"children": [
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "TextBox",
-													"id": "test1",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Stopień pokrewieństwa",
-													"defaultText": "Stopień pokrewieństwa",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "test1",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Urząd skarbowy",
-													"defaultText": "Urząd skarbowy",
-													"size": {
-														"large": 8
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"type": "PanelComponent",
-									"id": "panel4",
-									"size": {
-										"large": 10
-									},
-									"children": [
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "TextBox",
-													"id": "test1",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Stopień pokrewieństwa",
-													"defaultText": "Stopień pokrewieństwa",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "test1",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Urząd skarbowy",
-													"defaultText": "Urząd skarbowy",
-													"size": {
-														"large": 8
-													}
-												}
-											]
-										}
-									]
-								},
-								{
-									"type": "PanelComponent",
-									"id": "panel4",
-									"size": {
-										"large": 10
-									},
-									"children": [
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "TextBox",
-													"id": "test1",
-													"infoText": "Imię",
-													"defaultText": "Imię",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Nazwisko",
-													"defaultText": "Nazwisko",
-													"size": {
-														"large": 4
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Stopień pokrewieństwa",
-													"defaultText": "Stopień pokrewieństwa",
-													"size": {
-														"large": 3
-													}
-												}
-											]
-										},
-										{
-											"type": "RowComponent",
-											"id": "row1",
-											"children": [
-												{
-													"type": "PeselComponent",
-													"id": "test1",
-													"infoText": "PESEL",
-													"defaultText": "PESEL",
-													"size": {
-														"large": 3
-													}
-												},
-												{
-													"type": "TextBox",
-													"id": "test2",
-													"infoText": "Urząd skarbowy",
-													"defaultText": "Urząd skarbowy",
-													"size": {
-														"large": 8
-													}
-												}
-											]
-										}
-									]
+												]
+											}
+										]
+									}
 								}
 							]
 						},

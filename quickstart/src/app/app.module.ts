@@ -90,6 +90,7 @@ import {TextBoxEditor} from "./Editor/TextBoxEditor";
 import {EditorBox} from "./Editor/EditorBox";
 import {DynamicListComponent} from "./Components/FrontComponents/DynamicListComponent";
 
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   imports:      [ BrowserModule,
@@ -97,6 +98,7 @@ import {DynamicListComponent} from "./Components/FrontComponents/DynamicListComp
 					        HttpModule,
     				      JsonpModule,
 					        FormsModule,
+                  ReactiveFormsModule,
   				      ],
   declarations: [ AppComponent,
   					KeysPipe,

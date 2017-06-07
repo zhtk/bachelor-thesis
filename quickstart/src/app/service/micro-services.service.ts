@@ -22,8 +22,6 @@ export class MicroServicesService {
 		var headers = new Headers();
 		headers.append('service_name', serviceName);
 
-		//return Promise.resolve(LAYOUT);
-
 		if (serviceName == 'getZwoln') {
 			console.log("zwolnienie")
 			return this.http.get('/getZwoln', { headers: headers })
