@@ -26,7 +26,29 @@ def lista(request):
 def dajWniosek(request):
 	ident = request.GET.get('id', '7')
 	wniosek = Wniosek.objects.get(id_wniosku=ident)
-		
+	
+	lista_dzieci = []
+	for i in wniosek.dzieci.all():
+		lista_dzieci.append({
+			'dziecko1_imie': i.imie,
+			'dziecko1_nazwisko': i.nazwisko,
+			'dziecko1_plec': i.plec,
+			'dziecko1_pesel': i.pesel,
+			'dziecko1_stan_cyw': i.stan_cywilny,
+			'dziecko1_obywat': i.obywatelstwo,
+			'dziecko1_data_ur': i.data_urodzenia,
+		})	
+	
+	lista_rodzina = []
+	for i in wniosek.rodzina.all():
+		lista_rodzina.append({
+			'czlonek_imie': i.imie,
+			'czlonek_nazwisko': i.nazwisko,
+			'czlonek_stopien_pokr': i.pokrewienstwo,
+			'czlonek_pesel': i.pesel,
+			'czlonek_urzad_sk': i.urzad_skarbowy,
+		})
+	
 	res = {
 		'wnioskodawca_imie': wniosek.autor.imie,
 		'wnioskodawca_nazwisko': wniosek.autor.nazwisko,
@@ -38,6 +60,10 @@ def dajWniosek(request):
 		'wnioskodawca_ulica': wniosek.autor.ulica,
 		'wnioskodawca_nr_domu': wniosek.autor.nr_domu,
 		'wnioskodawca_nr_mieszk': wniosek.autor.nr_mieszkania,
+		
+		'dzieci': lista_dzieci,
+		'rodzina': lista_rodzina,
+		'test1': wniosek.niepelnosprawne,
 	}
 	
 	return HttpResponse(json.dumps(res, ensure_ascii=False))
@@ -85,7 +111,33 @@ def wyslij(request):
 		nr_mieszkania = request.POST.get('wnioskodawca_nr_mieszk', '2043')
 	)
 	autor.save()
-	wniosek = Wniosek(autor=autor)
+	
+	niepelnosprawne = request.POST.get('test1', '')
+	wniosek = Wniosek(autor=autor, niepelnosprawne=niepelnosprawne)
+	wniosek.save()
+	
+	for i in range(1, int(request.POST.get('czlonkowieRodziny_childCount', '0')) + 1):
+		czlonek = CzlonekRodziny()
+		czlonek.imie = request.POST.get('czlonek_imie_' + str(i), '')
+		czlonek.nazwisko = request.POST.get('czlonek_nazwisko_' + str(i), '')
+		czlonek.pesel = request.POST.get('czlonek_pesel_' + str(i), '')
+		czlonek.pokrewienstwo = request.POST.get('czlonek_stopien_pokr_' + str(i), '')
+		czlonek.urzad_skarbowy = request.POST.get('czlonek_urzad_sk_' + str(i), '')
+		czlonek.save()
+		wniosek.rodzina.add(czlonek)
+	
+	for i in range(1, int(request.POST.get('kolejneDzieci_childCount', '0')) + 1):
+		dziecko = Dziecko()
+		dziecko.imie = request.POST.get('dziecko1_imie_' + str(i), '')
+		dziecko.nazwisko = request.POST.get('dziecko1_nazwisko_' + str(i), '')
+		dziecko.plec = request.POST.get('dziecko1_plec_' + str(i), '')
+		dziecko.pesel = request.POST.get('dziecko1_pesel_' + str(i), '')
+		dziecko.stan_cywilny = request.POST.get('dziecko1_stan_cyw_' + str(i), '')
+		dziecko.obywatelstwo = request.POST.get('dziecko1_obywat_' + str(i), '')
+		dziecko.data_urodzenia = request.POST.get('dziecko1_data_ur_' + str(i), '')
+		dziecko.save()
+		wniosek.dzieci.add(dziecko)
+	
 	wniosek.save()
 	
 	data = strftime("%Y-%m-%d", gmtime())

@@ -60,6 +60,7 @@ class Wniosek(models.Model):
     rodzina = models.ManyToManyField(CzlonekRodziny)
     status = models.CharField(max_length=1, choices=STATUS_WNIOSKU, default='0')
     dodano = models.DateTimeField(auto_now_add=True)
+    niepelnosprawne = models.CharField(max_length=100)
     
     def __str__(self):
         return "wniosek nr " + str(self.id_wniosku)
