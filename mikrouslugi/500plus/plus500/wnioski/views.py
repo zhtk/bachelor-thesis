@@ -61,8 +61,8 @@ def dajWniosek(request):
 		'wnioskodawca_nr_domu': wniosek.autor.nr_domu,
 		'wnioskodawca_nr_mieszk': wniosek.autor.nr_mieszkania,
 		
-		'dzieci': lista_dzieci,
-		'rodzina': lista_rodzina,
+		'kolejneDzieci': lista_dzieci,
+		'czlonkowieRodziny': lista_rodzina,
 		'test1': wniosek.niepelnosprawne,
 	}
 	
