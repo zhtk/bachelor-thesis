@@ -75,11 +75,17 @@ export class DynamicListComponent extends FrontEndClass implements RenderFromJSO
 
   constructor(private cfr: ComponentFactoryResolver) {
     super();
+    this.replicableElement = json2;
     this.sendCount = true;
+    this.startChildCount = 0;
   }
   
   ngOnInit(): void {
-    this.dodaj();
+    if (this.startChildCount == 0)
+      this.dodaj();
+    else
+      for (var i = 0; i < this.startChildCount; i++) 
+        this.dodaj();
   }
 
   private enhance_sibling_id(childNumber: number, jsonObj: Object): Object {
@@ -98,6 +104,9 @@ export class DynamicListComponent extends FrontEndClass implements RenderFromJSO
   onSubmit() {
     alert();
   }
+
+  @SetterAlg()  
+  startChildCount: number;
 
   @SetterAlg()
   replicableElement: Object;
@@ -137,6 +146,10 @@ export class DynamicListComponent extends FrontEndClass implements RenderFromJSO
         return i;
       }
     }
+  }
+
+  private shouldModify() {
+    return (this.startChildCount == 0);
   }
 
   renderJSON(specification: any): void {

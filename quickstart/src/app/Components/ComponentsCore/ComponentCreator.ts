@@ -273,7 +273,7 @@ export class ComponentCreator {
 	}
 
 	static setObjectProperty(className: string, jsonElem: string, obj: any, val: any) {
-		console.log("wolam dla " + className + ", " + jsonElem)
+		//console.log("wolam dla " + className + ", " + jsonElem)
 		renderInstr[className][jsonElem](obj, val);
 	}
 }

@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
 import {MenuService} from "../../menu-service";
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 import {ProviderTypeEnum} from "../ComponentsCore/ProviderTypeEnum";
+import {Attr, SetterAlg, ComponentsInfo, ComponentsRegister, Register} from "../ComponentsRegister";
 
 @Injectable()
 @Component
@@ -18,9 +19,15 @@ import {ProviderTypeEnum} from "../ComponentsCore/ProviderTypeEnum";
 })
 export class ContentComponent extends FrontEndClass implements RenderFromJSON{
 
+  @SetterAlg({field: "endpoint", func: (ci: ContentComponent, v: any) => {ci.setEndpoint(v)}})
   url:string;
+  @SetterAlg()
   text:string;
+  @SetterAlg({field: "provider_type", func: (ci: ContentComponent, v: any) => {ci.setProvider(v)}})
   providerType:ProviderTypeEnum;
+
+  @SetterAlg()
+  data_provider: string;
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
@@ -29,6 +36,26 @@ export class ContentComponent extends FrontEndClass implements RenderFromJSON{
 
     //let timer = TimerObservable.create(0, 5000);
     //timer.subscribe(t => this.start());
+  }
+
+  setProvider(provider_type: any) {
+    switch(provider_type)
+      {
+        case "static":
+          this.providerType = ProviderTypeEnum.static;
+          break;
+        case "dynamic":
+          this.providerType = ProviderTypeEnum.dynamic;
+          break;
+        case "periodic":
+          this.providerType = ProviderTypeEnum.service;
+          break;
+      }
+  }
+
+  setEndpoint(endpoint: any) {
+    this.url = endpoint;
+    this.start();
   }
 
   renderJSON(specification: any): void {

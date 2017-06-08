@@ -97,7 +97,7 @@ const layout_dict =
                       {
                         "type": "PanelComponent",
                         "title": "Pracownik",
-                        "collapse": true,
+                        "collapsible": true,
                         "hidable" : true,
                         "size": {
                           "large": 12,
@@ -114,7 +114,7 @@ const layout_dict =
                       {
                         "type": "PanelComponent",
                         "title": "Pracownik",
-                        "collapse": true,
+                        "collapsible": true,
                         "hidable" : true,
                         "size": {
                           "large": 12,
@@ -131,7 +131,7 @@ const layout_dict =
                       {
                         "type": "PanelComponent",
                         "title": "Pracownik",
-                        "collapse": true,
+                        "collapsible": true,
                         "size": {
                           "large": 12,
                         },

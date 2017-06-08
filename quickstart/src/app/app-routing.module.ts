@@ -32,7 +32,7 @@ import { PiecsetComponent }            from "./piecsetComponent";
 import { EditorComponent }             from "./Editor/EditorComponent";
 import { CreatedSubmissionsComponent } from "./created-submissions.component";
 import { ApproveSubmissionsComponent } from "./approved-submissions.component";
-import {DynamicListComponent} from "./Components/FrontComponents/DynamicListComponent";
+import { DynamicListComponent }        from "./Components/FrontComponents/DynamicListComponent";
 
 const routes: Routes = [
 

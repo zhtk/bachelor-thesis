@@ -31,7 +31,7 @@ export class MicroServicesService {
 		}
 		else {
 			// return this.http.get('/api/view/plus500-wniosek/')
-			return this.http.get('/get500')
+			return this.http.get('/api/view/plus500-wniosek/')
 				.toPromise()
 				.then(res => res.json())
 				.catch(this.handleError);

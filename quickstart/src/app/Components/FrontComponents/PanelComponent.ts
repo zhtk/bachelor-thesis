@@ -62,7 +62,7 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
   @SetterAlg()
   cursor:string;
 
- @SetterAlg({field: "size", func: (ci: PanelComponent, v: any) => {ci.setGridClass({"size": v})}})
+  @SetterAlg({field: "size", func: (ci: PanelComponent, v: any) => {ci.setGridClass({"size": v})}})
   size: SizeProperties;
 
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;

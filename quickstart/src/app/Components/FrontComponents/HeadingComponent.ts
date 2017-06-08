@@ -3,7 +3,7 @@ import { FormClass } from '../FormComponents/FormClass'
 import { FormsModule }   from '@angular/forms';
 import {FrontEndClass} from "../ComponentsCore/MainClasses/FrontEndClass";
 import {ProviderTypeEnum} from "../ComponentsCore/ProviderTypeEnum";
-import {ComponentsRegister, Register, Attr} from "../ComponentsRegister";
+import {Attr, SetterAlg, ComponentsInfo, ComponentsRegister, Register} from "../ComponentsRegister";
 import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 
 
@@ -22,9 +22,9 @@ import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 export class HeadingComponent extends FrontEndClass implements RenderFromJSON
 {
 
-
   textType:ProviderTypeEnum;
-  @Attr({info:"Tekst ssna górnej belce", default : "", name:""})
+  @Attr({info:"Tekst na górnej belce", default : "", name:""})
+  @SetterAlg()
   text: string;
   backgroundColor: string;
 

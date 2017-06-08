@@ -26,11 +26,7 @@ export class TestComponent implements OnInit
 
     constructor(private route: ActivatedRoute, public cfr: ComponentFactoryResolver,
                 private msService: MicroServicesService) {
-        this.factory = cfr;
-        console.log("niebywałe")
-        console.log(this.route.snapshot.params['name']);
-        console.log(this.pages[this.route.snapshot.params['name']]);
-        
+        this.factory = cfr;      
     }
 
     @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
@@ -56,7 +52,7 @@ export class TestComponent implements OnInit
         for (var elem = 0; elem < parsed.length; elem++)
         {
             var added = ComponentCreator.createFromJSON(
-            parsed[elem], this.cfr, this.target)
+                parsed[elem], this.cfr, this.target)
 
             // var added = ComponentCreator.insertComponent(
             //   this.cfr, this.target, parsed[elem]["type"]);
