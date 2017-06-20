@@ -218,9 +218,16 @@ Informacja o tym fakcie natychmiast zostanie doręczona do wnioskodawcy.
 \section{Wymagania niefunkcjonalne}
 
 Bardzo wiele uwagi poświęciliśmy wymaganiom niefunkcjonalnym. Nasz Klient bardzo
-wyraźnie życzył sobie, by były spełnione normy ,,12 Factor App'' \cite{tfa}.
-W szczególności, nasz serwis powinien cechować się wysokim współczynnikiem
-niezawodnośći i odporności na losowe awarie. Ma to szczególne duże znaczenie
+wyraźnie życzył sobie, by spełnione były normy ,,12 Factor App'' \cite{tfa}.
+Niektóre spośród nich są stosunkowo proste: kod powinien być trzymany w systemie
+kontroli wersji, należy bardzo wyraźnie określać zależności, konfiguracja pobierana
+jest z środowiska, powinno być możliwe bezbolesne przeniesienie usług wspomagających
+(takich jak bazy danych) do zewnętrznych dostawców (np. chmury AWS). Pozostałe
+normy odnoszą się do takich zagadnień jak zapewnienie jednolitości środowisk testowych
+i produkcyjnych, wykorzystanie dobrodziejstw płynących z współbieżności oraz
+zarządzanie już działającą aplikacją. Z naszego punktu widzenia najważniejsza była
+następująca zasada: nasz serwis powinien cechować się wysokim współczynnikiem
+niezawodności i odporności na losowe awarie. Ma to szczególne duże znaczenie
 podczas komunikacji na linii obywatel -- państwo, gdzie jakiekolwiek rozbieżności
 mogą być opłakane w skutkach. W miarę postępu cyfryzacji państwa liczba użytkowników
 naszego serwisu będzie zbliżać się do 14-tu milionów osób. Należy zapewnić
