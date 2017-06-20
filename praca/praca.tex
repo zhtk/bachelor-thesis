@@ -135,7 +135,7 @@ programistów, których zatrudnienie generuje mniejsze koszty wytworzenia kodu. 
 zrównoważonego rozwoju, zapobiegając centalizacji ośrodków programistycznych, a z drugiej strony prowadziłby do wymiernych
 oszczędności na wynagrodzeniach.
 
-\section{Zleceniodawca - ZUS}
+\section{Pomysłodawca - ZUS}
 
 Naszym zleceniodawcą był Zakład Ubezpieczeń Społecznych. Według ,,Rocznika
 Statystycznego Ubezpieczeń Społecznych'' \cite{rocznik} w 2011 roku w ZUS było ubezpieczonych
@@ -177,7 +177,7 @@ wyżej czynników można uznać nasz projekt za zakończony sukcesem.
 \chapter{Wymagania}
 
 Głównym wymaganiem postawionym przed naszym frameworkiem było umożliwienie reimplementacji
-Platformy Usług Elektronicznych ZUS (widocznej na poniższym obrazku) oraz stworzenie
+Platformy Usług Elektronicznych ZUS \cite{zuspue} (widocznej na poniższym obrazku) oraz stworzenie
 przykładowego portalu ilustrującego jego możliwości.\\
 \includegraphics[width=\textwidth]{obrazki/pue2.png}
 Naszemu zespołowi pozostawiono bardzo duży stopień swobody przy projektowaniu i
@@ -275,7 +275,7 @@ architekturę opartą o mikrousługi.
 
 \section{Mikrousługi}
 
-Mikrousługi to stosunkowo nowy wzorzec architektoniczny będący rozwinięciem
+Mikrousługi \cite{fowlermicroservices} to stosunkowo nowy wzorzec architektoniczny będący rozwinięciem
 architektury zorientowanej na usługi (ang. \textit{service-oriented architecture}).
 Cechuje się ona rozbiciem poszczególnych składowych systemu na małe, luźno powiązane
 usługi implementujące logikę biznesową. Znacząco ułatwia to ciągłą integrację (ang.
@@ -302,9 +302,25 @@ do której pozostałe usługi nie mają bezpośredniego dostępu. Dzięki temu �
 staje się wymuszenie luźnego powiązania usług, a ewolucja schematu bazy danych nie
 wymusza zmian w całym kodzie aplikacji. Ponadto zespół pracujący nad daną mikrousługą
 może w sposób nie wpływający na pozostałą część systemu wybrać tę bazę danych, która
-najbardziej odpowiada rozwiązywanemu problemowi. Niestety to podejście ma swoje wady,
-do których można zaliczyć konieczność utrzymywania spójności danych w niezależnych
-od siebie systemach bazodanowych.
+najbardziej odpowiada rozwiązywanemu problemowi.
+
+Niestety architektura zorientowana na mikrousługi ma swoje wady \cite{hauer}.
+Do najpoważniejszych należy konieczność utrzymywania spójności danych w niezależnych
+od siebie systemach bazodanowych. Ze względu na rozproszoną naturę aplikacji
+wiele operacji wymaga interakcji z kilkoma niezależnymi od siebie serwerami baz
+danych. Może się okazać, że z powodu awarii łączy pomiędzy serwerami część
+transakcji nie zostanie wykonana co doprowadzi do rozspójnienia danych. W systemach
+administracji publicznej nie powinno dochodzić do takich sytuacji, gdyż może to
+doprowadzić do realnych i niezawinionych szkód u obywatela. Innymi problemami
+nierozłącznie związanymi z mikrousługami są: mniej wygodny interfejs programisty
+w porównaniu z architekturą monolityczną, konieczność uwzględniania w projekcie
+aplikacji problemów występujących w warstwie sieciowej (takich jak awarie sprzętu
+sieciowego) oraz niższa wydajność z powodu latencji przy przesyłaniu danych przez
+sieć oraz konieczności serializacji i deserializacji zapytań.
+
+Niezależnie od tych wad uważamy, że w naszej aplikacji zastosowanie architektury
+mikrousługowej jest całkowicie racjonalnym rozwiązaniem. Zalety mikrousług w dużej
+mierze rekompensują wymienione wyżej wady.
 
 \section{Bezstanowość mikrousług}
 
@@ -512,10 +528,14 @@ trakcie naszych prac.
 \section{Angular 2}
 
 Aby rozwinąć swoje skrzydła, asynchroniczne działanie mikrousług wymaga również działającej asynchronicznie warstwy użytkownika.
-Spośród obecnie stosowanych frameworków frontendowych wyróżniały się dwa: Angular oraz React.js.
+Spośród obecnie stosowanych frameworków frontendowych wyróżniały się dwa: Angular \cite{angular2} oraz React.js \cite{react}.
 Zdecydowaliśmy się na ten pierwszy z powodu kluczowej dla klienta, całkowicie otwartej licencji.
-Wykorzystaliśmy drugą wersję Angulara od Google, ponieważ jest oparta o nowsze rozwiązania niż pierwsza,
-a w szczególności wykorzystuje język TypeScript, czyli obiektowe rozszerzenie języka Javascript.
+Licencja frameworka React.js była dla naszego klienta całkowicie nieakceptowalna
+z powodu niejasnych zapisów, które dawały firmie Facebook prawo do cofnięcia zgody
+na wykorzystanie frameworka \cite{reactlicense}. W przypadku instytucji państwowej
+jaką jest ZUS było to obarczone niedopuszczalnym ryzykiem.
+Wykorzystaliśmy drugą (w chwili wybierania technologii najnowszą) wersję Angulara
+od Google. Wykorzystuje on język TypeScript, czyli obiektowe rozszerzenie języka Javascript.
 W stosunku do JavaScript można stwierdzić, że wszystko co związane z obiektowością
 w TypeScript to tylko lukier syntaktyczny, ponieważ kod TypeScript podczas kompilacji
 jest tłumaczony do czystego JavaScript. TypeScript implementuje większość
@@ -526,9 +546,9 @@ klasy już w trakcie kompilacji.
 
 \section{Bootstrap}
 
-Za wygląd strony odpowiada HTML5, połączony z Bootstrapem.
+Za wygląd strony odpowiada HTML5, połączony z Bootstrapem \cite{bootstrap}.
 Bootstrap to zbiór gotowych komponentów wizualnych, pozwalający, bez zbędnego wnikania
-w stronę ``artystyczną'', tworzyć strony estetyczne oraz wygodne w użyciu strony internetowe.
+w stronę ,,artystyczną'', tworzyć strony estetyczne oraz wygodne w użyciu strony internetowe.
 Jako, że tematem naszej pracy nie jest projektowanie stron internetowych i nie chcieliśmy zbytnio wnikać w aspekty graficzne,
 użyliśmy gotowej skórki sbAdmin2, w której wprowadziliśmy liczne zmiany.
 
@@ -537,14 +557,14 @@ użyliśmy gotowej skórki sbAdmin2, w której wprowadziliśmy liczne zmiany.
 Powszechnie przyjętym zwyczajem jest, że mikrousługi komunikują się przy pomocy
 RESTowych API \cite{mammatustech}. Naszym zdaniem do kontrukcji takiego interfejsu
 idealnie nadają się frameworki do tworzenia aplikacji webowych. Z uwagi na swoją
-prostotę wybraliśmy Django. Dodatkowym argumentem za takim wyborem był tutaj fakt,
+prostotę wybraliśmy Django \cite{django}. Dodatkowym argumentem za takim wyborem był tutaj fakt,
 że architektura mikrousług zachęca do dywersyfikacji technologii. Wybierając
 framework napisany w języku Python chcieliśmy pokazać, że nasze rozwiązanie dobrze
 integruje usługi napisane w różnych językach.
 
 \section{Express.js}
 
-Do serwowania części frontendowej serwisu wykorzystujemy serwer Express.js.
+Do serwowania części frontendowej serwisu wykorzystujemy serwer Express.js \cite{expressjs}.
 Korzystanie z niego jest proste i stosunkowo przyjemne, znakomicie integruje się
 on z platformą Node.js. W przeciwieństwie do Lite--servera z którego korzystaliśmy
 na początku, Express.js jest dobrze udokumentowany i udostępnia bogate API, z którego
@@ -553,11 +573,11 @@ skorzystaliśmy przy integracji z backendem.
 \section{gRPC}
 
 Podczas projektowania mechanizmu komunikacji pomiędzy mikrousługami nasz Klient
-zasugerował użycie WSDL. Nie zgodziliśmy się na to, gdyż użycie tak ciężkiego
+zasugerował użycie WSDL \cite{wsdl}. Nie zgodziliśmy się na to, gdyż użycie tak ciężkiego
 protokołu jest sprzeczne z typowymi praktykami stosowanymi w architekturze
 mikrousług \cite{mammatustech}. Jednocześnie nie chcieliśmy, by nasza aplikacja
 była ograniczona tylko i wyłącznie do RESTowych protokołów. Ostatecznie
-zaproponowaliśmy użycie gRPC, który łączy zalety obu wymienionych wcześniej
+zaproponowaliśmy użycie gRPC \cite{grpc}, który łączy zalety obu wymienionych wcześniej
 rozwiązań. Z jednej strony jest stosunkowo lekkim i wykorzystującym niewiele
 zasobów protokołem sieciowym, a z drugiej strony pozwala na ścisłe zdefiniowanie
 udostępnianych przez serwer usług w czytelnym dla ludzi formacie. Po napisaniu
@@ -569,7 +589,7 @@ programowania.
 
 \section{Play Framework}
 
-Play Framework opiera się na podobnych ideach architektonicznych co Django. Kiedy
+Play Framework \cite{play} opiera się na podobnych ideach architektonicznych co Django. Kiedy
 go wybieraliśmy mieliśmy nadzieję, że będzie się on bardzo dobrze integrował z
 ekosystemem Javowym. Okazało się, że było to błędne założenie. Kłopoty pojawiły
 się już na samym początku, kiedy odkryliśmy że między frameworkiem Play i gRPC ma
@@ -584,8 +604,8 @@ dostęp do niej odbywa się poprzez wyspecjalizowaną usługę zapewniającą do
 danych lub w ramach jednej mikrousługi, gdzie służy jako tymczasowe składowisko
 informacji potrzebnych przy wykonywaniu operacji. W takim modelu rodzaj użytej
 bazy danych jest transparentny dla usługi wywołującej. Z uwagi na prototypowy
-charakter naszego projektu poprzestaliśmy na bazie SQLite, jako że znakomicie
-integruje się ona z Django, ponadto zastąpienie jej PostgreSQLem jest
+charakter naszego projektu poprzestaliśmy na bazie SQLite \cite{sqlite}, jako że znakomicie
+integruje się ona z Django, ponadto zastąpienie jej PostgreSQLem \cite{postgres} jest
 praktycznie bezkosztowe.
 
 \section{ZooKeeper}
@@ -622,7 +642,7 @@ lidera \cite{curatorlock}.
 
 \subsection{Curator}
 
-Biblioteka Curator upraszcza wiele aspektów związanych
+Biblioteka Curator \cite{curator} upraszcza wiele aspektów związanych
 z wykorzystaniem ZooKeepera, między innymi rejestrację serwerów mikrousług,
 zapewnia implementację najczęściej wykorzystywanych algorytmów synchronizujących
 oraz łatwe buforowanie drzewa węzłów wraz z automatycznym pobieraniem zmian. W
@@ -631,7 +651,7 @@ nasze potrzeby.
 
 \subsection{Kazoo}
 
-Kazoo jest nieoficjalnym klientem ZooKeepera dla języka Python. W trakcie
+Kazoo \cite{kazoo} jest nieoficjalnym klientem ZooKeepera dla języka Python. W trakcie
 implementacji naszej aplikacji doceniliśmy jego niezawodność i prostotę użycia.
 
 \chapter{Architektura aplikacji}
@@ -704,7 +724,7 @@ przeglądarki na komputerze użytkownika kod aplikacji napisany w frameworku Ang
 Następnie otrzymany program zostaje wykonany, a użytkownikowi zostaje zaprezentowany
 wygodny interfejs i możliwa staje się dalsza interakcja.
 
-\includegraphics[width=\textwidth]{../slajdy/Frontend.pdf}
+\includegraphics[width=\textwidth]{Frontend.pdf}
 
 Z powodu różnych zabezpieczeń wbudowanych w przeglądarki bezpośrednie połączenie
 klienta z integratorem nie jest możliwe. W związku z tym serwer express.js pełni
@@ -718,7 +738,7 @@ ZooKeepera oraz uwierzytelniania, do których dostęp jest bezpośredni. Wynika 
 specyficznych własności ZooKeepera który jest wykorzystywany do przechowywania
 konfiguracji integratora oraz pewnego rodzaju wyjątkowości serwera autoryzacji,
 która nie pozwala na zaklasyfikowanie go jako zwykłej mikrousługi.\\
-\includegraphics[width=\textwidth]{../slajdy/backend.pdf}
+\includegraphics[width=\textwidth]{backend.pdf}
 
 \chapter{Realizacja}
 
@@ -734,7 +754,7 @@ użytkownik otrzymuje większość potrzebnych informacji. Strona domowa jest do
 obywatela o aktualnym stanie spraw, z nim związanych. Informację te są wyraźnie wyróżnione, a kolory jakie przyjmują panele
 intuicyjnie wiążą się z kontekstem (np. czerwony kolor - sprawy odrzucone). Właściciel profilu nie musi marnować czasu
 na szukanie najbardziej potrzebnych mu informacji w innych miejschach strony. W założeniu strona domowa powinna być
-namiastką ,,Ściany'' znanej z popularnego protalu społecznościowego. Panel z powiadomieniami ([2]), to po prostu dostarczony
+namiastką ,,Ściany'' znanej z popularnego portalu społecznościowego. Panel z powiadomieniami ([2]), to po prostu dostarczony
 przez nas gotowy komponent o nazwie powiadomienia.
 
 \section{Komponenty}
@@ -748,14 +768,14 @@ Docelowe mikrousługi, wykorzystywane na naszej platformie, będą komunikowały
 Formularze z kolei posiadają zazwyczaj dosyć generyczne interfejsy graficzne i programistyczne.
 Stając przed tak ocenioną sytuacją, postanowiliśmy nie oddawać w ręce programistów mikrousług możliwości umieszczenia na stronie platformy dowolnego kodu HTML.
 Przede wszystkim, ze względów bezpieczeństwa - usługa mogłaby uruchamiać zlośliwy bądź posiadający krytyczne luki kod javascript.
-Ważne dla nas były jednak także kwestie stylistyczne - dużo wygodniej, niż publikować przewodniki styli (tzw. "Style Guide"),
+Ważne dla nas były jednak także kwestie stylistyczne - dużo wygodniej, niż publikować przewodniki styli (tzw. ,,Style Guide''),
 byłoby nam udostępnić już gotowe, wystylizowane przez nas kawałki kodu HTML.
 
 Osadzanie wewnątrz naszej aplikacji przekazanego w jakiś sposób szablonu HTML nie jest trudne, ale pozostaje pytanie o to,
 na kim będzie spoczywała odpowiedzialność jego napisania. Nie chcieliśmy
 żeby była do tego potrzebna wiedza frontendowa,
 dlatego postanowiliśmy zwiększyć poziom abstrakcji w naszych szablonach,
-a co za tym idzie - zbudować mały framework (szkielet),
+a co za tym idzie -- zbudować mały framework (szkielet),
 który uprości ich tworzenie, przekazywanie i interpretację, z poziomu osoby lub programu czytającego ich opis.
 
 \subsection{Opis komponentów}
@@ -823,37 +843,41 @@ Wygląd:\\\hline
 \end{tabularx}
 
 \subsection{System tworzenia automatycznej dokumentacji}
-Każdy komponent można opisać w podobny sposób(Co udowadnia powyższy podrodział).
+Każdy komponent można opisać w podobny sposób.
 Z uwagi na tę regularność stworzyliśmy mechanizm tworzenia automatycznej dokumentacji.
 Jako, że platforma składa się z wielu komponentów, w założeniu tworzonych przez wielu
 programistów, istnieje potrzeba usystematyzowania opisu komponentów.
 Nasz mechanizm przyczynia się do zwiększenia spójności platformy, pozwala zachować porządek
 wśród komponentów, oraz niejako wymusza na programiście większą staranność.
-Na podstawie naszych doświadczeń stwierdzialiśmy, że bardzo wygodne jest opisywanie
-kodu w trakcie i miejscu jego tworzenia. Dlatego używając dekoratorów,
+Na podstawie naszych doświadczeń stwierdziliśmy, że bardzo wygodne jest opisywanie
+kodu w trakcie i w miejscu jego tworzenia. Dlatego używając dekoratorów,
 stworzyliśmy mechanizm pozwalający tworzyć komponenty niejako w sposób opisowy.
-Zapewne dużym nadużyciem będzie nazwanie użytego podejście terminem programowanie w paradygmacie opisowym,
+Zapewne dużym nadużyciem będzie nazwanie użytego podejścia terminem
+\textit{programowanie w paradygmacie opisowym},
 jednak na dobrą sprawę sam sposób kreacji komponentów został, faktycznie, sprowadzony do
-automatycznego generowanie kodu na podstawie opisy składowych.
+automatycznego generowanie kodu na podstawie opisu składowych.
 Dekoratory pozwalają na zmianę zachowanie dekorowanego przez siebie elementu już w momencie kompilacji,
-lub w momencie wywływania danego elementu(dla metod).
+lub w momencie wywoływania danego elementu (dla metod).
+
 Stworzyliśmy następujące dekoratory:
-Dekorator register - dodaje komponent do bibliotki komonentów. Wymaga podania nazwy komponentu,
-jego opisu ogólnego, słów kluczowych(charakteryzacja komponentu),
+\begin{itemize}
+	\item Dekorator register - dodaje komponent do bibliotki komonentów. Wymaga podania nazwy komponentu,
+jego opisu ogólnego, słów kluczowych (charakteryzacja komponentu),
 oraz opisu działania. Dekorator dekoruje klasę, tzn. modyfikuje zawartość
 klasy w momencie kompilacji.
 
-Dekorator Attr - dodaje do opisu komponentu, w którym się znajduję, opis samego siebie.
+	\item Dekorator Attr - dodaje do opisu komponentu, w którym się znajduję, opis samego siebie.
 Komponent to nic innego jak zbiór wielu parametrów, które określają jego wygląd i zachowanie.
 Oczywiście niewszystkie atrybuty danego komponentu są widocznego na zewnątrz, niektóre wykorzystywane
 są tylko w wewnętrznych działaniach (obliczeniach klasy), dlatego też nie wprowadziliśmy mechanizmu, który
 automatycznie listowałby wszystkie atrybuty danego komponentu. To od programisty
-zależy, które parametry będą ``wyprowadzone'' na zewnątrz, czyli które komponentu bedą edywalne z zewnątrz
-i będą miały wpływ na zachowanie komponentu, a które będą ukryte na potrzeby wewnętrznych działan komponentu.
-
+zależy, które parametry będą ,,wyprowadzone'' na zewnątrz, czyli które komponentu bedą edytowalne z zewnątrz
+i będą miały wpływ na zachowanie komponentu, a które będą ukryte na potrzeby wewnętrznych działań komponentu.
+\end{itemize}
 
 \subsection{Edytor}
 TODO
+
 \subsection{Platforma developera}
 Sposób dodawania mikrosusług, style guide.
 
@@ -943,7 +967,7 @@ począwszy od konfliktu zależności pomiędzy pakietami, poprzez niedziałając
 SSL, aż po zawieszanie się serwera. Być może było to spowodowane koniecznością
 użycia niestabilnej wersji frameworka. Wymienione kłopoty w połączeniu z niezadowalającym
 postępem prac skłoniły nas do przepisania integratora w języku Python. Nowa wersja
-nazwana przez nas integratorem 2 nie posiada wymienionych wyżej wad i została
+nazwana przez nas Integratorem 2 nie posiada wymienionych wyżej wad i została
 dogłębnie przetestowana w praktyce.
 
 \section{Mikrousługi}
@@ -1050,7 +1074,6 @@ użytkownika i możliwa jest interakcja z mikrousługą.
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}
 
-
 \begin{tabularx}{\linewidth}{|l|X|} \hline
 	\textbf{Członek zespołu} & \textbf{Wykonane zadania} \\
 	\hline
@@ -1059,12 +1082,12 @@ użytkownika i możliwa jest interakcja z mikrousługą.
 	Jarosław Socha & TODO\\
 	\hline 
 	Piotr Zalas & Zaproponowanie wstępnej architektury aplikacji.\newline
-	  Implementacja integratora i integratora 2.\newline
+	  Implementacja Integratora i Integratora 2.\newline
 	  Implementacja mikrousług powiadomień, loggera, poczty, 500+.\newline
 	  Implementacja usługi autoryzacji.\newline
 	  Implementacja serwera frontendu w Express.js.\newline
 	  Przygotowanie diagramów ilustrujących architekturę.\newline
-	  Spisanie niniejszej pracy (z wyjątkiem rozdziałów ...).\\
+	  Spisanie niniejszej pracy (z wyjątkiem rozdziałów 4.2, 4.3, 6.1 - 6.3).\\
 	\hline
 \end{tabularx}
 
@@ -1195,8 +1218,47 @@ http://distributedlog.incubator.apache.org/
 \bibitem[Netflix]{nginx} Tony Mauro, \textit{Adopting Microservices at Netflix: Lessons for Architectural Design},
 https://www.nginx.com/blog/microservices-at-netflix-architectural-best-practices/
 
+\bibitem[hauer]{hauer} Philipp Hauer, \textit{Microservices in a Nutshell. Pros and Cons.},
+https://blog.philipphauer.de/microservices-nutshell-pros-cons/
+
 \bibitem[mammatustech]{mammatustech} Rick Hightower, \textit{Java Microservices Architecture},
 http://www.mammatustech.com/java-microservices-architecture
+
+\bibitem[reactlic]{reactlicense} React, etc. Tech Stack, \textit{Your license to use React.js can be revoked if you compete with Facebook},
+http://react-etc.net/entry/your-license-to-use-react-js-can-be-revoked-if-you-compete-with-facebook
+
+\bibitem[A2]{angular2} Google, \textit{Angular},
+https://angular.io/
+
+\bibitem[React]{react} Facebook, \textit{React},
+https://facebook.github.io/react/
+
+\bibitem[Bt]{bootstrap} Twitter, \textit{Bootstrap},
+http://getbootstrap.com/
+
+\bibitem[Dj]{django}  Django Software Foundation, \textit{Django},
+https://www.djangoproject.com/
+
+\bibitem[Ej]{expressjs} Node.js Foundation, \textit{Express},
+https://expressjs.com/
+
+\bibitem[Ws]{wsdl} World Wide Web Consortium, \textit{Web Services Description Language},
+https://www.w3.org/TR/wsdl
+
+\bibitem[grpc]{grpc} Google, \textit{gRPC},
+http://www.grpc.io/
+
+\bibitem[Play]{play} Lightbend, \textit{Play Framework},
+https://www.playframework.com/
+
+\bibitem[SQLite]{sqlite} SQLite Consortium, \textit{SQLite},
+https://www.sqlite.org/
+
+\bibitem[postgres]{postgres} The PostgreSQL Global Development Group, \textit{PostgreSQL},
+https://www.postgresql.org/
+
+\bibitem[Kazoo]{kazoo} Kazoo team, \textit{Kazoo},
+https://github.com/python-zk/kazoo
 
 \end{thebibliography}
 
