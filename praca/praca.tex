@@ -885,8 +885,32 @@ i będą miały wpływ na zachowanie komponentu, a które będą ukryte na potrz
 \subsection{Edytor}
 TODO
 
+\subsection{Instrukcje renderowania komponentu z obiektu JSON}
+Chcieliśmy, aby przekazywanie do komponentu algorytmu jego renderowania z otrzymanego obiektu JSON było, jak przystało na framework, maksymalnie proste i nowoczesne.
+Jest to kolejne miejsce, w którym pomocne okazały się dekoratory. Za pomocą dekoratora \mintinline{python}|@SetterAlg|, dla każdego pola (właściwości) komponentu, można ustawić osobną funkcję odpowiedzialną za przypisanie temu polu wartości.
+Funkcje przekazywane do dekoratora są jak w poniższym przykładzie:
+\begin{minted}{javascript}
+@SetterAlg({field: "nazwa_pola_w_JSON", 
+    func: (class_instance, json_field_value) => {/* ciało funkcji */}})
+pole_w_komponencie: string;
+\end{minted}
+
+Schemat działania ww. dekoratora jest następujący: napotykając we właściwym dla komponentu JSONie na pole o nazwie
+\mintinline{javascript}{nazwa_pola_w_JSON}, wykonuje algorytm opisany w ciele funkcji. Ważne jest, żeby sygnatura funkcji przekazywanej do dekoratora była dwuargumentowa, aby - jak zresztą sugeruje przykład - w momencie wywoływania przekazać w kolejnych argumentach instancję komponentu oraz wartość pola \mintinline{javascript}{nazwa_pola_w_JSON}.
+
+Zaletą takiego rozwiązania jest możliwość zastosowania następującego uproszczenia: w większości przypadków, będziemy chcieli, aby po napotkaniu pola p w JSONie opisującym komponent K, ustawić w K wartość właściwości o nazwie p na wartość dostarczaną przez JSON. Stąd też, jest to domyślne zachowanie dla pustego dekoratora
+\mintinline{javascript}{@SetterAlg()}. Można zapisać, że pusty dekorator zachowuje się tak samo, jak następujący:
+
+\begin{minted}{javascript}
+@SetterAlg({field: "pole_w_komponencie", 
+    func: (class_instance, json_field_value) => { 
+        class_instance.pole_w_komponencie = json_field_value 
+    }})
+pole_w_komponencie: string;
+\end{minted}
+
 \subsection{Platforma developera}
-Sposób dodawania mikrosusług, style guide.
+Sposób dodawania mikrousług, style guide.
 
 \section{Serwer uwierzytelniania i autoryzacji}
 
