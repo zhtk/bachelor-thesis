@@ -887,7 +887,7 @@ TODO
 
 \subsection{Instrukcje renderowania komponentu z obiektu JSON}
 Chcieliśmy, aby przekazywanie do komponentu algorytmu jego renderowania z otrzymanego obiektu JSON było, jak przystało na framework, maksymalnie proste i nowoczesne.
-Jest to kolejne miejsce, w którym pomocne okazały się dekoratory. Za pomocą dekoratora \mintinline{python}|@SetterAlg|, dla każdego pola (właściwości) komponentu, można ustawić osobną funkcję odpowiedzialną za przypisanie temu polu wartości.
+Jest to kolejne miejsce, w którym pomocne okazały się dekoratory. Za pomocą dekoratora \mintinline{javascript}|@SetterAlg|, dla każdego pola (właściwości) komponentu, można ustawić osobną funkcję odpowiedzialną za przypisanie temu polu wartości.
 Funkcje przekazywane do dekoratora są jak w poniższym przykładzie:
 \begin{minted}{javascript}
 @SetterAlg({field: "nazwa_pola_w_JSON", 
@@ -908,6 +908,9 @@ Zaletą takiego rozwiązania jest możliwość zastosowania następującego upro
     }})
 pole_w_komponencie: string;
 \end{minted}
+
+\subsection{Style Guide}
+Style Guide to jeden z komponentów naszej aplikacji, którego działanie jest możliwe dzięki wsparciu dekoratorów \mintinline{javascript}{register} oraz \mintinline{javascript}{Attr}. Pozwala on na zaprojektowanie i dostosowanie dowolnego komponentu, którego chcemy użyć w naszej mikrousłudze. Wyświetla on ogólne informacje na temat rozważanego komponentu, wskazuje domyślne wartości pól obiektu JSON powiązanego z komponentem, oraz umożliwia modyfikację tych wartości. Całość jest na bieżąco renderowana, zapewniając dynamiczny podgląd wprowadzanych zmian. Kolejne komponenty aplikacji dodają się automatycznie do biblioteki Style Guide'a, przy czym automatyzacja ta jest przeprowadzana za pomocą wspomnianych wyżej dekoratorów.
 
 \subsection{Platforma developera}
 Sposób dodawania mikrousług, style guide.
