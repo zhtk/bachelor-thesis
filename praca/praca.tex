@@ -751,17 +751,17 @@ która nie pozwala na zaklasyfikowanie go jako zwykłej mikrousługi.\\
 
 \section{Tworzenie mockupów}
 Jako, że naszym celem nie było stworzenie gotowej platformy (w sensie produkcyjnym), a raczej stworzenie proof of concept,
-intensywnie tworzyliśmy prototypy. Chcialismy pokazać jak PUE może wyglądać, niekoniecznie skupiając się na
-sprawach żmudnych, czasochłonnych, a niekoniecznie potrzebnych do pokazanie idei.
+intensywnie tworzyliśmy prototypy. Chcieliśmy pokazać, jak PUE może wyglądać bez skupiania się na
+sprawach żmudnych, czasochłonnych i niekoniecznie potrzebnych do pokazanie idei.
 
 \section{Strona domowa}
 Nastawienie społeczeństwa do ZUS, jako organizacji jest zdecydowanie negatywne, dlatego tworząc nasz projekt staraliśmy się
 zmienić wizerunek ZUSu. Postawiliśmy na personalizacje kontaktów z użytkownikiem odwiedzającym naszą platformę. Dlatego już po zalogowaniu
-użytkownik otrzymuje większość potrzebnych informacji. Strona domowa jest dopracowana pod względem UX. Panele ([1]) informują
-obywatela o aktualnym stanie spraw, z nim związanych. Informację te są wyraźnie wyróżnione, a kolory jakie przyjmują panele
+użytkownik otrzymuje większość potrzebnych informacji. Strona domowa jest dopracowana pod względem UX. Panele informują
+obywatela o aktualnym stanie spraw z nim związanych. Informację te są wyraźnie wyróżnione, a kolory jakie przyjmują panele
 intuicyjnie wiążą się z kontekstem (np. czerwony kolor - sprawy odrzucone). Właściciel profilu nie musi marnować czasu
-na szukanie najbardziej potrzebnych mu informacji w innych miejschach strony. W założeniu strona domowa powinna być
-namiastką ,,Ściany'' znanej z popularnego portalu społecznościowego. Panel z powiadomieniami ([2]), to po prostu dostarczony
+na szukanie najbardziej potrzebnych mu informacji w innych miejscach strony. W założeniu strona domowa powinna być
+namiastką ,,Ściany'' znanej z popularnego portalu społecznościowego. Panel z powiadomieniami to po prostu dostarczony
 przez nas gotowy komponent o nazwie powiadomienia.
 
 \section{Komponenty}
@@ -769,12 +769,12 @@ przez nas gotowy komponent o nazwie powiadomienia.
 
 Projektując naszą platformę, pamiętaliśmy o istotnym nacisku, jaki klient kładł na jej proste rozszerzanie.
 Postanowiliśmy zatem zaprojektować własny mechanizm, który usprawniłby wytwarzanie mikrousług gotowych do pracy w naszym systemie.
-Od strony backendu, dużo łatwiej jest uzgodnić wspólny interfejs, którego implementacja w nowej mikrousłudze pozwoli podłączyć ją do działającej platformy.
-Frontend natomiast jest wytwarzany, w zasadzie wyłącznie w języku HTML, ze wsparciem ze strony języka skryptowego Javascript oraz jego bibliotek.
-Docelowe mikrousługi, wykorzystywane na naszej platformie, będą komunikowały się z REST-owym backendem.
+Od strony backendu dużo łatwiej jest uzgodnić wspólny interfejs, którego implementacja w nowej mikrousłudze pozwoli podłączyć ją do działającej platformy.
+Frontend natomiast jest wytwarzany w zasadzie wyłącznie w języku HTML, ze wsparciem ze strony języka skryptowego Javascript oraz jego bibliotek.
+Docelowe mikrousługi wykorzystywane na naszej platformie będą komunikowały się z REST-owym backendem.
 Formularze z kolei posiadają zazwyczaj dosyć generyczne interfejsy graficzne i programistyczne.
 Stając przed tak ocenioną sytuacją, postanowiliśmy nie oddawać w ręce programistów mikrousług możliwości umieszczenia na stronie platformy dowolnego kodu HTML.
-Przede wszystkim, ze względów bezpieczeństwa - usługa mogłaby uruchamiać zlośliwy bądź posiadający krytyczne luki kod javascript.
+Przede wszystkim ze względów bezpieczeństwa - usługa mogłaby uruchamiać zlośliwy bądź posiadający krytyczne luki kod javascript.
 Ważne dla nas były jednak także kwestie stylistyczne - dużo wygodniej, niż publikować przewodniki styli (tzw. ,,Style Guide''),
 byłoby nam udostępnić już gotowe, wystylizowane przez nas kawałki kodu HTML.
 
@@ -793,44 +793,42 @@ Każdy komponent powinien posiadać unikalny w skali całego obiektu JSON identy
 \textbf{Nazwa:}
 Powiadomienie
 \\\hline
-Opis:\\
+\textbf{Opis:}\\
 
 Rodzaj krótkiej wiadomości, składający się z tytyłu i treści powiadomienia.\\\hline
-Końcówki:\\
+\textbf{Końcówki:}\\
 Końcówka pobierająca powiadomienie\\\hline
-JSON: \\
-title: \\
-msg:\\
-time:\\\hline
-Opis działania:\\
+\textbf{JSON:}\\
+\textit{title:} tytuł wiadomości\\
+\textit{msg:} treść wiadomości, która zostanie rozwinięta w chwili kliknięcia na tytuł\\
+\textit{time:} czas wysłania powiadomienia\\\hline
+\textbf{Opis działania:}\\
 Powiadomienie zostaje jednorazowo pobrane z podanej końcówki.\\\hline
-Wygląd:\\\hline
 \end{tabularx}
 
 \begin{tabularx}{\linewidth}{|X|}\hline
-Nazwa:
+\textbf{Nazwa:}
 Lista powiadomień
 \\\hline
-Opis:\\
+\textbf{Opis:}\\
 
 Pojemnik na powiadomienia, koordynujący pobieranie powiadomień\\\hline
-Końcówki:\\
+\textbf{Końcówki:}\\
 Końcówka z powiadomieniami\\
 Końcówka z liczbą powiadomień
 \\\hline
-JSON: \\
-title: \\
-msg:\\
-time:\\\hline
-Opis działania:\\
+\textbf{JSON:}\\
+\textit{title:}\\
+\textit{msg:}\\
+\textit{time:} \\ \hline
+\textbf{Opis działania:}\\
 Cyklicznie (w ustalonych odstępach czasu, obecnie co 5 sekund), komponent
 wysyła zapytanie o liczbę dostępnych powiadomień, następnie w pętli, iteruje zwróconą liczbę razy,
 pobierając za każdym razem powiadomienie z końcówki. Pobieranie powiadomienia z końcówki sprowadza się
 do stworzenia komponentu Powiadomienia z danym adresem końcówki, a następnie osadzenie komponentu w sobie.\\\hline
-Wygląd:\\\hline
 \end{tabularx}
 
-\vspace{30pt}
+%\vspace{30pt}
 
 \begin{tabularx}{\linewidth}{|X|}\hline
 \textbf{Nazwa:}
@@ -892,7 +890,7 @@ Dodatkowo w algorytmie walidacji jest liczona suma kontrolna PESELu.
 \\\hline
 \end{tabularx}
 
-\vspace{60pt}
+%\vspace{60pt}
 
 \begin{tabularx}{\linewidth}{|X|}\hline
 \textbf{Nazwa:}
@@ -927,7 +925,6 @@ Formularz wysyła na zadaną końcówkę zapytanie HTTP zawierające w treści z
 \\\hline
 \end{tabularx}
 
-
 \begin{tabularx}{\linewidth}{|X|}\hline
 \textbf{Nazwa:}
 LabelComponent
@@ -961,7 +958,7 @@ Komponent potomny może być replikowany dowolną liczbę razy. Liczba kopii jes
 \\\hline
 \end{tabularx}
 
-\vspace{60pt}
+%\vspace{60pt}
 
 \begin{tabularx}{\linewidth}{|l|}\hline
 \textbf{Nazwa:}
@@ -997,14 +994,14 @@ automatycznego generowanie kodu na podstawie opisu składowych.
 
 Stworzyliśmy następujące dekoratory:
 \begin{itemize}
-	\item Dekorator \mintinline{javascript}{@register} - dodaje komponent do bibliotki komonentów. Wymaga podania nazwy komponentu,
+	\item Dekorator \mintinline{text}{@register} - dodaje komponent do bibliotki komonentów. Wymaga podania nazwy komponentu,
 jego opisu ogólnego, słów kluczowych (charakteryzacja komponentu),
 oraz opisu działania. Dekorator dekoruje klasę, tzn. modyfikuje zawartość
 klasy w momencie kompilacji.
 
-	\item Dekorator \mintinline{javascript}{@Attr} - dodaje do opisu komponentu, w którym się znajduję, opis samego siebie.
+	\item Dekorator \mintinline{text}{@Attr} - dodaje do opisu komponentu, w którym się znajduje, opis samego siebie.
 Komponent to nic innego jak zbiór wielu parametrów, które określają jego wygląd i zachowanie.
-Oczywiście niewszystkie atrybuty danego komponentu są widocznego na zewnątrz, niektóre wykorzystywane
+Oczywiście nie wszystkie atrybuty danego komponentu są widoczne na zewnątrz, niektóre wykorzystywane
 są tylko w wewnętrznych działaniach (obliczeniach klasy), dlatego też nie wprowadziliśmy mechanizmu, który
 automatycznie listowałby wszystkie atrybuty danego komponentu. To od programisty
 zależy, które parametry będą ,,wyprowadzone'' na zewnątrz, czyli które komponentu bedą edytowalne z zewnątrz
@@ -1016,7 +1013,7 @@ TODO
 
 \subsection{Instrukcje renderowania komponentu z obiektu JSON}
 Chcieliśmy, aby przekazywanie do komponentu algorytmu jego renderowania z otrzymanego obiektu JSON było, jak przystało na framework, maksymalnie proste i nowoczesne.
-Jest to kolejne miejsce, w którym pomocne okazały się dekoratory. Za pomocą dekoratora \mintinline{javascript}|@SetterAlg|, dla każdego pola (właściwości) komponentu, można ustawić osobną funkcję odpowiedzialną za przypisanie temu polu wartości.
+Jest to kolejne miejsce, w którym pomocne okazały się dekoratory. Za pomocą dekoratora \mintinline{text}{@SetterAlg}, dla każdego pola (właściwości) komponentu, można ustawić osobną funkcję odpowiedzialną za przypisanie temu polu wartości.
 Funkcje przekazywane do dekoratora są jak w poniższym przykładzie:
 \begin{minted}{javascript}
 @SetterAlg({field: "nazwa_pola_w_JSON", 
@@ -1027,8 +1024,8 @@ pole_w_komponencie: string;
 Schemat działania ww. dekoratora jest następujący: napotykając we właściwym dla komponentu JSONie na pole o nazwie
 \mintinline{javascript}{nazwa_pola_w_JSON}, wykonuje algorytm opisany w ciele funkcji. Ważne jest, żeby sygnatura funkcji przekazywanej do dekoratora była dwuargumentowa, aby - jak zresztą sugeruje przykład - w momencie wywoływania przekazać w kolejnych argumentach instancję komponentu oraz wartość pola \mintinline{javascript}{nazwa_pola_w_JSON}.
 
-Zaletą takiego rozwiązania jest możliwość zastosowania następującego uproszczenia: w większości przypadków, będziemy chcieli, aby po napotkaniu pola p w JSONie opisującym komponent K, ustawić w K wartość właściwości o nazwie p na wartość dostarczaną przez JSON. Stąd też, jest to domyślne zachowanie dla pustego dekoratora
-\mintinline{javascript}{@SetterAlg()}. Można zapisać, że pusty dekorator zachowuje się tak samo, jak następujący:
+Zaletą takiego rozwiązania jest możliwość zastosowania następującego uproszczenia: w większości przypadków, będziemy chcieli, aby po napotkaniu pola \texttt{p} w JSONie opisującym komponent \texttt{K}, ustawić w \texttt{K} wartość właściwości o nazwie \texttt{p} na wartość dostarczaną przez JSON. Stąd też jest to domyślne zachowanie dla pustego dekoratora
+\mintinline{text}{@SetterAlg()}. Można uznać, że pusty dekorator zachowuje się tak samo, jak następujący:
 
 \begin{minted}{javascript}
 @SetterAlg({field: "pole_w_komponencie", 
@@ -1039,7 +1036,7 @@ pole_w_komponencie: string;
 \end{minted}
 
 \subsection{Style Guide}
-Style Guide to jeden z komponentów naszej aplikacji, którego działanie jest możliwe dzięki wsparciu dekoratorów \mintinline{javascript}{register} oraz \mintinline{javascript}{Attr}. Pozwala on na zaprojektowanie i dostosowanie dowolnego komponentu, którego chcemy użyć w naszej mikrousłudze. Wyświetla on ogólne informacje na temat rozważanego komponentu, wskazuje domyślne wartości pól obiektu JSON powiązanego z komponentem, oraz umożliwia modyfikację tych wartości. Całość jest na bieżąco renderowana, zapewniając dynamiczny podgląd wprowadzanych zmian. Kolejne komponenty aplikacji dodają się automatycznie do biblioteki Style Guide'a, przy czym automatyzacja ta jest przeprowadzana za pomocą wspomnianych wyżej dekoratorów. Po skończeniu dostosowywania komponentu, w prawym górnym rogu można znaleźć obiekt JSON, który pozwoli na wyrenderowanie go w żądanym kształcie.\\
+Style Guide to jeden z komponentów naszej aplikacji, którego działanie jest możliwe dzięki wsparciu dekoratorów \mintinline{javascript}{register} oraz \mintinline{javascript}{Attr}. Pozwala on na zaprojektowanie i dostosowanie dowolnego komponentu, którego chcemy użyć w naszej mikrousłudze. Wyświetla on ogólne informacje na temat rozważanego komponentu, wskazuje domyślne wartości pól obiektu JSON powiązanego z komponentem, oraz umożliwia modyfikację tych wartości. Całość jest na bieżąco renderowana, zapewniając dynamiczny podgląd wprowadzanych zmian. Kolejne komponenty aplikacji dodają się automatycznie do biblioteki Style Guide'a, przy czym automatyzacja ta jest przeprowadzana za pomocą wspomnianych wyżej dekoratorów. Po skończeniu dostosowywania komponentu, w prawym górnym rogu można znaleźć obiekt JSON, który pozwoli na wyrenderowanie go w żądanym kształcie.
 
 Poniżej przykład użycia Style Guide dla komponentu PanelComponent: \\
 \includegraphics[width=\textwidth]{obrazki/styleguide.png}
@@ -1049,11 +1046,10 @@ Na potrzeby realizacji prototypu, pozwoliliśmy sobie na wyspecjalizowanie pewne
 Do wyświetlenia mikrousługi formularzowej, której interfejs jest opisany obiektem JSON, obiekt ten musi zawierać następujące pola:
 \begin{itemize}
 	\item $send-url$: adres URL, na który zostanie wysłany formularz
-	\item $fill-url$: adres URL, z którego należy pobrać dane dowstępnego wypełnienia formularza (dane stałe, np. Nazwisko, PESEL)
+	\item $fill-url$: adres URL, z którego należy pobrać dane dostępnego wypełnienia formularza (dane stałe, np. nazwisko, numer PESEL)
 	\item $components$: tablica zawierająca komponenty interfejsu
 \end{itemize}
 W takiej postaci jest wysyłany na przykład JSON komponentu Plus500.
-
 
 \subsection{Platforma developera}
 Sposób dodawania mikrousług, style guide.
