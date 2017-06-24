@@ -1056,7 +1056,7 @@ W takiej postaci jest wysyłany na przykład JSON komponentu Plus500.
 
 
 \subsection{Platforma developera}
-Sposób dodawania mikrousług, style guide.
+Dodawanie nowej mikrousługi do pakietu istniejących jest bardzo proste, chociaż nie udało nam się do końca zaimplementować wszystkich mechanizmów upraszczających. W skrócie, wystarczy stworzyć nową klasę języka TypeScript, zaimportować dekorator \mintinline{javascript}{@SetterAlg}, oraz opcjonalnie \mintinline{javascript}{@Register} i \mintinline{javascript}{@Attr} do dokumentacji. Następnie wszystkie pola w klasie, które chcemy mieć możliwość ustawiać za pomocą obiektów JSON, dekorujemy \mintinline{javascript}{@SetterAlg} wedle uznania. Pozostało jeszcze tylko dodać w funkcji statycznej \mintinline{javascript}{createFromJSON()} mapowanie z żądanej nazwy komponentu w JSONie na instancję klasy (czyli mówiąc prościej, jaką wartością w polu $type$ w JSONie chcemy identyfikować nasz komponent). Na sam koniec, w głównym module aplikacji, \mintinline{javascript}{src/app/app.module.ts} dodajemy nasz komponent do tablic $declarations$ oraz $entryComponents$. Nasz nowy komponent jest już gotowy do użycia.
 
 \section{Serwer uwierzytelniania i autoryzacji}
 
