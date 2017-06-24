@@ -787,7 +787,7 @@ który uprości ich tworzenie, przekazywanie i interpretację, z poziomu osoby l
 
 \subsection{Opis komponentów}
 \begin{tabularx}{\linewidth}{|l|l|c|X|l|}\hline
-Nazwa:
+\textbf{Nazwa:}
 Powiadomienie
 \\\hline
 Opis:\\
@@ -827,26 +827,153 @@ do stworzenia komponentu Powiadomienia z danym adresem końcówki, a następnie 
 Wygląd:\\\hline
 \end{tabularx}
 
+\vspace{30pt}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+PanelComponent
+\\\hline
+\textbf{Opis:}\\
+
+Kontener z paskiem tytułowym i zawartością.\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+$title$: tytuł panelu\\
+$panel\_class$: typ - kolor - panelu, wg. typów obsługiwanych przez bootstrap\\
+$collapsible$: czy ciało panelu rozwijane\\
+$hidable$: czy panel usuwalny\\
+$backgroundColor$: kolor tła w ciele panelu\\
+$textColor$: kolor tekstu w panelu\\
+$cursor$: typ kursora (myszy) na obszarze panelu\\
+$size$: obiekt o polach $xsmall, small, medium, large, xlarge$, opisujący dla jakiego rozmiaru okna, jak szeroki ma być panel w skali $0 - 12$ (mechanizm zapożyczony z bootstrapa)
+\\\hline
+\textbf{Opis działania:}\\
+Komponent pozwalający obramować grupę innych komponentów w tak zwany panel. W ciele panelu możliwe jest osadzanie innych komponentów. Panel może posiadać pasek tytułowy, oraz możliwość rozwijania\\\hline
+
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+TextBox
+\\\hline
+\textbf{Opis:}\\
+
+Pole tekstowe do wprowadzania danych\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+$defaultText$: tekst-wskazówka, tzw. placeholder\\
+$text$: tekst domyślny, początkowa wartość\\
+$regex$: wyrażenie regularne w składni javascript, do walidacji wprowadzonych danych\\
+$visible$: czy komponent widzialny\\
+Inne pola, np. $size$, jak w PanelComponencie wyżej
+\\\hline
+\textbf{Opis działania:}\\
+Pole tekstowe czeka na dane od użytkownika. Przy pomyślnej walidacji, podświetla się na zielono, w przeciwnym wypadku na czerwono.
+\\\hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+PeselComponent
+\\\hline
+\textbf{Opis:}\\
+
+Pole tekstowe do wprowadzania numeru PESEL\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+Jak w TextBox
+\\\hline
+\textbf{Opis działania:}\\
+Pole tekstowe dostosowane domyślnie przez wyrażenie regularne do rozpoznawania liczb identyfikujących numer PESEL.
+Dodatkowo w algorytmie walidacji jest liczona suma kontrolna PESELu.
+\\\hline
+\end{tabularx}
+
+\vspace{60pt}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+ZipcodeComponent
+\\\hline
+\textbf{Opis:}\\
+
+Pole tekstowe do wprowadzania kodu pocztowego\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+Jak w TextBox
+\\\hline
+\textbf{Opis działania:}\\
+Pole tekstowe dostosowane domyślnie przez wyrażenie regularne do rozpoznawania kodów pocztowych formatu $00-000$
+\\\hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+FormComponent
+\\\hline
+\textbf{Opis:}\\
+
+Formularz wysyłający swoją zawartość na podaną końcówkę\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+$form\_action$: adres URL końcówki, na którą zostanie wysłany formularz\\
+$method$: metoda $get$ lub $post$ wysyłania zapytania na końcówkę\\
+\hline
+\textbf{Opis działania:}\\
+Formularz wysyła na zadaną końcówkę zapytanie HTTP zawierające w treści zawartość pól, które są w nim osadzone.
+\\\hline
+\end{tabularx}
 
 
 \begin{tabularx}{\linewidth}{|X|}\hline
-Nazwa:
-Panel
+\textbf{Nazwa:}
+LabelComponent
 \\\hline
-Opis:\\
+\textbf{Opis:}\\
 
-Kontener z paskiem tytułowym i zawartością.\\\hline
-Końcówki:\\
-końcówka pobierająca tytuł\\
+Etykieta - niemodyfikowalne pole tekstowe\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+$text$: treść wyświetlanego tekstu\\
+$backgroundColor$: kolor tła etykietki\\
+\hline
+\textbf{Opis działania:}\\
+Etykietka służy do wyświetlania tekstu dowolnej długości. Tekst jest zawijany, aby uniknąć konieczności przewijania strony w poziomie.
 \\\hline
-JSON: \\
-title: \\
-msg:\\
-time:\\\hline
-Opis działania:\\
-Komponent, w zależnosci od konfiguracji, cyklicznie lub jednorazowo pobiera treść
-górenego paska. W ciele panelu możliwe jest osadzanie innych komponentów.\\\hline
-Wygląd:\\\hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+DynamicListComponent
+\\\hline
+\textbf{Opis:}\\
+
+Komponent, który pozwala użytkownikowi na replikację swojego komponentu potomnego dowolną liczbę razy\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+$replicableElement$: dowolny, pojedynczy komponent, który ma być replikowany\\
+\hline
+\textbf{Opis działania:}\\
+Komponent potomny może być replikowany dowolną liczbę razy. Liczba kopii jest regulowana za pomocą przycisków $+/-$ zlokalizowanych u dołu komponentu. Domyślnie potomek jest jeden.
+\\\hline
+\end{tabularx}
+
+\vspace{60pt}
+
+\begin{tabularx}{\linewidth}{|l|}\hline
+\textbf{Nazwa:}
+RowComponent
+\\\hline
+\textbf{Opis:}\\
+
+Prosty komponent szeregujący w jednym wierszu komponenty potomne\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+Brak\\
+\hline
+\textbf{Opis działania:}\\
+Komponent jest implementacją bootstrapowej klasy $row$.
+\\\hline
 \end{tabularx}
 
 \subsection{System tworzenia automatycznej dokumentacji}
@@ -859,21 +986,20 @@ wśród komponentów, oraz niejako wymusza na programiście większą starannoś
 Na podstawie naszych doświadczeń stwierdziliśmy, że bardzo wygodne jest opisywanie
 kodu w trakcie i w miejscu jego tworzenia. Dlatego używając dekoratorów,
 stworzyliśmy mechanizm pozwalający tworzyć komponenty niejako w sposób opisowy.
+\textbf{Dekorator} to specjalna deklaracja, którą można dołączyć do definicji dowolnej klasy, metody, czy właściwości klasy języka TypeScript. Implementacyjnie, dekorator nie jest niczym innym, jak funkcją wołaną w czasie kompilacji. Tworzenie automatycznej dokumentacji odbywa się zatem podczas budowania aplikacji.
 Zapewne dużym nadużyciem będzie nazwanie użytego podejścia terminem
 \textit{programowanie w paradygmacie opisowym},
 jednak na dobrą sprawę sam sposób kreacji komponentów został, faktycznie, sprowadzony do
 automatycznego generowanie kodu na podstawie opisu składowych.
-Dekoratory pozwalają na zmianę zachowanie dekorowanego przez siebie elementu już w momencie kompilacji,
-lub w momencie wywoływania danego elementu (dla metod).
 
 Stworzyliśmy następujące dekoratory:
 \begin{itemize}
-	\item Dekorator register - dodaje komponent do bibliotki komonentów. Wymaga podania nazwy komponentu,
+	\item Dekorator \mintinline{javascript}{@register} - dodaje komponent do bibliotki komonentów. Wymaga podania nazwy komponentu,
 jego opisu ogólnego, słów kluczowych (charakteryzacja komponentu),
 oraz opisu działania. Dekorator dekoruje klasę, tzn. modyfikuje zawartość
 klasy w momencie kompilacji.
 
-	\item Dekorator Attr - dodaje do opisu komponentu, w którym się znajduję, opis samego siebie.
+	\item Dekorator \mintinline{javascript}{@Attr} - dodaje do opisu komponentu, w którym się znajduję, opis samego siebie.
 Komponent to nic innego jak zbiór wielu parametrów, które określają jego wygląd i zachowanie.
 Oczywiście niewszystkie atrybuty danego komponentu są widocznego na zewnątrz, niektóre wykorzystywane
 są tylko w wewnętrznych działaniach (obliczeniach klasy), dlatego też nie wprowadziliśmy mechanizmu, który
@@ -910,7 +1036,21 @@ pole_w_komponencie: string;
 \end{minted}
 
 \subsection{Style Guide}
-Style Guide to jeden z komponentów naszej aplikacji, którego działanie jest możliwe dzięki wsparciu dekoratorów \mintinline{javascript}{register} oraz \mintinline{javascript}{Attr}. Pozwala on na zaprojektowanie i dostosowanie dowolnego komponentu, którego chcemy użyć w naszej mikrousłudze. Wyświetla on ogólne informacje na temat rozważanego komponentu, wskazuje domyślne wartości pól obiektu JSON powiązanego z komponentem, oraz umożliwia modyfikację tych wartości. Całość jest na bieżąco renderowana, zapewniając dynamiczny podgląd wprowadzanych zmian. Kolejne komponenty aplikacji dodają się automatycznie do biblioteki Style Guide'a, przy czym automatyzacja ta jest przeprowadzana za pomocą wspomnianych wyżej dekoratorów.
+Style Guide to jeden z komponentów naszej aplikacji, którego działanie jest możliwe dzięki wsparciu dekoratorów \mintinline{javascript}{register} oraz \mintinline{javascript}{Attr}. Pozwala on na zaprojektowanie i dostosowanie dowolnego komponentu, którego chcemy użyć w naszej mikrousłudze. Wyświetla on ogólne informacje na temat rozważanego komponentu, wskazuje domyślne wartości pól obiektu JSON powiązanego z komponentem, oraz umożliwia modyfikację tych wartości. Całość jest na bieżąco renderowana, zapewniając dynamiczny podgląd wprowadzanych zmian. Kolejne komponenty aplikacji dodają się automatycznie do biblioteki Style Guide'a, przy czym automatyzacja ta jest przeprowadzana za pomocą wspomnianych wyżej dekoratorów. Po skończeniu dostosowywania komponentu, w prawym górnym rogu można znaleźć obiekt JSON, który pozwoli na wyrenderowanie go w żądanym kształcie.\\
+
+Poniżej przykład użycia Style Guide dla komponentu PanelComponent: \\
+\includegraphics[width=\textwidth]{obrazki/styleguide.png}
+
+\subsection{Interfejs mikrousługi jako JSON}
+Na potrzeby realizacji prototypu, pozwoliliśmy sobie na wyspecjalizowanie pewnej grupy mikrousług jako tak zwane mikrousługi formularzowe, to znaczy takie, które pozwalają na skonstruowanie formularza, który wysyła gdzieś dane pobrane od użytkownika.
+Do wyświetlenia mikrousługi formularzowej, której interfejs jest opisany obiektem JSON, obiekt ten musi zawierać następujące pola:
+\begin{itemize}
+	\item $send-url$: adres URL, na który zostanie wysłany formularz
+	\item $fill-url$: adres URL, z którego należy pobrać dane dowstępnego wypełnienia formularza (dane stałe, np. Nazwisko, PESEL)
+	\item $components$: tablica zawierająca komponenty interfejsu
+\end{itemize}
+W takiej postaci jest wysyłany na przykład JSON komponentu Plus500.
+
 
 \subsection{Platforma developera}
 Sposób dodawania mikrousług, style guide.
