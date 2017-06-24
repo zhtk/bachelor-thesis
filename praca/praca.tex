@@ -1183,6 +1183,10 @@ wyśle on zapytanie pod adres \texttt{http://localhost:8000/notify/pending/} i p
 odpowiedź z powrotem. Wyrejestrowanie usługi z integratora nastąpi automatycznie po
 wyłączeniu serwera.
 
+\subsection{Autoryzacja}
+Autoryzacja w aplikacjach webowych jest kwestią dosyć skomplikowaną i w naszym prototypie chcieliśmy bardziej przedstawić jakąkolwiek działającą implementację, niż zadbać o jej dopracowanie pod względem bezpieczeństwa.
+Domyślne konta w aplikacji to konto $user$, oraz konto $admin$, hasła do kont są domyślnie takie, jak ich nazwy.
+
 \subsection{Logger}
 
 Logger jest mikrousługą ilustrującą działanie mechanizmu haków. Na początku
@@ -1253,7 +1257,16 @@ użytkownika i możliwa jest interakcja z mikrousługą.
 	\hline
 	Michał Jaroń & TODO\\
 	\hline
-	Jarosław Socha & TODO\\
+	Jarosław Socha & Zaproponowanie ogólnej architektury warstwy front-end. \newline
+		Implementacja logiki Style Guide. \newline
+		Implementacja dynamicznych komponentów. \newline
+		Implementacja front-endu wiadomości. \newline
+		Implementacja wniosków 500plus z użyciem komponentów. \newline
+		Implementacja front-endu autoryzacji. \newline
+		Implementacja komunikacji HTTP z warstwą backend. \newline
+		Implementacja renderowania komponentów z obiektów JSON za pomocą dekoratora @SetterAlg. \newline
+		Implementacja mechanizmu podglądu i rozpatrywania wniosków.
+	\\
 	\hline 
 	Piotr Zalas & Zaproponowanie wstępnej architektury aplikacji.\newline
 	  Implementacja Integratora i Integratora 2.\newline
