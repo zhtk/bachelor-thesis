@@ -4,7 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{minted}
-\usepackage{ltablex}
+\usepackage{ltablex
 \usepackage{tabularx}
 \usepackage{pbox}
 
@@ -751,8 +751,9 @@ która nie pozwala na zaklasyfikowanie go jako zwykłej mikrousługi.\\
 
 \section{Tworzenie mockupów}
 Jako, że naszym celem nie było stworzenie gotowej platformy (w sensie produkcyjnym), a raczej stworzenie proof of concept,
-intensywnie tworzyliśmy prototypy. Chcieliśmy pokazać, jak PUE może wyglądać bez skupiania się na
-sprawach żmudnych, czasochłonnych i niekoniecznie potrzebnych do pokazanie idei.
+dlatego intensywnie tworzyliśmy prototypy. Chcieliśmy pokazać, jak PUE może wyglądać, nie skupiając się jednak na
+sprawach żmudnych, czasochłonnych i niekoniecznie potrzebnych do pokazanie idei (takich jak kwestie bezpieczeństwa - oczywiście
+tego tematu całkowicie nie pominieliśmy - ale zapewnienie bezpieczeństwa dla takiego typu platformy nie było naszym głównym celem).
 
 \section{Strona domowa}
 Nastawienie społeczeństwa do ZUS, jako organizacji jest zdecydowanie negatywne, dlatego tworząc nasz projekt staraliśmy się
@@ -760,9 +761,11 @@ zmienić wizerunek ZUSu. Postawiliśmy na personalizacje kontaktów z użytkowni
 użytkownik otrzymuje większość potrzebnych informacji. Strona domowa jest dopracowana pod względem UX. Panele informują
 obywatela o aktualnym stanie spraw z nim związanych. Informację te są wyraźnie wyróżnione, a kolory jakie przyjmują panele
 intuicyjnie wiążą się z kontekstem (np. czerwony kolor - sprawy odrzucone). Właściciel profilu nie musi marnować czasu
-na szukanie najbardziej potrzebnych mu informacji w innych miejscach strony. W założeniu strona domowa powinna być
+na szukanie najbardziej potrzebnych mu informacji, w innych miejscach strony. W założeniu, strona domowa powinna być
 namiastką ,,Ściany'' znanej z popularnego portalu społecznościowego. Panel z powiadomieniami to po prostu dostarczony
-przez nas gotowy komponent o nazwie powiadomienia.
+przez nas gotowy komponent o nazwie powiadomienia. Po skasowaniu wszystkich aktualnych powiadomień wyświetla się spersonalizowany
+komunikat, chwalący użytkownika za aktywność. To kolejny element wpisujący się w naszą filozofię tworzenia platformy jako
+środowiska nie tylko użytecznego ale i przyjaznego.
 
 \section{Komponenty}
 \subsection{Mechanizm komponentów}
@@ -785,9 +788,22 @@ dlatego postanowiliśmy zwiększyć poziom abstrakcji w naszych szablonach,
 a co za tym idzie -- zbudować mały framework (szkielet),
 który uprości ich tworzenie, przekazywanie i interpretację, z poziomu osoby lub programu czytającego ich opis.
 
+Uważamy, że większość elementów na stronach składająych się na aplikacje webowe można stworzyć składając mały zbiór gotowych elementów.
+To właśnie dlatego wprowadzamy w naszym frameworku pojęcie komponentu. Komponenty to niepodzielne (patrząć z zewnątrz) części oferujące
+pewien rodzaj aktywności. Sama ``definicja'' komponentów brzmi bardzo podobnie jak mikrousług, komponenty operują jednak w warstwie frontend,
+to one korzystają z mirkousług, łączać logikę w jeden spójny klocek.
+
 \subsection{Opis komponentów}
 
-Każdy komponent powinien posiadać unikalny w skali całego obiektu JSON identyfikator, ustawiany jako wartość pola $id$. Oprócz tego, poniżej znajduje się w miarę szczegółowy opis budowy zaimplementowanych komponentów: \\
+Każdy komponent oferuje pewien rodzaj aktywności, żeby lepiej pokazać różnicę między komponentem, a mikrousługą,
+można posłużyc się metaforą. Stół do ruletki to jeden komponent składający się z komponentów, plansza, koła.
+Komponent oferuję możliwość zagrania w ruletkę. Za losowanie(ruch kulki w kole) odpowiada już jednak mikroułsuga, za werfyfikacje
+graczy również odpowiada mikrousługa. Z poziomu programisty używającego naszego komponentu nie widać jednak
+tych poszczególnych części składowych. Programista chce w pewnym miejscy osadzić stół z ruletką, wklei więc w swój kod
+<ruletka></ruletka>. Komponent stworzony już przez kogoś innego. Reużywalność kodu w najlepszej postacii.
+Każdy komponent powinien posiadać unikalny w skali całego obiektu JSON identyfikator, ustawiany jako wartość pola $id$.
+Jako, że pomimo różnych zadań zewnętrzny iterfejs komponentów jest w miarę podobny, 
+poniżej znajduje się w miarę szczegółowy opis kilku wybranych komponentów: \\
 
 \begin{tabularx}{\linewidth}{|l|l|c|X|l|}\hline
 \textbf{Nazwa:}
@@ -795,7 +811,7 @@ Powiadomienie
 \\\hline
 \textbf{Opis:}\\
 
-Rodzaj krótkiej wiadomości, składający się z tytyłu i treści powiadomienia.\\\hline
+Rodzaj krótkiej wiadomości, składającej się z tytyłu i treści powiadomienia.\\\hline
 \textbf{Końcówki:}\\
 Końcówka pobierająca powiadomienie\\\hline
 \textbf{JSON:}\\
@@ -815,7 +831,7 @@ Lista powiadomień
 Pojemnik na powiadomienia, koordynujący pobieranie powiadomień\\\hline
 \textbf{Końcówki:}\\
 Końcówka z powiadomieniami\\
-Końcówka z liczbą powiadomień
+Końcówka z liczbą powiadomień(musi wiedzieć ile ściągnąć)
 \\\hline
 \textbf{JSON:}\\
 \textit{title:}\\
@@ -835,7 +851,6 @@ do stworzenia komponentu Powiadomienia z danym adresem końcówki, a następnie 
 PanelComponent
 \\\hline
 \textbf{Opis:}\\
-
 Kontener z paskiem tytułowym i zawartością.\\
 \hline
 \textbf{Pola obiektu JSON:} \\
@@ -849,7 +864,8 @@ $cursor$: typ kursora (myszy) na obszarze panelu\\
 $size$: obiekt o polach $xsmall, small, medium, large, xlarge$, opisujący dla jakiego rozmiaru okna, jak szeroki ma być panel w skali $0 - 12$ (mechanizm zapożyczony z bootstrapa)
 \\\hline
 \textbf{Opis działania:}\\
-Komponent pozwalający obramować grupę innych komponentów w tak zwany panel. W ciele panelu możliwe jest osadzanie innych komponentów. Panel może posiadać pasek tytułowy, oraz możliwość rozwijania\\\hline
+Komponent pozwalający obramować grupę innych komponentów w tak zwany panel.
+W ciele panelu możliwe jest osadzanie innych komponentów. Panel może posiadać pasek tytułowy, oraz możliwość rozwijania\\\hline
 
 \end{tabularx}
 
@@ -977,16 +993,20 @@ Komponent jest implementacją bootstrapowej klasy $row$.
 \end{tabularx}
 
 \subsection{System tworzenia automatycznej dokumentacji}
-Każdy komponent można opisać w podobny sposób.
+Każdy komponent można scharektyrować za pomocą podbonych cech(co potwierdza powyższy podrodział).
 Z uwagi na tę regularność stworzyliśmy mechanizm tworzenia automatycznej dokumentacji.
 Jako, że platforma składa się z wielu komponentów, w założeniu tworzonych przez wielu
-programistów, istnieje potrzeba usystematyzowania opisu komponentów.
+programistów, istnieje potrzeba usystematyzowania opisu komponentów. Co więcej, jeden z naszych pomysłów
+zakładał stworzenie ``marketu`` (na wzór marketów z aplikacjami np. appstore) komponentów, co wymusiło
+by nałożenie jeszcze sztywniejszych ram na programistów tworzących komponenty.
 Nasz mechanizm przyczynia się do zwiększenia spójności platformy, pozwala zachować porządek
 wśród komponentów, oraz niejako wymusza na programiście większą staranność.
 Na podstawie naszych doświadczeń stwierdziliśmy, że bardzo wygodne jest opisywanie
 kodu w trakcie i w miejscu jego tworzenia. Dlatego używając dekoratorów,
-stworzyliśmy mechanizm pozwalający tworzyć komponenty niejako w sposób opisowy.
-\textbf{Dekorator} to specjalna deklaracja, którą można dołączyć do definicji dowolnej klasy, metody, czy właściwości klasy języka TypeScript. Implementacyjnie, dekorator nie jest niczym innym, jak funkcją wołaną w czasie kompilacji. Tworzenie automatycznej dokumentacji odbywa się zatem podczas budowania aplikacji.
+stworzyliśmy mechanizm pozwalający tworzyć komponenty(od strony kodu) niejako w sposób opisowy.
+\textbf{Dekorator} to specjalna deklaracja, którą można dołączyć do definicji dowolnej klasy, metody, czy właściwości klasy języka TypeScript. 
+Implementacyjnie, dekorator nie jest niczym innym, jak funkcją wołaną w czasie kompilacji(istnieją wyjątki od tego, w którym momencie będzie dana funkcja wołana.
+Tworzenie automatycznej dokumentacji odbywa się zatem podczas budowania aplikacji.
 Zapewne dużym nadużyciem będzie nazwanie użytego podejścia terminem
 \textit{programowanie w paradygmacie opisowym},
 jednak na dobrą sprawę sam sposób kreacji komponentów został, faktycznie, sprowadzony do
@@ -995,7 +1015,7 @@ automatycznego generowanie kodu na podstawie opisu składowych.
 Stworzyliśmy następujące dekoratory:
 \begin{itemize}
 	\item Dekorator \mintinline{text}{@register} - dodaje komponent do bibliotki komonentów. Wymaga podania nazwy komponentu,
-jego opisu ogólnego, słów kluczowych (charakteryzacja komponentu),
+jego opisu ogólnego, słów kluczowych(tagów) (charakteryzacja komponentu),
 oraz opisu działania. Dekorator dekoruje klasę, tzn. modyfikuje zawartość
 klasy w momencie kompilacji.
 
@@ -1003,17 +1023,33 @@ klasy w momencie kompilacji.
 Komponent to nic innego jak zbiór wielu parametrów, które określają jego wygląd i zachowanie.
 Oczywiście nie wszystkie atrybuty danego komponentu są widoczne na zewnątrz, niektóre wykorzystywane
 są tylko w wewnętrznych działaniach (obliczeniach klasy), dlatego też nie wprowadziliśmy mechanizmu, który
-automatycznie listowałby wszystkie atrybuty danego komponentu. To od programisty
+automatycznie listowałby wszystkie atrybuty danego komponentu(co jest możliwe w js). To od programisty
 zależy, które parametry będą ,,wyprowadzone'' na zewnątrz, czyli które komponentu bedą edytowalne z zewnątrz
 i będą miały wpływ na zachowanie komponentu, a które będą ukryte na potrzeby wewnętrznych działań komponentu.
 \end{itemize}
 
 \subsection{Edytor}
-TODO
+Skoro tworzenie kompontów powinno być bardzo proste, możliwe wręcz dla osób nie posiadająych dużej wiedzy technicznej, warto byłoby
+stworzyć możliwość tworzenia aplikacji za pomocą naprawdę prostych narzędzi. Tak jak korzystanie z gotowych komponentów
+bardzo upraszcza pisanie aplikacji, to jednak ciągle może być to za cieżka do zrealizowania rzecz dla laika. Dlatego też pomyśleliśmy
+o edytorze który pozwalałby przeciągać, rozciągać, customizować wygląd komponentów. Edytor nie został jednak doprowadzony do wystarczająco dojrzałego
+stanu. Nie został jednak usunięty z projektu ponieważ, te zręby edytor, które powstały niosą ze sobą sporą dawkę wiedzy. Jako, że Angular2
+jest framewrokiem młodym nie istnieje w pełni działąjące rozwiązanie wspierające zmieniania rozmiarów(resizable) oraz przesuwanie komponetów.
+Dlatego pomimo, że edytor nie działa jeszcze w 100 procentach warto spojrzeć na dwie zaimplementowane dyrektywy - draggable i resizable.
+Umożliwiają one dopisanie do dowolnego elementu html (element musi rozmiar, co w przypadku html nie jest tak oczywiste, więc czasamio trzeba
+jakiś element opakować we wrapper, który już faktycznie ma rozmiar) słów draggable i resizable, takie proste dopisanie czyni te elementy
+obiektami, którym możemy zmieniać rozmiar, przesuwać je itp. Implementacja tych funkcjonalności chociaż ostatecznie nie przydaje się( w obecnej) w fazie projektu,
+to jednak wpasowuje się w nurt tworzenia przez nas oprogramowania łatwo rozszerzalnego , reużywalnego i w końcu prostego w użyciu. Czy życie porgramitów
+frontend niebyłoby prostrze, gdyby wystarczyło zapisać przykładowo : <div draggable> </div>, żeby ożywić element? Nasze rozwiązanie pozwala na takie działanie,
+musimy jednak pamiętać, że ciągle opiera się na frameworku angular.
+
 
 \subsection{Instrukcje renderowania komponentu z obiektu JSON}
-Chcieliśmy, aby przekazywanie do komponentu algorytmu jego renderowania z otrzymanego obiektu JSON było, jak przystało na framework, maksymalnie proste i nowoczesne.
-Jest to kolejne miejsce, w którym pomocne okazały się dekoratory. Za pomocą dekoratora \mintinline{text}{@SetterAlg}, dla każdego pola (właściwości) komponentu, można ustawić osobną funkcję odpowiedzialną za przypisanie temu polu wartości.
+Chcieliśmy, aby przekazywanie do komponentu algorytmu jego renderowania z otrzymanego obiektu JSON było,
+jak przystało na framework, maksymalnie proste i nowoczesne.
+Jest to kolejne miejsce, w którym pomocne okazały się dekoratory.
+Za pomocą dekoratora \mintinline{text}{@SetterAlg}, dla każdego pola (właściwości) komponentu,
+można ustawić osobną funkcję odpowiedzialną za przypisanie temu polu wartości.
 Funkcje przekazywane do dekoratora są jak w poniższym przykładzie:
 \begin{minted}{javascript}
 @SetterAlg({field: "nazwa_pola_w_JSON", 
@@ -1261,13 +1297,19 @@ użytkownika i możliwa jest interakcja z mikrousługą.
 \begin{tabularx}{\linewidth}{|l|X|} \hline
 	\textbf{Członek zespołu} & \textbf{Wykonane zadania} \\
 	\hline
-	Michał Jaroń & TODO\\
+	Michał Jaroń & Stworzenie architektury warstwy frontend (komponenty). \newline
+		      Stworzenie mockupów:
+			-> zwolnienie lekarskie
+			-> podglądanie kolejek w urzędach
+			->
+		\newline
+		Stworzenie fontendu wiadomości. \newline
+		
+	\\	
+	
 	\hline
-	Jarosław Socha & Zaproponowanie ogólnej architektury warstwy front-end. \newline
-		Implementacja logiki Style Guide. \newline
-		Implementacja dynamicznych komponentów. \newline
-		Implementacja front-endu wiadomości. \newline
-		Implementacja wniosków 500plus z użyciem komponentów. \newline
+	Jarosław Socha \newline
+		Wyklikanie wniosku 500+ z gotowych komponentów. \newline
 		Implementacja front-endu autoryzacji. \newline
 		Implementacja komunikacji HTTP z warstwą backend. \newline
 		Implementacja renderowania komponentów z obiektów JSON za pomocą dekoratora @SetterAlg. \newline

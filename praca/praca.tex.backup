@@ -4,17 +4,19 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{minted}
-\usepackage{ltablex}
+\usepackage{ltablex
+\usepackage{tabularx}
+\usepackage{pbox}
 
 % Dane magistranta:
 
-\author{Autorzy}
-
-\nralbumu{Albumy}
+\autor{Michał Jaroń}{348711}
+\autori{Jarosław Socha}{347267}
+\autorii{Piotr Zalas}{361374}
 
 \title{Framework oparty o wzorzec mikrousług na przykładzie portalu dla ZUS}
 
-\tytulang{Framework based on microservices pattern ilustrated by portal for ZUS}
+%\tytulang{Framework based on microservices pattern illustrated by portal for ZUS}
 
 \kierunek{Informatyka}
 
@@ -42,18 +44,40 @@
 }
 
 %Klasyfikacja tematyczna wedlug AMS (matematyka) lub ACM (informatyka)
-\klasyfikacja{D. Software\\
-  D.127. Ubezpieczenia społeczne}
+\klasyfikacja{
+	% \begin{CCSXML}
+	%	<ccs2012>
+	%	<concept>
+	%	<concept_id>10011007.10011006.10011066.10011068</concept_id>
+	%	<concept_desc>Software and its engineering~Software as a service orchestration system</concept_desc>
+	%	<concept_significance>500</concept_significance>
+	%	</concept>
+	%	</ccs2012>
+	%\end{CCSXML}
+	%
+	%\ccsdesc[500]{Software and its engineering~Software as a service orchestration system}
+	Software and its engineering\\
+	Software notations and tools\\
+	Development frameworks and environments\\
+	Software as a service orchestration system
+	%Software and its engineering~Software as a service orchestration system
+}
 
 % Słowa kluczowe:
-\keywords{mikrousługi, SOA, trudne sprawy}
+\keywords{Mikrousługi, Frontend, Backend, Integracja usług, Framework, Angular 2, Django, Python, TypeScript, ZooKeeper}
 
 \begin{document}
 \maketitle
 
 %tu idzie streszczenie na strone poczatkowa
 \begin{abstract}
-  Potem dopiszemy.
+	Praca przedstawia opis projektu i implementacji frameworka integracji mikrousług.
+	Omawiamy typowe problemy występujące przy integrowaniu usług, sposoby ich
+	rozwiązywania i zastosowane przez nas podejście z wykorzystaniem mikrousług.
+	Prezentujemy przegląd już istniejących technologii oraz kryteria ich doboru
+	do tworzonego przez nas rozwiązania. Następnie przedstawiamy architekturę i
+	praktyczną realizację portalu do komunikacji między obywatelem a urzędem z
+	wykorzystaniem opracowanego przez nas frameworka.
 \end{abstract}
 
 \tableofcontents
@@ -111,7 +135,7 @@ programistów, których zatrudnienie generuje mniejsze koszty wytworzenia kodu. 
 zrównoważonego rozwoju, zapobiegając centalizacji ośrodków programistycznych, a z drugiej strony prowadziłby do wymiernych
 oszczędności na wynagrodzeniach.
 
-\section{Zleceniodawca - ZUS}
+\section{Pomysłodawca - ZUS}
 
 Naszym zleceniodawcą był Zakład Ubezpieczeń Społecznych. Według ,,Rocznika
 Statystycznego Ubezpieczeń Społecznych'' \cite{rocznik} w 2011 roku w ZUS było ubezpieczonych
@@ -142,41 +166,72 @@ W żadnym przypadku praca z naszym systemem nie powinna przypominać nieprzyjemn
 nakłada na nas obowiązek rozwiązania problemu skalowalności aplikacji.
 
 \section{Produkt końcowy}
-TODO % TODO
+
+Nasz produkt spełnia wymienione wyżej oczekiwania. Dzięki zastosowaniu nowoczesnej
+architektury frameworka zapewniona została wysoka skalowalność, niezawodność oraz
+łatwość i wygoda użycia. Udowodniliśmy te stwierdzenia poprzez implementację przykładowego
+portalu realizującego wybrane przez naszego Klienta reprezentatywne przypadki użycia.
+Całość została podana w przyjaznej dla oka oprawie. Uważamy, że z powodu wymienionych
+wyżej czynników można uznać nasz projekt za zakończony sukcesem.
 
 \chapter{Wymagania}
 
 Głównym wymaganiem postawionym przed naszym frameworkiem było umożliwienie reimplementacji
-Platformy Usług Elektronicznych ZUS (widocznej na poniższym obrazku) oraz stworzenie
+Platformy Usług Elektronicznych ZUS \cite{zuspue} (widocznej na poniższym obrazku) oraz stworzenie
 przykładowego portalu ilustrującego jego możliwości.\\
 \includegraphics[width=\textwidth]{obrazki/pue2.png}
 Naszemu zespołowi pozostawiono bardzo duży stopień swobody przy projektowaniu i
 implementacji portalu. Główny nacisk położono na innowacyjność stworzonego rozwiązania.
-Niezależnie od tego, w trakcie naszych rozmów z klientem zostały wyłonione przedstawione
+Niezależnie od tego, w trakcie naszych rozmów z Klientem zostały wyłonione przedstawione
 niżej wymagania.
 
 \section{Wymagania funkcjonalne}
 
-TODO - FE i mikrousługi % TODO
+Stworzony przez nas portal powinien implementować kilka rezprezentatywnych
+przypadków użycia celem ilustracji możliwości naszego frameworka i łatwości,
+z jaką się w nim tworzy aplikacje. Wybraliśmy następujące przypadki użycia:
+powiadomienia, skrzynkę pocztową, usługę 500 plus.
+
+Najprostrzym w implementacji przypadkiem użycia jest sprawdzanie dostępnych
+powiadomień przez użytkownika. Tuż po udanym wejściu na nasz portal użytkownikowi
+powinien zostać wyświetlony ekran na którym zobaczyłby krótkie statystyki i
+informację, co zmieniło się od jego ostatniej wizyty na portalu.
+
+Kolejna grupa przypadków użycia związana jest z mechanizmem przypominającym
+wewnętrzną pocztę. Użytkownik powinien być w stanie wyświetlić listę wysłanych
+i odebranych wiadomości. Po wybraniu odpowiedniej wiadomości z listy powinna
+ukazać mu się jej treść. Możliwa jest też odpowiedź na wiadomość do nadawcy.
+Szczególnie istotny jest fakt, że z opisanego mechanizmu mogą korzystać różne
+usługi. Przykładowo, usługa odpowiedzialna za obsługę wniosków 500+ wysyła
+wiadomości związane z różnymi zdarzeniami dotyczącymi cyklu życia wniosku.
+
+Sztandarowym przypadkiem użycia ilustrującym pełnię możliwości naszego frameworka
+jest usługa odpowiedzialna za wnioski 500+. Użytkownik może przy jej pomocy
+wypełnić i złożyć wniosek o świadczenie. Po wysłaniu formularza powinien otrzymać
+stosowne powiadomienie na swoją skrzynkę pocztową. Następnie będzie mógł sprawdzić
+status złożonego wniosku oraz podejrzeć jego treść. W międzyczasie urzędnik ZUS
+otrzyma dostęp do panelu, w którym będzie mógł zdecydować o dalszych losach
+wniosku. Jeżeli po sprawdzeniu załączonych danych postanowi zaakceptować lub
+odrzucić wniosek, to będzie mógł to uczynić przy pomocy odpowiedniego guzika.
+Informacja o tym fakcie natychmiast zostanie doręczona do wnioskodawcy.
 
 \section{Wymagania niefunkcjonalne}
 
 Bardzo wiele uwagi poświęciliśmy wymaganiom niefunkcjonalnym. Nasz Klient bardzo
-wyraźnie życzył sobie, by były spełnione normy ,,12 Factor App'' \cite{tfa}.
-W szczególności, nasz serwis powinien cechować się wysokim współczynnikiem
-niezawodnośći i odporności na losowe awarie. Ma to szczególne duże znaczenie
+wyraźnie życzył sobie, by spełnione były normy ,,12 Factor App'' \cite{tfa}.
+Niektóre spośród nich są stosunkowo proste: kod powinien być trzymany w systemie
+kontroli wersji, należy bardzo wyraźnie określać zależności, konfiguracja pobierana
+jest z środowiska, powinno być możliwe bezbolesne przeniesienie usług wspomagających
+(takich jak bazy danych) do zewnętrznych dostawców (np. chmury AWS). Pozostałe
+normy odnoszą się do takich zagadnień jak zapewnienie jednolitości środowisk testowych
+i produkcyjnych, wykorzystanie dobrodziejstw płynących z współbieżności oraz
+zarządzanie już działającą aplikacją. Z naszego punktu widzenia najważniejsza była
+następująca zasada: nasz serwis powinien cechować się wysokim współczynnikiem
+niezawodności i odporności na losowe awarie. Ma to szczególne duże znaczenie
 podczas komunikacji na linii obywatel -- państwo, gdzie jakiekolwiek rozbieżności
 mogą być opłakane w skutkach. W miarę postępu cyfryzacji państwa liczba użytkowników
 naszego serwisu będzie zbliżać się do 14-tu milionów osób. Należy zapewnić
 skalowalność tworzonej aplikacji w sposób pozwalający na ich obsłużenie.
-
-Platforma powinna być prosta w użyciu nawet dla relatywnie nisko wykwalifikowanych
-programistów i utrudniać im popełnienie przynajmniej części błędów. Przykład
-problemu występującego w obecnej wersji PUE jest widoczny na poniższym obrazku.
-Ze względu na niewłaściwą architekturę systemu możliwe jest wyświetlenie
-użytkownikowi sprzecznych komunikatów dotyczących stanu zalogowania. Nasz framework
-nie powinien pozwalać na powstanie takiej sytuacji.\\
-\includegraphics[width=\textwidth]{obrazki/logowaniezle.png}
 
 Nasz serwis powinien cechować się spójnym i jednolitym wyglądem oraz wysoką
 reużywalnością komponentów wykorzystywanych do tworzenia interfejsu użytkownika.
@@ -195,6 +250,14 @@ to między innymi ,,Profil Zaufany (eGO)'' oraz ,,System Rejestrów Państwowych
 Nasz serwis powinien łatwo integrować się z wymienionym wyżej oprogramowaniem.
 Należy uwzględnić fakt, że możliwość modyfikacji i dostosowania zewnętrznych
 systemów do naszych potrzeb jest bardzo ograniczona.
+
+Platforma powinna być prosta w użyciu nawet dla relatywnie nisko wykwalifikowanych
+programistów i utrudniać im popełnienie przynajmniej części błędów. Przykład
+problemu występującego w obecnej wersji PUE jest widoczny na poniższym obrazku.
+Ze względu na niewłaściwą architekturę systemu możliwe jest wyświetlenie
+użytkownikowi sprzecznych komunikatów dotyczących stanu zalogowania. Nasz framework
+nie powinien pozwalać na powstanie takiej sytuacji.\\
+\includegraphics[width=\textwidth]{obrazki/logowaniezle.png}
 
 System utworzony na bazie naszego frameworka powinien cechować się znacznym stopniem
 automatyzacji. Dołączanie i odłączanie kolejnych serwerów powinno odbywać się w locie,
@@ -219,7 +282,7 @@ architekturę opartą o mikrousługi.
 
 \section{Mikrousługi}
 
-Mikrousługi to stosunkowo nowy wzorzec architektoniczny będący rozwinięciem
+Mikrousługi \cite{fowlermicroservices} to stosunkowo nowy wzorzec architektoniczny będący rozwinięciem
 architektury zorientowanej na usługi (ang. \textit{service-oriented architecture}).
 Cechuje się ona rozbiciem poszczególnych składowych systemu na małe, luźno powiązane
 usługi implementujące logikę biznesową. Znacząco ułatwia to ciągłą integrację (ang.
@@ -246,9 +309,25 @@ do której pozostałe usługi nie mają bezpośredniego dostępu. Dzięki temu �
 staje się wymuszenie luźnego powiązania usług, a ewolucja schematu bazy danych nie
 wymusza zmian w całym kodzie aplikacji. Ponadto zespół pracujący nad daną mikrousługą
 może w sposób nie wpływający na pozostałą część systemu wybrać tę bazę danych, która
-najbardziej odpowiada rozwiązywanemu problemowi. Niestety to podejście ma swoje wady,
-do których można zaliczyć konieczność utrzymywania spójności danych w niezależnych
-od siebie systemach bazodanowych.
+najbardziej odpowiada rozwiązywanemu problemowi.
+
+Niestety architektura zorientowana na mikrousługi ma swoje wady \cite{hauer}.
+Do najpoważniejszych należy konieczność utrzymywania spójności danych w niezależnych
+od siebie systemach bazodanowych. Ze względu na rozproszoną naturę aplikacji
+wiele operacji wymaga interakcji z kilkoma niezależnymi od siebie serwerami baz
+danych. Może się okazać, że z powodu awarii łączy pomiędzy serwerami część
+transakcji nie zostanie wykonana co doprowadzi do rozspójnienia danych. W systemach
+administracji publicznej nie powinno dochodzić do takich sytuacji, gdyż może to
+doprowadzić do realnych i niezawinionych szkód u obywatela. Innymi problemami
+nierozłącznie związanymi z mikrousługami są: mniej wygodny interfejs programisty
+w porównaniu z architekturą monolityczną, konieczność uwzględniania w projekcie
+aplikacji problemów występujących w warstwie sieciowej (takich jak awarie sprzętu
+sieciowego) oraz niższa wydajność z powodu latencji przy przesyłaniu danych przez
+sieć oraz konieczności serializacji i deserializacji zapytań.
+
+Niezależnie od tych wad uważamy, że w naszej aplikacji zastosowanie architektury
+mikrousługowej jest całkowicie racjonalnym rozwiązaniem. Zalety mikrousług w dużej
+mierze rekompensują wymienione wyżej wady.
 
 \section{Bezstanowość mikrousług}
 
@@ -456,10 +535,14 @@ trakcie naszych prac.
 \section{Angular 2}
 
 Aby rozwinąć swoje skrzydła, asynchroniczne działanie mikrousług wymaga również działającej asynchronicznie warstwy użytkownika.
-Spośród obecnie stosowanych frameworków frontendowych wyróżniały się dwa: Angular oraz React.js.
+Spośród obecnie stosowanych frameworków frontendowych wyróżniały się dwa: Angular \cite{angular2} oraz React.js \cite{react}.
 Zdecydowaliśmy się na ten pierwszy z powodu kluczowej dla klienta, całkowicie otwartej licencji.
-Wykorzystaliśmy drugą wersję Angulara od Google, ponieważ jest oparta o nowsze rozwiązania niż pierwsza,
-a w szczególności wykorzystuje język TypeScript, czyli obiektowe rozszerzenie języka Javascript.
+Licencja frameworka React.js była dla naszego klienta całkowicie nieakceptowalna
+z powodu niejasnych zapisów, które dawały firmie Facebook prawo do cofnięcia zgody
+na wykorzystanie frameworka \cite{reactlicense}. W przypadku instytucji państwowej
+jaką jest ZUS było to obarczone niedopuszczalnym ryzykiem.
+Wykorzystaliśmy drugą (w chwili wybierania technologii najnowszą) wersję Angulara
+od Google. Wykorzystuje on język TypeScript, czyli obiektowe rozszerzenie języka Javascript.
 W stosunku do JavaScript można stwierdzić, że wszystko co związane z obiektowością
 w TypeScript to tylko lukier syntaktyczny, ponieważ kod TypeScript podczas kompilacji
 jest tłumaczony do czystego JavaScript. TypeScript implementuje większość
@@ -470,9 +553,9 @@ klasy już w trakcie kompilacji.
 
 \section{Bootstrap}
 
-Za wygląd strony odpowiada HTML5, połączony z Bootstrapem.
+Za wygląd strony odpowiada HTML5, połączony z Bootstrapem \cite{bootstrap}.
 Bootstrap to zbiór gotowych komponentów wizualnych, pozwalający, bez zbędnego wnikania
-w stronę ``artystyczną'', tworzyć strony estetyczne oraz wygodne w użyciu strony internetowe.
+w stronę ,,artystyczną'', tworzyć strony estetyczne oraz wygodne w użyciu strony internetowe.
 Jako, że tematem naszej pracy nie jest projektowanie stron internetowych i nie chcieliśmy zbytnio wnikać w aspekty graficzne,
 użyliśmy gotowej skórki sbAdmin2, w której wprowadziliśmy liczne zmiany.
 
@@ -481,14 +564,14 @@ użyliśmy gotowej skórki sbAdmin2, w której wprowadziliśmy liczne zmiany.
 Powszechnie przyjętym zwyczajem jest, że mikrousługi komunikują się przy pomocy
 RESTowych API \cite{mammatustech}. Naszym zdaniem do kontrukcji takiego interfejsu
 idealnie nadają się frameworki do tworzenia aplikacji webowych. Z uwagi na swoją
-prostotę wybraliśmy Django. Dodatkowym argumentem za takim wyborem był tutaj fakt,
+prostotę wybraliśmy Django \cite{django}. Dodatkowym argumentem za takim wyborem był tutaj fakt,
 że architektura mikrousług zachęca do dywersyfikacji technologii. Wybierając
 framework napisany w języku Python chcieliśmy pokazać, że nasze rozwiązanie dobrze
 integruje usługi napisane w różnych językach.
 
 \section{Express.js}
 
-Do serwowania części frontendowej serwisu wykorzystujemy serwer Express.js.
+Do serwowania części frontendowej serwisu wykorzystujemy serwer Express.js \cite{expressjs}.
 Korzystanie z niego jest proste i stosunkowo przyjemne, znakomicie integruje się
 on z platformą Node.js. W przeciwieństwie do Lite--servera z którego korzystaliśmy
 na początku, Express.js jest dobrze udokumentowany i udostępnia bogate API, z którego
@@ -497,11 +580,11 @@ skorzystaliśmy przy integracji z backendem.
 \section{gRPC}
 
 Podczas projektowania mechanizmu komunikacji pomiędzy mikrousługami nasz Klient
-zasugerował użycie WSDL. Nie zgodziliśmy się na to, gdyż użycie tak ciężkiego
+zasugerował użycie WSDL \cite{wsdl}. Nie zgodziliśmy się na to, gdyż użycie tak ciężkiego
 protokołu jest sprzeczne z typowymi praktykami stosowanymi w architekturze
 mikrousług \cite{mammatustech}. Jednocześnie nie chcieliśmy, by nasza aplikacja
 była ograniczona tylko i wyłącznie do RESTowych protokołów. Ostatecznie
-zaproponowaliśmy użycie gRPC, który łączy zalety obu wymienionych wcześniej
+zaproponowaliśmy użycie gRPC \cite{grpc}, który łączy zalety obu wymienionych wcześniej
 rozwiązań. Z jednej strony jest stosunkowo lekkim i wykorzystującym niewiele
 zasobów protokołem sieciowym, a z drugiej strony pozwala na ścisłe zdefiniowanie
 udostępnianych przez serwer usług w czytelnym dla ludzi formacie. Po napisaniu
@@ -513,7 +596,7 @@ programowania.
 
 \section{Play Framework}
 
-Play Framework opiera się na podobnych ideach architektonicznych co Django. Kiedy
+Play Framework \cite{play} opiera się na podobnych ideach architektonicznych co Django. Kiedy
 go wybieraliśmy mieliśmy nadzieję, że będzie się on bardzo dobrze integrował z
 ekosystemem Javowym. Okazało się, że było to błędne założenie. Kłopoty pojawiły
 się już na samym początku, kiedy odkryliśmy że między frameworkiem Play i gRPC ma
@@ -528,8 +611,8 @@ dostęp do niej odbywa się poprzez wyspecjalizowaną usługę zapewniającą do
 danych lub w ramach jednej mikrousługi, gdzie służy jako tymczasowe składowisko
 informacji potrzebnych przy wykonywaniu operacji. W takim modelu rodzaj użytej
 bazy danych jest transparentny dla usługi wywołującej. Z uwagi na prototypowy
-charakter naszego projektu poprzestaliśmy na bazie SQLite, jako że znakomicie
-integruje się ona z Django, ponadto zastąpienie jej PostgreSQLem jest
+charakter naszego projektu poprzestaliśmy na bazie SQLite \cite{sqlite}, jako że znakomicie
+integruje się ona z Django, ponadto zastąpienie jej PostgreSQLem \cite{postgres} jest
 praktycznie bezkosztowe.
 
 \section{ZooKeeper}
@@ -566,7 +649,7 @@ lidera \cite{curatorlock}.
 
 \subsection{Curator}
 
-Biblioteka Curator upraszcza wiele aspektów związanych
+Biblioteka Curator \cite{curator} upraszcza wiele aspektów związanych
 z wykorzystaniem ZooKeepera, między innymi rejestrację serwerów mikrousług,
 zapewnia implementację najczęściej wykorzystywanych algorytmów synchronizujących
 oraz łatwe buforowanie drzewa węzłów wraz z automatycznym pobieraniem zmian. W
@@ -575,19 +658,17 @@ nasze potrzeby.
 
 \subsection{Kazoo}
 
-Kazoo jest nieoficjalnym klientem ZooKeepera dla języka Python. W trakcie
+Kazoo \cite{kazoo} jest nieoficjalnym klientem ZooKeepera dla języka Python. W trakcie
 implementacji naszej aplikacji doceniliśmy jego niezawodność i prostotę użycia.
 
-\chapter{Realizacja}
-
-\section{Architektura aplikacji}
+\chapter{Architektura aplikacji}
 
 Nasza aplikacja jest podzielona na trzy warstwy: frontend, mikrousługi oraz
 warstwę integrującą, na którą składają się serwery autoryzacji i integratora.
 Komunikacja pomiędzy poszczególnymi warstwami jest bezstanowa, co przynajmniej
 w teorii powinno pozwolić na osiągnięcie niemal nieograniczonej skalowalności.
 
-\subsection{Frontend}
+\section{Frontend}
 
 Główną ideą którą kierowaliśmy się przy projektowaniu frontendu było udostępnienie
 programiście mikrousług komponentów, z których mógłby następnie tworzyć interfejs
@@ -597,16 +678,16 @@ składać swój projekt, niewątpliwie upraszcza proces tworzenia nowych funkcjo
 
 Rzeczony opis utrzymany jest na wysokim poziomie abstracji --
 jest w nim zawarta informacja \textbf{co} ma być wyświetlone, ale nie \textbf{jak}.
-U użytkownika wchodzącego na nasz portal poprzez przeglądarkę
-internetową JSON opisujący komponenty powinien zostać przekonwertowany na kod HTML
-dostosowany do jego przeglądarki. Co więcej, systemy służące do automatycznego
+Użytkownik wchodzący na nasz portal poprzez przeglądarkę internetową otrzymuje
+JSONa opisującego komponenty do wyświetlenia, który następnie jest przekonwertowany
+na kod HTML dostosowany do jego przeglądarki. Dzięki temu, że wygląd panelu użytkownika
+jest zapisany w formacie pośrednim możliwa jest zmiana wyglądu portalu bez
+konieczności ponownego wdrażania wszystkich serwerów mikrousług.
+Systemy służące do automatycznego
 zarządzania pracownikami mogą zupełnie pomijać warstwę prezentacji i operować
-bezpośrednio na danych dostarczanych przez warstwę integracji. Dzięki temu,
-że wygląd panelu użytkownika jest zapisany w formacie pośrednim możliwa jest
-zmiana wyglądu portalu bez konieczności ponownego wdrażania wszystkich serwerów
-mikrousług.
+bezpośrednio na danych dostarczanych przez warstwę integracji. 
 
-\subsection{Warstwa integracji}
+\section{Warstwa integracji}
 
 Kluczowym elementem tej warstwy jest integrator, przez który przechodzi niemal
 cały ruch w systemie. Każda mikrousługa wchodząca w skład portalu musi być
@@ -615,8 +696,8 @@ integratora, który sprawdza, czy klient mikrousługi ma odpowiednie uprawnienia
 dostępowe, dokonuje tłumaczenia komunikatów pomiędzy różnymi interfejsami,
 wyszukuje adres serwera, do którego ma trafić komunikat oraz go wywołuje.
 
-Z uwagi na to, że dane przechodzą przez niego w postaci nieszyfrowanej można
-go podłączyć do IDSa (ang. \textit{Intrusion Detection System}) wykrywającego
+Z uwagi na to, że integrator ma wgląd w przechodzące przez niego dane, można
+go podłączyć do ,,Systemu Wykrywania Intruzów'' (ang. \textit{Intrusion Detection System}) wykrywającego
 anomalie w przesyłanych danych i w ten sposób zapobiegać masowemu wyciekowi
 wrażliwych danych lub atakom hakerskim. Stanowi też dodatkową linię obrony, którą
 musi sforsować potencjalny haker. Dzięki temu system jest odporniejszy na błędy
@@ -630,7 +711,7 @@ serwera jest możliwy z dowolnej części sieci. Z uwagi na konieczność zapewn
 łatwej integracji z zewnętrznymi usługami typu ,,Profil Zaufany (eGO)'', do
 identyfikacji użytkowników użyliśmy jednorazowych tokenów.
 
-\subsection{Mikrousługi}
+\section{Mikrousługi}
 
 Mikrousługi realizują logikę biznesową. Typowym cyklem życia serwera usługi jest
 przygotowanie do obsługi nadchodzących żądań, rejestracja w integratorze i obsługa
@@ -638,98 +719,373 @@ zapytań. W końcowej fazie cyklu serwer się wyrejestrowuje z integratora. Real
 integratora oczekuje, że poszczególne serwery będą z punktu widzenia klienta
 nierozróżnialne.
 
+\section{Komunikacja między warstwami}
 
-\subsection{Tworzenie mockupów}
+Z uwagi na stosunkowo duży poziom złożoności architektury naszej aplikacji opis
+komunikacji podzieliliśmy na dwie części: backend i frontend. W obydwu dodatkowo
+zawarliśmy warstwę integracji.
+
+W części frontendowej (zaprezentowanej na poniższym obrazku) główną rolę odgrywa
+serwer express.js, który serwuje do
+przeglądarki na komputerze użytkownika kod aplikacji napisany w frameworku Angular.
+Następnie otrzymany program zostaje wykonany, a użytkownikowi zostaje zaprezentowany
+wygodny interfejs i możliwa staje się dalsza interakcja.
+
+\includegraphics[width=\textwidth]{Frontend.pdf}
+
+Z powodu różnych zabezpieczeń wbudowanych w przeglądarki bezpośrednie połączenie
+klienta z integratorem nie jest możliwe. W związku z tym serwer express.js pełni
+dodatkowo rolę pośrednika pomiędzy aplikacją internetową a integratorem i serwerem
+autoryzacji. Pozostałe rodzaje klientów naszego portalu mogą go całkowicie pominąć.
+
+Jak widać na poniższym schemacie, centralnym elementem w komunikacji elementów
+backendu jest integrator. Przechodzi przez niego praktycznie cały ruch między
+poszczególnymi mikrousługami i serwerami frontendu. Wyjątek stanowią tutaj serwery
+ZooKeepera oraz uwierzytelniania, do których dostęp jest bezpośredni. Wynika to ze
+specyficznych własności ZooKeepera który jest wykorzystywany do przechowywania
+konfiguracji integratora oraz pewnego rodzaju wyjątkowości serwera autoryzacji,
+która nie pozwala na zaklasyfikowanie go jako zwykłej mikrousługi.\\
+\includegraphics[width=\textwidth]{backend.pdf}
+
+\chapter{Realizacja}
+
+\section{Tworzenie mockupów}
 Jako, że naszym celem nie było stworzenie gotowej platformy (w sensie produkcyjnym), a raczej stworzenie proof of concept,
-intensywnie tworzyliśmy prototypy. Chcialismy pokazać jak PUE może wyglądać, niekoniecznie skupiając się na
-sprawach żmudnych, czasochłonnych, a niekoniecznie potrzebnych do pokazanie idei.
+dlatego intensywnie tworzyliśmy prototypy. Chcieliśmy pokazać, jak PUE może wyglądać, nie skupiając się jednak na
+sprawach żmudnych, czasochłonnych i niekoniecznie potrzebnych do pokazanie idei (takich jak kwestie bezpieczeństwa - oczywiście
+tego tematu całkowicie nie pominieliśmy - ale zapewnienie bezpieczeństwa dla takiego typu platformy nie było naszym głównym celem).
 
-#Strona domowa
-Nastawienie społeczeństwa do ZUS, jako organizacji jest zdecydowanie negatywne, dlatego tworząc nasz proejkt staraliśmy się
-zmienić wizerunek ZUSu. Postawiliśmy na personalizacje kontaktów z userem odwiedzającym naszą platformę. Dlatego już po zalogowaniu
-użytkownik otrzymuje większość potrzebnych informacji. Strona domowa jest dopracowana pod względem UX. Panele ([1]) informują
-obywatela o aktualnym stanie spraw, z nim związanych. Informację te są wyraźnie wyróżnione, a kolory jakie przyjmuję panele
+\section{Strona domowa}
+Nastawienie społeczeństwa do ZUS, jako organizacji jest zdecydowanie negatywne, dlatego tworząc nasz projekt staraliśmy się
+zmienić wizerunek ZUSu. Postawiliśmy na personalizacje kontaktów z użytkownikiem odwiedzającym naszą platformę. Dlatego już po zalogowaniu
+użytkownik otrzymuje większość potrzebnych informacji. Strona domowa jest dopracowana pod względem UX. Panele informują
+obywatela o aktualnym stanie spraw z nim związanych. Informację te są wyraźnie wyróżnione, a kolory jakie przyjmują panele
 intuicyjnie wiążą się z kontekstem (np. czerwony kolor - sprawy odrzucone). Właściciel profilu nie musi marnować czasu
-na szukanie najbardziej potrzebnych mu informacji w innych miejschach strony. W założeniu strona domowa powinna być
-namiastką Wallu - znanego z popularnego protalu społecznościowego. Panel z powiadomieniami ([2]), to po prostu dostarczony
-przez nas gotowy komponent o nazwie powiadomienia.
+na szukanie najbardziej potrzebnych mu informacji, w innych miejscach strony. W założeniu, strona domowa powinna być
+namiastką ,,Ściany'' znanej z popularnego portalu społecznościowego. Panel z powiadomieniami to po prostu dostarczony
+przez nas gotowy komponent o nazwie powiadomienia. Po skasowaniu wszystkich aktualnych powiadomień wyświetla się spersonalizowany
+komunikat, chwalący użytkownika za aktywność. To kolejny element wpisujący się w naszą filozofię tworzenia platformy jako
+środowiska nie tylko użytecznego ale i przyjaznego.
 
 \section{Komponenty}
 \subsection{Mechanizm komponentów}
 
 Projektując naszą platformę, pamiętaliśmy o istotnym nacisku, jaki klient kładł na jej proste rozszerzanie.
 Postanowiliśmy zatem zaprojektować własny mechanizm, który usprawniłby wytwarzanie mikrousług gotowych do pracy w naszym systemie.
-Od strony backendu, dużo łatwiej jest uzgodnić wspólny interfejs, którego implementacja w nowej mikrousłudze pozwoli podłączyć ją do działającej platformy.
-Frontend natomiast jest wytwarzany, w zasadzie wyłącznie w języku HTML, ze wsparciem ze strony języka skryptowego Javascript oraz jego bibliotek.
-Docelowe mikrousługi, wykorzystywane na naszej platformie, będą komunikowały się z REST-owym backendem.
+Od strony backendu dużo łatwiej jest uzgodnić wspólny interfejs, którego implementacja w nowej mikrousłudze pozwoli podłączyć ją do działającej platformy.
+Frontend natomiast jest wytwarzany w zasadzie wyłącznie w języku HTML, ze wsparciem ze strony języka skryptowego Javascript oraz jego bibliotek.
+Docelowe mikrousługi wykorzystywane na naszej platformie będą komunikowały się z REST-owym backendem.
 Formularze z kolei posiadają zazwyczaj dosyć generyczne interfejsy graficzne i programistyczne.
 Stając przed tak ocenioną sytuacją, postanowiliśmy nie oddawać w ręce programistów mikrousług możliwości umieszczenia na stronie platformy dowolnego kodu HTML.
-Przede wszystkim, ze względów bezpieczeństwa - usługa mogłaby uruchamiać zlośliwy bądź posiadający krytyczne luki kod javascript.
-Ważne dla nas były jednak także kwestie stylistyczne - dużo wygodniej, niż publikować przewodniki styli (tzw. "Style Guide"),
+Przede wszystkim ze względów bezpieczeństwa - usługa mogłaby uruchamiać zlośliwy bądź posiadający krytyczne luki kod javascript.
+Ważne dla nas były jednak także kwestie stylistyczne - dużo wygodniej, niż publikować przewodniki styli (tzw. ,,Style Guide''),
 byłoby nam udostępnić już gotowe, wystylizowane przez nas kawałki kodu HTML.
 
 Osadzanie wewnątrz naszej aplikacji przekazanego w jakiś sposób szablonu HTML nie jest trudne, ale pozostaje pytanie o to,
 na kim będzie spoczywała odpowiedzialność jego napisania. Nie chcieliśmy
 żeby była do tego potrzebna wiedza frontendowa,
 dlatego postanowiliśmy zwiększyć poziom abstrakcji w naszych szablonach,
-a co za tym idzie - zbudować mały framework (szkielet),
+a co za tym idzie -- zbudować mały framework (szkielet),
 który uprości ich tworzenie, przekazywanie i interpretację, z poziomu osoby lub programu czytającego ich opis.
 
+Uważamy, że większość elementów na stronach składająych się na aplikacje webowe można stworzyć składając mały zbiór gotowych elementów.
+To właśnie dlatego wprowadzamy w naszym frameworku pojęcie komponentu. Komponenty to niepodzielne (patrząć z zewnątrz) części oferujące
+pewien rodzaj aktywności. Sama ``definicja'' komponentów brzmi bardzo podobnie jak mikrousług, komponenty operują jednak w warstwie frontend,
+to one korzystają z mirkousług, łączać logikę w jeden spójny klocek.
+
 \subsection{Opis komponentów}
+
+Każdy komponent oferuje pewien rodzaj aktywności, żeby lepiej pokazać różnicę między komponentem, a mikrousługą,
+można posłużyc się metaforą. Stół do ruletki to jeden komponent składający się z komponentów, plansza, koła.
+Komponent oferuję możliwość zagrania w ruletkę. Za losowanie(ruch kulki w kole) odpowiada już jednak mikroułsuga, za werfyfikacje
+graczy również odpowiada mikrousługa. Z poziomu programisty używającego naszego komponentu nie widać jednak
+tych poszczególnych części składowych. Programista chce w pewnym miejscy osadzić stół z ruletką, wklei więc w swój kod
+<ruletka></ruletka>. Komponent stworzony już przez kogoś innego. Reużywalność kodu w najlepszej postacii.
+Każdy komponent powinien posiadać unikalny w skali całego obiektu JSON identyfikator, ustawiany jako wartość pola $id$.
+Jako, że pomimo różnych zadań zewnętrzny iterfejs komponentów jest w miarę podobny, 
+poniżej znajduje się w miarę szczegółowy opis kilku wybranych komponentów: \\
+
 \begin{tabularx}{\linewidth}{|l|l|c|X|l|}\hline
-Nazwa:
+\textbf{Nazwa:}
 Powiadomienie
 \\\hline
-Opis:\\
+\textbf{Opis:}\\
 
-Rodzaj krótkiej wiadomości, składający się z tytyłu i treści powiadomienia.\\\hline
-Końcówki:\\
+Rodzaj krótkiej wiadomości, składającej się z tytyłu i treści powiadomienia.\\\hline
+\textbf{Końcówki:}\\
 Końcówka pobierająca powiadomienie\\\hline
-JSON: \\
-title: \\
-msg:\\
-time:\\\hline
-Opis działania:\\
+\textbf{JSON:}\\
+\textit{title:} tytuł wiadomości\\
+\textit{msg:} treść wiadomości, która zostanie rozwinięta w chwili kliknięcia na tytuł\\
+\textit{time:} czas wysłania powiadomienia\\\hline
+\textbf{Opis działania:}\\
 Powiadomienie zostaje jednorazowo pobrane z podanej końcówki.\\\hline
-Wygląd:\\\hline
 \end{tabularx}
 
-\begin{tabularx}{\linewidth}{|l}\hline
-Nazwa:
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
 Lista powiadomień
 \\\hline
-Opis:\\
+\textbf{Opis:}\\
 
 Pojemnik na powiadomienia, koordynujący pobieranie powiadomień\\\hline
-Końcówki:\\
+\textbf{Końcówki:}\\
 Końcówka z powiadomieniami\\
-Końcówka z liczbą powiadomień
+Końcówka z liczbą powiadomień(musi wiedzieć ile ściągnąć)
 \\\hline
-JSON: \\
-title: \\
-msg:\\
-time:\\\hline
-Opis działania:\\
+\textbf{JSON:}\\
+\textit{title:}\\
+\textit{msg:}\\
+\textit{time:} \\ \hline
+\textbf{Opis działania:}\\
 Cyklicznie (w ustalonych odstępach czasu, obecnie co 5 sekund), komponent
 wysyła zapytanie o liczbę dostępnych powiadomień, następnie w pętli, iteruje zwróconą liczbę razy,
 pobierając za każdym razem powiadomienie z końcówki. Pobieranie powiadomienia z końcówki sprowadza się
 do stworzenia komponentu Powiadomienia z danym adresem końcówki, a następnie osadzenie komponentu w sobie.\\\hline
-Wygląd:\\\hline
+\end{tabularx}
+
+%\vspace{30pt}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+PanelComponent
+\\\hline
+\textbf{Opis:}\\
+Kontener z paskiem tytułowym i zawartością.\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+$title$: tytuł panelu\\
+$panel\_class$: typ - kolor - panelu, wg. typów obsługiwanych przez bootstrap\\
+$collapsible$: czy ciało panelu rozwijane\\
+$hidable$: czy panel usuwalny\\
+$backgroundColor$: kolor tła w ciele panelu\\
+$textColor$: kolor tekstu w panelu\\
+$cursor$: typ kursora (myszy) na obszarze panelu\\
+$size$: obiekt o polach $xsmall, small, medium, large, xlarge$, opisujący dla jakiego rozmiaru okna, jak szeroki ma być panel w skali $0 - 12$ (mechanizm zapożyczony z bootstrapa)
+\\\hline
+\textbf{Opis działania:}\\
+Komponent pozwalający obramować grupę innych komponentów w tak zwany panel.
+W ciele panelu możliwe jest osadzanie innych komponentów. Panel może posiadać pasek tytułowy, oraz możliwość rozwijania\\\hline
+
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+TextBox
+\\\hline
+\textbf{Opis:}\\
+
+Pole tekstowe do wprowadzania danych\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+$defaultText$: tekst-wskazówka, tzw. placeholder\\
+$text$: tekst domyślny, początkowa wartość\\
+$regex$: wyrażenie regularne w składni javascript, do walidacji wprowadzonych danych\\
+$visible$: czy komponent widzialny\\
+Inne pola, np. $size$, jak w PanelComponencie wyżej
+\\\hline
+\textbf{Opis działania:}\\
+Pole tekstowe czeka na dane od użytkownika. Przy pomyślnej walidacji, podświetla się na zielono, w przeciwnym wypadku na czerwono.
+\\\hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+PeselComponent
+\\\hline
+\textbf{Opis:}\\
+
+Pole tekstowe do wprowadzania numeru PESEL\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+Jak w TextBox
+\\\hline
+\textbf{Opis działania:}\\
+Pole tekstowe dostosowane domyślnie przez wyrażenie regularne do rozpoznawania liczb identyfikujących numer PESEL.
+Dodatkowo w algorytmie walidacji jest liczona suma kontrolna PESELu.
+\\\hline
+\end{tabularx}
+
+%\vspace{60pt}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+ZipcodeComponent
+\\\hline
+\textbf{Opis:}\\
+
+Pole tekstowe do wprowadzania kodu pocztowego\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+Jak w TextBox
+\\\hline
+\textbf{Opis działania:}\\
+Pole tekstowe dostosowane domyślnie przez wyrażenie regularne do rozpoznawania kodów pocztowych formatu $00-000$
+\\\hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+FormComponent
+\\\hline
+\textbf{Opis:}\\
+
+Formularz wysyłający swoją zawartość na podaną końcówkę\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+$form\_action$: adres URL końcówki, na którą zostanie wysłany formularz\\
+$method$: metoda $get$ lub $post$ wysyłania zapytania na końcówkę\\
+\hline
+\textbf{Opis działania:}\\
+Formularz wysyła na zadaną końcówkę zapytanie HTTP zawierające w treści zawartość pól, które są w nim osadzone.
+\\\hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+LabelComponent
+\\\hline
+\textbf{Opis:}\\
+
+Etykieta - niemodyfikowalne pole tekstowe\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+$text$: treść wyświetlanego tekstu\\
+$backgroundColor$: kolor tła etykietki\\
+\hline
+\textbf{Opis działania:}\\
+Etykietka służy do wyświetlania tekstu dowolnej długości. Tekst jest zawijany, aby uniknąć konieczności przewijania strony w poziomie.
+\\\hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Nazwa:}
+DynamicListComponent
+\\\hline
+\textbf{Opis:}\\
+
+Komponent, który pozwala użytkownikowi na replikację swojego komponentu potomnego dowolną liczbę razy\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+$replicableElement$: dowolny, pojedynczy komponent, który ma być replikowany\\
+\hline
+\textbf{Opis działania:}\\
+Komponent potomny może być replikowany dowolną liczbę razy. Liczba kopii jest regulowana za pomocą przycisków $+/-$ zlokalizowanych u dołu komponentu. Domyślnie potomek jest jeden.
+\\\hline
+\end{tabularx}
+
+%\vspace{60pt}
+
+\begin{tabularx}{\linewidth}{|l|}\hline
+\textbf{Nazwa:}
+RowComponent
+\\\hline
+\textbf{Opis:}\\
+
+Prosty komponent szeregujący w jednym wierszu komponenty potomne\\
+\hline
+\textbf{Pola obiektu JSON:} \\
+Brak\\
+\hline
+\textbf{Opis działania:}\\
+Komponent jest implementacją bootstrapowej klasy $row$.
+\\\hline
 \end{tabularx}
 
 \subsection{System tworzenia automatycznej dokumentacji}
-Co udowadnia powyższy podrodział, każdy komponent można opisać w podobny sposób.
+Każdy komponent można scharektyrować za pomocą podbonych cech(co potwierdza powyższy podrodział).
 Z uwagi na tę regularność stworzyliśmy mechanizm tworzenia automatycznej dokumentacji.
-Użyliśmy ciekawej konstrukcji jaką oferuje ts, a mianowicie dekoratorów.
-Stworzyliśmy następujące własne dekoratory:
+Jako, że platforma składa się z wielu komponentów, w założeniu tworzonych przez wielu
+programistów, istnieje potrzeba usystematyzowania opisu komponentów. Co więcej, jeden z naszych pomysłów
+zakładał stworzenie ``marketu`` (na wzór marketów z aplikacjami np. appstore) komponentów, co wymusiło
+by nałożenie jeszcze sztywniejszych ram na programistów tworzących komponenty.
+Nasz mechanizm przyczynia się do zwiększenia spójności platformy, pozwala zachować porządek
+wśród komponentów, oraz niejako wymusza na programiście większą staranność.
+Na podstawie naszych doświadczeń stwierdziliśmy, że bardzo wygodne jest opisywanie
+kodu w trakcie i w miejscu jego tworzenia. Dlatego używając dekoratorów,
+stworzyliśmy mechanizm pozwalający tworzyć komponenty(od strony kodu) niejako w sposób opisowy.
+\textbf{Dekorator} to specjalna deklaracja, którą można dołączyć do definicji dowolnej klasy, metody, czy właściwości klasy języka TypeScript. 
+Implementacyjnie, dekorator nie jest niczym innym, jak funkcją wołaną w czasie kompilacji(istnieją wyjątki od tego, w którym momencie będzie dana funkcja wołana.
+Tworzenie automatycznej dokumentacji odbywa się zatem podczas budowania aplikacji.
+Zapewne dużym nadużyciem będzie nazwanie użytego podejścia terminem
+\textit{programowanie w paradygmacie opisowym},
+jednak na dobrą sprawę sam sposób kreacji komponentów został, faktycznie, sprowadzony do
+automatycznego generowanie kodu na podstawie opisu składowych.
 
-Dekorator register - dodaje komponent do bibliotki komonentów. 
+Stworzyliśmy następujące dekoratory:
+\begin{itemize}
+	\item Dekorator \mintinline{text}{@register} - dodaje komponent do bibliotki komonentów. Wymaga podania nazwy komponentu,
+jego opisu ogólnego, słów kluczowych(tagów) (charakteryzacja komponentu),
+oraz opisu działania. Dekorator dekoruje klasę, tzn. modyfikuje zawartość
+klasy w momencie kompilacji.
 
+	\item Dekorator \mintinline{text}{@Attr} - dodaje do opisu komponentu, w którym się znajduje, opis samego siebie.
+Komponent to nic innego jak zbiór wielu parametrów, które określają jego wygląd i zachowanie.
+Oczywiście nie wszystkie atrybuty danego komponentu są widoczne na zewnątrz, niektóre wykorzystywane
+są tylko w wewnętrznych działaniach (obliczeniach klasy), dlatego też nie wprowadziliśmy mechanizmu, który
+automatycznie listowałby wszystkie atrybuty danego komponentu(co jest możliwe w js). To od programisty
+zależy, które parametry będą ,,wyprowadzone'' na zewnątrz, czyli które komponentu bedą edytowalne z zewnątrz
+i będą miały wpływ na zachowanie komponentu, a które będą ukryte na potrzeby wewnętrznych działań komponentu.
+\end{itemize}
 
 \subsection{Edytor}
-TODO
+Skoro tworzenie kompontów powinno być bardzo proste, możliwe wręcz dla osób nie posiadająych dużej wiedzy technicznej, warto byłoby
+stworzyć możliwość tworzenia aplikacji za pomocą naprawdę prostych narzędzi. Tak jak korzystanie z gotowych komponentów
+bardzo upraszcza pisanie aplikacji, to jednak ciągle może być to za cieżka do zrealizowania rzecz dla laika. Dlatego też pomyśleliśmy
+o edytorze który pozwalałby przeciągać, rozciągać, customizować wygląd komponentów. Edytor nie został jednak doprowadzony do wystarczająco dojrzałego
+stanu. Nie został jednak usunięty z projektu ponieważ, te zręby edytor, które powstały niosą ze sobą sporą dawkę wiedzy. Jako, że Angular2
+jest framewrokiem młodym nie istnieje w pełni działąjące rozwiązanie wspierające zmieniania rozmiarów(resizable) oraz przesuwanie komponetów.
+Dlatego pomimo, że edytor nie działa jeszcze w 100 procentach warto spojrzeć na dwie zaimplementowane dyrektywy - draggable i resizable. 
+
+\subsection{Instrukcje renderowania komponentu z obiektu JSON}
+Chcieliśmy, aby przekazywanie do komponentu algorytmu jego renderowania z otrzymanego obiektu JSON było, jak przystało na framework, maksymalnie proste i nowoczesne.
+Jest to kolejne miejsce, w którym pomocne okazały się dekoratory. Za pomocą dekoratora \mintinline{text}{@SetterAlg}, dla każdego pola (właściwości) komponentu, można ustawić osobną funkcję odpowiedzialną za przypisanie temu polu wartości.
+Funkcje przekazywane do dekoratora są jak w poniższym przykładzie:
+\begin{minted}{javascript}
+@SetterAlg({field: "nazwa_pola_w_JSON", 
+    func: (class_instance, json_field_value) => {/* ciało funkcji */}})
+pole_w_komponencie: string;
+\end{minted}
+
+Schemat działania ww. dekoratora jest następujący: napotykając we właściwym dla komponentu JSONie na pole o nazwie
+\mintinline{javascript}{nazwa_pola_w_JSON}, wykonuje algorytm opisany w ciele funkcji. Ważne jest, żeby sygnatura funkcji przekazywanej do dekoratora była dwuargumentowa, aby - jak zresztą sugeruje przykład - w momencie wywoływania przekazać w kolejnych argumentach instancję komponentu oraz wartość pola \mintinline{javascript}{nazwa_pola_w_JSON}.
+
+Zaletą takiego rozwiązania jest możliwość zastosowania następującego uproszczenia: w większości przypadków, będziemy chcieli, aby po napotkaniu pola \texttt{p} w JSONie opisującym komponent \texttt{K}, ustawić w \texttt{K} wartość właściwości o nazwie \texttt{p} na wartość dostarczaną przez JSON. Stąd też jest to domyślne zachowanie dla pustego dekoratora
+\mintinline{text}{@SetterAlg()}. Można uznać, że pusty dekorator zachowuje się tak samo, jak następujący:
+
+\begin{minted}{javascript}
+@SetterAlg({field: "pole_w_komponencie", 
+    func: (class_instance, json_field_value) => { 
+        class_instance.pole_w_komponencie = json_field_value 
+    }})
+pole_w_komponencie: string;
+\end{minted}
+
+\subsection{Style Guide}
+Style Guide to jeden z komponentów naszej aplikacji, którego działanie jest możliwe dzięki wsparciu dekoratorów \mintinline{javascript}{register} oraz \mintinline{javascript}{Attr}. 
+Pozwala on na zaprojektowanie i dostosowanie dowolnego komponentu, którego chcemy użyć w naszej mikrousłudze. Wyświetla ogólne informacje na temat rozważanego komponentu, wskazuje domyślne wartości pól obiektu JSON powiązanego z komponentem, oraz umożliwia modyfikację tych wartości. 
+Całość jest na bieżąco renderowana, zapewniając dynamiczny podgląd wprowadzanych zmian. Kolejne komponenty aplikacji dodają się automatycznie do biblioteki Style Guide'a, przy czym automatyzacja ta jest przeprowadzana za pomocą wspomnianych wyżej dekoratorów. 
+Po skończeniu dostosowywania komponentu, w prawym górnym rogu można znaleźć obiekt JSON, który pozwoli na wyrenderowanie go w żądanym kształcie.\\
+
+Poniżej przykład użycia Style Guide dla komponentu PanelComponent: \\
+\includegraphics[width=\textwidth]{obrazki/styleguide.png}
+
+\subsection{Interfejs mikrousługi jako JSON}
+Na potrzeby realizacji prototypu, pozwoliliśmy sobie na wyspecjalizowanie pewnej grupy mikrousług jako tak zwane mikrousługi formularzowe, to znaczy takie, które pozwalają na skonstruowanie formularza, który wysyła gdzieś dane pobrane od użytkownika.
+Do wyświetlenia mikrousługi formularzowej, której interfejs jest opisany obiektem JSON, obiekt ten musi zawierać następujące pola:
+\begin{itemize}
+	\item $send-url$: adres URL, na który zostanie wysłany formularz
+	\item $fill-url$: adres URL, z którego należy pobrać dane dostępnego wypełnienia formularza (dane stałe, np. nazwisko, numer PESEL)
+	\item $components$: tablica zawierająca komponenty interfejsu
+\end{itemize}
+W takiej postaci jest wysyłany na przykład JSON komponentu Plus500.
+
 \subsection{Platforma developera}
-Sposób dodawania mikrosusług, style guide.
+Dodawanie nowej mikrousługi do pakietu istniejących jest bardzo proste, chociaż nie udało nam się do końca zaimplementować wszystkich mechanizmów upraszczających. 
+W skrócie, wystarczy stworzyć nową klasę języka TypeScript, zaimportować dekorator \mintinline{javascript}{@SetterAlg}, oraz opcjonalnie \mintinline{javascript}{@Register} i \mintinline{javascript}{@Attr} do dokumentacji. 
+Następnie wszystkie pola w klasie, które chcemy mieć możliwość ustawiać za pomocą obiektów JSON, dekorujemy \mintinline{javascript}{@SetterAlg} wedle uznania. 
+Pozostało jeszcze tylko dodać w funkcji statycznej \mintinline{javascript}{createFromJSON()} mapowanie z żądanej nazwy komponentu w JSONie na instancję klasy (czyli mówiąc prościej, jaką wartością w polu $type$ w JSONie chcemy identyfikować nasz komponent). 
+Na sam koniec, w głównym module aplikacji, \mintinline{javascript}{src/app/app.module.ts} dodajemy nasz komponent do tablic $declarations$ oraz $entryComponents$. Nasz nowy komponent jest już gotowy do użycia.
 
 \section{Serwer uwierzytelniania i autoryzacji}
 
@@ -748,7 +1104,7 @@ bitowa, w której zapalony bit oznacza posiadanie danego uprawnienia.
 \section{Integrator}
 
 Integrator został zrealizowany jako standardowa aplikacja internetowa obsługująca
-klientów poprzez protokół HTTP. Każda mikrousługa rejestrująca się w integratorze
+klientów poprzez protokół HTTP(S). Każda mikrousługa rejestrująca się w integratorze
 może poprosić o wystawienie dowolnej liczby tzw. końcówek (ang. \textit{endpoint}).
 Końcówka jest jednoznacznie określonym adresem, pod którym serwer usługi udostępnia
 swoje zasoby. Wyróżniamy trzy typy końcówek:
@@ -765,22 +1121,23 @@ swoje zasoby. Wyróżniamy trzy typy końcówek:
 	\item Write - służy do wykonywania akcji mających efekt uboczny, np. złożenia
 	wniosku.
 \end{itemize}
+Do jednej końcówki typu Read i Write może być przypisanych dowolnie wiele serwerów
+usługi. Integrator dla każdego zapytania losowo wybiera jeden z nich i do niego
+kieruje wchodzące zapytanie, a następnie przekazuje odpowiedź z powrotem.
 
 Dzięki współpracy integratora z serwerem uwierzytelniania dostęp do poszczególnych
 końcówek może być ograniczony tylko do autoryzowanych użytkowników. Identyfikacja
 uprawnionych klientów odbywa się poprzez przekazanie tokenu sesji w parametrze zapytania.
+
 W przypadku końcówek o typie Read i Write możliwe jest przechwytywanie i modyfikacja
 przesyłanych danych przy pomocy tzw. haków (ang. \textit{hook}). Haki mogą być
 osobno zakładane na każdą końcówkę. Na jednej końcówce może być założonych dowolnie
-wiele haków, których kolejność wykonywania zależy od nadanego im liczbowego priorytetu.
+wiele haków, których kolejność wykonywania zależy od nadanego im priorytetu.
 Wyróżniamy dwa typy haków:
 \begin{itemize}
 	\item In - modyfikują zapytania wchodzące do mikrousługi.
 	\item Out - modyfikują wychodzące z mikrousługi odpowiedzi na zapytania.
 \end{itemize}
-Do jednej końcówki typu Read i Write może być przypisanych dowolnie wiele serwerów
-usługi. Integrator dla każdego zapytania losowo wybiera jeden z nich i do niego
-kieruje wchodzące zapytanie, a następnie przekazuje odpowiedź z powrotem.
 
 Integrator oferuje dwie metody pobierania listy aktywnych końcówek. Dostępne są
 one pod adresami:
@@ -814,10 +1171,10 @@ Początkowo integrator był implementowany w technologii Play Framework. Niestet
 w miarę postępu prac ujawnialiśmy kolejne problemy związane z tym frameworkiem,
 począwszy od konfliktu zależności pomiędzy pakietami, poprzez niedziałający tryb
 SSL, aż po zawieszanie się serwera. Być może było to spowodowane koniecznością
-użycia wersji niestabilnej frameworka. Wymienione kłopoty w połączeniu z niezadowalającym
+użycia niestabilnej wersji frameworka. Wymienione kłopoty w połączeniu z niezadowalającym
 postępem prac skłoniły nas do przepisania integratora w języku Python. Nowa wersja
-nazwana przez nas integratorem 2 nie posiada wymienionych wyżej wad i została
-dogłębnie przetestowana.
+nazwana przez nas Integratorem 2 nie posiada wymienionych wyżej wad i została
+dogłębnie przetestowana w praktyce.
 
 \section{Mikrousługi}
 
@@ -845,10 +1202,9 @@ import notify.installer as inst
 addr = "http://localhost:8000"
 inst.zk.start()
 
-inst.add_read_endpoint("notify-pending", "server1", 
-	addr + "/notify/pending/", "null")
-inst.add_write_endpoint("notify-set_variable", "server1",
-	addr + "/notify/set_variable/", "null")
+inst.add_read_endpoint("notify-pending", "server1", addr + "/notify/pending/")
+inst.add_write_endpoint("notify-set_variable", "server1", addr +
+	"/notify/set_variable/")
 \end{minted}
 W przedstawionym przykładzie następuje zaimportowanie biblioteki dostarczanej wraz z
 integratorem służącej do komunikacji z nim. Następnie zostaje nawiązane połączenie z
@@ -858,6 +1214,10 @@ serwerem integratora i tworzone są dwie końcówki typu Read i Write o nazwach
 wyśle on zapytanie pod adres \texttt{http://localhost:8000/notify/pending/} i przekaże
 odpowiedź z powrotem. Wyrejestrowanie usługi z integratora nastąpi automatycznie po
 wyłączeniu serwera.
+
+\subsection{Autoryzacja}
+Autoryzacja w aplikacjach webowych jest kwestią dosyć skomplikowaną i w naszym prototypie chcieliśmy bardziej przedstawić jakąkolwiek działającą implementację, niż zadbać o jej dopracowanie pod względem bezpieczeństwa.
+Domyślne konta w aplikacji to konto $user$, oraz konto $admin$, hasła do kont są domyślnie takie, jak ich nazwy.
 
 \subsection{Logger}
 
@@ -872,27 +1232,47 @@ inst.add_node('/hook/out/read/google/h1', addr + "/out/", temp=True)
 \end{minted}
 Od tej pory cała komunikacja do i z wymienionej końcówki przechodzi przez serwer
 mikrousługi, która wykorzystuje ten fakt do wypisywania całego ruchu na konsolę.
-Kolejność aplikowania haków zależy od nazwy haka (w tym przypadku ,,h1'').
-Haki o mniejszych leksykograficznie nazwach są wykonywane wcześniej.
+Kolejność aplikowania haków zależy od nazwy haka (w tym przypadku ,,h1''), tj.
+haki o mniejszych leksykograficznie nazwach są wykonywane wcześniej.
+
+\subsection{Poczta}
+Mikrousługa poczty była pierwszą zaimplementowaną usługą, z którą użytkownik
+naszej platformy mógł podjąć interakcję. Jak sama nazwa wskazuje, można przy jej
+pomocy wysyłać i odbierać wiadomości.\\
+\includegraphics[width=\textwidth]{obrazki/poczta.png}
+
+Tutaj ujawniły się pierwsze mocne strony przyjętej przez nas architektury całego
+portalu. Dzięki jasnemu odseparowaniu warstwy prezentacji od warstwy danych
+możliwe staje się korzystanie przez mikrousługi z dokładnie tego samego interfejsu,
+z którego korzysta warstwa frontendowa portalu do prezentacji danych użytkownikowi.
+Przykładowo, kiedy osoba siedząca przed komputerem wysyła wiadomość, to w tej samej
+chwili z tej samej końcówki może korzystać aplikacja kliencka na smartfona, system
+do zarządzania kadrami, a nawet inna mikrousługa znajdująca się w serwerowni ZUS.
+Wykorzystaliśmy ten fakt przy tworzeniu usługi 500+ do wysyłania powiadomień o
+udanym złożeniu wniosku.
+Unifikacja interfejsów sprawia, że utworzenie, utrzymanie i rozwój mikrousługi jest
+tańsze i prostsze. Eliminujemy w ten sposób konieczność utrzymywania kilku redundantnych
+kanałów do komunikacji z serwisem oraz w jego obrębie.
 
 \subsection{Plus500}
 
 Z powodu ograniczeń nałożonych na nazwy pakietów w języku Python usługę odpowiedzialną
 za obsługę wniosków o świadczenie $500+$ nazwaliśmy ,,Plus500''. Nasza mikrousługa
-umożliwia wyświetlenie statusu złożonych wniosków (nazwy, daty udostępnienia i informacji
-czy wniosek został rozpatrzony) oraz wysłanie wypełnionego formularza.
+umożliwia wyświetlenie złożonych wniosków, rozpatrzenie ich przez urzędnika oraz
+wysłanie wypełnionego formularza.
 
 Szablon formularza wniosku o świadczenie 500+ plus znajduje się w pliku ,,500plus.form''
 i jest opisany w formacie JSON. Po połączeniu z serwerem mikrousługi szablon jest
 wysyłany do klienta i wyświetlany. Po naciśnięciu odpowiedniego guzika zawartość
 wniosku jest serializowana i wysyłana do mikrousługi.\\
 \includegraphics[width=\textwidth]{obrazki/piecset.png}
-
-Rejestracja usługi w integratorze zajmuje tylko 5 linijek kodu:
+Rejestracja usługi w integratorze zajmuje tylko 7 linijek kodu:
 \begin{minted}{python}
 inst.add_view_endpoint_from_file("plus500-wniosek", '500plus.form')
-inst.add_read_endpoint("plus500-lista", "server1", addr + "/lista/", "null")
-inst.add_write_endpoint("plus500-send", "server1", addr + "/wyslij/", "null")
+inst.add_read_endpoint("plus500-lista", "server1", addr + "/lista/")
+inst.add_read_endpoint("plus500-pokaz", "server1", addr + "/pokaz/")
+inst.add_write_endpoint("plus500-send", "server1", addr + "/wyslij/")
+inst.add_write_endpoint("plus500-ustaw", "server1", addr + "/ustaw/")
 inst.add_menu_element("Moje wnioski 500+", "read/plus500-lista", "/plus500lista")
 inst.add_menu_element("Złóż wniosek 500+", "view/plus500-wniosek", "/plus500nowy")
 \end{minted}
@@ -903,21 +1283,122 @@ samym końcu rejestrujemy wpisy w menu. Od tej chwili zmiany są widoczne w inte
 użytkownika i możliwa jest interakcja z mikrousługą.
 
 \chapter{Wkład poszczególnych członków zespołu w projekt}
-TODO
+
+\begin{tabularx}{\linewidth}{|l|X|} \hline
+	\textbf{Członek zespołu} & \textbf{Wykonane zadania} \\
+	\hline
+	Michał Jaroń & TODO\\
+	\hline
+	Jarosław Socha & Zaproponowanie ogólnej architektury warstwy front-end. \newline
+		Implementacja logiki Style Guide. \newline
+		Implementacja dynamicznych komponentów. \newline
+		Implementacja front-endu wiadomości. \newline
+		Implementacja wniosków 500plus z użyciem komponentów. \newline
+		Implementacja front-endu autoryzacji. \newline
+		Implementacja komunikacji HTTP z warstwą backend. \newline
+		Implementacja renderowania komponentów z obiektów JSON za pomocą dekoratora @SetterAlg. \newline
+		Implementacja mechanizmu podglądu i rozpatrywania wniosków.
+	\\
+	\hline 
+	Piotr Zalas & Zaproponowanie wstępnej architektury aplikacji.\newline
+	  Implementacja Integratora i Integratora 2.\newline
+	  Implementacja mikrousług powiadomień, loggera, poczty, 500+.\newline
+	  Implementacja usługi autoryzacji.\newline
+	  Implementacja serwera frontendu w Express.js.\newline
+	  Przygotowanie diagramów ilustrujących architekturę.\newline
+	  Spisanie niniejszej pracy (z wyjątkiem rozdziałów 4.2, 4.3, 6.1 - 6.3).\\
+	\hline
+\end{tabularx}
 
 \chapter{Podsumowanie}
-TODO
+
+Jesteśmy usatysfakcjonowani otrzymanym produktem. Udało nam się osiągnąć znaczną
+automatyzację procesu zarządzania infrastrukturą. Dzięki automatycznej rejestracji i
+wyrejestrowywaniu usług personel techniczny jest zwolniony z wykonywania żmudnej,
+powtarzalnej pracy. Zmniejszyliśmy możliwość popełnienia błędu podczas konfiguracji,
+a jednocześnie dzięki automatycznemu odcinaniu uszkodzonego serwera od reszty systemu
+zwiększyliśmy niezawodność w sposób odczuwalny dla przeciętnego użytkownika.
+
+Zaproponowany przez nas interfejs użytkownika jest wygodny i przyjemny dla oka,
+odpowiada najnowszym trendom w projektowaniu witryn internetowych. Spójność interfejsu
+została zagwarantowana przez opakowanie jego typowych elementów w system komponentów,
+przy projektowaniu którego kierowaliśmy się względami praktycznymi. W pewnych przypadkach
+(takich jak okienko wiadomości) bardziej opłacalne było stworzenie jednego dużego
+elementu, niż składanie go z kilku mniejszych. Przy tworzeniu formularzy wykorzystaliśmy
+wiele małych elementów takich jak pola tekstowe i guziki do stworzenia większej
+całości. Separacja danych i warstwy prezentacji pozwala na bezbolesną zmianę wyglądu
+portalu bez konieczności jakiejkolwiek ingerencji w elementy pozostałych warstw, w
+szczególności mikrousług.
+
+Programiści mikrousług otrzymali od nas narzędzie łączące prostotę tworzenia aplikacji
+i dużą siłę wyrazu. Zaproponowany przez nas interfejs pozwala skupić się na tworzeniu
+logiki biznesowej z pominięciem niepotrzebnych szczegółów związanych z komunikacją
+z innymi częściami systemu oraz dotyczących strony wizualnej. Dzięki rozbiciu
+elementów platformy na małe, niezależne części, dalsza rozbudowa i wprowadzanie zmian
+w portalu staje się łatwiejsze.
+
+Zastosowanie elastycznej architektury umożliwia dalszy rozwój platformy. Stworzyliśmy
+listę rzeczy, które warto w dalszej kolejności zaimplementować i które w znaczący
+sposób podniosłyby wartość stworzonego przez nas frameworka. Niestety, ze względu na
+ograniczony czas projektu nie byliśmy w stanie ich zaprogramować. Na wymienionej liście
+znalazł się miedzy innymi postulat głębszej automatyzacji warstwy frontendu. Obecnie
+dodanie nowej usługi wymaga zaangażowania zespołu opiekującego się częścią kliencką
+naszego portalu. Chcielibyśmy, żeby mikrousługi miały większy wpływ na jej działanie.
+Przykładowo, dodawanie nowych elementów do menu głównego mogłoby się odbywać w pełni
+automatycznie. Mikrousługa mogłaby też mieć możliwość zapisywania i odczytywania danych
+w kliencie, a także wskazywania końcówki która ma być wyświetlona jako następna.
+Dzięki temu możliwe stałoby się konstruowanie wielostronnicowych formularzy, które
+krok po kroku prowadziłyby użytkownika przez proces wypełniania wniosku.
+
+Usprawnienia są możliwe także po stronie backendu. Do najprostrzych może należeć
+automatyczne wykrywanie serwera integratora na zasadzie podobnej do stosowanej
+w protokole DHCP. Obecnie trzeba jawnie podawać adres integratora, co w dynamicznie
+zmieniającym się środowisku nie powinno mieć miejsca. Bardziej złożonymi problemami
+zarysowanymi już w rozdziale 3 jest orchestracja mikrousług i uspójnianie między
+nimi danych w przypadku konfliktu. Problem orchestracji może być częściowo
+rozwiązany poprzez mechanizm haków, który umożliwia tworzenie operacji obejmujących
+wiele usług, jednak naszym zdaniem jest to rozwiązanie dalekie od optymalnego.
+
+Powyższa lista powstała na wyraźne życzenie naszego Klienta, który był zainteresowany
+perspektywami dalszego rozwoju stworzonego przez nas prototypu. Niewątpliwie tematyka
+mikrousług i architektury zorientowanej na usługi jeszcze nie raz będzie przedmiotem
+naszego zawodowego zainteresowania. Jako zespół mamy wielką nadzieję, że spełniliśmy
+pokładane w nas oczekiwania.
 
 \appendix
 \chapter{Spis zawartości dołączonej płyty CD}
-Dokładny spis zawartości towarzyszącej płytki (p. dalej). To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział). Płytka CD/DVD/Blu-ray/...
+Dołączona do pracy płyta zawiera następujące pliki i katalogi:
 
-Zawiera:\\
-Pełną dokumentacją projektu w łatwo dającym się odczytać formacie (najlepiej pdf + źródło).
-Program (w postaci źródłowej i potencjalnie umożliwiającej uruchomienie, to może oznaczać np. dostarczenie stosownych plików makefile, pomocniczych plików z danymi, opisu instalacji itp.).
-Wszelkie inne dokumenty powstałe podczas zajęć (np. teksty prezentacji, teksty pracy z poprzedniego dużego punktu, itp.).
+\section{Katalog \mintinline{python}{/backend/}}
+TODO
 
-Płyta jest częścią pracy - trzeba tyle płyt co drukowanych egzemplarzy pracy. Płytkę trzeba przymocować do pracy, tak by a) nie wypadała b) dało się ją wyjąć i odczytać w komputerze :).
+\section{Katalog \mintinline{python}{/frontend/}}
+TODO
+
+\section{Plik \mintinline{python}{Instalacja - Backend.pdf}}
+Instrukcja instalacji i uruchomienia części backendowej naszej aplikacji
+
+\section{Plik \mintinline{python}{Instalacja - Frontend.pdf}}
+Instrukcja instalacji i uruchomienia części frontendowej naszej aplikacji
+
+\section{Katalog \mintinline{python}{/prezentacja/}}
+Prezentacja z dnia 10.06.2017
+
+\section{Plik \mintinline{python}{README}}
+Plik zawierający dodatkowe informacje na temat zawartości płyty
+
+%Dokładny spis zawartości towarzyszącej płytki (p. dalej). To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział). Płytka CD/DVD/Blu-ray/...
+%
+%Zawiera:\\
+%Pełną dokumentacją projektu w łatwo dającym się odczytać formacie (najlepiej pdf + źródło).
+%Program (w postaci źródłowej i potencjalnie umożliwiającej uruchomienie, to może oznaczać np. dostarczenie stosownych plików makefile, pomocniczych plików z danymi, opisu instalacji itp.).
+%Wszelkie inne dokumenty powstałe podczas zajęć (np. teksty prezentacji, teksty pracy z poprzedniego dużego punktu, itp.).
+%
+%Płyta jest częścią pracy - trzeba tyle płyt co drukowanych egzemplarzy pracy. Płytkę trzeba przymocować do pracy, tak by a) nie wypadała b) dało się ją wyjąć i odczytać w komputerze :).
+
+
+%\chapter{Zrzuty ekranu z naszej aplikacji}
+% TODO
 
 %\chapter{Obserwator emerytalny}
 %Z uwagi na bardzo niepewny charakter naszego projektu i trudności związane z
@@ -927,58 +1408,97 @@ Płyta jest częścią pracy - trzeba tyle płyt co drukowanych egzemplarzy prac
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
 
-\bibitem[TFA]{tfa} Autor nieznany, \textit{The Twelve-Factor App}, https://12factor.net/
+\bibitem[1]{curator} Apache, \textit{Apache Curator},
+http://curator.apache.org/. [Dostęp: 2017-06-22].
 
-\bibitem[SDM]{govsm} Autor nieznany, \textit{Government Service Design Manual},
-https://www.gov.uk/service-manual/index.html
+\bibitem[2]{curatorlock} Apache, \textit{Apache Curator - Shared Lock},
+http://curator.apache.org/curator-recipes/shared-lock.html. [Dostęp: 2017-06-22].
 
-\bibitem[MSV]{microsvc} Chris Richardson, \textit{Microservice architecture patterns and best practices},
-http://microservices.io/
+\bibitem[3]{distibutedlog} Apache, \textit{DistributedLog},
+http://distributedlog.incubator.apache.org/. [Dostęp: 2017-06-22].
 
-\bibitem[MCO]{mcobywatel} Ministerstwo Cyfryzacji, \textit{Portal Rzeczypospolitej Polskiej - Opis projektu},
-https://mc.gov.pl/projekty/portal-rzeczypospolitej-polskiej/opis-projektu
+\bibitem[4]{kafka} Apache, \textit{Kafka},
+https://kafka.apache.org/. [Dostęp: 2017-06-22].
 
-\bibitem[PUE]{zuspue} ZUS, \textit{Platforma Usług Elektronicznych},
-http://pue.zus.pl/
+\bibitem[5]{zookeeper} Apache, \textit{Apache ZooKeeper},
+https://zookeeper.apache.org/. [Dostęp: 2017-06-22].
 
-\bibitem[RDL]{redislock} Redis, \textit{Distributed locks with Redis},
-https://redis.io/topics/distlock
+\bibitem[6]{microsvc} Chris Richardson, \textit{Microservice architecture patterns and best practices},
+http://microservices.io/. [Dostęp: 2017-06-22].
 
-\bibitem[RDS]{redisson} \textit{Redisson},
-http://redisson.org/
+\bibitem[7]{redislock} \textit{Distributed locks with Redis},
+https://redis.io/topics/distlock. [Dostęp: 2017-06-22].
 
-\bibitem[AZK]{zookeeper} Apache, \textit{Apache ZooKeeper},
-https://zookeeper.apache.org/
+\bibitem[8]{django} Django Software Foundation, \textit{Django},
+https://www.djangoproject.com/. [Dostęp: 2017-06-22].
 
-\bibitem[ACU]{curator} Apache, \textit{Apache Curator},
-http://curator.apache.org/
+\bibitem[9]{react} Facebook, \textit{React},
+https://facebook.github.io/react/. [Dostęp: 2017-06-22].
 
-\bibitem[HTL]{redisbad} Martin Kleppmann, \textit{How to do distributed locking},
-http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html
+\bibitem[10]{angular2} Google, \textit{Angular},
+https://angular.io/. [Dostęp: 2017-06-22].
 
-\bibitem[CLK]{curatorlock} Apache, \textit{Apache Curator - Shared Lock},
-http://curator.apache.org/curator-recipes/shared-lock.html
+\bibitem[11]{grpc} Google, \textit{gRPC},
+http://www.grpc.io/. [Dostęp: 2017-06-22].
 
-\bibitem[Fowler]{fowlermicroservices} James Lewis, Martin Fowler, \textit{Microservices},
-https://martinfowler.com/articles/microservices.html
+\bibitem[12]{govsm} \textit{Government Service Design Manual},
+https://www.gov.uk/service-manual/index.html. [Dostęp: 2017-06-22].
 
-\bibitem[RSUS]{rocznik} ZUS, \textit{Rocznik Statystyczny Ubezpieczeń Społecznych},
-http://www.zus.pl/baza-wiedzy/statystyka/rocznik-statystyczny-ubezpieczen-spolecznych
+\bibitem[13]{fowlermicroservices} James Lewis, Martin Fowler, \textit{Microservices},
+https://martinfowler.com/articles/microservices.html. [Dostęp: 2017-06-22].
 
-\bibitem[Beanstlkd]{beanstalkd} Keith Rarick, \textit{Beanstalkd},
-http://kr.github.io//beanstalkd/
+\bibitem[14]{kazoo} Kazoo team, \textit{Kazoo},
+https://github.com/python-zk/kazoo. [Dostęp: 2017-06-22].
 
-\bibitem[Kafka]{kafka} Apache, \textit{Kafka},
-https://kafka.apache.org/
+\bibitem[15]{beanstalkd} Keith Rarick, \textit{Beanstalkd},
+http://kr.github.io//beanstalkd/. [Dostęp: 2017-06-22].
 
-\bibitem[DL]{distibutedlog} Apache, \textit{DistributedLog},
-http://distributedlog.incubator.apache.org/
+\bibitem[16]{play} Lightbend, \textit{Play Framework},
+https://www.playframework.com/. [Dostęp: 2017-06-22].
 
-\bibitem[Netflix]{nginx} Tony Mauro, \textit{Adopting Microservices at Netflix: Lessons for Architectural Design},
-https://www.nginx.com/blog/microservices-at-netflix-architectural-best-practices/
+\bibitem[17]{redisbad} Martin Kleppmann, \textit{How to do distributed locking},
+http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html. [Dostęp: 2017-06-22].
 
-\bibitem[mammatustech]{mammatustech} Rick Hightower, \textit{Java Microservices Architecture},
-http://www.mammatustech.com/java-microservices-architecture
+\bibitem[18]{mcobywatel} Ministerstwo Cyfryzacji, \textit{Portal Rzeczypospolitej Polskiej - Opis projektu},
+https://mc.gov.pl/projekty/portal-rzeczypospolitej-polskiej/opis-projektu. [Dostęp: 2017-06-22].
+
+\bibitem[19]{expressjs} Node.js Foundation, \textit{Express},
+https://expressjs.com/. [Dostęp: 2017-06-22].
+
+\bibitem[20]{hauer} Philipp Hauer, \textit{Microservices in a Nutshell. Pros and Cons.},
+https://blog.philipphauer.de/microservices-nutshell-pros-cons/. [Dostęp: 2017-06-22].
+
+\bibitem[21]{reactlicense} React, etc. Tech Stack, \textit{Your license to use React.js can be revoked if you compete with Facebook},
+http://react-etc.net/entry/your-license-to-use-react-js-can-be-revoked-if-you-compete-with-facebook. [Dostęp: 2017-06-22].
+
+\bibitem[22]{redisson} \textit{Redisson},
+http://redisson.org/. [Dostęp: 2017-06-22].
+
+\bibitem[23]{mammatustech} Rick Hightower, \textit{Java Microservices Architecture},
+http://www.mammatustech.com/java-microservices-architecture. [Dostęp: 2017-06-22].
+
+\bibitem[24]{sqlite} SQLite Consortium, \textit{SQLite},
+https://www.sqlite.org/. [Dostęp: 2017-06-22].
+
+\bibitem[25]{postgres} The PostgreSQL Global Development Group, \textit{PostgreSQL},
+https://www.postgresql.org/. [Dostęp: 2017-06-22].
+
+\bibitem[26]{tfa} \textit{The Twelve-Factor App}, https://12factor.net/. [Dostęp: 2017-06-22].
+
+\bibitem[27]{nginx} Tony Mauro, \textit{Adopting Microservices at Netflix: Lessons for Architectural Design},
+https://www.nginx.com/blog/microservices-at-netflix-architectural-best-practices/. [Dostęp: 2017-06-22].
+
+\bibitem[28]{bootstrap} Twitter, \textit{Bootstrap},
+http://getbootstrap.com/. [Dostęp: 2017-06-22].
+
+\bibitem[29]{wsdl} World Wide Web Consortium, \textit{Web Services Description Language},
+https://www.w3.org/TR/wsdl. [Dostęp: 2017-06-22].
+
+\bibitem[30]{zuspue} ZUS, \textit{Platforma Usług Elektronicznych},
+http://pue.zus.pl/. [Dostęp: 2017-06-22].
+
+\bibitem[31]{rocznik} ZUS, \textit{Rocznik Statystyczny Ubezpieczeń Społecznych},
+http://www.zus.pl/baza-wiedzy/statystyka/rocznik-statystyczny-ubezpieczen-spolecznych. [Dostęp: 2017-06-22].
 
 \end{thebibliography}
 
