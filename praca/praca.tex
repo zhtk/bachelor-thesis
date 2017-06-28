@@ -7,6 +7,7 @@
 \usepackage{ltablex}
 \usepackage{tabularx}
 \usepackage{pbox}
+\usepackage{dirtree}
 
 % Dane magistranta:
 
@@ -1456,27 +1457,124 @@ naszego zawodowego zainteresowania. Jako zespół mamy wielką nadzieję, że sp
 pokładane w nas oczekiwania.
 
 \appendix
-\chapter{Spis zawartości dołączonej płyty CD}
-Dołączona do pracy płyta zawiera następujące pliki i katalogi:
+ \chapter{Spis zawartości dołączonej płyty CD}
+ Dołączona do pracy płyta zawiera następujące pliki i katalogi:
+ 
+ \section{Plik \mintinline{python}{Instalacja - Backend.pdf}}
+Instrukcja instalacji i uruchomienia części backendowej naszej aplikacji.
+ 
+ \section{Plik \mintinline{python}{Instalacja - Frontend.pdf}}
+Instrukcja instalacji i uruchomienia części frontendowej naszej aplikacji.
+ 
+ \section{Katalog \mintinline{python}{/prezentacja/}}
+ Prezentacja z dnia 10.06.2017
+ 
+ \section{Plik \mintinline{python}{README}}
+Plik zawierający dodatkowe informacje na temat zawartości płyty.
 
 \section{Katalog \mintinline{python}{/backend/}}
-TODO
+
+Poniżej drzewo katalogów:\\
+
+\vspace{160pt}
+
+\dirtree{%
+.1 backend.
+.2 auth.
+.2 integrator.
+.3 app.
+.4 auth.
+.4 controllers.
+.4 managers.
+.3 conf.
+.3 project.
+.3 ssl.
+.2 integrator2.
+.3 editor.
+.4 migrations.
+.3 endpoints.
+.4 migrations.
+.3 integrator2.
+.3 menu.
+.4 migrations.
+.3 zk.
+.2 integrator-installer.
+.2 mikrouslugi.
+.3 500plus.
+.4 plus500.
+.5 plus500.
+.5 wnioski.
+.6 migrations.
+.3 ezla.
+.4 ezla.
+.4 zwolnienia.
+.5 migrations.
+.3 logger.
+.4 logger.
+.5 interceptor.
+.6 migrations.
+.5 logger.
+.3 mail.
+.4 mail.
+.5 baza.
+.6 migrations.
+.5 mail.
+.3 notifier.
+.4 notifier.
+.5 notifier.
+.5 notify.
+.6 migrations.
+.6 templates.
+.7 notify.
+}
 
 \section{Katalog \mintinline{python}{/frontend/}}
-TODO
-
-\section{Plik \mintinline{python}{Instalacja - Backend.pdf}}
-Instrukcja instalacji i uruchomienia części backendowej naszej aplikacji
-
-\section{Plik \mintinline{python}{Instalacja - Frontend.pdf}}
-Instrukcja instalacji i uruchomienia części frontendowej naszej aplikacji
-
-\section{Katalog \mintinline{python}{/prezentacja/}}
-Prezentacja z dnia 10.06.2017
-
-\section{Plik \mintinline{python}{README}}
-Plik zawierający dodatkowe informacje na temat zawartości płyty
-
+Poniżej drzewo katalogów:\\
+\dirtree{%
+.1 frontend.
+.2 quickstart.
+.3 auth.
+.3 e2e.
+.3 src.
+.4 app.
+.5 500plus.
+.5 Components.
+.6 ComponentsCore.
+.7 Interfaces.
+.7 MainClasses.
+.6 FormComponents.
+.7 TextBox.
+.6 FrontComponents.
+.5 dashboard\_components.
+.5 Editor.
+.5 email\_components.
+.5 home\_components.
+.5 leave\_components.
+.6 pacjent-components.
+.5 meeting\_components.
+.6 opinion\_components.
+.6 reservation\_components.
+.5 navbar\_components.
+.5 service.
+.5 services\_components.
+.4 data.
+.4 dist.
+.5 css.
+.5 js.
+.4 js.
+.4 less.
+.4 pages.
+.5 Components.
+.6 Panel.
+.6 TextBoxComponents.
+.5 home\_subpages.
+.5 leave\_subpages.
+.5 meeting\_subpages.
+.6 booking\_subpages.
+.6 opinion\_subpages.
+.6 queue\_subpages.
+.5 services\_subpages.
+}
 %Dokładny spis zawartości towarzyszącej płytki (p. dalej). To bardzo ważne, proszę zapisać jako osobny rozdział (czyli np. nie podrozdział). Płytka CD/DVD/Blu-ray/...
 %
 %Zawiera:\\
