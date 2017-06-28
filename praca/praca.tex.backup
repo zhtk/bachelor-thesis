@@ -752,8 +752,54 @@ która nie pozwala na zaklasyfikowanie go jako zwykłej mikrousługi.\\
 \section{Tworzenie mockupów}
 Jako, że naszym celem nie było stworzenie gotowej platformy (w sensie produkcyjnym), a raczej stworzenie proof of concept,
 dlatego intensywnie tworzyliśmy prototypy. Chcieliśmy pokazać, jak PUE może wyglądać, nie skupiając się jednak na
-sprawach żmudnych, czasochłonnych i niekoniecznie potrzebnych do pokazanie idei (takich jak kwestie bezpieczeństwa - oczywiście
-tego tematu całkowicie nie pominieliśmy - ale zapewnienie bezpieczeństwa dla takiego typu platformy nie było naszym głównym celem).
+sprawach żmudnych, czasochłonnych i niekoniecznie potrzebnych do pokazania idei (takich jak kwestie bezpieczeństwa - oczywiście
+tego tematu całkowicie nie pominieliśmy, ale zapewnienie bezpieczeństwa dla takiego typu platformy nie było naszym głównym celem).
+Mockupy realizowaliśmy przy użyciu angular2 oraz html i css. Część stworzonych przez nas makiet posłużyła potem jako przykład
+realnego use-casem, tzn. makiety przerobiliśmy na elementu występujące na naszym frameworku(elemenaty takie jak divy, zamieniliśmy na
+komponenty z naszego katalogu komponentów, dane, które we wstępnych makietach pobieraliśmy ze statycznych tablic, są pobierane za
+pomocą mikroserwisów). 
+
+\subsection{Zrealizowane mockupy}
+\subsubsection{500+}
+Przykład dynamicznego formularza. Po zaprojektowaniu jako wstępnej makiety, został przepisany
+z użyciem narzędzi naszego frameworku. Na uwagę zasługują dynamiczne listy, pozwalające
+na wpisanie dowolnej liczby dzieci. Jednocześnie nie zaciemniają obrazu (można je zwijać, rozwijać, dodawać...).
+Formularz zostaje wstępnie wypełniony danymi. Skoro już korzystamy z internetowej platformy i nasze konto
+zawiera szeref informacji to niepotrzebne staje się uzupełnianie wielu pół formularza ręcznie. Dlatego
+mikrousługa zaciąga szereg danych uzupęłniając cześć pół formularza oraz czyniąj je niedostępnymi do edycji(np. nazwisko).
+\subsubsection{Zwolnienie lekarskie}
+Zwolnienie lerkarskie zostało rozbite na 3 przypadki użycia, obejmujące 3 różne rodzaje użytkowników, które
+będą zainteresowane L4.
+\begin{itemize}
+
+  \item Lekarz \newline
+    Wystawianie zwolnienia - statyczny formularz
+  \item Pacjent \newline
+    Podgląd swoich zwolnień lekarskich. Możliwość wygenerowania podpisane certyfikatu, potwiedzającego
+    zwolnienie lekarskie. Nasza wizja obejmuje inne podejście do zwolnień lekarskich niż obecnie.
+    Całkowite odejście od dokumentów papierowych, chcielibyśmy zrealizować za pomocą możliwośći
+    generowanie certufikatów pełniących rolę L4. Za pomocą naszej platformy można by takie certyfikatu
+    od razu wysłać do swojego pracodawcy.
+  \item Pracodawca
+    Pogląd aktulanych/archiwalnych zwolnień swoich pracowników. Na uwagę zasługuje wygodna prezentacja danych -
+    w postacii zakładek.
+\end{typ_listy}
+Moduł L4 został przepisany z użyciem naszych frameworka.
+\subsubsection{Strona Domowa}
+Omawiana również w dalszej części. Przepisana z użyciem frameworka.
+
+\subsubsection{Umawianie wizyt}
+Podstrona pozwalająca na umówienie wizyty w urzędzie. Pozwala zlokalizować najbliższy urząd,
+dostarcza od razu informacji od możliowści dojazdu. Zadeklarowanie sprawy do załatwienia pozwala
+systemowi określić przybliżony czas załatawiania danej sprawy. W systemie działającym produkcyjne
+moduł przewidujący czas załatwiania usługi byłby bardzo przydatny i mógłby, na podstawie historycznych czasów
+wizyt w urzędach przewidywać realne, przybliżone czasy dla danej sprawy. Przyczyniłoby się to
+do skrócenia kolejek w urzędach. Z daną sprawąm, niezależnie od petenta, związany jest związany na ogól podobny,
+lub wręcz taki sam zbiór dokumentów, które trzeba posiadać podczas wizyty w urzędzie. Dlatego system automatycznie
+podpowiada listę koniecznych dokumentów. UX na tym niewątpliwie zyskuje.
+
+\subsubsection{Kolejki w urzędach}
+Usługa pozwala podejrzeć aktualną długość oczekiwania na obłużenie przez urzędnika.
 
 \section{Strona domowa}
 Nastawienie społeczeństwa do ZUS, jako organizacji jest zdecydowanie negatywne, dlatego tworząc nasz projekt staraliśmy się
@@ -1035,11 +1081,21 @@ bardzo upraszcza pisanie aplikacji, to jednak ciągle może być to za cieżka d
 o edytorze który pozwalałby przeciągać, rozciągać, customizować wygląd komponentów. Edytor nie został jednak doprowadzony do wystarczająco dojrzałego
 stanu. Nie został jednak usunięty z projektu ponieważ, te zręby edytor, które powstały niosą ze sobą sporą dawkę wiedzy. Jako, że Angular2
 jest framewrokiem młodym nie istnieje w pełni działąjące rozwiązanie wspierające zmieniania rozmiarów(resizable) oraz przesuwanie komponetów.
-Dlatego pomimo, że edytor nie działa jeszcze w 100 procentach warto spojrzeć na dwie zaimplementowane dyrektywy - draggable i resizable. 
+Dlatego pomimo, że edytor nie działa jeszcze w 100 procentach warto spojrzeć na dwie zaimplementowane dyrektywy - draggable i resizable.
+Umożliwiają one dopisanie do dowolnego elementu html (element musi rozmiar, co w przypadku html nie jest tak oczywiste, więc czasamio trzeba
+jakiś element opakować we wrapper, który już faktycznie ma rozmiar) słów draggable i resizable, takie proste dopisanie czyni te elementy
+obiektami, którym możemy zmieniać rozmiar, przesuwać je itp. Implementacja tych funkcjonalności chociaż ostatecznie nie przydaje się( w obecnej) w fazie projektu,
+to jednak wpasowuje się w nurt tworzenia przez nas oprogramowania łatwo rozszerzalnego , reużywalnego i w końcu prostego w użyciu. Czy życie porgramitów
+frontend niebyłoby prostrze, gdyby wystarczyło zapisać przykładowo : <div draggable> </div>, żeby ożywić element? Nasze rozwiązanie pozwala na takie działanie,
+musimy jednak pamiętać, że ciągle opiera się na frameworku angular.
+
 
 \subsection{Instrukcje renderowania komponentu z obiektu JSON}
-Chcieliśmy, aby przekazywanie do komponentu algorytmu jego renderowania z otrzymanego obiektu JSON było, jak przystało na framework, maksymalnie proste i nowoczesne.
-Jest to kolejne miejsce, w którym pomocne okazały się dekoratory. Za pomocą dekoratora \mintinline{text}{@SetterAlg}, dla każdego pola (właściwości) komponentu, można ustawić osobną funkcję odpowiedzialną za przypisanie temu polu wartości.
+Chcieliśmy, aby przekazywanie do komponentu algorytmu jego renderowania z otrzymanego obiektu JSON było,
+jak przystało na framework, maksymalnie proste i nowoczesne.
+Jest to kolejne miejsce, w którym pomocne okazały się dekoratory.
+Za pomocą dekoratora \mintinline{text}{@SetterAlg}, dla każdego pola (właściwości) komponentu,
+można ustawić osobną funkcję odpowiedzialną za przypisanie temu polu wartości.
 Funkcje przekazywane do dekoratora są jak w poniższym przykładzie:
 \begin{minted}{javascript}
 @SetterAlg({field: "nazwa_pola_w_JSON", 
@@ -1287,13 +1343,27 @@ użytkownika i możliwa jest interakcja z mikrousługą.
 \begin{tabularx}{\linewidth}{|l|X|} \hline
 	\textbf{Członek zespołu} & \textbf{Wykonane zadania} \\
 	\hline
-	Michał Jaroń & TODO\\
+	Michał Jaroń & Stworzenie architektury komponentów. \newline
+		    Stworzenie systemu automatycznej dokumentacji. \newline
+		    Idea i implementacja styleguide\newline
+		    Podstawy edyotra - dyrektywy resizable oraz draggable\newline
+		    Stworzenie podstaw komunikacji z zewnętrznym serwerem\newline
+		      Stworzenie mockupów:
+			-> zwolnienie lekarskie
+			-> podglądanie kolejek w urzędach
+			-> umawianie wizyty
+			-> grid dostępnych usług
+			-> strona domowa \ newline
+		\newline
+		Stworzenie fontendu wiadomości. \newline
+		Implementacja  bocznego okna wiadomości\newline
+		Szereg prac poprawiająych UX i UI\newline
+		
+	\\	
+	
 	\hline
-	Jarosław Socha & Zaproponowanie ogólnej architektury warstwy front-end. \newline
-		Implementacja logiki Style Guide. \newline
-		Implementacja dynamicznych komponentów. \newline
-		Implementacja front-endu wiadomości. \newline
-		Implementacja wniosków 500plus z użyciem komponentów. \newline
+	Jarosław Socha \newline
+		Wyklikanie wniosku 500+ z gotowych komponentów. \newline
 		Implementacja front-endu autoryzacji. \newline
 		Implementacja komunikacji HTTP z warstwą backend. \newline
 		Implementacja renderowania komponentów z obiektów JSON za pomocą dekoratora @SetterAlg. \newline

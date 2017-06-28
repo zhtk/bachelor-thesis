@@ -752,10 +752,56 @@ która nie pozwala na zaklasyfikowanie go jako zwykłej mikrousługi.\\
 \section{Tworzenie mockupów}
 Jako, że naszym celem nie było stworzenie gotowej platformy (w sensie produkcyjnym), a raczej stworzenie proof of concept,
 dlatego intensywnie tworzyliśmy prototypy. Chcieliśmy pokazać, jak PUE może wyglądać, nie skupiając się jednak na
-sprawach żmudnych, czasochłonnych i niekoniecznie potrzebnych do pokazanie idei (takich jak kwestie bezpieczeństwa - oczywiście
-tego tematu całkowicie nie pominieliśmy - ale zapewnienie bezpieczeństwa dla takiego typu platformy nie było naszym głównym celem).
+sprawach żmudnych, czasochłonnych i niekoniecznie potrzebnych do pokazania idei (takich jak kwestie bezpieczeństwa - oczywiście
+tego tematu całkowicie nie pominieliśmy, ale zapewnienie bezpieczeństwa dla takiego typu platformy nie było naszym głównym celem).
+Mockupy realizowaliśmy przy użyciu angular2 oraz html i css. Część stworzonych przez nas makiet posłużyła potem jako przykład
+realnego use-casem, tzn. makiety przerobiliśmy na elementu występujące na naszym frameworku(elemenaty takie jak divy, zamieniliśmy na
+komponenty z naszego katalogu komponentów, dane, które we wstępnych makietach pobieraliśmy ze statycznych tablic, są pobierane za
+pomocą mikroserwisów). 
 
-\section{Strona domowa}
+\subsection{Zrealizowane mockupy}
+\subsubsection{500+}
+Przykład dynamicznego formularza. Po zaprojektowaniu jako wstępnej makiety, został przepisany
+z użyciem narzędzi naszego frameworku. Na uwagę zasługują dynamiczne listy, pozwalające
+na wpisanie dowolnej liczby dzieci. Jednocześnie nie zaciemniają obrazu (można je zwijać, rozwijać, dodawać...).
+Formularz zostaje wstępnie wypełniony danymi. Skoro już korzystamy z internetowej platformy i nasze konto
+zawiera szeref informacji to niepotrzebne staje się uzupełnianie wielu pół formularza ręcznie. Dlatego
+mikrousługa zaciąga szereg danych uzupęłniając cześć pół formularza oraz czyniąj je niedostępnymi do edycji(np. nazwisko).
+\subsubsection{Zwolnienie lekarskie}
+Zwolnienie lerkarskie zostało rozbite na 3 przypadki użycia, obejmujące 3 różne rodzaje użytkowników, które
+będą zainteresowane L4.
+\begin{itemize}
+
+  \item Lekarz \newline
+    Wystawianie zwolnienia - statyczny formularz
+  \item Pacjent \newline
+    Podgląd swoich zwolnień lekarskich. Możliwość wygenerowania podpisane certyfikatu, potwiedzającego
+    zwolnienie lekarskie. Nasza wizja obejmuje inne podejście do zwolnień lekarskich niż obecnie.
+    Całkowite odejście od dokumentów papierowych, chcielibyśmy zrealizować za pomocą możliwośći
+    generowanie certufikatów pełniących rolę L4. Za pomocą naszej platformy można by takie certyfikatu
+    od razu wysłać do swojego pracodawcy.
+  \item Pracodawca
+    Pogląd aktulanych/archiwalnych zwolnień swoich pracowników. Na uwagę zasługuje wygodna prezentacja danych -
+    w postacii zakładek.
+\end{typ_listy}
+Moduł L4 został przepisany z użyciem naszych frameworka.
+\subsubsection{Strona Domowa}
+Omawiana również w dalszej części. Przepisana z użyciem frameworka.
+
+\subsubsection{Umawianie wizyt}
+Podstrona pozwalająca na umówienie wizyty w urzędzie. Pozwala zlokalizować najbliższy urząd,
+dostarcza od razu informacji od możliowści dojazdu. Zadeklarowanie sprawy do załatwienia pozwala
+systemowi określić przybliżony czas załatawiania danej sprawy. W systemie działającym produkcyjne
+moduł przewidujący czas załatwiania usługi byłby bardzo przydatny i mógłby, na podstawie historycznych czasów
+wizyt w urzędach przewidywać realne, przybliżone czasy dla danej sprawy. Przyczyniłoby się to
+do skrócenia kolejek w urzędach. Z daną sprawąm, niezależnie od petenta, związany jest związany na ogól podobny,
+lub wręcz taki sam zbiór dokumentów, które trzeba posiadać podczas wizyty w urzędzie. Dlatego system automatycznie
+podpowiada listę koniecznych dokumentów. UX na tym niewątpliwie zyskuje.
+
+\subsubsection{Kolejki w urzędach}
+Usługa pozwala podejrzeć aktualną długość oczekiwania na obłużenie przez urzędnika.
+
+\subsubsection{Strona domowa}
 Nastawienie społeczeństwa do ZUS, jako organizacji jest zdecydowanie negatywne, dlatego tworząc nasz projekt staraliśmy się
 zmienić wizerunek ZUSu. Postawiliśmy na personalizacje kontaktów z użytkownikiem odwiedzającym naszą platformę. Dlatego już po zalogowaniu
 użytkownik otrzymuje większość potrzebnych informacji. Strona domowa jest dopracowana pod względem UX. Panele informują
@@ -766,6 +812,10 @@ namiastką ,,Ściany'' znanej z popularnego portalu społecznościowego. Panel z
 przez nas gotowy komponent o nazwie powiadomienia. Po skasowaniu wszystkich aktualnych powiadomień wyświetla się spersonalizowany
 komunikat, chwalący użytkownika za aktywność. To kolejny element wpisujący się w naszą filozofię tworzenia platformy jako
 środowiska nie tylko użytecznego ale i przyjaznego.
+
+\subsubsection{Grid dostępnych usług}
+Grid z panelami będącymi odnośnikami do dostępnych na platformie usług. Grid zachowuje się dynamicznie,
+możliwe jest filtrowanie po danych kategoriach (tagi).
 
 \section{Komponenty}
 \subsection{Mechanizm komponentów}
@@ -1011,6 +1061,8 @@ Zapewne dużym nadużyciem będzie nazwanie użytego podejścia terminem
 \textit{programowanie w paradygmacie opisowym},
 jednak na dobrą sprawę sam sposób kreacji komponentów został, faktycznie, sprowadzony do
 automatycznego generowanie kodu na podstawie opisu składowych.
+System automatycznej dokumentacji jest używany przy tworzeniu styleguide, jednocześnie użyte dekoratory pozwalają
+na edycje wyglądu komponentu i poglglądanie na biężąco efektów. 
 
 Stworzyliśmy następujące dekoratory:
 \begin{itemize}
@@ -1297,21 +1349,37 @@ użytkownika i możliwa jest interakcja z mikrousługą.
 \begin{tabularx}{\linewidth}{|l|X|} \hline
 	\textbf{Członek zespołu} & \textbf{Wykonane zadania} \\
 	\hline
-	Michał Jaroń & Stworzenie architektury warstwy frontend (komponenty). \newline
+	Michał Jaroń & Stworzenie architektury komponentów. \newline
+		    Stworzenie systemu automatycznej dokumentacji. \newline
+		    Idea i implementacja styleguide\newline
+		    Podstawy edytora - dyrektywy resizable oraz draggable\newline
+		    Stworzenie podstaw komunikacji z zewnętrznym serwerem(m.in. pobieranie z końcówki periodyczne)\newline
 		      Stworzenie mockupów:
 			-> zwolnienie lekarskie
 			-> podglądanie kolejek w urzędach
-			->
+			-> umawianie wizyty
+			-> grid dostępnych usług
+			-> strona domowa \ newline
 		\newline
 		Stworzenie fontendu wiadomości. \newline
-		
+		Implementacja bocznego okna wiadomości\newline
+		Szereg prac poprawiająych UX i UI\newline
+		Implementacja komponentów(wymienam tylko niekóre):
+		  -> panel (z reukrencyjnym renderowaniem, oraz dynamiczne akcje)\newline
+		  -> panelgroup (z reukrencyjnym renderowaniem)\newline
+		  -> formularz
+		  -> powiadomienie
+		  -> lista powiadomień
+		  -> szkielet rozszerzalnej listy
+		  -> textboxy
+		  -> wiele innych...
+		Opis części frontendowej.  
 	\\	
 	
 	\hline
 	Jarosław Socha \newline
 		Wyklikanie wniosku 500+ z gotowych komponentów. \newline
 		Implementacja front-endu autoryzacji. \newline
-		Implementacja komunikacji HTTP z warstwą backend. \newline
 		Implementacja renderowania komponentów z obiektów JSON za pomocą dekoratora @SetterAlg. \newline
 		Implementacja mechanizmu podglądu i rozpatrywania wniosków.
 	\\
