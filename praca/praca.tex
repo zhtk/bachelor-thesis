@@ -814,7 +814,7 @@ komunikat, chwalący użytkownika za aktywność. To kolejny element wpisujący 
 środowiska nie tylko użytecznego ale i przyjaznego.
 
 \subsubsection{Grid dostępnych usług}
-Grid z panelami będącymi odnośnikami do dostępnych na platformie usług. Grid zachowuje się dynamicznie,
+Grid z panelami będącymi odnośnikami do dostępnych na platformie usług. Grid zachowuje się dynamicznie,
 możliwe jest filtrowanie po danych kategoriach (tagi).
 
 \section{Komponenty}
@@ -846,10 +846,10 @@ to one korzystają z mirkousług, łączać logikę w jeden spójny klocek.
 \subsection{Opis komponentów}
 
 Każdy komponent oferuje pewien rodzaj aktywności, żeby lepiej pokazać różnicę między komponentem, a mikrousługą,
-można posłużyc się metaforą. Stół do ruletki to jeden komponent składający się z komponentów, plansza, koła.
+można posłużyc się metaforą. Stół do ruletki to jeden komponent składający się z komponentów, plansza, koła.
 Komponent oferuję możliwość zagrania w ruletkę. Za losowanie(ruch kulki w kole) odpowiada już jednak mikroułsuga, za werfyfikacje
 graczy również odpowiada mikrousługa. Z poziomu programisty używającego naszego komponentu nie widać jednak
-tych poszczególnych części składowych. Programista chce w pewnym miejscy osadzić stół z ruletką, wklei więc w swój kod
+tych poszczególnych części składowych. Programista chce w pewnym miejscy osadzić stół z ruletką, wklei więc w swój kod
 <ruletka></ruletka>. Komponent stworzony już przez kogoś innego. Reużywalność kodu w najlepszej postacii.
 Każdy komponent powinien posiadać unikalny w skali całego obiektu JSON identyfikator, ustawiany jako wartość pola $id$.
 Jako, że pomimo różnych zadań zewnętrzny iterfejs komponentów jest w miarę podobny, 
@@ -1093,7 +1093,7 @@ jakiś element opakować we wrapper, który już faktycznie ma rozmiar) słów d
 obiektami, którym możemy zmieniać rozmiar, przesuwać je itp. Implementacja tych funkcjonalności chociaż ostatecznie nie przydaje się( w obecnej) w fazie projektu,
 to jednak wpasowuje się w nurt tworzenia przez nas oprogramowania łatwo rozszerzalnego , reużywalnego i w końcu prostego w użyciu. Czy życie porgramitów
 frontend niebyłoby prostrze, gdyby wystarczyło zapisać przykładowo : <div draggable> </div>, żeby ożywić element? Nasze rozwiązanie pozwala na takie działanie,
-musimy jednak pamiętać, że ciągle opiera się na frameworku angular.
+musimy jednak pamiętać, że ciągle opiera się na frameworku angular.
 
 
 \subsection{Instrukcje renderowania komponentu z obiektu JSON}
@@ -1354,34 +1354,36 @@ użytkownika i możliwa jest interakcja z mikrousługą.
 		    Idea i implementacja styleguide\newline
 		    Podstawy edytora - dyrektywy resizable oraz draggable\newline
 		    Stworzenie podstaw komunikacji z zewnętrznym serwerem(m.in. pobieranie z końcówki periodyczne)\newline
-		      Stworzenie mockupów:
-			-> zwolnienie lekarskie
-			-> podglądanie kolejek w urzędach
-			-> umawianie wizyty
-			-> grid dostępnych usług
-			-> strona domowa \ newline
-		\newline
+           Stworzenie mockupów:\newline
+			-> zwolnienie lekarskie\newline
+			-> podglądanie kolejek w urzędach\newline
+			-> umawianie wizyty\newline
+			-> grid dostępnych usług\newline
+			-> strona domowa \newline
 		Stworzenie fontendu wiadomości. \newline
 		Implementacja bocznego okna wiadomości\newline
-		Szereg prac poprawiająych UX i UI\newline
-		Implementacja komponentów(wymienam tylko niekóre):
+		Szereg prac poprawiających UX i UI \newline
+		Implementacja komponentów: \newline
 		  -> panel (z reukrencyjnym renderowaniem, oraz dynamiczne akcje)\newline
 		  -> panelgroup (z reukrencyjnym renderowaniem)\newline
-		  -> formularz
-		  -> powiadomienie
-		  -> lista powiadomień
-		  -> szkielet rozszerzalnej listy
-		  -> textboxy
-		  -> wiele innych...
-		Opis części frontendowej.  
+		  -> formularz \newline
+		  -> powiadomienie \newline
+		  -> lista powiadomień \newline
+		  -> szkielet rozszerzalnej listy \newline
+		  -> textboxy \newline
+		Opis części frontendowej w pracy.
 	\\	
 	
 	\hline
-	Jarosław Socha \newline
-		Wyklikanie wniosku 500+ z gotowych komponentów. \newline
-		Implementacja front-endu autoryzacji. \newline
-		Implementacja renderowania komponentów z obiektów JSON za pomocą dekoratora @SetterAlg. \newline
-		Implementacja mechanizmu podglądu i rozpatrywania wniosków.
+	Jarosław Socha & Implementacja wniosku 500+ z przygotowanych komponentów. \newline
+		Implementacja logiki Style Guide. \newline
+		Implementacja logiki front-endu wiadomości. \newline
+		Implementacja dynamicznej listy komponentów. \newline
+ 		Implementacja front-endu autoryzacji. \newline
+ 		Implementacja komunikacji HTTP z warstwą backend. \newline
+		Implementacja mechanizmu podglądu i rozpatrywania wniosków. \newline
+		Projekt i implementacja renderowania komponentów z obiektów JSON za pomocą dekoratora @SetterAlg. \newline
+		Spisanie w pracy fragmentów rozdziału 6.3.
 	\\
 	\hline 
 	Piotr Zalas & Zaproponowanie wstępnej architektury aplikacji.\newline
