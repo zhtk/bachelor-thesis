@@ -767,7 +767,7 @@ z użyciem narzędzi naszego frameworka. Na uwagę zasługują dynamiczne listy 
 na wpisanie dowolnej liczby dzieci, które jednocześnie nie zaciemniają obrazu (można je zwijać, rozwijać, dodawać i tak dalej).
 Formularz zostaje wstępnie wypełniony danymi. Skoro już korzystamy z internetowej platformy i nasze konto
 zawiera szereg informacji to niepotrzebne staje się uzupełnianie wielu pól formularza ręcznie. Dlatego
-mikrousługa zaciąga szereg danych uzupełniając cześć pól formularza oraz czyniąc je niedostępnymi do edycji (np. pole z nazwiskiem).
+mikrousługa zaciąga szereg danych uzupełniając część pól formularza, jednocześnie czyniąc je niedostępnymi do edycji (np. pole z nazwiskiem).
 \subsubsection{Zwolnienie lekarskie}
 Zwolnienie lekarskie zostało rozbite na 3 przypadki użycia, obejmujące 3 różne rodzaje użytkowników, które
 będą zainteresowane L4.
@@ -849,8 +849,7 @@ Każdy komponent oferuje pewien rodzaj aktywności, żeby lepiej pokazać różn
 można posłużyc się metaforą. Stół do ruletki to jeden komponent składający się z komponentów, plansza, koła.
 Komponent oferuję możliwość zagrania w ruletkę. Za losowanie (ruch kulki w kole) odpowiada już jednak mikroułsuga, zaś za weryfikację
 graczy odpowiada inna mikrousługa. Z poziomu programisty używającego naszego komponentu nie widać jednak
-tych poszczególnych części składowych. Programista chce w pewnym miejscy osadzić stół z ruletką, wklei więc w swój kod
-<ruletka></ruletka>. Komponent stworzony już przez kogoś innego. Reużywalność kodu w najlepszej postaci.
+tych poszczególnych części składowych. Programista chce w pewnym miejscy osadzić stół z ruletką, wklei więc w swój kod fragment \mintinline{text}{<ruletka></ruletka>}. Komponent stworzony już przez kogoś innego. Reużywalność kodu jest więc dobrze zachowana.
 Każdy komponent powinien posiadać unikalny w skali całego obiektu JSON identyfikator, ustawiany jako wartość pola $id$.
 Jako, że pomimo różnych zadań zewnętrzny interfejs komponentów jest w miarę podobny, 
 poniżej znajduje się w miarę szczegółowy opis kilku wybranych komponentów: \\
@@ -1355,17 +1354,17 @@ użytkownika i możliwa jest interakcja z mikrousługą.
 	Michał Jaroń & Stworzenie architektury komponentów. \newline
 		    Stworzenie systemu automatycznej dokumentacji. \newline
 		    Idea i implementacja Style Guide. \newline
-		    Podstawy edytora - dyrektywy resizable oraz draggable\newline
-		    Stworzenie podstaw komunikacji z zewnętrznym serwerem(m.in. pobieranie z końcówki periodycznej)\newline
+		    Podstawy edytora - dyrektywy resizable oraz draggable.\newline
+		    Stworzenie podstaw komunikacji z zewnętrznym serwerem(m.in. pobieranie z końcówki periodycznej).\newline
           	Stworzenie mockupów:\newline
 			-> Zwolnienie lekarskie\newline
 			-> Podglądanie kolejek w urzędach\newline
 			-> Umawianie wizyty\newline
 			-> Grid dostępnych usług\newline
 			-> Strona domowa \newline
-		Stworzenie fontendu wiadomości. \newline
-		Implementacja bocznego okna wiadomości\newline
-		Szereg prac poprawiających UX i UI \newline
+		Stworzenie front-endu wiadomości. \newline
+		Implementacja bocznego okna wiadomości.\newline
+		Szereg prac poprawiających UX i UI. \newline
 		Implementacja komponentów: \newline
 		  -> Panel (z rekurencyjnym renderowaniem, oraz dynamiczne akcje)\newline
 		  -> PanelGroup (z rekurencyjnym renderowaniem)\newline
@@ -1374,12 +1373,12 @@ użytkownika i możliwa jest interakcja z mikrousługą.
 		  -> Lista powiadomień \newline
 		  -> Szkielet rozszerzalnej listy \newline
 		  -> TextBox \newline
-		Opis części frontendowej w pracy (rozdziały 4.2, 4.3, 6.1 - 6.3).
+		Opis części front-endowej w pracy (rozdziały 4.2, 4.3, 6.1 - 6.3).
 	\\	
 	
 	\hline
 	Jarosław Socha & Implementacja wniosku 500+ z przygotowanych komponentów. \newline
-		Implementacja logiki Style Guide. \newline
+		Implementacja Style Guide. \newline
 		Implementacja logiki front-endu wiadomości. \newline
 		Implementacja dynamicznej listy komponentów. \newline
  		Implementacja front-endu autoryzacji. \newline
