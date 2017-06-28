@@ -823,28 +823,28 @@ Końcówka pobierająca powiadomienie\\\hline
 Powiadomienie zostaje jednorazowo pobrane z podanej końcówki.\\\hline
 \end{tabularx}
 
-\begin{tabularx}{\linewidth}{|X|}\hline
-\textbf{Nazwa:}
-Lista powiadomień
-\\\hline
-\textbf{Opis:}\\
-
-Pojemnik na powiadomienia, koordynujący pobieranie powiadomień\\\hline
-\textbf{Końcówki:}\\
-Końcówka z powiadomieniami\\
-Końcówka z liczbą powiadomień(musi wiedzieć ile ściągnąć)
-\\\hline
-\textbf{JSON:}\\
-\textit{title:}\\
-\textit{msg:}\\
-\textit{time:} \\ \hline
-\textbf{Opis działania:}\\
-Cyklicznie (w ustalonych odstępach czasu, obecnie co 5 sekund), komponent
-wysyła zapytanie o liczbę dostępnych powiadomień, następnie w pętli, iteruje zwróconą liczbę razy,
-pobierając za każdym razem powiadomienie z końcówki. Pobieranie powiadomienia z końcówki sprowadza się
-do stworzenia komponentu Powiadomienia z danym adresem końcówki, a następnie osadzenie komponentu w sobie.\\\hline
-\end{tabularx}
-
+%\begin{tabularx}{\linewidth}{|X|}\hline
+%\textbf{Nazwa:}
+%Lista powiadomień
+%\\\hline
+%\textbf{Opis:}\\
+%
+%Pojemnik na powiadomienia, koordynujący pobieranie powiadomień\\\hline
+%\textbf{Końcówki:}\\
+%Końcówka z powiadomieniami\\
+%Końcówka z liczbą powiadomień(musi wiedzieć ile ściągnąć)
+%\\\hline
+%\textbf{JSON:}\\
+%\textit{title:}\\
+%\textit{msg:}\\
+%\textit{time:} \\ \hline
+%\textbf{Opis działania:}\\
+%Cyklicznie (w ustalonych odstępach czasu, obecnie co 5 sekund), komponent
+%wysyła zapytanie o liczbę dostępnych powiadomień, następnie w pętli, iteruje zwróconą liczbę razy,
+%pobierając za każdym razem powiadomienie z końcówki. Pobieranie powiadomienia z końcówki sprowadza się
+%do stworzenia komponentu Powiadomienia z danym adresem końcówki, a następnie osadzenie komponentu w sobie.\\\hline
+%\end{tabularx}
+%
 %\vspace{30pt}
 
 \begin{tabularx}{\linewidth}{|X|}\hline
@@ -869,6 +869,8 @@ Komponent pozwalający obramować grupę innych komponentów w tak zwany panel.
 W ciele panelu możliwe jest osadzanie innych komponentów. Panel może posiadać pasek tytułowy, oraz możliwość rozwijania\\\hline
 
 \end{tabularx}
+
+% \vspace{160pt}
 
 \begin{tabularx}{\linewidth}{|X|}\hline
 \textbf{Nazwa:}
@@ -907,7 +909,7 @@ Dodatkowo w algorytmie walidacji jest liczona suma kontrolna PESELu.
 \\\hline
 \end{tabularx}
 
-%\vspace{60pt}
+\vspace{60pt}
 
 \begin{tabularx}{\linewidth}{|X|}\hline
 \textbf{Nazwa:}
@@ -942,6 +944,8 @@ Formularz wysyła na zadaną końcówkę zapytanie HTTP zawierające w treści z
 \\\hline
 \end{tabularx}
 
+%\vspace{40pt}
+
 \begin{tabularx}{\linewidth}{|X|}\hline
 \textbf{Nazwa:}
 LabelComponent
@@ -975,7 +979,7 @@ Komponent potomny może być replikowany dowolną liczbę razy. Liczba kopii jes
 \\\hline
 \end{tabularx}
 
-%\vspace{60pt}
+\vspace{60pt}
 
 \begin{tabularx}{\linewidth}{|l|}\hline
 \textbf{Nazwa:}
@@ -1299,22 +1303,25 @@ użytkownika i możliwa jest interakcja z mikrousługą.
 	\textbf{Członek zespołu} & \textbf{Wykonane zadania} \\
 	\hline
 	Michał Jaroń & Stworzenie architektury warstwy frontend (komponenty). \newline
-		      Stworzenie mockupów:
-			-> zwolnienie lekarskie
-			-> podglądanie kolejek w urzędach
-			->
-		\newline
-		Stworzenie fontendu wiadomości. \newline
-		
+		Stworzenie mockupów: zwolnienia lekarskiego oraz podglądania kolejek w urzędach. \newline
+		Stworzenie front-endu wiadomości. \newline
+		Spisanie w pracy rozdziałów 4.2, 4.3, 6.1 - 6.3. \newline
+		Implementacja dekoratorów @Attr oraz @Register. \newline
+		Projekt i implementacja front-endu Style Guide. \newline
+		Projekt edytora. \newline
+		Projekt i implementacja komponentów.
 	\\	
 	
 	\hline
-	Jarosław Socha \newline
-		Wyklikanie wniosku 500+ z gotowych komponentów. \newline
+	Jarosław Socha & Implementacja wniosku 500+ z przygotowanych komponentów. \newline
+		Implementacja logiki Style Guide. \newline
+		Implementacja logiki front-endu wiadomości. \newline
+		Implementacja dynamicznej listy komponentów. \newline
 		Implementacja front-endu autoryzacji. \newline
 		Implementacja komunikacji HTTP z warstwą backend. \newline
-		Implementacja renderowania komponentów z obiektów JSON za pomocą dekoratora @SetterAlg. \newline
-		Implementacja mechanizmu podglądu i rozpatrywania wniosków.
+		Projekt i implementacja renderowania komponentów z obiektów JSON za pomocą dekoratora @SetterAlg. \newline
+		Implementacja mechanizmu podglądu i rozpatrywania wniosków. \newline
+		Spisanie w pracy fragmentów rozdziału 6.3.
 	\\
 	\hline 
 	Piotr Zalas & Zaproponowanie wstępnej architektury aplikacji.\newline
