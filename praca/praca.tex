@@ -31,7 +31,7 @@
 \opiekun{mgra Michała Możdżonka}
 
 % miesiąc i~rok:
-\date{Maj 2017}
+\date{Czerwiec 2017}
 
 %Podać dziedzinę wg klasyfikacji Socrates-Erasmus:
 \dziedzina{ 
@@ -1065,11 +1065,11 @@ Zapewne dużym nadużyciem będzie nazwanie użytego podejścia terminem
 jednak na dobrą sprawę sam sposób kreacji komponentów został, faktycznie, sprowadzony do
 automatycznego generowanie kodu na podstawie opisu składowych.
 System automatycznej dokumentacji jest używany przy tworzeniu Style Guide, jednocześnie użyte dekoratory pozwalają
-na edycje wyglądu komponentu i podlglądanie na bieżąco efektów. 
+na edycje wyglądu komponentu i podglądanie na bieżąco efektów. 
 
 Stworzyliśmy następujące dekoratory:
 \begin{itemize}
-	\item Dekorator \mintinline{text}{@register} - dodaje komponent do bibliotki komonentów. Wymaga podania nazwy komponentu,
+	\item Dekorator \mintinline{text}{@register} - dodaje komponent do biblioteki komonentów. Wymaga podania nazwy komponentu,
 jego opisu ogólnego, słów kluczowych -- tagów (charakteryzacja komponentu),
 oraz opisu działania. Dekorator dekoruje klasę, tzn. modyfikuje zawartość
 klasy w momencie kompilacji.
@@ -1079,7 +1079,7 @@ Komponent to nic innego jak zbiór wielu parametrów, które określają jego wy
 Oczywiście nie wszystkie atrybuty danego komponentu są widoczne na zewnątrz, niektóre wykorzystywane
 są tylko w wewnętrznych działaniach (obliczeniach klasy), dlatego też nie wprowadziliśmy mechanizmu, który
 automatycznie listowałby wszystkie atrybuty danego komponentu (co jest możliwe w JavaScript). To od programisty
-zależy, które parametry będą ,,wyprowadzone'' na zewnątrz, czyli które komponentu bedą edytowalne z zewnątrz
+zależy, które parametry będą ,,wyprowadzone'' na zewnątrz, czyli które komponenty bedą edytowalne z zewnątrz
 i będą miały wpływ na zachowanie komponentu, a które będą ukryte na potrzeby wewnętrznych działań komponentu.
 \end{itemize}
 
@@ -1094,8 +1094,8 @@ Dlatego pomimo, że edytor nie działa jeszcze w 100 procentach warto spojrzeć 
 Umożliwiają one dopisanie do dowolnego elementu HTML (element musi rozmiar, co w przypadku HTML nie jest tak oczywiste, więc czasami trzeba
 jakiś element opakować w wrapper, który już faktycznie ma rozmiar) słów draggable i resizable. Takie proste dopisanie czyni te elementy
 obiektami, którym możemy zmieniać rozmiar, przesuwać je itp. Implementacja tych funkcjonalności chociaż ostatecznie nie przydaje się w obecnej fazie projektu,
-to jednak wpasowuje się w nurt tworzenia przez nas oprogramowania łatwo rozszerzalnego, reużywalnego i w końcu prostego w użyciu. Czy życie porgramistów
-frontendowych nie byłoby prostrze, gdyby wystarczyło zapisać przykładowo: <div draggable> </div>, żeby ożywić element? Nasze rozwiązanie pozwala na takie działanie,
+to jednak wpasowuje się w nurt tworzenia przez nas oprogramowania łatwo rozszerzalnego, reużywalnego i w końcu prostego w użyciu. Czy życie programistów
+frontendowych nie byłoby prostsze, gdyby wystarczyło zapisać przykładowo: <div draggable> </div>, żeby ożywić element? Nasze rozwiązanie pozwala na takie działanie,
 musimy jednak pamiętać, że ciągle opiera się na frameworku Angular.
 
 \subsection{Instrukcje renderowania komponentu z obiektu JSON}
