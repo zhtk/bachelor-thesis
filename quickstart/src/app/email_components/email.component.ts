@@ -107,6 +107,6 @@ export class EmailComponent implements OnInit{
 
 	maximize():void
 	{
-		this.fullscreen = !this.fullscreen;
+		// this.fullscreen = !this.fullscreen;
 	}
 }
