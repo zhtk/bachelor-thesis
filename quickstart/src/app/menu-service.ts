@@ -28,6 +28,5 @@ export class MenuService {
 
 }
 function mapPersons(response:Response): string{
-  console.log(response);
   return response.toString()
 }

@@ -13,19 +13,16 @@ import {TimerObservable} from "rxjs/observable/TimerObservable";
 @Component
 ({
   selector: 'spancomponent',
-  template: '{{text}}'
+  template: '{{ text }}'
 })
 export class SpanComponent extends FrontEndClass{
 
   url:string;
   text:string;
 
-
   constructor(private http: Http) {
     super();
     this.text = "";
-
-
   }
 
   create_static(text:string) {
@@ -34,7 +31,7 @@ export class SpanComponent extends FrontEndClass{
   create_dynamic(provider_type:string, time:number, url:string, text:string) {
     this.url = url;
     if(provider_type == "periodic")
-    {// Sciagaj w odstpeach czasu
+    {// Sciagaj w odstepach czasu
       let timer = TimerObservable.create(0, time);
       timer.subscribe(t => this.start());
     }

@@ -14,37 +14,7 @@ import {Observable} from "rxjs";
 @Component
 ({
   selector: 'created-submissions',
-  //templateUrl: '../pages/test.html',
-  template: 
-  `
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Nazwa wniosku</th>
-        <th>Data</th>
-        <th>Status</th>
-        <th>Podgląd</th>
-        <th>Ustaw status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let elem of subList">
-        <td>{{ readableName(elem.typ) }}</td>
-        <td>{{ readable(elem.data) }}</td>
-        <td>{{ parseVal(elem.status) }}</td>
-        <td>
-          <button class="btn btn-info" (click)="preview(elem.typ, elem.id)">Kliknij tutaj</button>
-        </td>
-        <td>
-          <button class="btn btn-success" (click)="accept(elem.id)">Zaakceptuj</button>
-        </td>
-        <td>
-          <button class="btn btn-danger" (click)="deny(elem.id)">Odrzuć</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  `
+  templateUrl: '../pages/approved-submissions.html',
 })
 export class ApproveSubmissionsComponent implements OnInit
 {
@@ -60,7 +30,7 @@ export class ApproveSubmissionsComponent implements OnInit
     }
   }
 
-  private subList: { typ: string, data: string, status: string/*, id?: string*/ }[] = []
+  private subList: { typ: string, data: string, status: string } [] = [];
 
   constructor(private http: Http, private router: Router) {}
 
@@ -72,10 +42,8 @@ export class ApproveSubmissionsComponent implements OnInit
     this.http.get('/api/read/plus500-lista/')
       .toPromise()
       .then(res => res.json())
-      .then(res => {
-        console.log(res)
-        //console.log(JSON.parse(res))
-        this.subList = res; //JSON.parse(res);
+      .then(res => {        
+        this.subList = res;
       });
   }
 
@@ -127,13 +95,10 @@ export class ApproveSubmissionsComponent implements OnInit
   }
 
   private preview(type: string, id: string) {
-    // routuj czy cokolwiek
-    //window.location.href = "/preview/" + type + "/" + id;
     this.router.navigateByUrl('/preview/' + type + '/' + id);
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 

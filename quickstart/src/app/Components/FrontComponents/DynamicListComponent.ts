@@ -8,61 +8,6 @@ import {Attr, SetterAlg, ComponentsInfo, ComponentsRegister, Register} from "../
 import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
 import {SizeProperties} from "../ComponentsCore/MainClasses/SizeProperties";
 
-const t = '{"type": "TextBox",' +
-  '"id": "dziecko2_data_ur",' +
-  '"infoText": "Data urodzenia",' +
-  '"defaultText": "Data urodzenia",' +
-  '"size": {"large": 12}}';
-
-const json =  '{"type": "PanelComponent",' +
-  '"title": "Pracownik","collapse": true,' +
-  '"hidable" : true,' +
-  '"size": {"large": 12,}' +
-  '}';
-
-const json2 = 
-  {
-    "type": "PanelComponent",
-    "title": "Pracownik",
-    "collapsible": true,
-    "hidable" : true,
-    "size": {"large": 12},
-    "children": [
-      {
-        "type": "RowComponent",
-        "id": "row1",
-        "children": [
-          {
-            "type": "TextBox",
-            "id": "wnioskodawca_imie",
-            "infoText": "Imię",
-            "defaultText": "Imię",
-            "size": {
-              "large": 5
-            }
-          },
-          {
-            "type": "TextBox",
-            "id": "wnioskodawca_nazwisko",
-            "infoText": "Nazwisko",
-            "defaultText": "Nazwisko",
-            "size": {
-              "large": 6
-            }
-          }
-        ]
-      }
-    ]
-  }
-;
-
-const to = '{"title" : ' +
-  '"nowy"'+'"panel_class" : "success"' +
-  '"collapsible" : false"main_id" : ' +
-  '"""hidable" : false"visible" : true"size" ' +
-  ': {"large":"12"}"backgroundColor" : "blue""textColor" : ' +
-  '"red""cursor" : "pointer"}';
-
 @Component
 ({
   selector: 'dynamic_list',
@@ -70,12 +15,11 @@ const to = '{"title" : ' +
 })
 export class DynamicListComponent extends FrontEndClass implements RenderFromJSON, Container, OnInit {
 
-
   @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
   constructor(private cfr: ComponentFactoryResolver) {
     super();
-    this.replicableElement = json2;
+    this.replicableElement = {};
     this.sendCount = true;
     this.startChildCount = 0;
   }
@@ -96,8 +40,6 @@ export class DynamicListComponent extends FrontEndClass implements RenderFromJSO
       for (let child of jsonObj['children'])
         this.enhance_sibling_id(childNumber, child);
 
-    console.log("Obiekt jak nowy!")
-    console.log(jsonObj)
     return jsonObj;
   }
 
@@ -164,7 +106,3 @@ export class DynamicListComponent extends FrontEndClass implements RenderFromJSO
   }
 
 }
-
-/**
- * Created by majki on 05.06.17.
- */

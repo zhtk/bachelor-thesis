@@ -33,8 +33,7 @@ export class InboxComponent {
 				.subscribe(
 						() => {
 						this.messagesService.getMessagesInbox().then(messages => this.message_array = messages);
-						console.log("raz za razem")}
-					);
+					});
 		});
 	}
 

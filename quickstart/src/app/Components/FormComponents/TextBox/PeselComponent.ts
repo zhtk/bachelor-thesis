@@ -13,7 +13,6 @@ export class PeselComponent extends TextBox
 {
 	constructor() {
 		super();
-		//this.text = "95040100120";
 		this.defaultText = "PESEL";
 		this.infoText = "PESEL";
 		this.regex = new RegExp("^[0-9]{11}$");
@@ -37,6 +36,7 @@ export class PeselComponent extends TextBox
 	}
 
 	validate(): Boolean {
+		// standardowy algorytm liczenia sumy kontrolnej dla numeru PESEL
 		var parsedPesel = Array<number>();
 		for (var i = 0; i < this.text.length; ++i) {
 			parsedPesel[i] = parseInt(this.text[i]);

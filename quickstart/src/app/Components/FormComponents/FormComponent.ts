@@ -41,7 +41,6 @@ export class FormComponent extends FormClass implements Container
   constructor(private cfr: ComponentFactoryResolver, private router: Router, private http: Http) {
 
     super();
-    //this.sended = false;
     this.grid_class = "col-lg-12";
     this.form_action = "/";
     this.method = "get";
@@ -72,7 +71,6 @@ export class FormComponent extends FormClass implements Container
   }
 
   public onSubmit(event: Event) {
-    console.log("OTO ONSUBMIT")
     event.preventDefault();
     
     const formData = new FormData();
@@ -83,8 +81,6 @@ export class FormComponent extends FormClass implements Container
 
     for (let el of (document.forms[this.hash]).getElementsByTagName("input"))
     {
-      console.log("nazwa: " + el.name)
-      console.log("wartosc: " + el.value);
       formData.append(el.name, el.value);
     }
     
@@ -101,7 +97,6 @@ export class FormComponent extends FormClass implements Container
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 }

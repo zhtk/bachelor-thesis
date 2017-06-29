@@ -14,30 +14,7 @@ import {Observable} from "rxjs";
 @Component
 ({
   selector: 'created-submissions',
-  //templateUrl: '../pages/test.html',
-  template: 
-  `
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Nazwa wniosku</th>
-        <th>Data</th>
-        <th>Status</th>
-        <th>Podgląd</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let elem of subList">
-        <td>{{ readableName(elem.typ) }}</td>
-        <td>{{ readable(elem.data) }}</td>
-        <td>{{ parseVal(elem.status) }}</td>
-        <td>
-          <button class="btn btn-info" (click)="preview(elem.typ, elem.id)">Kliknij tutaj</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  `
+  templateUrl: '../pages/created-submissions.html',
 })
 export class CreatedSubmissionsComponent implements OnInit
 {
@@ -60,8 +37,6 @@ export class CreatedSubmissionsComponent implements OnInit
   ngOnInit(): void {
     this.subList = new Array();
     this.concatFromNewService('/api/read/plus500-lista/')
-    // .then(
-    //   () => this.concatFromNewService('/api/read/ezla-lista/'))
   }
 
   private concatFromNewService(url: string) {
@@ -69,8 +44,7 @@ export class CreatedSubmissionsComponent implements OnInit
       .toPromise()
       .then(res => res.json())
       .then(res => {
-        this.subList = this.subList.concat(res); //JSON.parse(res);
-        console.log(this.subList)
+        this.subList = this.subList.concat(res);
       });
   }
 
@@ -98,8 +72,6 @@ export class CreatedSubmissionsComponent implements OnInit
   }
 
   private preview(type: string, id: string) {
-    // routuj czy cokolwiek
-    //window.location.href = "/preview/" + type + "/" + id;
     this.router.navigateByUrl('/preview/' + type + '/' + id);
   }
 

@@ -4,7 +4,6 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 
-//import {MenuService} from './menu-service'
 import { MsTile }  from '../mstile';
 import { MicroServicesService } from '../service/micro-services.service';
 
@@ -13,7 +12,6 @@ const FilterTags: string[] = ['renta', 'urlop', 'zwolnienie', 'emerytura', 'skla
 @Component({
   selector: 'services',
   templateUrl: 'pages/services_subpages/micro.html',
-  //providers: [MenuService]
 })
 export class ServicesComponent implements OnInit {
     tags: Set<string>;
@@ -24,7 +22,6 @@ export class ServicesComponent implements OnInit {
     profile = {};
     test:string;
 
-
     constructor(private msService: MicroServicesService) {
         this.category = [];
         this.tagStyles = new Array();
@@ -32,30 +29,15 @@ export class ServicesComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        //this.menuService
-        //.getAll2()
-        //.subscribe(p => this.test = p, err => console.log(err));
         
         this.msService.getGrid().then(gridjson => 
         {
-            console.log("dostalem kafelki");
             this.servicesList = gridjson;
             for (let s of this.servicesList) {
                 this.tags.add(s.tag);
             }
-            console.log(this.servicesList);
-            this.tagStyles = Array(this.servicesList.length).fill("label label-primary");
-
-            // IntervalObservable
-            //     .create(this.REFRESH_RATE)
-            //     .subscribe(
-            //             () => {
-            //             this.msService.getGrid().then(gridjson => { this.servicesList = gridjson });
-            //         );
-            
+            this.tagStyles = Array(this.servicesList.length).fill("label label-primary");            
         });
-
-        console.log("okej")
     }
     
     filter(what: string, index :number): void {
@@ -72,8 +54,3 @@ export class ServicesComponent implements OnInit {
     }
 
 }
-
-
-
-
-

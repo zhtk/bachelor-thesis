@@ -4,7 +4,7 @@ import { MsTile } from '../mstile';
 import { LAYOUT } from '../500plus/mock-form';
 import { MyHttp } from '../http.service';
 import 'rxjs/add/operator/toPromise';
-import { Observable }     from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class MicroServicesService {
@@ -23,14 +23,12 @@ export class MicroServicesService {
 		headers.append('service_name', serviceName);
 
 		if (serviceName == 'getZwoln') {
-			console.log("zwolnienie")
 			return this.http.get('/getZwoln', { headers: headers })
 				.toPromise()
 				.then(res => res.json())
 				.catch(this.handleError);			
 		}
 		else {
-			// return this.http.get('/api/view/plus500-wniosek/')
 			return this.http.get('/api/view/plus500-wniosek/')
 				.toPromise()
 				.then(res => res.json())
@@ -58,7 +56,6 @@ export class MicroServicesService {
 	}
 
 	private handleError(error: any): Promise<any> {
-		console.error('An error occurred', error); // for demo purposes only
 		return Promise.reject(error.message || error);
 	}
 }

@@ -32,7 +32,6 @@ export function SetterAlg(obj?: {field: string, func: Function}) {
             renderInstr[className] = {};
         }
 
-
         if (!field)
             field = decoratedPropertyName;
 
@@ -43,7 +42,6 @@ export function SetterAlg(obj?: {field: string, func: Function}) {
             renderInstr[className][field] =
                 (classInstance: any, val: any) => { classInstance[decoratedPropertyName] = val }; // tu funkcja settera
         }
-
     }
 }
 
@@ -59,7 +57,6 @@ export function Attr(label: MemberInfo) {
 
         label.type = typeof label.default;
         ComponentsRegister.attributes[target.constructor.name].push(label);
-        //Object.defineProperty(label, 'class_name', {value: target.constructor.name});
     };
 }
 
@@ -95,9 +92,6 @@ export class MemberInfo {
 export class ComponentsInfo {
  public name: string;
  public description: string;
-
- // members:MemberInfo[];
- // extends:ComponentsInfo[];
 }
 
 

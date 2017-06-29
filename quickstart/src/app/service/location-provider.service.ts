@@ -8,7 +8,6 @@ export class LocationProviderService {
 	current$ = this.currentPath.asObservable();
 
 	setWindowLocationPath(s: string) {
-		// console.log("zmienil sie path na " + s);
 		this.currentPath.next(s);
 	}
 }

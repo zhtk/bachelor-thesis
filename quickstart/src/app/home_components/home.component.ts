@@ -17,7 +17,6 @@ export class User {
 
 export class HomeComponent {
 
-
 	private notifValues: {positive: number; negative: number; pending: number; } = 
 		{positive: 0, negative: 0, pending: 0 };
 
@@ -35,11 +34,7 @@ export class HomeComponent {
 		this.notifService.getNotificationPending().then(numb => 
 		{
 			this.notifValues.pending = numb;
-		});
-
-		console.log("pobrano")
-		console.log(this.notifValues)
-		
+		});		
 	}
 
 	user : User = {

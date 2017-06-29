@@ -26,7 +26,7 @@ export class ComponentCreator {
 
 	private componentMapping = new Map();
 
-	static insertComponent(factory:ComponentFactoryResolver,
+	static insertComponent(factory:ComponentFactoryResolver, // ?? TODO wywalic czy nie
 		target:ViewContainerRef, type: string):RenderFromJSON {
 		var compFactory: any;
 		// Rozwiazanie tymczasowe, z mapą z góry nie chce działać
@@ -86,12 +86,12 @@ export class ComponentCreator {
 			case ("Span"):
 				compFactory = factory.resolveComponentFactory(SpanComponent);
 				break;
-      case ("PanelEditor"):
-        compFactory = factory.resolveComponentFactory(PanelEditor);
-        break;
-      case ("TextBoxEditor"):
-        compFactory = factory.resolveComponentFactory(TextBoxEditor);
-        break;
+			case ("PanelEditor"):
+				compFactory = factory.resolveComponentFactory(PanelEditor);
+				break;
+			case ("TextBoxEditor"):
+				compFactory = factory.resolveComponentFactory(TextBoxEditor);
+				break;
 			default: // powinno byc explicite
 				compFactory = factory.resolveComponentFactory(PanelComponent);
 				break;
@@ -100,12 +100,8 @@ export class ComponentCreator {
 		const ref = target.createComponent(compFactory);
 		return <RenderFromJSON> ref.instance;
 	}
-	// TODO refactor!!!
 
-	constructor() {
-	}
-
-
+	constructor() {}
 
 	static createFromJSON(jsonObject: any, factory:ComponentFactoryResolver,
 		target:ViewContainerRef): RenderFromJSON {
@@ -114,10 +110,7 @@ export class ComponentCreator {
 		var obj: any;
 		var className: string;
 
-
-		// tu powyzej: decyzja na podst. mapy "type" -> ClassName
-
-		// HACK, zniknie
+		// inaczej nie chce działać
 		switch (jsonObject["type"]) {
 			case ("TextBox"):
 				compFactory = factory.resolveComponentFactory(TextBox);
@@ -250,30 +243,19 @@ export class ComponentCreator {
 				throw "Błędny typ komponentu";
 		}
 
-		//endof zniknie
-
-		// ref = target.createComponent(compFactory);
-		// obj = <FrontEndClass> ref.instance
-
 		for (var elem in jsonObject) {
 			if (elem == "children") {
 				for (var i = 0; i < jsonObject.children.length; i++) {
 					this.createFromJSON(jsonObject.children[i], factory, obj.target);
 				}
 			} else if (elem != "type") {
-				//renderInstr[className][elem](obj, jsonObject[elem]);
 				this.setObjectProperty(className, elem, obj, jsonObject[elem]);
-
 			}
 		}
-
 		return ref;
-		//return <RenderFromJSON> obj;
-
 	}
 
 	static setObjectProperty(className: string, jsonElem: string, obj: any, val: any) {
-		//console.log("wolam dla " + className + ", " + jsonElem)
 		renderInstr[className][jsonElem](obj, val);
 	}
 }

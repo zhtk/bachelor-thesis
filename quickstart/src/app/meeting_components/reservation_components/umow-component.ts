@@ -31,12 +31,11 @@ export class UmowComponent implements OnInit {
       this.sprawy.push (["08:00", "10:10", "11:00"]);
       this.sprawy.push (["11:30", "12:15", "12:50"]);
       this.potrzeba = 0;
-        this.wojewodztwo ='';
-        this.gmina ='';
-        this.powiat = '';
-        this.urzad ='';
+      this.wojewodztwo ='';
+      this.gmina ='';
+      this.powiat = '';
+      this.urzad ='';
       this.pathurl = window.location.pathname;
-      alert("siema")
     }
   fakeArray = Array(30).fill("x");
   constructor()

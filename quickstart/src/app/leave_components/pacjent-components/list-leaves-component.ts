@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-
 export class Zwolnienie {
     id:String;
     name:String;

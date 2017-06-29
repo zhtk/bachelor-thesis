@@ -69,8 +69,6 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
 
   constructor(private cfr: ComponentFactoryResolver) {
     super();
-    console.log("tworze PANELCOMPONENT");
-    //this.params = this.params.concat(ComponentsRegister.attributes['PanelComponent']);
     this.main_id = Math.floor((Math.random() * 10000) + 1).toString();
     this.arrayOfKeys += Object.keys(this);
     this.panel_class = "panel panel-default";
@@ -79,7 +77,6 @@ export class PanelComponent extends FrontEndClass implements RenderFromJSON, Con
     this.hidable = false;
     this.visible = true;
     this.collapsible = false;
-    // this.title = "panel";
   }
 
   ngOnInit() {

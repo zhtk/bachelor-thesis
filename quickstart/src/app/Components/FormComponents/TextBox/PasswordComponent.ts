@@ -12,7 +12,6 @@ export class PasswordComponent extends TextBox
 {
 	constructor() {
 		super();
-		this.text = "95040100120";
 	}
 
 	@SetterAlg()

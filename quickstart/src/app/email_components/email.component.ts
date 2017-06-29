@@ -24,8 +24,6 @@ export class EmailComponent implements OnInit{
 		this.fullscreen = false;
 		
 		if (this.checkForCache()) {
-			console.log("zawartosc cache wiadomosci to:")
-
 			var sumlen = 
 				localStorage.getItem("email-cache-addresser").length +
 				localStorage.getItem("email-cache-topic").length +
@@ -60,7 +58,6 @@ export class EmailComponent implements OnInit{
 	}
 
 	myOnChanges() {
-		//console.log("mamy zmiane");
 		localStorage.setItem("email-cache-addresser", this.addresser);
 		localStorage.setItem("email-cache-topic", this.topic);
 		localStorage.setItem("email-cache-content", this.msgContent);

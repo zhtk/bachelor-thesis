@@ -1,8 +1,8 @@
-import { Component, Input, } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { FormClass } from '../FormClass'
 import { FormsModule }   from '@angular/forms';
-import {Attr, SetterAlg, ComponentsInfo, ComponentsRegister, Register} from "../../ComponentsRegister";
-import {SizeProperties} from "../../ComponentsCore/MainClasses/SizeProperties";
+import { Attr, SetterAlg, ComponentsInfo, ComponentsRegister, Register } from "../../ComponentsRegister";
+import { SizeProperties } from "../../ComponentsCore/MainClasses/SizeProperties";
 
 @Component({
   selector: 'textBox',
@@ -41,7 +41,6 @@ export class TextBox extends FormClass implements RenderFromJSON
   constructor ()
   {
     super();
-    console.log("tworze TEXTBOX")
     this.maxLength = 0;
     this.minLength = 0;
     this.defaultText = "DefaultText";
@@ -50,10 +49,8 @@ export class TextBox extends FormClass implements RenderFromJSON
     this.name = "val";
     this.infoText = "";
   }
-  //Tutaj przyda się klasa autouzupelnienie
-  //autoComplete:AutoComplete
-
-  // Wołana po wpisnaiu znaku do pola
+  
+  // metoda wołana po wpisnaiu znaku do pola
   textInputValidate (a:string)
   {
     if(this.text.length == 0) {

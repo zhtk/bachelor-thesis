@@ -16,8 +16,6 @@ export class LabelComponent extends FormClass implements RenderFromJSON {
   text: string;
   @SetterAlg()
   backgroundColor: string;
-  // @SetterAlg()
-  // id: number;
 
   @SetterAlg({field: "size", func: (ci: LabelComponent, v: any) => {ci.setGridClass({"size": v})}})
   size: SizeProperties;

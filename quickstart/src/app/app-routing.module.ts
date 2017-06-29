@@ -37,7 +37,6 @@ import { DynamicListComponent }        from "./Components/FrontComponents/Dynami
 const routes: Routes = [
 
         { path: 'editor', component: EditorComponent},
-        //{ path: '', redirectTo: '/app', pathMatch: 'full' },
         { path: 'auth',  component: LoginComponent },
         { path: '404', component: PageNotFoundComponent },
         { path: '',  component: PreprocComponent, children: [
@@ -62,7 +61,6 @@ const routes: Routes = [
             { path: 'pracodawca',  component:PracodawcaComponent },
             { path: 'lekarz',  component: LekarzComponent },
             { path: 'pacjent',  component: PacjentComponent },
-            //{ path: 'komponenty', component: TestComponent},
             { path: 'sublist', component: CreatedSubmissionsComponent },
             { path: 'approve', component: ApproveSubmissionsComponent },
             { path: 'lista_test', component: DynamicListComponent }

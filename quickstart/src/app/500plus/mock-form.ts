@@ -404,60 +404,9 @@ const layout_dict =
 			]
 		}
 	]
-}
-
-	/*{
-		"components":
-		[
-			{
-				"type": "RepeatableComponent",
-
-				"children": [
-					{
-						"type": "PanelComponent",
-						"id": "panel3",
-						"size": {
-							"large": 10,
-						},
-						"children": [
-							{
-								"type": "LabelComponent",
-								"id": "test2",
-								"size": {
-									"large": 10,
-								},
-								"text": 
-		`5. Oświadczam, że orzeczeniem o niepełnosprawności lub orzeczeniem o umiarkowanym lub
-		znacznym stopniu niepełnosprawności legitymuje się następujące dziecko wchodzące w skład
-		rodziny (wypełnić tylko w przypadku ubiegania się o świadczenie wychowawcze na pierwsze dziecko
-		jeśli członkiem rodziny jest dziecko legitymujące się ww. orzeczeniem):`,
-							},
-							{
-								"type": "RowComponent",
-								"id": "row1",
-								"children": [
-									{
-										"type": "TextBox",
-										"id": "test1",
-										"infoText" : "Imię i nazwisko dziecka",
-										"defaultText": "Imię i nazwisko dziecka",
-										"size": {
-											"large": 10,
-										},
-									}
-								]
-							},
-						]
-					}
-				]
-			}
-					
-		]
-	}*/
-;
+};
 
 export const LAYOUT = JSON.stringify(layout_dict);
-
 
 const zwolnienie = 
 {
@@ -511,13 +460,17 @@ const zwolnienie =
 
 
 
-
-
-
 const filled_form = {
-	"wnioskodawca_imie": "Janusz",
-	"wnioskodawca_nazwisko": "Tracz"
-
+	"wnioskodawca_imie": "Jan",
+	"wnioskodawca_nazwisko": "Kowalski",
+	"wnioskodawca_pesel": "99000000101",
+	"wnioskodawca_stan_cyw": "Wdowiec",
+	"wnioskodawca_obywatelstwo": "Polskie",
+	"wnioskodawca_miasto": "Pcim",
+	"wnioskodawca_zipcode": "00-007",
+	"wnioskodawca_ulica": "Zwyczajna",
+	"wnioskodawca_nr_domu": "1",
+	"wnioskodawca_nr_mieszk": "23",
 }
 
 export const VALUES = JSON.stringify(filled_form);

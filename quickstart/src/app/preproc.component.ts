@@ -5,7 +5,6 @@ import { LoginService } from './login.service';
 
 @Component({
 	selector: 'preproc',
-	//template: `` //`<router-outlet></router-outlet>`
 	templateUrl: 'pages/mockup.html'
 })
 export class PreprocComponent implements OnInit {

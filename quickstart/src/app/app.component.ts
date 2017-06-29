@@ -14,21 +14,13 @@ import { Http, Response } from '@angular/http';
 @Component({
   selector: 'my-app',
   template: `<router-outlet></router-outlet>`,
-  //templateUrl: 'pages/mockup.html',
   providers: [ MenuService, MessagesService, NotificationsService, EmailService, LocationProviderService,
                MicroServicesService, LoginService, MyHttp ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
     constructor(private router: Router, private locationProviderService: LocationProviderService, private loginService: LoginService) {
         this.router.events.subscribe(() => {
             this.locationProviderService.setWindowLocationPath(window.location.pathname);
         });
-      // this.loginService.checkIfAuth()
-      //     .then(this.respond)
-      //     .catch(this.handleRejection);
-    }
-
-    ngOnInit() {
-      
     }
 }

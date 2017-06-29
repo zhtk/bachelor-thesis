@@ -21,8 +21,6 @@ export class SendboxComponent {
 		this.message_array = [];
 		this.messagesService.getMessagesSendbox().then(messages => 
 		{
-			console.log("wiado:");
-			console.log(messages);
 			this.message_array = messages;
 			this.current_message = null;
 
@@ -35,8 +33,7 @@ export class SendboxComponent {
 				.subscribe(
 						() => {
 						this.messagesService.getMessagesSendbox().then(messages => this.message_array = messages);
-						console.log("raz za razem")}
-					);
+					});
 		});
 	}
 

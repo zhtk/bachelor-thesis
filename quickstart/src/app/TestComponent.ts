@@ -18,7 +18,7 @@ import { MicroServicesService } from './service/micro-services.service';
 export class TestComponent implements OnInit
 {
     factory: ComponentFactoryResolver;
-    pageJSON: string // = HOME;
+    pageJSON: string;
     pages = {
         'piecset' : LAYOUT,
         'main' : HOME
@@ -32,8 +32,6 @@ export class TestComponent implements OnInit
     @ViewChild('target', { read: ViewContainerRef }) target: ViewContainerRef;
 
     ngOnInit(): void {
-        console.log("rozwazany json:")
-        console.log(this.pageJSON);
         if (this.pages[this.route.snapshot.params['name']] != undefined) {
             this.pageJSON = this.pages[this.route.snapshot.params['name']];
             this.renderService();
@@ -53,18 +51,11 @@ export class TestComponent implements OnInit
         {
             var added = ComponentCreator.createFromJSON(
                 parsed[elem], this.cfr, this.target)
-
-            // var added = ComponentCreator.insertComponent(
-            //   this.cfr, this.target, parsed[elem]["type"]);
-            // added.renderJSON(parsed[elem]);
         }
         setTimeout(() => { this.fillDefaults() }, 3000); // for demo only
     }
 
     private fillDefaults() {
-        console.log("sprawdzam...")
-        console.log(this.pageJSON);
-        console.log("zagladne na url " + JSON.parse(this.pageJSON)["fill-url"])
         this.msService.getFormPrefill(JSON.parse(this.pageJSON)["fill-url"])
         .then(resp => this.applyFill(resp));
     }
@@ -74,9 +65,6 @@ export class TestComponent implements OnInit
             if (document.getElementById(v)) {
                 (<HTMLInputElement> document.getElementById(v)).value = valuesList[v];
                 (<HTMLInputElement> document.getElementById(v)).disabled = true;
-            }
-            else {
-                console.log(typeof(v))
             }
         }
     }

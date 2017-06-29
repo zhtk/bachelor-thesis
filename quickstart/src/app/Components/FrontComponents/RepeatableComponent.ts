@@ -47,7 +47,6 @@ export class RepeatableComponent implements RenderFromJSON, OnInit, Container{
   ngOnInit(): void {}
 
   renderJSON(specification: any): void {
-    //this.target.clear();
     if("id" in specification)
       this.id = specification["id"];
 

@@ -17,6 +17,5 @@ import { DashboardComponent }  from './dashboard_components/dashboard.component'
   			 DashboardComponent,
   			 NavbarComponent,
   			 NavtoolsComponent, ],
-  //bootstrap:    [ NavtoolsComponent ]
 })
 export class NavtoolsModule { }

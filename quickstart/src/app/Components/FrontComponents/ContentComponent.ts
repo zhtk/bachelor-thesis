@@ -33,9 +33,6 @@ export class ContentComponent extends FrontEndClass implements RenderFromJSON{
 
   constructor(private cfr: ComponentFactoryResolver, private peopleServicee : MenuService, private http: Http) {
     super();
-
-    //let timer = TimerObservable.create(0, 5000);
-    //timer.subscribe(t => this.start());
   }
 
   setProvider(provider_type: any) {
@@ -80,7 +77,6 @@ export class ContentComponent extends FrontEndClass implements RenderFromJSON{
   }
 
   start(){
-    console.log(this.url);
    this.http.get(this.url).map(res => res.text())
               .subscribe(p => this.text = p)
   }

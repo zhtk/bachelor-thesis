@@ -29,7 +29,6 @@ export class EditorBox implements OnInit {
 
     for (var i = 0; i < this.components.length; i++)
       ComponentCreator.insertComponent(this.cfr, this.target, this.components[i]);
-
   }
 
   constructor(private cfr: ComponentFactoryResolver) {
