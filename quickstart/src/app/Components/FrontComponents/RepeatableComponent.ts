@@ -17,14 +17,6 @@ import { SetterAlg } from "../ComponentsRegister";
   selector: 'repeat',
   template: '<div *ngFor="let nr of numbers"><template #target></template></div>'
 })
-@Register
-(
-  {
-    name : "Repeatable",
-    description : "Pozwala wyświetlić 1.. razy swoją zawartość",
-    tag : "kontener"
-  }
-)
 export class RepeatableComponent implements RenderFromJSON, OnInit, Container{
 
   @SetterAlg()

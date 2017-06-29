@@ -1,3 +1,6 @@
+var authUrl = '207.154.212.228:50051';
+var backendUrl = 'http://207.154.212.228:9000';
+
 var express = require('express')
 var proxyMiddleware = require('http-proxy-middleware');
 var fallbackMiddleware = require('connect-history-api-fallback');
@@ -5,10 +8,10 @@ var grpc = require('grpc');
 var morgan = require('morgan');
 
 var authDescriptor = grpc.load(__dirname + '/auth/auth.proto');
-var authChannel = new authDescriptor.AuthService('207.154.212.228:50051', grpc.credentials.createInsecure());
+var authChannel = new authDescriptor.AuthService(authUrl, grpc.credentials.createInsecure());
 
 var proxy = proxyMiddleware({
-  target: 'http://207.154.212.228:9000',
+  target: backendUrl,
   changeOrigin: true,
   ws: true,
   pathRewrite: {
@@ -24,7 +27,6 @@ app.get('/login', function (req, res) {
     res.status(403).end();
     return;
   }
-  console.log("przyszlo zapytanie");
   
   var loginData = {login: req.query.login, password: req.query.password};
 
@@ -145,8 +147,15 @@ app.get('/getZwoln', function (req, res) {
 });
 
 const FILL_500 = {
-  "wnioskodawca_imie": "Janusz",
-  "wnioskodawca_nazwisko": "Tracz"
+  "wnioskodawca_imie": "Jan",
+  "wnioskodawca_nazwisko": "Kowalski",
+  "wnioskodawca_stan_cyw": "Wdowiec",
+  "wnioskodawca_obywatelstwo": "Polskie",
+  "wnioskodawca_miasto": "Pcim",
+  "wnioskodawca_zipcode": "00-007",
+  "wnioskodawca_ulica": "Zwyczajna",
+  "wnioskodawca_nr_domu": "1",
+  "wnioskodawca_nr_mieszk": "23"
 };
 
 app.get('/plus500-fill', function (req, res) {

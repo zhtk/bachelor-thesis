@@ -12,13 +12,6 @@ import {Docs} from "../ComponentsCore/Interfaces/DescribeInterface";
   template: `<h1 class="page-header">{{ text }}{{name}}</h1>`,
   providers:[ComponentsRegister]
 })
-@Register
-(
-  { name : "Heading",
-    description : "Okno z górną belką i miejscem na zawartość",
-    tag : "kontener"
-  }
-)
 export class HeadingComponent extends FrontEndClass implements RenderFromJSON
 {
 

@@ -18,14 +18,6 @@ import { SetterAlg } from "../ComponentsRegister";
   template: '<div class="row"><template #target></template></div>'
  ,
 })
-@Register
-(
-  {
-    name : "Row",
-    description : "Grupuje zawartość w rząd",
-    tag : "kontener"
-  }
-)
 export class RowComponent implements RenderFromJSON, OnInit, Container{
 
   @SetterAlg()
