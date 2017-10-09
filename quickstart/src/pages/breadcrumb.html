@@ -1,0 +1,7 @@
+<ol class="breadcrumb" style="width: 1000px;  margin-left: 250px; margin-top: 10px; background-color: rgba(0, 0, 0, 0);">
+	<li>Jesteś tutaj: </li>
+	<li *ngFor="let link of pathElements">
+		<a routerLink="{{ link.long }}" routerLinkActive="active">{{ link.short }}</a>
+	</li>
+	<li class="active" >{{ activeLink }}</li>
+</ol>

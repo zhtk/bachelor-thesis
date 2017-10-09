@@ -1,0 +1,70 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav in" id="side-menu">
+            <li class="sidebar-search">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+                </div>
+                <!-- /input-group -->
+            </li>
+            <li>
+                <a routerLink="/main" routerLinkActive="active" >Panel Ogólny</a>
+            </li>
+          <li data-toggle="collapse" data-target="#dash">
+            <a routerLink="/main" >Komponenty<span class="fa arrow"></span><br><small class="text-muted">Style Guide</small></a>
+            <ul id ="dash" class="nav nav-second-level collapse">
+              <li *ngFor = "let i of display">
+                <a routerLink="/style_guide/{{i}}" routerLinkActive="active">{{i}}</a>
+              </li>
+            </ul>
+          </li>
+            <li>
+                <a routerLink="/messages" routerLinkActive="active">Dokumenty i Wiadomości<br><small class="text-muted">Korespondencja z ZUS</small></a>
+            </li>
+            <li>
+                <a routerLink="/services" routerLinkActive="active">Usługi<br><small class="text-muted">Katalog usług elektronicznych</small></a>
+            </li>
+            <li>
+                <a routerLink="/sublist" routerLinkActive="active">Wnioski<br><small class="text-muted">Lista złożonych wniosków</small></a>
+            </li>
+            <li *ngIf="superuser">
+                <a routerLink="/approve" routerLinkActive="active">Rozpatrywanie wniosków<br><small class="text-muted">Przejrzyj i zmień status wniosku</small></a>
+            </li>
+          <li data-toggle="collapse" data-target="#testy">
+            <a routerLink="/main" >Test<span class="fa arrow"></span><br><small class="text-muted">Strony testowe</small></a>
+            <ul id ="testy" class="nav nav-second-level collapse">
+              <li>
+                <a routerLink="/test/main" routerLinkActive="active">Strona domowa<br><small class="text-muted">Strona domowa z JSONa</small></a>
+              </li>
+              <li>
+                <a routerLink="/test/piecset" routerLinkActive="active">500+<br><small class="text-muted">500+ z JSONa</small></a>
+              </li>
+              <li>
+                <a routerLink="/test/zwolnienie" routerLinkActive="active">Zwolnienie<br><small class="text-muted">Moduł dla lekarza</small></a>
+              </li>
+              <li>
+                <a routerLink="/editor" routerLinkActive="active">Edytor<br><small class="text-muted">Edytor</small></a>
+                <a routerLink="/lista_test" routerLinkActive="active">Lista<br><small class="text-muted">Dynamiczna lista</small></a>
+              </li>
+            </ul>
+          </li>
+
+            <li>
+                <a routerLink="/meeting" routerLinkActive="active">Wizyty<br><small class="text-muted">Rezerwacja wizyty w ZUS</small></a>
+            </li>
+            <li>
+                <a>Panel ubezpieczonego<br><small class="text-muted">Składki, OFE, stan konta</small></a>
+            </li>
+            <li>
+                <a>Ustawienia<br><small class="text-muted">Konfiguracja profilu</small></a>
+            </li>
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>
+<!-- /.navbar-static-side -->

@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nazwa wniosku</th>
+      <th>Data</th>
+      <th>Status</th>
+      <th>Podgląd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let elem of subList">
+      <td>{{ readableName(elem.typ) }}</td>
+      <td>{{ readable(elem.data) }}</td>
+      <td>{{ parseVal(elem.status) }}</td>
+      <td>
+        <button class="btn btn-info" (click)="preview(elem.typ, elem.id)">Kliknij tutaj</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

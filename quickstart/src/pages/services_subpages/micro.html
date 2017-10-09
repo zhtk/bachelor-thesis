@@ -1,0 +1,30 @@
+<div style ="padding: 20px;"></div>
+<nav class="navbar navbar-default">
+    <h4>
+    <div class="container">
+        <span style="cursor: pointer; margin-right: 5px;" *ngFor = "let tag of tags; let i = index" 
+            [ngClass]="tagStyles[i]" (click) = "filter(tag, i);" >#{{tag}}</span>
+    </div>
+    </h4>
+</nav>
+
+<div style ="padding: 20px;"></div>
+<div class="row">
+    <div *ngFor ="let cell of servicesList; let i = index">
+        <div class="col-lg-3 col-md-6" *ngIf="category.length ==0 || category.indexOf(cell.tag) != -1"
+            onClick="this.className = 'col-lg-3 col-md-6';" data-toggle="collapse" [attr.data-target]="'#' + i" >
+            <div class="panel panel-primary"> 
+                <div class="panel-heading">
+                     <a [routerLink]="['/test', cell.redirectUrl]" routerLinkActive="active" class="btn btn-primary">
+                    <h3 class="panel-title">{{cell.title}}</h3> </a>
+                </div> 
+                <div class="panel-body">
+                    {{cell.description}}
+                    <div id="{{i}}" class="collapse">
+                        Lorem ipsum dolor text....Lorem ipsum dolor text....Lorem ipsum dolor text....Lorem ipsum dolor text....
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>

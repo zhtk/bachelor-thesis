@@ -1,0 +1,112 @@
+<div style="padding: 20px"></div>
+<div class ="row" id = "pesel">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-md-6 col-lg-6">
+        <span style="font-size: 1.5em">Pesel ubezpieczonego:</span><br>
+        <div class="input-wrapper">
+            <form (keyup.enter)="pesel()">
+                <input type="text" value="" maxlength="11" >
+            </form>
+        </div>
+    </div>
+</div>
+<div style="padding: 20px"></div>
+
+<div class="panel panel-primary" *ngIf="isPesel"> 
+    <div class="panel-heading"> 
+        <h3 class="panel-title">Formularz</h3> 
+    </div>
+    <div class ="row" style ="margin-left:20px; margin-top: 20px;">
+        <div class="panel-body" class="col-md-3 col-lg-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dane osobowe</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-6">
+                                <input type="text" class="form-control" 
+                                    placeholder="{{name}}" aria-describedby="basic-addon1" disabled>
+                            </div>
+                            <div class="col-md-3 col-lg-6">
+                                    <input type="text" class="form-control" 
+                                    placeholder="{{surname}}" aria-describedby="basic-addon1"disabled>
+                            </div>
+                        </div>
+                        <div class ="row" style ="margin-top: 10px;">
+                            <div class="col-md-3 col-lg-5">
+                                <input type="text" class="form-control" 
+                                placeholder="{{birthday}}" aria-describedby="basic-addon1"disabled>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-1"></div>
+        <div class="panel-body" class="col-md-3 col-lg-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dane adresowe</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-5">
+                                <input type="text" class="form-control" 
+                                    placeholder="{{postal_code}}" aria-describedby="basic-addon1"disabled>
+                            </div>
+                            <div class="col-md-3 col-lg-7">
+                                    <input type="text" class="form-control" 
+                                    placeholder="{{city}}" aria-describedby="basic-addon1"disabled>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 10px;">
+                            <div class="col-md-3 col-lg-6">
+                                <input type="text" class="form-control" 
+                                    placeholder="{{street}}" aria-describedby="basic-addon1"disabled>
+                            </div>
+                            <div class="col-md-3 col-lg-3" >
+                                    <input type="text" class="form-control" 
+                                    placeholder="{{house}}" aria-describedby="basic-addon1"disabled>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                 <input type="text" class="form-control" 
+                               placeholder="{{flat}}" aria-describedby="basic-addon1"disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class ="row" style ="margin-left:20px; margin-top: 20px;">
+        <div class="panel-body" class="col-md-3 col-lg-7">
+        <div class="panel panel-default">
+            <div class="panel-heading">Informacje o zwolnieniu</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-6">
+                            <input type="text" class="form-control" style="background-color: #FFECB3;"
+                                placeholder="Niezdolność do pracy od(dd/mm/rrrr)" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-md-3 col-lg-6">
+                                <input type="text" class="form-control" style="background-color: #FFECB3;"
+                                placeholder="Niezdolność do pracy do(dd/mm/rrrr)" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class ="row">    
+                         <div style="padding-top: 20px;" class="col-md-3 col-lg-10">
+                             Kod choroby:
+                            <select multiple="" class="form-control" id="exampleSelect2">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                         </div>
+                    </div>
+                </div>
+        </div>
+
+    </div>
+  <button style="margin-top:100px; margin-left:130px; padding:30px" type="button" class="btn btn-primary">
+    Wystaw
+    </button>
+</div>
+</div>

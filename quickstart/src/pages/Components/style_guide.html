@@ -1,0 +1,95 @@
+<div style ="padding:20px"></div>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Informacja ogólne</div>
+      <div class="panel-body">
+        <h3>Nazwa</h3>
+        {{obj.name}}
+        <h3>Opis</h3>
+        {{obj.description}}
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Json</div>
+      <div class="panel-body">
+        <!-- <div [innerHTML]="json"> -->
+        <small>{{ '{' }}</small><br>
+        <div style="padding-left: 20px;">
+          <small *ngFor="let item of obj.params">
+            "{{ item.name }}" : {{ printTypeBased(item.type, getMapName(item.name)) }} <br>
+          </small>
+        </div>
+        <small>{{ '}' }}</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style ="padding:20px"></div>
+<div class="row">
+  <div class="col-lg-10">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Atrybuty</div>
+      <div class="panel-body">
+
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Nazwa</th>
+            <th>Opis</th>
+            <th>Typ wartości</th>
+            <th>Wartość domyślna</th>
+            <th>Zmień wartość</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor = "let param of obj.params">
+            <td>{{param.name}}</td>
+            <td>{{param.info}}</td>
+            <td>{{param.type}}</td>
+            
+            <td *ngIf="!isObject(obj[param.name])">{{printTypeBased(param.type, param.default)}}</td>
+            <td *ngIf="!isObject(obj[param.name])">
+              <input [(ngModel)]="jsonVal[param.name]" (change) = "attr_change()">
+            </td>
+            
+            <td *ngIf="isObject(obj[param.name])">{{makeString(param.default)}}</td>
+            <td *ngIf="isObject(obj[param.name])"> 
+              <table class="table ">
+                <tbody>
+                  <tr *ngFor = "let nestedParam of listaParam(obj[param.name]) ">
+                    <td>
+                      {{ nestedParam }}
+                    </td>
+                    <td>
+                       <input [(ngModel)]="(jsonVal[param.name])[nestedParam]" (change) = "attr_change(param, nestedParam)">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style ="padding:20px"></div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Komponent</div>
+      <div class="panel-body">
+        <template #target></template>
+      </div>
+    </div>
+  </div>
+</div>
+

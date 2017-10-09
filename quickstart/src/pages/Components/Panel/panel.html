@@ -1,0 +1,15 @@
+<div class= "panelowy" [ngClass] = "grid_class"  [hidden]="!visible">
+    <div [ngClass] = "panel_class" id= "{{id}}">
+      <div [style.cursor] = "cursor" class="panel-heading" *ngIf="title || hidable"
+           [attr.data-toggle]=" collapsible ? 'collapse' : null " [attr.data-target]="'#' + main_id">
+        <h3 class="panel-title">{{ title }}
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true"
+                  *ngIf="hidable == true" (click)="hide()">×
+          </button>
+        </h3>
+      </div>
+      <div [ngClass] = "panel_body_class"  id="{{main_id}}">
+        <template #target></template>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div *ngIf="!hidden">
+    <div class="panel panel-primary" [ngClass]="{'page-center': fullscreen}" style = "margin: 0;" aria-expanded="false"> 
+        <div class="panel-heading"> 
+            <h3 class="panel-title" style = "width: 200px; display: inline-block" >Wyślij wiadomość</h3> 
+
+            <div style="float:right;">
+                <span *ngIf="!fullscreen" class ="glyphicon glyphicon-fullscreen" (click)="maximize()" style="cursor:pointer; margin-right:10px"></span>
+                <span *ngIf="fullscreen" class ="glyphicon glyphicon-minus" (click)="maximize()" style="cursor:pointer; margin-right:10px"></span>
+                <span *ngIf="!resized" class ="glyphicon glyphicon-resize-full" (click)="resize()" data-toggle="collapse" href="#rozwin" style="cursor:pointer"></span>
+                <span *ngIf="resized" class ="glyphicon glyphicon-resize-small" (click)="resize()" data-toggle="collapse" href="#rozwin" style="cursor:pointer"></span>
+                <span class ="glyphicon glyphicon-remove" (click) = "exit()" style="cursor:pointer; margin-left:10px"></span>
+            </div>
+
+        </div> 
+        <div *ngIf="!fullscreen" class="panel-body collapse in" style = "width: 400px; height: 440px;" id="rozwin">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresat" [(ngModel)]="addresser" (ngModelChange)="myOnChanges()">
+            <div style ="padding: 7px"></div>
+            <input type="text" class="form-control" placeholder="Temat" [(ngModel)]="topic" (ngModelChange)="myOnChanges()">
+            <div style ="padding: 7px"></div>
+            <textarea class="form-control" id="exampleTextarea" rows="12" [(ngModel)]="msgContent" (ngModelChange)="myOnChanges()">{{ msgContent }}</textarea>  
+            <div style ="padding: 7px"></div>
+            <button type="button" style="float:right"class="btn btn-primary" (click)="sendMessage()">Wyślij</button>
+        </div>
+        <div *ngIf="fullscreen" class="panel-body collapse in" style = "width: 1050px; height: 650px; border: 10px;" id="rozwin">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresat" [(ngModel)]="addresser" (ngModelChange)="myOnChanges()">
+            <div style ="padding: 10px"></div>
+            <input type="text" class="form-control" placeholder="Temat" [(ngModel)]="topic" (ngModelChange)="myOnChanges()">
+            <div style ="padding: 10px"></div>
+            <textarea class="form-control" id="exampleTextarea" rows="22">{{ msgContent }}</textarea>  
+            <div style ="padding: 10px"></div>
+            <button type="button" style="float:right"class="btn btn-primary" (click)="sendMessage()">Wyślij</button>
+        </div>
+    </div>
+    <div *ngIf="fullscreen" style="background-color: rgba(0, 0, 0, 0.5); position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;">
+    </div>
+</div>
